@@ -469,7 +469,15 @@ class DeterministicEngine:
                     "metrics": {"resolved_entity": "NONE", "resolved_registry": res_reg}
                 }
 
-            # Pass known entities to RAGService entity resolver instead of generic fallback
+            # Pass known entities to Conversation Intelligence Pipeline for full pre-sales consultation
+            try:
+                import core.entity_resolver as core_resolver
+                core_res = core_resolver.resolve(query)
+                if core_res and core_res.get("entity_id"):
+                    return None
+            except Exception:
+                pass
+
             if q_lower in self.ks.reg.entity_lookup or q_lower in self.ks.reg.unified_vocabulary:
                 return None
 

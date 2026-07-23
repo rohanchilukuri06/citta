@@ -155,24 +155,38 @@ def build_overview(entity: Dict[str, Any]) -> Optional[str]:
         
     overview = entity.get("overview")
     desc = entity.get("description", "")
-    route = entity.get("route", "/contact")
     
-    md = f"### {title} — Overview\n\n"
+    md = f"Yes. CittaAI offers an enterprise platform called **{title}**.\n\n"
     if isinstance(overview, dict):
         summary = overview.get("summary")
         description = overview.get("description") or desc
         if summary:
-            md += f"**Summary**: {summary}\n\n"
+            md += f"{summary}\n\n"
         if description:
             md += f"{description}\n\n"
     else:
         description = overview or desc
-        md += f"{description}\n\n"
-        
-    category = entity.get("category", "")
-    btn_text = "Learn More →" if category == "product" else "Explore Service →" if category == "service" else "View Solution →"
-    md += f"[{btn_text}]({route})"
-    return md
+        if description:
+            md += f"{description}\n\n"
+
+    # Add capabilities checkmarks
+    capabilities = entity.get("capabilities", [])
+    if capabilities and isinstance(capabilities, list):
+        md += "It combines:\n"
+        for cap in capabilities[:5]:
+            if isinstance(cap, dict):
+                c_title = cap.get("title", "")
+                c_desc = cap.get("description", "")
+                md += f"✓ **{c_title}**: {c_desc}\n" if c_desc else f"✓ **{c_title}**\n"
+            else:
+                md += f"✓ {cap}\n"
+        md += "\n"
+
+    target_users = entity.get("target_users", [])
+    if target_users and isinstance(target_users, list):
+        md += f"This makes it suitable for {', '.join(target_users)}."
+
+    return md.strip()
 
 def build_how_it_works(entity: Dict[str, Any]) -> Optional[str]:
     title = entity.get("name", "Entity")

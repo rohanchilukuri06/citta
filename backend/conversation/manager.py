@@ -172,7 +172,27 @@ class ConversationManager:
             }
         )
 
-        # 10. Update historical context
+        # 10. Log Pipeline Diagnostic Trace
+        val_report = context.variables.get("validation_report")
+        val_status = "PASS" if (val_report and val_report.is_valid) else "WARN/REPAIRED"
+        persona_prof = context.variables.get("persona_profile")
+        persona_role = persona_prof.primary_role.name if persona_prof else "PROSPECTIVE_CUSTOMER"
+        
+        logger.info(
+            f"\n========== PIPELINE DIAGNOSTIC TRACE ==========\n"
+            f"USER        : {query}\n"
+            f"INTENT      : {intent.primary_intent} ({intent.confidence})\n"
+            f"PERSONA     : {persona_role}\n"
+            f"ENTITY      : {context.active_entity_id}\n"
+            f"STRATEGY    : {getattr(strategy, 'selected_strategy', str(strategy))}\n"
+            f"SECTIONS    : {getattr(plan, 'sections', plan)}\n"
+            f"KNOWLEDGE   : Deterministic (Knowledge Registry)\n"
+            f"SUGGESTIONS : {[s.get('label') for s in suggestions]}\n"
+            f"VALIDATION  : {val_status}\n"
+            f"==============================================="
+        )
+
+        # 11. Update historical context
         context.history.append({"role": "user", "content": query})
         context.history.append({"role": "assistant", "content": final_text})
         self.context_engine.update_context(context, {"history": context.history})

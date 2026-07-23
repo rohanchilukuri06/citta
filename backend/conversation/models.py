@@ -245,6 +245,15 @@ class ValidationReport:
     summary_reasoning: str = ""
 
 @dataclass
+class StructuredResponseSection:
+    opening: str = ""
+    overview: str = ""
+    business_value: str = ""
+    capabilities: List[str] = field(default_factory=list)
+    target_audience: str = ""
+    next_steps: List[str] = field(default_factory=list)
+
+@dataclass
 class Signal:
     signal_type: str        # KeywordSignal, EntitySignal, ConversationSignal, MemorySignal
     source: IntentSource

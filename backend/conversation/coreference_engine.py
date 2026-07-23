@@ -68,7 +68,22 @@ class CoreferenceEngine:
                 candidate_nodes.append(node)
 
         if not candidate_nodes:
-            # Pronouns found but no active entities in memory -> Low confidence, trigger clarification
+            # Check if query contains an explicit entity or topic keyword (e.g. ecommerce, pharma, sap, demo, pricing, leadership)
+            explicit_keywords = ["ecommerce", "pharma", "sap", "pricing", "cost", "leadership", "hipaa", "security", "demo", "schedule", "compare", "ai"]
+            has_explicit_topic = any(k in query.lower() for k in explicit_keywords)
+            
+            if has_explicit_topic:
+                return CoreferenceResult(
+                    original_query=query,
+                    resolved_query=query,
+                    selected_entity=None,
+                    candidates=[],
+                    pronouns_detected=pronouns,
+                    confidence=0.85,
+                    requires_clarification=False
+                )
+
+            # Pronouns found with no explicit topic and no active entities in memory -> Low confidence, trigger clarification
             return CoreferenceResult(
                 original_query=query,
                 resolved_query=query,

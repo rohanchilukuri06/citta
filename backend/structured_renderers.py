@@ -75,30 +75,30 @@ def sanitize_conversational_text(text: str) -> str:
     return "\n".join(cleaned_lines).strip()
 
 def render_product(obj) -> str:
-    """Renders a Product object to conversational chat format."""
+    """Renders a Product object to conversational pre-sales consultant format."""
     parts = []
     title = clean_val(obj.title or obj.name)
     tagline = clean_val(obj.tagline)
     overview = clean_val(obj.overview or obj.description)
     
-    parts.append(f"🏆 **{title}**")
+    parts.append(f"Yes.\n\nCittaAI provides **{title}**.")
     if tagline:
         parts.append(f"*{tagline}*\n")
     if overview:
         parts.append(f"{overview}\n")
     
     if obj.capabilities:
-        parts.append("Key Highlights:")
+        parts.append("Key Platform Capabilities:")
         for cap in obj.capabilities[:5]:
             cap_title = clean_val(cap.title)
             cap_desc = clean_val(cap.description)
-            parts.append(f"• **{cap_title}**: {cap_desc}" if cap_desc else f"• **{cap_title}**")
+            parts.append(f"✓ **{cap_title}**: {cap_desc}" if cap_desc else f"✓ **{cap_title}**")
         parts.append("")
         
     if obj.benefits:
         bens = [clean_val(b) for b in obj.benefits if clean_val(b)]
         if bens:
-            parts.append("Core Value & Benefits:")
+            parts.append("Business Value & Strategic Outcomes:")
             for benefit in bens[:4]:
                 parts.append(f"• {benefit}")
             parts.append("")
@@ -106,35 +106,35 @@ def render_product(obj) -> str:
     if obj.target_users:
         users = [clean_val(u) for u in obj.target_users if clean_val(u)]
         if users:
-            parts.append(f"**Target Audience**: {', '.join(users)}")
+            parts.append(f"This makes it suitable for {', '.join(users)}.")
             
     return sanitize_conversational_text("\n".join(parts))
 
 def render_service(obj) -> str:
-    """Renders a Service object to conversational chat format."""
+    """Renders a Service object to conversational pre-sales consultant format."""
     parts = []
     title = clean_val(obj.title or obj.name)
     tagline = clean_val(obj.tagline)
     overview = clean_val(obj.overview or obj.description)
 
-    parts.append(f"🛠️ **{title}**")
+    parts.append(f"CittaAI delivers specialized enterprise services through **{title}**.")
     if tagline:
         parts.append(f"*{tagline}*\n")
     if overview:
         parts.append(f"{overview}\n")
     
     if obj.capabilities:
-        parts.append("Key Highlights:")
+        parts.append("Service Highlights:")
         for cap in obj.capabilities[:5]:
             c_title = clean_val(cap.title)
             c_desc = clean_val(cap.description)
-            parts.append(f"• **{c_title}**: {c_desc}" if c_desc else f"• **{c_title}**")
+            parts.append(f"✓ **{c_title}**: {c_desc}" if c_desc else f"✓ **{c_title}**")
         parts.append("")
         
     if obj.benefits:
         bens = [clean_val(b) for b in obj.benefits if clean_val(b)]
         if bens:
-            parts.append("Core Value & Benefits:")
+            parts.append("Business Impact:")
             for benefit in bens[:4]:
                 parts.append(f"• {benefit}")
             parts.append("")
@@ -142,33 +142,36 @@ def render_service(obj) -> str:
     return sanitize_conversational_text("\n".join(parts))
 
 def render_solution(obj) -> str:
-    """Renders a Solution object to conversational chat format."""
+    """Renders a Solution object to conversational pre-sales consultant format."""
     parts = []
     title = clean_val(obj.title or obj.name)
     tagline = clean_val(obj.tagline)
     overview = clean_val(obj.overview or obj.description)
 
-    parts.append(f"⚙️ **{title}**")
+    parts.append(f"Yes. CittaAI offers an enterprise platform called **{title}**.")
     if tagline:
-        parts.append(f"*{tagline}*\n")
+        parts.append(f"\n*{tagline}*")
     if overview:
-        parts.append(f"{overview}\n")
+        parts.append(f"\nIt is designed for businesses seeking to {overview.lower() if len(overview)>0 and overview[0].isupper() else overview}.")
     
     if obj.capabilities:
-        parts.append("Key Highlights, Process & Platform Benefits:")
+        parts.append("\nIt combines:")
         for cap in obj.capabilities[:5]:
             c_title = clean_val(cap.title)
             c_desc = clean_val(cap.description)
-            parts.append(f"• **{c_title}**: {c_desc}" if c_desc else f"• **{c_title}**")
-        parts.append("")
+            parts.append(f"✓ **{c_title}**: {c_desc}" if c_desc else f"✓ **{c_title}**")
         
     if obj.workflows:
-        parts.append("System Architecture & Workflow:")
+        parts.append("\nOperational Workflow:")
         for step in obj.workflows[:4]:
             s_title = clean_val(step.title)
             s_desc = clean_val(step.description)
-            parts.append(f"• Step {step.step} ({s_title}): {s_desc}" if s_desc else f"• Step {step.step}: {s_title}")
-        parts.append("")
+            parts.append(f"{step.step}. **{s_title}**: {s_desc}" if s_desc else f"{step.step}. **{s_title}**")
+
+    if hasattr(obj, "target_users") and obj.target_users:
+        users = [clean_val(u) for u in obj.target_users if clean_val(u)]
+        if users:
+            parts.append(f"\nThis makes it suitable for {', '.join(users)}.")
 
     return sanitize_conversational_text("\n".join(parts))
 
