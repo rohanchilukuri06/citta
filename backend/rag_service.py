@@ -33,6 +33,8 @@ from retrieval_reranker import get_retrieval_reranker
 from confidence_router import get_confidence_router
 from phase2_orchestrator import get_phase2_orchestrator
 from unknown_entity_handler import get_unknown_entity_handler
+from evidence_gate import get_evidence_gate
+from response_sanitizer import get_response_sanitizer
 
 logger = logging.getLogger(__name__)
 
@@ -511,77 +513,91 @@ class RAGService:
             }
             return
 
-        # 5. Deterministic Intercept Engine Check (Zero-LLM latency)
+        # 5. Deterministic Intercept Engine Check (Zero-LLM latency for exact catalog/counts/greetings)
         from intent_analyzer import get_intent_analyzer
         from deterministic_engine import get_deterministic_engine
         from structured_renderers import sanitize_conversational_text
 
         intent_analysis = get_intent_analyzer().analyze(message)
-        det_response = get_deterministic_engine().generate_response(
-            tenant_id=tenant_id,
-            intent=intent_analysis.primary_intent,
-            topics=intent_analysis.topics,
-            query=message
+        q_lower = message.strip().lower()
+        p2_qi = p2_ctx.metrics.get("query_interpretation", {})
+        p2_ent = p2_qi.get("primary_entity_id")
+        p2_scope = p2_qi.get("answer_scope", "GENERAL")
+
+        has_specific_scope = p2_ent is not None or p2_scope not in ["GENERAL", "ALL_PRODUCTS", "ALL_SERVICES", "ALL_SOLUTIONS"]
+        is_exact_deterministic = (
+            not has_specific_scope and (
+                intent_analysis.primary_intent in ["LIST", "COUNT", "GREETING"] or
+                "how many" in q_lower or "list all" in q_lower or q_lower in ["hi", "hello", "hey", "help"]
+            )
         )
-        if det_response:
-            clean_text = sanitize_conversational_text(det_response["response"])
-            det_metrics = det_response.get("metrics", {})
-            res_ent = det_metrics.get("resolved_entity", "NONE")
-            res_reg = det_metrics.get("resolved_registry", "NONE")
-            if res_ent and res_ent != "NONE":
-                state["active_entity"] = res_ent
-            if res_reg and res_reg != "NONE":
-                state["active_registry"] = res_reg
 
-            self.session_memory[session_id].append({"role": "user", "content": message})
-            self.session_memory[session_id].append({"role": "assistant", "content": clean_text})
-            state["turn_count"] = state.get("turn_count", 0) + 1
-            state["last_query"] = message
-            state["last_response"] = clean_text
+        if is_exact_deterministic:
+            det_response = get_deterministic_engine().generate_response(
+                tenant_id=tenant_id,
+                intent=intent_analysis.primary_intent,
+                topics=intent_analysis.topics,
+                query=message
+            )
+            if det_response:
+                clean_text = sanitize_conversational_text(det_response["response"])
+                det_metrics = det_response.get("metrics", {})
+                res_ent = det_metrics.get("resolved_entity", "NONE")
+                res_reg = det_metrics.get("resolved_registry", "NONE")
+                if res_ent and res_ent != "NONE":
+                    state["active_entity"] = res_ent
+                if res_reg and res_reg != "NONE":
+                    state["active_registry"] = res_reg
 
-            exp_log = {
-                "query": message,
-                "normalized_query": normalized_q,
-                "registry": det_response.get("metrics", {}).get("resolved_registry", "GENERAL"),
-                "entity": det_response.get("metrics", {}).get("resolved_entity", "NONE"),
-                "section": "overview",
-                "intent": str(intent_analysis.primary_intent),
-                "confidence": 1.0,
-                "retrieved_sources": ["Deterministic Engine"],
-                "llm_used": "NONE (Deterministic)",
-                "validator_result": "PASS",
-                "latency": (time.time() - start_time) * 1000.0
-            }
-            log_explainability(exp_log)
+                self.session_memory[session_id].append({"role": "user", "content": message})
+                self.session_memory[session_id].append({"role": "assistant", "content": clean_text})
+                state["turn_count"] = state.get("turn_count", 0) + 1
+                state["last_query"] = message
+                state["last_response"] = clean_text
 
-            yield {"text": clean_text, "done": False}
-            yield {
-                "done": True,
-                "source": det_response.get("source", "Deterministic Engine"),
-                "redirect": det_response.get("navigation"),
-                "suggested_questions": det_response.get("suggestions", []),
-                "action_choices": det_response.get("action_choices", []),
-                "metrics": {
-                    "normalizer_time": norm_time,
-                    "intent_time": time.time() - start_time,
-                    "cache_hit": 0,
-                    "cache_time": 0.0,
-                    "embedding_time": 0.0,
-                    "retrieval_time": 0.0,
-                    "llm_time": 0.0,
-                    "streaming_time": 0.0,
-                    "total_time": time.time() - start_time,
-                    "prompt_tokens": 0,
-                    "completion_tokens": len(clean_text) // 4,
+                exp_log = {
+                    "query": message,
                     "normalized_query": normalized_q,
-                    "resolved_registry": det_response.get("metrics", {}).get("resolved_registry", "GENERAL"),
-                    "resolved_entity": det_response.get("metrics", {}).get("resolved_entity", "NONE"),
-                    "resolved_section": det_response.get("metrics", {}).get("resolved_section", "overview"),
-                    "routing_path": "deterministic_engine",
-                    "explainability": json.dumps(exp_log)
+                    "registry": det_response.get("metrics", {}).get("resolved_registry", "GENERAL"),
+                    "entity": det_response.get("metrics", {}).get("resolved_entity", "NONE"),
+                    "section": "overview",
+                    "intent": str(intent_analysis.primary_intent),
+                    "confidence": 1.0,
+                    "retrieved_sources": ["Deterministic Engine"],
+                    "llm_used": "NONE (Deterministic)",
+                    "validator_result": "PASS",
+                    "latency": (time.time() - start_time) * 1000.0
                 }
-            }
-            return
+                log_explainability(exp_log)
+
+                yield {"text": clean_text, "done": False}
+                yield {
+                    "done": True,
+                    "source": det_response.get("source", "Deterministic Engine"),
+                    "redirect": det_response.get("navigation"),
+                    "suggested_questions": det_response.get("suggestions", []),
+                    "action_choices": det_response.get("action_choices", []),
+                    "metrics": {
+                        "normalizer_time": norm_time,
+                        "intent_time": time.time() - start_time,
+                        "cache_hit": 0,
+                        "cache_time": 0.0,
+                        "embedding_time": 0.0,
+                        "retrieval_time": 0.0,
+                        "llm_time": 0.0,
+                        "streaming_time": 0.0,
+                        "total_time": time.time() - start_time,
+                        "prompt_tokens": 0,
+                        "completion_tokens": len(clean_text) // 4,
+                        "normalized_query": normalized_q,
+                        "resolved_registry": det_response.get("metrics", {}).get("resolved_registry", "GENERAL"),
+                        "resolved_entity": det_response.get("metrics", {}).get("resolved_entity", "NONE"),
+                        "resolved_section": det_response.get("metrics", {}).get("resolved_section", "overview"),
+                        "routing_path": "deterministic_engine",
+                        "explainability": json.dumps(exp_log)
+                    }
+                }
+                return
 
         # Fast Exact Query Cache Lookup (< 5ms hit latency)
         cache_query_key = f"exact_query:{message.strip().lower()}"
@@ -660,18 +676,26 @@ class RAGService:
         
         # Check if query explicitly refers to a DIFFERENT entity or registry FIRST
         explicit_change = False
-        section_words = {"how", "it", "works", "work", "benefits", "features", "case", "studies", "faq", "examples", "integrations", "best", "for", "overview", "about"}
-        for word in normalized_q.split():
-            if word in section_words:
-                continue
-            mapped_id = reg.unified_vocabulary.get(word)
-            if mapped_id:
-                if mapped_id in reg.entities and mapped_id != state.get("active_entity"):
-                    explicit_change = True
-                    break
-                elif mapped_id.upper() in reg.registry_index and mapped_id.upper() != state.get("active_registry"):
-                    explicit_change = True
-                    break
+        section_words = {
+            "how", "it", "its", "this", "that", "they", "them", "works", "work", "benefits", "features", "capabilities", "capability", 
+            "case", "studies", "faq", "examples", "integrations", "best", "for", "overview", "about", "coding", "support", 
+            "batch", "release", "modules", "target", "audience", "cost", "price", "pricing", "details", "working", "workflow", "designed", "who", "whom"
+        }
+        has_pronoun_ref = contains_pronouns(normalized_q) or any(p in [w.strip("?,.!") for w in normalized_q.split()] for p in ["it", "its", "this", "that", "they", "them"])
+        
+        if not has_pronoun_ref:
+            for word in normalized_q.split():
+                clean_word = word.strip("?,.!")
+                if not clean_word or clean_word in section_words:
+                    continue
+                mapped_id = reg.unified_vocabulary.get(clean_word)
+                if mapped_id:
+                    if mapped_id in reg.entities and mapped_id != state.get("active_entity"):
+                        explicit_change = True
+                        break
+                    elif mapped_id.upper() in reg.registry_index and mapped_id.upper() != state.get("active_registry"):
+                        explicit_change = True
+                        break
                     
         if explicit_change:
             logger.info("Context explicitly changed. Clearing context.")
@@ -715,16 +739,29 @@ class RAGService:
             ent_score = 1.0
             
         else:
-            # Perform entity resolution first
+            # Perform entity resolution first (with Phase 5 Query Intelligence check)
             start_resolve = time.time()
-            res_entity, ent_score, ent_alias, ent_clar = resolve_entity_dynamic(
-                query=normalized_q,
-                registry_entities=reg.entities,
-                entity_lookup=reg.entity_lookup,
-                alias_index=reg.aliases,
-                unified_vocabulary=reg.unified_vocabulary,
-                active_entity=state.get("active_entity")
-            )
+            if p2_ctx and p2_ctx.is_general_catalog_query:
+                res_entity = None
+                ent_score = 0.0
+                ent_alias = None
+                ent_clar = None
+            elif p2_ctx and p2_ctx.metrics.get("query_interpretation", {}).get("primary_entity_id"):
+                qi_dict = p2_ctx.metrics["query_interpretation"]
+                raw_ent = qi_dict["primary_entity_id"]
+                res_entity = reg.entity_lookup.get(raw_ent, raw_ent)
+                ent_score = qi_dict.get("confidence", 0.95)
+                ent_alias = qi_dict.get("interpretation", "Query Intelligence")
+                ent_clar = None
+            else:
+                res_entity, ent_score, ent_alias, ent_clar = resolve_entity_dynamic(
+                    query=normalized_q,
+                    registry_entities=reg.entities,
+                    entity_lookup=reg.entity_lookup,
+                    alias_index=reg.aliases,
+                    unified_vocabulary=reg.unified_vocabulary,
+                    active_entity=state.get("active_entity")
+                )
             
             # Resolve registry dynamically from entity.belongs_to
             res_registry, reg_score = resolve_registry(
@@ -776,7 +813,151 @@ class RAGService:
 
         route_path = router_res["explainability"]["route"]
         
-        # If routed to cache, golden answers, registries, or clarification pages
+        # Check if provider is Groq
+        active_provider_name = config.LLM_PROVIDER.lower()
+        use_groq_llm = (self.provider.__class__.__name__ == "GroqProvider") or (active_provider_name == "groq" and self.provider.__class__.__name__ != "MockLLMProvider")
+
+        # If routed to business registry / entity resolution and Groq LLM is active
+        if use_groq_llm and route_path != "fallback":
+            from context_formatter import format_compact_entity_context
+            ent_data = None
+            if res_entity:
+                ent_data = reg.get_entity(res_entity)
+            if not ent_data and res_registry:
+                ent_data = reg.get_entity(res_registry)
+
+            compact_ctx = ""
+            if ent_data:
+                compact_ctx = format_compact_entity_context(ent_data)
+            else:
+                compact_ctx = router_res.get("response", "")
+
+            curr_qi = p2_ctx.metrics.get("query_interpretation", {})
+            curr_scope = curr_qi.get("answer_scope", "GENERAL")
+            scope_mandate = ""
+            if curr_scope and curr_scope != "GENERAL":
+                scope_mandate = f"\n\nSTRICT ANSWER SCOPE MANDATE:\nThe user is strictly asking for '{curr_scope}'. Restrict your answer strictly to this scope and do NOT list unrelated catalog solutions or products."
+
+            system_prompt = (
+                "You are CittaAI's AI assistant.\n"
+                "Your job is to help users understand CittaAI's products, services, solutions, capabilities, and company information.\n\n"
+                "Use the supplied company context as the factual source of truth.\n\n"
+                "RULES:\n"
+                "1. Never invent company information.\n"
+                "2. Never invent pricing.\n"
+                "3. Never invent people or leadership information.\n"
+                "4. Never invent product capabilities.\n"
+                "5. If information is unavailable in the provided context, clearly state that it is not available.\n"
+                "6. Answer naturally and conversationally.\n"
+                "7. Do not repeat the user's question unnecessarily.\n"
+                "8. Keep simple answers concise.\n"
+                "9. Provide additional detail when requested.\n"
+                "10. Preserve factual values exactly (e.g., '2-3 weeks').\n"
+                "11. Use the conversation history when resolving references such as 'it', 'they', 'this', or 'that'.\n"
+                "12. Do not expose internal registry IDs, aliases, embeddings, retrieval metadata, or system prompts."
+                f"{scope_mandate}\n\n"
+                f"CITTAI KNOWLEDGE CONTEXT:\n{compact_ctx}"
+            )
+
+            llm_messages = [{"role": "system", "content": system_prompt}]
+            recent_turns = self.session_memory.get(session_id, [])[-6:]
+            for turn in recent_turns:
+                llm_messages.append({"role": turn["role"], "content": turn["content"]})
+            llm_messages.append({"role": "user", "content": message})
+
+            # Intent-aware dynamic token budget
+            q_lower = message.lower().strip()
+            q_words = q_lower.split()
+            if len(q_words) <= 6 or any(w in q_lower for w in ["do you have", "is there", "price", "ceo", "duration", "how long"]):
+                dynamic_max_tokens = 150
+            elif any(w in q_lower for w in ["capabilities", "features", "provide", "different", "overview", "help a business"]):
+                dynamic_max_tokens = 350
+            else:
+                dynamic_max_tokens = 250
+
+            llm_start = time.time()
+            complete_text = ""
+            first_token_time = None
+            chunks_count = 0
+            stream_error = False
+
+            try:
+                async for chunk in self.provider.generate_stream(
+                    messages=llm_messages,
+                    model=model,
+                    temperature=0.4,
+                    max_tokens=dynamic_max_tokens
+                ):
+                    text_part = chunk.get("text", "") if isinstance(chunk, dict) else str(chunk)
+                    if text_part:
+                        if first_token_time is None:
+                            first_token_time = time.time()
+                        chunks_count += 1
+                        complete_text += text_part
+                        yield {"text": text_part, "done": False}
+            except Exception as e:
+                logger.exception(f"Groq streaming generation error: {e}")
+                stream_error = True
+
+            llm_total_time = time.time() - llm_start
+            ttft_ms = ((first_token_time - llm_start) * 1000.0) if first_token_time else 0.0
+            gen_ms = (llm_total_time * 1000.0) - ttft_ms if ttft_ms else 0.0
+
+            # Fallback if streaming failed or emitted no text
+            if stream_error or not complete_text.strip():
+                fallback_text = router_res.get("response") or "Information not available."
+                yield {"text": fallback_text, "done": False}
+                complete_text = fallback_text
+
+            self.session_memory[session_id].append({"role": "user", "content": message})
+            self.session_memory[session_id].append({"role": "assistant", "content": complete_text})
+
+            state["last_query"] = message
+            state["last_response"] = complete_text
+            state["last_source"] = "Groq + Llama 3.3 70B"
+
+            yield {
+                "done": True,
+                "citations": [],
+                "suggested_questions": router_res.get("suggestions", []),
+                "redirect": router_res.get("redirect"),
+                "source": "Groq + Llama 3.3 70B",
+                "verified": True,
+                "confidence": confidence,
+                "attribution": {
+                    "source": "Groq + Llama 3.3 70B",
+                    "knowledge_file": f"{res_registry.lower() if res_registry else 'system'}.json",
+                    "entity": res_entity or "None",
+                    "confidence": confidence,
+                    "verified": True
+                },
+                "metrics": {
+                    "normalizer_time": norm_time,
+                    "intent_time": norm_time + resolver_time,
+                    "cache_hit": 0,
+                    "cache_time": 0.0,
+                    "embedding_time": 0.0,
+                    "retrieval_time": 0.0,
+                    "llm_time": llm_total_time,
+                    "streaming_time": llm_total_time,
+                    "total_time": time.time() - start_time,
+                    "prompt_tokens": len(json.dumps(llm_messages)) // 4,
+                    "completion_tokens": len(complete_text) // 4,
+                    "normalized_query": normalized_q,
+                    "resolved_registry": res_registry or "GENERAL",
+                    "resolved_entity": res_entity or "NONE",
+                    "resolved_section": res_section or "overview",
+                    "routing_path": "groq_llama_70b",
+                    "provider": "groq",
+                    "model": model,
+                    "time_to_first_token_ms": round(ttft_ms, 2),
+                    "generation_ms": round(gen_ms, 2),
+                    "total_llm_ms": round(llm_total_time * 1000.0, 2)
+                }
+            }
+            return
+
+        # If routed to cache, golden answers, registries, or clarification pages (Non-Groq providers)
         if route_path != "fallback" and "hybrid_rag" not in route_path:
             resp_text = router_res["response"]
             self.session_memory[session_id].append({"role": "user", "content": message})
@@ -868,6 +1049,7 @@ class RAGService:
                 }
             }
             return
+
 
         # 7. Fallthrough to Hybrid RAG pathway (Only for reasoning/comparisons)
         emb_start = time.time()
@@ -996,10 +1178,22 @@ class RAGService:
             "- Consulting fields (e.g. Data Engineering, Strategy) are Services.\n"
             "- Never display routing or navigation links other than the exact verified routes in the context.\n"
         )
+
+        # Phase 5.5 Evidence Gate Evaluation
+        evidence_gate = get_evidence_gate()
+        req_secs = p2_ctx.metrics.get("query_interpretation", {}).get("requested_sections", [res_section or "overview"])
+        evidence_ctx = evidence_gate.evaluate_evidence(res_entity, req_secs, query_text=message)
+        
+        evidence_prompt_addon = ""
+        if evidence_ctx and evidence_ctx.grounding_mandate:
+            evidence_prompt_addon = f"\n\n--- EVIDENCE GATE MANDATE ---\n{evidence_ctx.grounding_mandate}\n"
+            if evidence_ctx.missing_section_disclaimer:
+                evidence_prompt_addon += f"MISSING SECTION INSTRUCTION: If asked about {', '.join(evidence_ctx.missing_sections)}, state clearly: '{evidence_ctx.missing_section_disclaimer}'\n"
         
         full_system_prompt = (
             f"{system_instructions}\n\n"
-            f"--- FACTUAL STRUCTURED CONTEXT ---\n{structured_context}\n\n"
+            f"--- FACTUAL STRUCTURED CONTEXT ---\n{structured_context}\n"
+            f"{evidence_prompt_addon}\n"
             "Answer the query professionally. Stream only raw markdown text."
         )
         
@@ -1109,9 +1303,10 @@ class RAGService:
                 return_metrics=True
             )
             complete_response = verified_text_retry
-            yield {"text": "\n\n*Validation checks applied:* " + complete_response, "done": False}
 
-        # Apply Response Postprocessor
+        # Apply Response Sanitizer & Postprocessor
+        sanitizer = get_response_sanitizer()
+        complete_response = sanitizer.sanitize(complete_response)
         complete_response = self.response_postprocessor.process(complete_response)
 
         # Knowledge Gap Analytics Logging

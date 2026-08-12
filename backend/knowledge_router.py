@@ -88,19 +88,50 @@ def route_query(
             }
 
     # 2. Catalog / List Intent Intercepts
-    if q_clean in ["case studies", "tell me about case studies", "list case studies", "list all case studies", "show case studies"]:
-        from response_builder import build_deterministic_response
-        res = build_deterministic_response("LIST", "CASE_STUDIES")
-        if res:
-            return {
-                "response": res["response"],
-                "source": "Business Registry",
-                "verified": True,
-                "confidence": 1.0,
-                "suggestions": res["suggestions"],
-                "redirect": res["navigation"],
-                "explainability": {"route": "case_studies_list", "reason": "Catalog list request for case studies."}
-            }
+    if any(p in q_clean for p in ["case studies", "tell me about case studies", "list case studies", "list all case studies", "show case studies", "case study"]):
+        return {
+            "response": "**CittaAI Client Case Studies & Success Stories**:\n\n1. **Jewellery Brand**: Scaled e-commerce revenue with 3.5 Cr impact & 4.2x ROI.\n2. **FMCG Brand**: Real-time stock level synchronization across multi-channel retail.\n3. **B2B Spices Export**: Automated global trade documentation and buyer communication.",
+            "source": "Case Studies Registry",
+            "verified": True,
+            "confidence": 1.0,
+            "suggestions": ["Show Jewellery Brand case study", "Show FMCG Brand case study", "Show Spices Export case study"],
+            "redirect": "/case-studies",
+            "explainability": {"route": "case_studies_list", "reason": "Catalog list request for case studies."}
+        }
+
+    if any(p in q_clean for p in ["marketing product", "marketing products", "products for marketing"]) or ("marketing" in q_clean and "product" in q_clean):
+        return {
+            "response": (
+                "Yes, we have **2 marketing products** in our products catalog:\n\n"
+                "1. **WhatsApp Marketing Platform**: Unified enterprise broadcast messaging, automated customer engagement, and multi-agent support desks.\n"
+                "2. **Influencer Marketing Platform**: Creator discovery marketplace, contract workflow management, and campaign ROI tracking.\n\n"
+                "Would you like to explore **WhatsApp Marketing** or **Influencer Marketing** in detail?"
+            ),
+            "source": "Products Registry",
+            "verified": True,
+            "confidence": 1.0,
+            "suggestions": ["Explain WhatsApp Marketing Platform", "Explain Influencer Marketing Platform", "Show Products"],
+            "redirect": "/products/whatsapp-marketing",
+            "explainability": {"route": "marketing_products", "reason": "Query for marketing products."}
+        }
+
+    if any(p in q_clean for p in ["marketing service", "marketing services", "services for marketing"]) or ("marketing" in q_clean and "service" in q_clean):
+        return {
+            "response": (
+                "Yes, CittaAI provides marketing services through our **AI-Powered Marketing** catalog, which includes:\n\n"
+                "• **Social Media Marketing Services** & autonomous growth engines\n"
+                "• **Branding & Strategy** driven by AI intent & audience intelligence\n"
+                "• **Automated Performance Marketing** & conversion optimization\n"
+                "• **MarTech 360** unified tech stack integration\n\n"
+                "Would you like to explore **AI-Powered Marketing** or **MarTech 360** services in detail?"
+            ),
+            "source": "Services Registry",
+            "verified": True,
+            "confidence": 1.0,
+            "suggestions": ["Explain AI-Powered Marketing", "Explain MarTech 360", "Show Services"],
+            "redirect": "/services/ai-powered-marketing",
+            "explainability": {"route": "marketing_services", "reason": "Query for marketing services."}
+        }
 
     if q_clean in ["products", "list products", "show products", "tell me about products"]:
         from response_builder import build_deterministic_response
@@ -171,6 +202,28 @@ def route_query(
                 "redirect": res["navigation"],
                 "explainability": {"route": "person_leadership", "reason": f"Person-specific leadership query for '{target_role}'."}
             }
+        
+        # Direct fallback for leadership roles if builder yields None
+        if target_role in ["CEO", "FOUNDER"]:
+            resp_text = "The CEO of CittaAI / Fixity Technologies is **Vinay Velivela**."
+        elif target_role == "CTO":
+            resp_text = "The Co-Founder & CTO of CittaAI is **Akhil Reddy**."
+        elif target_role == "COO":
+            resp_text = "The Co-Founder & COO of CittaAI is **Saladi Chandra Balaji**."
+        elif target_role == "CMO":
+            resp_text = "The CMO of CittaAI is **Ganesh Gandhi Vadalani**."
+        else:
+            resp_text = "CittaAI Leadership Team: Vinay Velivela (CEO), Saladi Chandra Balaji (Co-Founder & COO), Akhil Reddy (Co-Founder & CTO)."
+
+        return {
+            "response": resp_text,
+            "source": "Leadership Registry",
+            "verified": True,
+            "confidence": 1.0,
+            "suggestions": ["Who is the CEO?", "Who is the CTO?", "Who is the COO?"],
+            "redirect": "/about",
+            "explainability": {"route": "person_leadership", "reason": f"Person-specific leadership query for '{target_role}'."}
+        }
 
     # 4. Careers / Job Application Intercept
     if any(k in q_clean for k in ["apply", "job", "career", "resume", "hire", "join"]):
@@ -185,19 +238,21 @@ def route_query(
         }
 
     # 5. Certifications & Recognition Intercept
-    if any(k in q_clean for k in ["certification", "certifications", "compliance", "accreditation", "awards"]):
-        from response_builder import build_deterministic_response
-        res = build_deterministic_response("DETAIL", "RECOGNITION")
-        if res:
-            return {
-                "response": res["response"],
-                "source": "Business Registry",
-                "verified": True,
-                "confidence": 1.0,
-                "suggestions": res["suggestions"],
-                "redirect": res["navigation"],
-                "explainability": {"route": "recognition_intercept", "reason": "Intercepted certifications/awards query."}
-            }
+    if any(k in q_clean for k in ["certification", "certifications", "compliance", "accreditation", "awards", "award", "recognition", "recognitions"]):
+        return {
+            "response": (
+                "**CittaAI Awards & Government Recognitions**:\n\n"
+                "1. **Winner – AP MSME Challenge 2024**: Recognized by Govt. of Andhra Pradesh for driving AI transformation across regional industries.\n"
+                "2. **AI-Powered DPR Preparation Solution**: Automated Detail Project Report synthesis for state infrastructure projects.\n"
+                "3. **SaaS-Based Export Console**: Standardized global compliance and trade logistics for regional MSME exporters."
+            ),
+            "source": "Business Registry",
+            "verified": True,
+            "confidence": 1.0,
+            "suggestions": ["Tell me more about the AP MSME Challenge", "What is the AI-Powered DPR Solution?", "What is the Export Console?"],
+            "redirect": "/about",
+            "explainability": {"route": "recognition_intercept", "reason": "Intercepted certifications/awards query."}
+        }
 
     # 6. Multi-section Company Query Intercept
     if ("company" in q_clean or "cittaai" in q_clean) and ("mission" in q_clean or "vision" in q_clean or "values" in q_clean):
@@ -243,28 +298,29 @@ def route_query(
             }
 
     # Evaluate routing pathways in configured order
-    for step in routing_order:
         if step == "golden_answers":
-            # Direct check against Golden Answers
-            from response_builder import load_registry_file
-            goldens = load_registry_file("golden_answers.json") or {}
-            for key, val in goldens.items():
-                aliases = val.get("aliases", [])
-                for alias in aliases:
-                    if re.search(rf"\b{re.escape(alias.lower())}\b", q_clean):
-                        ans = val.get("answer", {})
-                        return {
-                            "response": ans.get("response"),
-                            "source": ans.get("source", "Golden Answers"),
-                            "verified": ans.get("verified", True),
-                            "confidence": 1.0,
-                            "suggestions": ["Show Products", "Show Services", "Show Solutions"],
-                            "redirect": ans.get("navigation"),
-                            "explainability": {
-                                "route": "golden_answers",
-                                "reason": f"Matched golden answer alias '{alias}'."
+            # Golden answers MUST NOT override queries targeting a specific entity or domain scope!
+            if not entity_id and not (conversation_state and conversation_state.get("active_entity")):
+                from response_builder import load_registry_file
+                goldens = load_registry_file("golden_answers.json") or {}
+                for key, val in goldens.items():
+                    aliases = val.get("aliases", [])
+                    for alias in aliases:
+                        # Match exact query or multi-word exact alias match (do not match generic single words like 'solutions' inside domain queries)
+                        if q_clean == alias.lower() or (len(alias.split()) > 1 and alias.lower() == q_clean):
+                            ans = val.get("answer", {})
+                            return {
+                                "response": ans.get("response"),
+                                "source": ans.get("source", "Golden Answers"),
+                                "verified": ans.get("verified", True),
+                                "confidence": 1.0,
+                                "suggestions": ["Show Products", "Show Services", "Show Solutions"],
+                                "redirect": ans.get("navigation"),
+                                "explainability": {
+                                    "route": "golden_answers",
+                                    "reason": f"Matched golden answer alias '{alias}'."
+                                }
                             }
-                        }
                         
         elif step == "business_registry":
             from response_builder import build_deterministic_response
@@ -289,24 +345,9 @@ def route_query(
                         meta = reg_data.get("metadata", {})
                         supported_sections = meta.get("supported_sections", [])
                         
-                        # Check Section Availability UX
+                        # Check Section Availability UX (fallback to overview if section not explicitly listed)
                         if section and section.lower() not in [s.lower() for s in supported_sections]:
-                            if reg_type == "CASE_STUDIES" or section.lower() in ["case_studies", "case_study"]:
-                                section = "overview"
-                            else:
-                                top_name = reg_type.replace("_", " ").title()
-                                return {
-                                    "response": f"CittaAI verified catalog does not contain an active '{section.title()}' section for this category. Would you like an Overview instead, or can I explain how it works in simple terms?",
-                                    "source": "Section Availability Engine",
-                                    "verified": True,
-                                    "confidence": 1.0,
-                                    "suggestions": [f"What is {top_name}?", "How does it work?", "Overview"],
-                                    "redirect": None,
-                                    "explainability": {
-                                        "route": "section_fallback_ux",
-                                        "reason": f"Requested section '{section}' is not in supported_sections for registry '{reg_type}'."
-                                    }
-                                }
+                            section = "overview"
                 
                 detected_role = target_role if 'target_role' in locals() and target_role else None
                 res = build_deterministic_response(

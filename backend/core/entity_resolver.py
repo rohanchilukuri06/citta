@@ -42,6 +42,45 @@ class EntityResolver:
         trace = []
         timings = {}
         
+        q_raw = query.strip().lower()
+
+        # Step 0: Direct Raw Match against Canonical IDs and Aliases BEFORE rewrite_query
+        if q_raw in self.registry.entity_lookup:
+            ent_id = self.registry.entity_lookup[q_raw]
+            belongs_to = self.registry.knowledge_graph.get(ent_id, {}).get("belongs_to", "UNKNOWN")
+            trace.append(f"raw_exact_canonical_match='{q_raw}' -> {ent_id}")
+            timings["lookup_ms"] = (time.perf_counter() - t_start) * 1000.0
+            return {
+                "entity_id": ent_id,
+                "registry": belongs_to,
+                "entity_confidence": 1.0,
+                "routing_confidence": 1.0,
+                "confidence_level": "EXACT",
+                "matched_alias": q_raw,
+                "normalized_query": q_raw,
+                "source": "canonical",
+                "trace": trace,
+                "timings": timings
+            }
+        
+        if q_raw in self.registry.alias_lookup:
+            ent_id = self.registry.alias_lookup[q_raw]
+            belongs_to = self.registry.knowledge_graph.get(ent_id, {}).get("belongs_to", "UNKNOWN")
+            trace.append(f"raw_exact_alias_match='{q_raw}' -> {ent_id}")
+            timings["lookup_ms"] = (time.perf_counter() - t_start) * 1000.0
+            return {
+                "entity_id": ent_id,
+                "registry": belongs_to,
+                "entity_confidence": 1.0,
+                "routing_confidence": 1.0,
+                "confidence_level": "EXACT",
+                "matched_alias": q_raw,
+                "normalized_query": q_raw,
+                "source": "alias",
+                "trace": trace,
+                "timings": timings
+            }
+
         # 1. Clean / Normalize base text
         t_norm_start = time.perf_counter()
         try:
@@ -81,6 +120,45 @@ class EntityResolver:
             "management", "analytics", "reporting", "automation", "integration", "integrations", 
             "data", "suite", "suites"
         }
+
+        q_raw = query.strip().lower()
+
+        # Step 0: Direct Raw Match against Canonical IDs, Aliases, and Slugs
+        if q_raw in self.registry.entity_lookup:
+            ent_id = self.registry.entity_lookup[q_raw]
+            belongs_to = self.registry.knowledge_graph.get(ent_id, {}).get("belongs_to", "UNKNOWN")
+            trace.append(f"raw_exact_canonical_match='{q_raw}' -> {ent_id}")
+            timings["lookup_ms"] = (time.perf_counter() - t_lookup_start) * 1000.0
+            return {
+                "entity_id": ent_id,
+                "registry": belongs_to,
+                "entity_confidence": 1.0,
+                "routing_confidence": 1.0,
+                "confidence_level": "EXACT",
+                "matched_alias": q_raw,
+                "normalized_query": q_raw,
+                "source": "canonical",
+                "trace": trace,
+                "timings": timings
+            }
+        
+        if q_raw in self.registry.alias_lookup:
+            ent_id = self.registry.alias_lookup[q_raw]
+            belongs_to = self.registry.knowledge_graph.get(ent_id, {}).get("belongs_to", "UNKNOWN")
+            trace.append(f"raw_exact_alias_match='{q_raw}' -> {ent_id}")
+            timings["lookup_ms"] = (time.perf_counter() - t_lookup_start) * 1000.0
+            return {
+                "entity_id": ent_id,
+                "registry": belongs_to,
+                "entity_confidence": 1.0,
+                "routing_confidence": 1.0,
+                "confidence_level": "EXACT",
+                "matched_alias": q_raw,
+                "normalized_query": q_raw,
+                "source": "alias",
+                "trace": trace,
+                "timings": timings
+            }
 
         # Step 1: Exact Canonical ID or Name Match
         if q_clean in self.registry.entity_lookup:

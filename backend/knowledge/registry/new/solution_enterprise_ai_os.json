@@ -542,48 +542,43 @@
   "workflows": [
     {
       "step": 1,
-      "title": "RAG & Agentic Applications",
-      "description": "Retrieval-augmented reasoning apps with tool use, planning and multi-step workflows."
+      "title": "Data Ingestion & Pipeline Orchestration",
+      "description": "Connect structured and unstructured enterprise data sources with automated ETL and feature engineering."
     },
     {
       "step": 2,
-      "title": "Conversational AI",
-      "description": "Enterprise chat agents for customers, employees and internal ops with guardrails."
+      "title": "Knowledge Indexing & Graph Construction",
+      "description": "Build semantic embeddings, vector stores, and enterprise knowledge graphs for reliable contextual retrieval."
     },
     {
       "step": 3,
-      "title": "Voice Agents",
-      "description": "Inbound and outbound voice AI with real-time telephony and CRM integrations."
+      "title": "Model Selection & Hybrid LLM Routing",
+      "description": "Route prompts across proprietary and open-source models based on latency, cost, and task complexity."
     },
     {
       "step": 4,
-      "title": "Multi-Agent Systems",
-      "description": "Coordinated agents that plan, delegate and execute across business processes."
+      "title": "Enterprise Security & Guardrails Enforcement",
+      "description": "Apply strict role-based access control, PII masking, and anti-hallucination guardrails before model execution."
     },
     {
       "step": 5,
-      "title": "Document AI",
-      "description": "Extract, classify and reason over unstructured documents at enterprise scale."
+      "title": "Multi-Agent Planning & Task Execution",
+      "description": "Orchestrate autonomous agent swarms to break down complex enterprise goals into actionable sub-tasks."
     },
     {
       "step": 6,
-      "title": "Data Engineering & Analytics",
-      "description": "Pipelines, warehouses, feature stores and metrics stacks for AI-ready data."
+      "title": "Tool Integration & API Execution",
+      "description": "Connect AI agents safely to ERP, CRM, database, and internal microservice endpoints."
     },
     {
       "step": 7,
-      "title": "Agentic Knowledge Graph",
-      "description": "Structured knowledge graphs powering reasoning, search and recommendation."
+      "title": "Human-in-the-Loop Oversight",
+      "description": "Implement review gates and feedback loops for high-stakes operational actions and compliance."
     },
     {
       "step": 8,
-      "title": "Database Agents",
-      "description": "AI agents that reason over structured databases with governed query surfaces."
-    },
-    {
-      "step": 9,
-      "title": "Fine-Tuning & RL",
-      "description": "Model customisation with supervised fine-tuning, RLHF and evaluation loops."
+      "title": "Real-Time Telemetry & Performance Evaluation",
+      "description": "Monitor token usage, response quality, latency metrics, and audit logs continuously across enterprise deployments."
     }
   ],
   "benefits": [],

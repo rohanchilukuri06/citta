@@ -67,6 +67,19 @@ if vdb_exists:
     logging.info(f"Runtime DB Metadata: {tmp_store.get_metadata()}")
 logging.info(f"==========================================")
 
+@app.on_event("startup")
+async def prewarm_rag_embedding_model():
+    t_start = time.perf_counter()
+    logger.info("=== PRE-WARMING BGE EMBEDDING MODEL & RAG SERVICE ===")
+    try:
+        rag_serv = get_rag_service()
+        await rag_serv.get_embedding_model()
+        t_end = time.perf_counter()
+        duration_ms = round((t_end - t_start) * 1000.0, 2)
+        logger.info(f"=== EMBEDDING MODEL PRE-WARM COMPLETE: {duration_ms} ms ===")
+    except Exception as e:
+        logger.error(f"Failed to pre-warm embedding model on startup: {e}")
+
 @app.get("/")
 async def root_redirect():
     return RedirectResponse(url="/docs")
@@ -245,8 +258,8 @@ def init_analytics_db():
         )
     """)
     # Migration helper: update config if transitioning from Ollama to Nvidia
-    cursor.execute("UPDATE config SET value = ? WHERE key = 'llm_provider' AND value = 'ollama'", (config.LLM_PROVIDER,))
-    cursor.execute("UPDATE config SET value = ? WHERE key = 'llm_model' AND value = 'qwen2.5:7b'", (config.MODEL_NAME,))
+    cursor.execute("UPDATE config SET value = ? WHERE key = 'llm_provider'", (config.LLM_PROVIDER,))
+    cursor.execute("UPDATE config SET value = ? WHERE key = 'llm_model'", (config.GROQ_MODEL,))
 
     # Insert default config keys if missing
     cursor.execute("INSERT OR IGNORE INTO config (key, value) VALUES ('llm_provider', ?)", (config.LLM_PROVIDER,))
@@ -283,11 +296,12 @@ _rag_service_instance = None
 def get_rag_service() -> rag_service.RAGService:
     global _rag_service_instance
     if _rag_service_instance is None:
-        provider_name = get_config("llm_provider", config.LLM_PROVIDER)
+        provider_name = os.environ.get("LLM_PROVIDER", getattr(config, "LLM_PROVIDER", "groq"))
         
         config_dict = {
             "OPENAI_API_KEY": os.environ.get("OPENAI_API_KEY", config.API_KEY),
             "GEMINI_API_KEY": os.environ.get("GEMINI_API_KEY", ""),
+            "GROQ_API_KEY": os.environ.get("GROQ_API_KEY", ""),
             "CLAUDE_API_KEY": os.environ.get("CLAUDE_API_KEY", "")
         }
         provider_inst = llm_provider.get_llm_provider(provider_name, config_dict)

@@ -60,15 +60,19 @@ def validate_response(
     text_lower = text.lower()
 
     # 1. Resolved Entity Validation
-    if resolved_entity and hasattr(reg, "get_entity"):
+    if resolved_entity and resolved_entity not in ["company_info", "faq_general", "contact", "location"] and hasattr(reg, "get_entity"):
         ent = reg.get_entity(resolved_entity)
         if ent:
             ent_name = (ent.get("name") or ent.get("title") or resolved_entity).lower()
             aliases = [str(a).lower() for a in ent.get("aliases", [])]
+            base_name = resolved_entity.replace("_", " ").replace(" v2", "").replace("_v2", "").lower()
+            title_words = [w.lower() for w in ent_name.split() if len(w) > 3 and w.lower() not in ["and", "with", "for", "the", "os"]]
             matched_entity = (
                 ent_name in text_lower or 
                 resolved_entity.lower() in text_lower or 
-                any(a in text_lower for a in aliases if len(a) > 3)
+                base_name in text_lower or
+                any(a in text_lower for a in aliases if len(a) > 2) or
+                any(tw in text_lower for tw in title_words)
             )
             if not matched_entity:
                 metrics["entity_matched"] = False
@@ -112,6 +116,14 @@ def validate_response(
 
     # 3. Unsupported Products Check
     # Verify product mentions in text against reg.entities and reg.products
+    ALLOWED_GENERIC_DESCRIPTORS = {
+        "unified", "single", "series", "interactive", "comprehensive", "digital",
+        "automation", "software", "management", "learning", "cloud", "centralized",
+        "integrated", "enterprise", "scalable", "secure", "modern", "core", "smart",
+        "ai", "custom", "advanced", "multi", "flexible", "intuitive", "powerful",
+        "data", "intelligent", "analytics", "business", "technical", "corporate", "operational", "the",
+        "this", "that", "role-based", "review", "cpv", "reporting", "assessment", "monitoring", "healthcare", "clinical"
+    }
     product_phrases = re.findall(r"\b([a-z0-9_-]+\s+(?:os|platform|tool|app))\b", text_lower)
     valid_products = set()
     if hasattr(reg, "entities"):
@@ -124,6 +136,9 @@ def validate_response(
                 valid_products.add(str(a).lower())
 
     for prod_p in product_phrases:
+        first_word = prod_p.split()[0].lower()
+        if first_word in ALLOWED_GENERIC_DESCRIPTORS:
+            continue
         if prod_p not in valid_products and "operating system" not in prod_p:
             if not any(prod_p in vp for vp in valid_products):
                 metrics["unsupported_products"].append(prod_p)

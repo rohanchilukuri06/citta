@@ -4,8 +4,8 @@
     "registry_type": "SERVICES",
     "schema_version": "1.0",
     "content_version": "1.0",
-    "last_updated": "2026-07-25",
-    "knowledge_date": "2026-07-25",
+    "last_updated": "2026-08-10",
+    "knowledge_date": "2026-08-10",
     "priority": 80,
     "capabilities": {
       "reasoning": false,
@@ -82,7 +82,7 @@
         "real_estate_os",
         "enterprise_ai_os"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -137,7 +137,7 @@
       "related_entities": [
         "enterprise_ai_os"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -189,7 +189,7 @@
       ],
       "case_studies": [],
       "related_entities": [],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -247,7 +247,7 @@
         "whatsapp_marketing",
         "influencer_marketing"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -255,6 +255,78 @@
         "ai-powered marketing",
         "ai-powered-marketing",
         "ai_powered_marketing"
+      ]
+    },
+    {
+      "id": "martech_360",
+      "name": "MarTech 360",
+      "category": "service",
+      "route": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+      "summary": "AI Brand Architecture & Strategy Engine delivering living strategy systems.",
+      "description": "This is not \u201cbranding\u201d\u2014it\u2019s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system.",
+      "overview": {
+        "summary": "AI Brand Architecture & Strategy Engine delivering living strategy systems.",
+        "description": "This is not \u201cbranding\u201d\u2014it\u2019s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system."
+      },
+      "how_it_works": {
+        "process": "Ingests multi-source intent signals, simulates positioning scenarios, formulates core brand operating systems, and continuously validates engagement.",
+        "steps": [
+          "01 \u2014 Discovery & Signal Ingest: We ingest data from search, competitors, and audience behavior to map the market landscape.",
+          "02 \u2014 Predictive Modeling: AI simulates positioning scenarios and demand curves to identify high-value opportunities.",
+          "03 \u2014 Strategy Formulation: We build the core brand operating system: value proposition, offer architecture, and messaging.",
+          "04 \u2014 Iterative Validation: Continuous testing and refinement based on real-world engagement and revenue signals."
+        ]
+      },
+      "features": [
+        "Predictive positioning analysis using competitor and intent intelligence",
+        "AI-driven customer persona clusters based on behaviour + conversion data",
+        "Narrative and messaging scorecards with automated iteration loops",
+        "Offer architecture design using elasticity and conversion likelihood modelling",
+        "Brand tone system generation with consistency enforcement workflows",
+        "Funnel-aligned brand guidelines for multi-channel execution",
+        "Quarterly strategy recalibration powered by performance signals"
+      ],
+      "benefits": [
+        "+145% Growth",
+        "62%+ increase in qualified enquiries in 45 days (Luxury Real Estate)",
+        "2.4x consultation bookings in 60 days (Healthcare Services)",
+        "Strategy sprint typically completed in 2-3 weeks"
+      ],
+      "best_for": [
+        "Growth Leads",
+        "CMOs",
+        "Brand Strategists",
+        "Enterprise Executives"
+      ],
+      "faq": [
+        {
+          "question": "How is this different from traditional branding?",
+          "answer": "We don't just guess; we use data. Our strategies are built on behavioral evidence and predictive intelligence, not just creative opinions."
+        },
+        {
+          "question": "What data sources do you use?",
+          "answer": "We analyze search intent, competitor messaging, audience behavior, conversion patterns, and sentiment analysis."
+        },
+        {
+          "question": "How long does the strategy process take?",
+          "answer": "Unlike traditional agencies that take months, our initial strategy sprint is typically completed in 2-3 weeks."
+        }
+      ],
+      "case_studies": [
+        "Luxury Real Estate",
+        "Healthcare Services"
+      ],
+      "related_entities": [
+        "ai_powered_marketing",
+        "ai_strategy"
+      ],
+      "last_updated": "2026-08-10",
+      "verified": true,
+      "source": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+      "aliases": [
+        "martech 360",
+        "martech-360",
+        "martech_360"
       ]
     }
   ]

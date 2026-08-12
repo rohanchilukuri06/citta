@@ -6,32 +6,40 @@
   "name": "CittaAI",
   "title": "About CittaAI",
   "tagline": "Elevate. Innovate. Captivate.",
-  "overview": "A full-service Enterprise AI consultancy delivering customized intelligence solutions worldwide.",
-  "description": "A full-service Enterprise AI consultancy delivering customized intelligence solutions worldwide.",
+  "overview": "A full-service Enterprise AI consultancy delivering customized intelligence solutions worldwide. Mission: To empower enterprise transformation through autonomous, transparent, and scalable AI solutions. Vision: To be the global benchmark for trusted Enterprise AI architecture.",
+  "description": "A full-service Enterprise AI consultancy delivering customized intelligence solutions worldwide. Mission: To empower enterprise transformation through autonomous, transparent, and scalable AI solutions. Vision: To be the global benchmark for trusted Enterprise AI architecture.",
   "cta": "Read More",
   "url": "/about",
   "search": {
     "primary_keywords": [
       "citta",
       "cittaai",
-      "about company"
+      "about company",
+      "mission",
+      "vision"
     ],
     "secondary_keywords": [
       "enterprise ai",
       "consultancy",
       "who leads",
-      "who founded"
+      "who founded",
+      "company mission",
+      "company vision"
     ],
     "aliases": [
       "citta",
       "cittaai",
       "company",
       "about",
-      "who_founded"
+      "who_founded",
+      "mission",
+      "vision"
     ],
     "synonyms": [
       "agency",
-      "partner"
+      "partner",
+      "mission",
+      "vision"
     ]
   },
   "classification": {

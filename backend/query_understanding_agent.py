@@ -126,10 +126,13 @@ class QueryUnderstandingAgent:
         self.provider = provider
         if self.provider is None:
             try:
-                from llm_provider import NvidiaProvider
-                self.provider = NvidiaProvider()
+                from llm_provider import get_llm_provider
+                import config
+                target_provider = getattr(config, "LLM_PROVIDER", "groq")
+                config_dict = {"GROQ_API_KEY": getattr(config, "GROQ_API_KEY", ""), "NVIDIA_API_KEY": getattr(config, "NVIDIA_API_KEY", "")}
+                self.provider = get_llm_provider(target_provider, config_dict)
             except Exception as e:
-                logger.warning(f"Could not initialize LLM provider: {e}")
+                logger.warning(f"Could not initialize LLM provider '{target_provider}': {e}")
 
     async def analyze(self, query: str, history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
         """

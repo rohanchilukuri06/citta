@@ -4,8 +4,8 @@
     "registry_type": "SOLUTIONS",
     "schema_version": "1.0",
     "content_version": "1.0",
-    "last_updated": "2026-07-25",
-    "knowledge_date": "2026-07-25",
+    "last_updated": "2026-08-10",
+    "knowledge_date": "2026-08-10",
     "priority": 80,
     "capabilities": {
       "reasoning": false,
@@ -78,7 +78,7 @@
         "whatsapp_marketing",
         "data_engineering"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -137,7 +137,7 @@
       "related_entities": [
         "data_engineering"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -197,7 +197,7 @@
       "related_entities": [
         "data_engineering"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -260,7 +260,7 @@
       "related_entities": [
         "data_engineering"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -319,7 +319,7 @@
       "related_entities": [
         "data_engineering"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -387,7 +387,7 @@
         "enterprise_agentic_ai",
         "data_engineering"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [

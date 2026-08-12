@@ -590,6 +590,67 @@ def compile_registries():
             "last_updated": str(date.today()),
             "verified": True,
             "source": "cittaai_products_services.md"
+        },
+        {
+            "id": "martech_360",
+            "name": "MarTech 360",
+            "category": "service",
+            "route": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+            "summary": "AI Brand Architecture & Strategy Engine delivering living strategy systems.",
+            "description": "This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system.",
+            "overview": {
+                "summary": "AI Brand Architecture & Strategy Engine delivering living strategy systems.",
+                "description": "This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system."
+            },
+            "how_it_works": {
+                "process": "Ingests multi-source intent signals, simulates positioning scenarios, formulates core brand operating systems, and continuously validates engagement.",
+                "steps": [
+                    "01 — Discovery & Signal Ingest: We ingest data from search, competitors, and audience behavior to map the market landscape.",
+                    "02 — Predictive Modeling: AI simulates positioning scenarios and demand curves to identify high-value opportunities.",
+                    "03 — Strategy Formulation: We build the core brand operating system: value proposition, offer architecture, and messaging.",
+                    "04 — Iterative Validation: Continuous testing and refinement based on real-world engagement and revenue signals."
+                ]
+            },
+            "features": [
+                "Predictive positioning analysis using competitor and intent intelligence",
+                "AI-driven customer persona clusters based on behaviour + conversion data",
+                "Narrative and messaging scorecards with automated iteration loops",
+                "Offer architecture design using elasticity and conversion likelihood modelling",
+                "Brand tone system generation with consistency enforcement workflows",
+                "Funnel-aligned brand guidelines for multi-channel execution",
+                "Quarterly strategy recalibration powered by performance signals"
+            ],
+            "benefits": [
+                "+145% Growth",
+                "62%+ increase in qualified enquiries in 45 days (Luxury Real Estate)",
+                "2.4x consultation bookings in 60 days (Healthcare Services)",
+                "Strategy sprint typically completed in 2-3 weeks"
+            ],
+            "best_for": [
+                "Growth Leads",
+                "CMOs",
+                "Brand Strategists",
+                "Enterprise Executives"
+            ],
+            "faq": [
+                {
+                    "question": "How is this different from traditional branding?",
+                    "answer": "We don't just guess; we use data. Our strategies are built on behavioral evidence and predictive intelligence, not just creative opinions."
+                },
+                {
+                    "question": "What data sources do you use?",
+                    "answer": "We analyze search intent, competitor messaging, audience behavior, conversion patterns, and sentiment analysis."
+                },
+                {
+                    "question": "How long does the strategy process take?",
+                    "answer": "Unlike traditional agencies that take months, our initial strategy sprint is typically completed in 2-3 weeks."
+                }
+            ],
+            "case_studies": ["Luxury Real Estate", "Healthcare Services"],
+            "related_entities": ["ai_powered_marketing", "ai_strategy"],
+            "last_updated": str(date.today()),
+            "verified": True,
+            "source": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy"
         }
     ]
     
@@ -1429,6 +1490,7 @@ def compile_registries():
             {"name": "service_enterprise_agentic_ai", "enabled": True, "priority": 80, "registry_id": "enterprise_agentic_ai_v2", "registry_type": "SERVICES", "content": "new/service_enterprise_agentic_ai.json"},
             {"name": "service_ai_strategy", "enabled": True, "priority": 80, "registry_id": "ai_strategy_v2", "registry_type": "SERVICES", "content": "new/service_ai_strategy.json"},
             {"name": "service_ai_powered_marketing", "enabled": True, "priority": 80, "registry_id": "ai_powered_marketing_v2", "registry_type": "SERVICES", "content": "new/service_ai_powered_marketing.json"},
+            {"name": "service_martech_360", "enabled": True, "priority": 80, "registry_id": "martech_360_v2", "registry_type": "SERVICES", "content": "new/service_martech_360.json"},
             {"name": "awards_recognition", "enabled": True, "priority": 75, "registry_id": "awards_recognition_v2", "registry_type": "RECOGNITION", "content": "new/awards_recognition.json"},
             {"name": "leadership_info", "enabled": True, "priority": 75, "registry_id": "leadership_info_v2", "registry_type": "LEADERSHIP", "content": "new/leadership_info.json"},
             {"name": "contact_info", "enabled": True, "priority": 70, "registry_id": "contact_info_v2", "registry_type": "CONTACT", "content": "new/contact_info.json"},

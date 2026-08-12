@@ -15,7 +15,9 @@
       "creator payouts",
       "influencer marketing platform",
       "influencer marketing",
-      "influencer campaigns"
+      "influencer campaigns",
+      "marketing products",
+      "marketing product"
     ],
     "secondary_keywords": [
       "creator collaboration os",
@@ -429,7 +431,48 @@
       "relationships": []
     }
   ],
-  "workflows": [],
+  "workflows": [
+    {
+      "step": 1,
+      "title": "Creator Discovery & Audience Vetting",
+      "description": "Search a global database of vetted creators and analyze audience demographics, fake follower rates, and engagement."
+    },
+    {
+      "step": 2,
+      "title": "Campaign Briefing & Outreach",
+      "description": "Create structured campaign briefs and send automated collaboration invitations to selected influencers."
+    },
+    {
+      "step": 3,
+      "title": "Contract & Rate Negotiation",
+      "description": "Manage digital agreements, negotiate deliverable terms, set pricing milestones, and confirm compliance policies."
+    },
+    {
+      "step": 4,
+      "title": "Content Submission & Brand Approval",
+      "description": "Review draft posts, videos, and captions submitted by creators before public publication to ensure brand alignment."
+    },
+    {
+      "step": 5,
+      "title": "Content Live Tracking & UTM Attribution",
+      "description": "Track live content posts across platforms automatically and attribute conversions using custom UTM links and promo codes."
+    },
+    {
+      "step": 6,
+      "title": "UGC Asset Vault Management",
+      "description": "Store, organize, and manage usage rights for influencer-generated images and videos in a centralized asset repository."
+    },
+    {
+      "step": 7,
+      "title": "Automated Milestone Payouts",
+      "description": "Release milestone-based payments securely to creators upon verified deliverable completion and performance verification."
+    },
+    {
+      "step": 8,
+      "title": "Campaign ROI & Performance Analytics",
+      "description": "Evaluate total campaign reach, impression quality, click volume, cost-per-engagement (CPE), and total revenue generated."
+    }
+  ],
   "benefits": [],
   "use_cases": [],
   "faq": [],

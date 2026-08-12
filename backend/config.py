@@ -10,12 +10,21 @@ load_dotenv(ROOT_DIR / '.env')
 LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "nvidia")
 NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
 NVIDIA_BASE_URL = os.environ.get("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1")
-NVIDIA_MODEL = os.environ.get("NVIDIA_MODEL", "meta/llama-3.1-70b-instruct")
+NVIDIA_MODEL = os.environ.get("NVIDIA_MODEL", "meta/llama-3.3-70b-instruct")
 
 # Backward compatibility mapping
 MODEL_NAME = NVIDIA_MODEL
 API_KEY = NVIDIA_API_KEY
 BASE_URL = NVIDIA_BASE_URL
+
+# Gemini parameters
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
+MAX_OUTPUT_TOKENS = int(os.environ.get("MAX_OUTPUT_TOKENS", "350"))
+# Groq parameters
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+
 
 # Generation parameters
 TEMPERATURE = float(os.environ.get("TEMPERATURE", "0.4"))

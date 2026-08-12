@@ -1,418 +1,214 @@
 {
   "uuid": "4aca3b20-23a6-53b8-8155-bc69713f79a0",
-  "id": "ai_powered_marketing",
+  "id": "martech_360",
   "type": "service",
   "slug": "martech-360",
-  "name": "AI-Powered Marketing",
-  "title": "AI-Powered Marketing",
-  "tagline": "Professional AI Services",
-  "overview": "Book a consultation with our AI experts today.",
-  "description": "Book a consultation with our AI experts today.",
-  "cta": "Book Now",
-  "url": "/services/martech-360",
+  "name": "MarTech 360",
+  "title": "AI-Powered Marketing Solutions",
+  "tagline": "AI Brand Architecture & Strategy Engine",
+  "overview": "This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system. Our AI models map category white-spaces, predict demand curves, and simulate positioning scenarios before a single asset is produced. We deploy automated audience segmentation, narrative testing workflows, and message scoring systems that learn from engagement and revenue outcomes. Instead of static brand decks, you receive a continuously optimized brand operating system: value proposition logic, offer architecture, pricing perception modelling, and a measurable communication framework. Traditional strategy relies on opinions and workshops; our approach runs on behavioural evidence, predictive intelligence, and iterative validation. The result is a brand that adapts to market shifts in real time, aligns every channel to a single growth thesis, and accelerates revenue velocity with fewer wasted cycles.",
+  "description": "This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system. Our AI models map category white-spaces, predict demand curves, and simulate positioning scenarios before a single asset is produced. We deploy automated audience segmentation, narrative testing workflows, and message scoring systems that learn from engagement and revenue outcomes. Instead of static brand decks, you receive a continuously optimized brand operating system: value proposition logic, offer architecture, pricing perception modelling, and a measurable communication framework. Traditional strategy relies on opinions and workshops; our approach runs on behavioural evidence, predictive intelligence, and iterative validation. The result is a brand that adapts to market shifts in real time, aligns every channel to a single growth thesis, and accelerates revenue velocity with fewer wasted cycles.",
+  "cta": "Start with Branding & Strategy",
+  "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
   "search": {
     "primary_keywords": [
-      "ai-powered marketing",
       "martech 360",
-      "martech"
+      "martech",
+      "ai-powered marketing solutions",
+      "branding & strategy",
+      "ai brand architecture & strategy engine"
     ],
     "secondary_keywords": [
-      "book a consultation with our ai experts today."
+      "ready to scale?",
+      "book a consultation with our ai experts today.",
+      "+145% growth",
+      "predictive positioning analysis",
+      "trust conversion engine",
+      "brand acceleration engine"
     ],
     "aliases": [
-      "ai powered marketing",
-      "ai-powered-marketing",
-      "ai_powered_marketing",
       "martech 360",
-      "martech"
+      "martech-360",
+      "martech_360",
+      "martech",
+      "ai brand architecture & strategy engine",
+      "branding & strategy",
+      "branding strategy",
+      "ai-powered marketing solutions",
+      "ai powered marketing solutions"
     ],
     "synonyms": []
   },
   "classification": {
-    "category": "ai_powered_marketing",
+    "category": "martech_360",
     "industry": "Enterprise",
     "domain": "SERVICES",
     "subdomain": null
   },
   "target_users": [
-    "CIO",
-    "CTO",
-    "Product Owners"
+    "Growth Leads",
+    "CMOs",
+    "Brand Strategists",
+    "Enterprise Executives"
   ],
   "capabilities": [
     {
-      "id": "branding_and_strategy",
+      "id": "martech_360_branding_and_strategy",
       "title": "Branding & Strategy",
       "subtitle": "AI Brand Architecture & Strategy Engine",
-      "description": "This is not \u201cbranding\u201d\u2014it\u2019s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system. Our AI models map category white-spaces, predict demand curves, and simulate positioning scenarios before a single asset is produced. We deploy automated audience segmentation, narrative testing workflows, and message scoring systems that learn from engagement and revenue outcomes. Instead of static brand decks, you receive a continuously optimized brand operating system: value proposition logic, offer architecture, pricing perception modelling, and a measurable communication framework. Traditional strategy relies on opinions and workshops; our approach runs on behavioural evidence, predictive intelligence, and iterative validation. The result is a brand that adapts to market shifts in real time, aligns every channel to a single growth thesis, and accelerates revenue velocity with fewer wasted cycles.",
+      "description": "This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system. Our AI models map category white-spaces, predict demand curves, and simulate positioning scenarios before a single asset is produced. We deploy automated audience segmentation, narrative testing workflows, and message scoring systems that learn from engagement and revenue outcomes. Instead of static brand decks, you receive a continuously optimized brand operating system: value proposition logic, offer architecture, pricing perception modelling, and a measurable communication framework. Traditional strategy relies on opinions and workshops; our approach runs on behavioural evidence, predictive intelligence, and iterative validation. The result is a brand that adapts to market shifts in real time, aligns every channel to a single growth thesis, and accelerates revenue velocity with fewer wasted cycles.",
       "keywords": [
         "branding",
         "strategy"
       ],
       "aliases": [
-        "branding & strategy"
+        "branding & strategy",
+        "ai brand architecture & strategy engine",
+        "branding strategy"
       ],
       "features": [
         {
-          "id": "predictive_positioning_analysis_using_competitor_a",
+          "id": "martech_360_predictive_positioning_analysis",
           "title": "Predictive positioning analysis using competitor and intent intelligence",
-          "description": "Capability feature: Predictive positioning analysis using competitor and intent intelligence"
+          "description": "Capability feature: Predictive positioning analysis using competitor and intent intelligence",
+          "keywords": [
+            "predictive",
+            "positioning",
+            "competitor",
+            "intent",
+            "intelligence"
+          ]
         },
         {
-          "id": "ai_driven_customer_persona_clusters_based_on_behav",
+          "id": "martech_360_ai_driven_customer_persona_clusters",
           "title": "AI-driven customer persona clusters based on behaviour + conversion data",
-          "description": "Capability feature: AI-driven customer persona clusters based on behaviour + conversion data"
+          "description": "Capability feature: AI-driven customer persona clusters based on behaviour + conversion data",
+          "keywords": [
+            "persona",
+            "clusters",
+            "behaviour",
+            "conversion",
+            "data"
+          ]
         },
         {
-          "id": "narrative_and_messaging_scorecards_with_automated_",
+          "id": "martech_360_narrative_and_messaging_scorecards",
           "title": "Narrative and messaging scorecards with automated iteration loops",
-          "description": "Capability feature: Narrative and messaging scorecards with automated iteration loops"
+          "description": "Capability feature: Narrative and messaging scorecards with automated iteration loops",
+          "keywords": [
+            "narrative",
+            "messaging",
+            "scorecards",
+            "iteration",
+            "loops"
+          ]
         },
         {
-          "id": "offer_architecture_design_using_elasticity_and_con",
+          "id": "martech_360_offer_architecture_design",
           "title": "Offer architecture design using elasticity and conversion likelihood modelling",
-          "description": "Capability feature: Offer architecture design using elasticity and conversion likelihood modelling"
+          "description": "Capability feature: Offer architecture design using elasticity and conversion likelihood modelling",
+          "keywords": [
+            "offer",
+            "architecture",
+            "elasticity",
+            "conversion",
+            "modelling"
+          ]
         },
         {
-          "id": "brand_tone_system_generation_with_consistency_enfo",
+          "id": "martech_360_brand_tone_system_generation",
           "title": "Brand tone system generation with consistency enforcement workflows",
-          "description": "Capability feature: Brand tone system generation with consistency enforcement workflows"
+          "description": "Capability feature: Brand tone system generation with consistency enforcement workflows",
+          "keywords": [
+            "brand",
+            "tone",
+            "consistency",
+            "enforcement",
+            "workflows"
+          ]
         },
         {
-          "id": "funnel_aligned_brand_guidelines_for_multi_channel_",
+          "id": "martech_360_funnel_aligned_brand_guidelines",
           "title": "Funnel-aligned brand guidelines for multi-channel execution",
-          "description": "Capability feature: Funnel-aligned brand guidelines for multi-channel execution"
+          "description": "Capability feature: Funnel-aligned brand guidelines for multi-channel execution",
+          "keywords": [
+            "funnel",
+            "guidelines",
+            "multi-channel",
+            "execution"
+          ]
         },
         {
-          "id": "quarterly_strategy_recalibration_powered_by_perfor",
+          "id": "martech_360_quarterly_strategy_recalibration",
           "title": "Quarterly strategy recalibration powered by performance signals",
-          "description": "Capability feature: Quarterly strategy recalibration powered by performance signals"
+          "description": "Capability feature: Quarterly strategy recalibration powered by performance signals",
+          "keywords": [
+            "quarterly",
+            "strategy",
+            "recalibration",
+            "performance",
+            "signals"
+          ]
         }
       ],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "social_media_marketing",
-      "title": "Social Media Marketing",
-      "subtitle": "Autonomous Social Growth Engine",
-      "description": "Social media is treated as a real-time signal laboratory, not a posting calendar. Our system monitors audience micro-behaviours\u2014watch time, saves, taps, replies, profile actions\u2014and trains prediction models to identify what will scale before it trends. We deploy generative content pipelines that produce multiple creative angles per theme, then automatically test hooks, pacing, and CTA variants through controlled release cycles. Behaviour tracking feeds a continuous optimization loop: formats evolve weekly, messaging adapts daily, and distribution decisions are guided by performance probability\u2014not guesswork. Traditional SMM depends on \u201cbest practices\u201d; our SMM runs on experimentation engines, audience modelling, and automated creative iteration. We build growth loops through community triggers, UGC capture systems, and retention sequences that turn attention into repeat exposure. The outcome is measurable: higher reach quality, faster creative learning, and compounding engagement that translates into leads and revenue.",
-      "keywords": [
-        "social",
-        "media",
-        "marketing"
+      "benefits": [
+        "+145% Growth"
       ],
-      "aliases": [
-        "social media marketing"
-      ],
-      "features": [
-        {
-          "id": "predictive_content_planning_based_on_trend_+_audie",
-          "title": "Predictive content planning based on trend + audience intent signals",
-          "description": "Capability feature: Predictive content planning based on trend + audience intent signals"
-        },
-        {
-          "id": "automated_hook_and_caption_generation_with_perform",
-          "title": "Automated hook and caption generation with performance scoring",
-          "description": "Capability feature: Automated hook and caption generation with performance scoring"
-        },
-        {
-          "id": "multi_variant_creative_testing_system_(formats,_ct",
-          "title": "Multi-variant creative testing system (formats, CTAs, pacing)",
-          "description": "Capability feature: Multi-variant creative testing system (formats, CTAs, pacing)"
-        },
-        {
-          "id": "behavioural_analytics_dashboard_(saves,_shares,_wa",
-          "title": "Behavioural analytics dashboard (saves, shares, watch-time, clicks)",
-          "description": "Capability feature: Behavioural analytics dashboard (saves, shares, watch-time, clicks)"
-        },
-        {
-          "id": "community_growth_loops_and_ugc_harvesting_automati",
-          "title": "Community growth loops and UGC harvesting automations",
-          "description": "Capability feature: Community growth loops and UGC harvesting automations"
-        },
-        {
-          "id": "retargeting_audiences_built_from_engagement_micro_",
-          "title": "Retargeting audiences built from engagement micro-events",
-          "description": "Capability feature: Retargeting audiences built from engagement micro-events"
-        },
-        {
-          "id": "weekly_creative_intelligence_reports_and_next_acti",
-          "title": "Weekly creative intelligence reports and next-action automation",
-          "description": "Capability feature: Weekly creative intelligence reports and next-action automation"
-        }
-      ],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "content_and_design",
-      "title": "Content & Design",
-      "subtitle": "Generative Content & Design Intelligence Studio",
-      "description": "Content becomes a production system\u2014designed to learn and compound. We generate assets through an AI-guided pipeline that aligns brand voice, audience intent, and conversion psychology. Our models map content gaps, predict high-impact topics, and create multi-format outputs (static, short-form, long-form, landing content) with consistency enforcement. Design is engineered using attention heatmap logic and emotion-response modelling\u2014layouts are built to control scroll behaviour, comprehension, and click probability. Every asset is tagged, tracked, and scored by performance metrics, then fed back into the system to improve future outputs. Traditional content teams create \u201cwhat looks good\u201d; we generate what is statistically likely to win. The result is a scalable content engine that produces high-volume, premium-quality assets with faster iteration, stronger narrative coherence, and measurable business outcomes\u2014without creative fatigue or inconsistency.",
-      "keywords": [
-        "content",
-        "design"
-      ],
-      "aliases": [
-        "content & design"
-      ],
-      "features": [
-        {
-          "id": "topic_intelligence_and_content_gap_prediction_syst",
-          "title": "Topic intelligence and content gap prediction system",
-          "description": "Capability feature: Topic intelligence and content gap prediction system"
-        },
-        {
-          "id": "brand_voice_model_and_consistency_enforcement_work",
-          "title": "Brand voice model and consistency enforcement workflows",
-          "description": "Capability feature: Brand voice model and consistency enforcement workflows"
-        },
-        {
-          "id": "multi_format_generative_content_production_(reels,",
-          "title": "Multi-format generative content production (reels, carousels, blogs, ads)",
-          "description": "Capability feature: Multi-format generative content production (reels, carousels, blogs, ads)"
-        },
-        {
-          "id": "design_system_optimized_for_attention_flow_and_con",
-          "title": "Design system optimized for attention flow and conversion triggers",
-          "description": "Capability feature: Design system optimized for attention flow and conversion triggers"
-        },
-        {
-          "id": "automated_a_b_creative_iteration_and_winner_amplif",
-          "title": "Automated A/B creative iteration and winner amplification",
-          "description": "Capability feature: Automated A/B creative iteration and winner amplification"
-        },
-        {
-          "id": "asset_tagging_+_performance_scoring_for_continuous",
-          "title": "Asset tagging + performance scoring for continuous learning",
-          "description": "Capability feature: Asset tagging + performance scoring for continuous learning"
-        },
-        {
-          "id": "conversion_aligned_content_calendars_built_from_pr",
-          "title": "Conversion-aligned content calendars built from predictive signals",
-          "description": "Capability feature: Conversion-aligned content calendars built from predictive signals"
-        }
-      ],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "seo",
-      "title": "SEO",
-      "subtitle": "Predictive SEO Compounding Engine",
-      "description": "SEO is executed as an algorithmic advantage\u2014not a checklist. We build predictive keyword ecosystems by analysing intent clusters, competitor authority patterns, and conversion pathways. Our system auto-generates topic maps, internal linking architectures, and content briefs that target ranking probability, not just volume. Machine learning models forecast which pages will win based on SERP volatility, content depth requirements, and authority gaps\u2014then prioritize execution for maximum compounding impact. Technical SEO is monitored continuously through automated crawls, anomaly detection, and performance regression alerts. Traditional SEO reacts monthly; our SEO adapts weekly through predictive insights and automated optimization loops. We combine behavioural tracking (dwell time, scroll depth, CTR) with content refinement workflows to increase relevance signals over time. The result is durable visibility, rising authority, and consistent inbound lead generation driven by an intelligence system that learns from search behaviour and business outcomes.",
-      "keywords": [],
-      "aliases": [
-        "seo"
-      ],
-      "features": [
-        {
-          "id": "predictive_keyword_+_intent_clustering_and_opportu",
-          "title": "Predictive keyword + intent clustering and opportunity forecasting",
-          "description": "Capability feature: Predictive keyword + intent clustering and opportunity forecasting"
-        },
-        {
-          "id": "automated_topic_maps,_content_briefs,_and_semantic",
-          "title": "Automated topic maps, content briefs, and semantic coverage models",
-          "description": "Capability feature: Automated topic maps, content briefs, and semantic coverage models"
-        },
-        {
-          "id": "internal_linking_architecture_generation_for_autho",
-          "title": "Internal linking architecture generation for authority flow",
-          "description": "Capability feature: Internal linking architecture generation for authority flow"
-        },
-        {
-          "id": "continuous_technical_seo_monitoring_with_anomaly_d",
-          "title": "Continuous technical SEO monitoring with anomaly detection",
-          "description": "Capability feature: Continuous technical SEO monitoring with anomaly detection"
-        },
-        {
-          "id": "behaviour_driven_content_optimization_(ctr,_dwell_",
-          "title": "Behaviour-driven content optimization (CTR, dwell time, scroll depth)",
-          "description": "Capability feature: Behaviour-driven content optimization (CTR, dwell time, scroll depth)"
-        },
-        {
-          "id": "serp_volatility_tracking_and_rapid_response_update",
-          "title": "SERP volatility tracking and rapid response update workflows",
-          "description": "Capability feature: SERP volatility tracking and rapid response update workflows"
-        },
-        {
-          "id": "monthly_compounding_growth_report_with_next_best_a",
-          "title": "Monthly compounding growth report with next-best actions",
-          "description": "Capability feature: Monthly compounding growth report with next-best actions"
-        }
-      ],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "ppc_advertising",
-      "title": "PPC Advertising",
-      "subtitle": "AI Performance Advertising Optimization Engine",
-      "description": "Paid media becomes a self-optimizing revenue machine when AI governs decisions. We build predictive bidding and budget allocation models that prioritize conversion probability and marginal ROI, not vanity metrics. Our system generates ad variations at scale\u2014headlines, visuals, angles, and CTAs\u2014then runs automated testing cycles to identify winners faster than manual optimization. Behaviour tracking connects ad engagement to on-site actions, enabling micro-segment retargeting and funnel-stage personalization. We deploy anomaly detection to prevent budget leakage, automated negative targeting refinement, and creative fatigue prediction to maintain performance stability. Traditional PPC teams adjust campaigns; our engine continuously recalibrates based on real-time signals. The result is lower acquisition costs, stronger conversion rates, and performance consistency even in volatile markets\u2014powered by automation, machine learning optimization, and rapid creative iteration.",
-      "keywords": [
-        "advertising"
-      ],
-      "aliases": [
-        "ppc advertising"
-      ],
-      "features": [
-        {
-          "id": "predictive_budget_allocation_and_bid_optimization_",
-          "title": "Predictive budget allocation and bid optimization workflows",
-          "description": "Capability feature: Predictive budget allocation and bid optimization workflows"
-        },
-        {
-          "id": "multi_variant_ad_creative_generation_and_automated",
-          "title": "Multi-variant ad creative generation and automated testing",
-          "description": "Capability feature: Multi-variant ad creative generation and automated testing"
-        },
-        {
-          "id": "funnel_stage_audience_modelling_and_micro_segment_",
-          "title": "Funnel-stage audience modelling and micro-segment retargeting",
-          "description": "Capability feature: Funnel-stage audience modelling and micro-segment retargeting"
-        },
-        {
-          "id": "conversion_path_analytics_and_drop_off_prevention_",
-          "title": "Conversion path analytics and drop-off prevention experiments",
-          "description": "Capability feature: Conversion path analytics and drop-off prevention experiments"
-        },
-        {
-          "id": "creative_fatigue_prediction_and_rotation_automatio",
-          "title": "Creative fatigue prediction and rotation automation",
-          "description": "Capability feature: Creative fatigue prediction and rotation automation"
-        },
-        {
-          "id": "anomaly_detection_for_spend_waste_and_performance_",
-          "title": "Anomaly detection for spend waste and performance regression",
-          "description": "Capability feature: Anomaly detection for spend waste and performance regression"
-        },
-        {
-          "id": "weekly_performance_intelligence_report_with_next_b",
-          "title": "Weekly performance intelligence report with next-best actions",
-          "description": "Capability feature: Weekly performance intelligence report with next-best actions"
-        }
-      ],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "e_commerce_growth",
-      "title": "E-commerce Growth",
-      "subtitle": "E-commerce Revenue Intelligence & Growth Loops",
-      "description": "E-commerce growth is engineered through predictive conversion science and automated retention systems. We track behaviour at every micro-step\u2014product views, scroll depth, cart actions, checkout drop-offs\u2014and use machine learning to identify friction points and high-value customer patterns. Our system predicts purchase likelihood and deploys personalized interventions: product recommendations, offer sequencing, and dynamic messaging across channels. We implement growth loops that convert buyers into repeat purchasers through automated post-purchase journeys, replenishment triggers, and loyalty activation workflows. Traditional e-commerce marketing runs campaigns; our approach builds an always-on revenue system that learns from every transaction. Generative AI accelerates creative production for product storytelling, bundles, and seasonal drops, while analytics models measure revenue impact per action. The outcome is higher conversion rates, stronger average order value, and compounding customer lifetime value driven by intelligence, not manual effort.",
-      "keywords": [
-        "e-commerce",
-        "growth"
-      ],
-      "aliases": [
-        "e-commerce growth"
-      ],
-      "features": [
-        {
-          "id": "behaviour_tracking_across_product_\u2192_cart_\u2192_checkou",
-          "title": "Behaviour tracking across product \u2192 cart \u2192 checkout journeys",
-          "description": "Capability feature: Behaviour tracking across product \u2192 cart \u2192 checkout journeys"
-        },
-        {
-          "id": "conversion_friction_detection_and_automated_experi",
-          "title": "Conversion friction detection and automated experimentation",
-          "description": "Capability feature: Conversion friction detection and automated experimentation"
-        },
-        {
-          "id": "predictive_purchase_intent_modelling_and_personali",
-          "title": "Predictive purchase intent modelling and personalization rules",
-          "description": "Capability feature: Predictive purchase intent modelling and personalization rules"
-        },
-        {
-          "id": "dynamic_offer_and_bundle_architecture_for_aov_opti",
-          "title": "Dynamic offer and bundle architecture for AOV optimization",
-          "description": "Capability feature: Dynamic offer and bundle architecture for AOV optimization"
-        },
-        {
-          "id": "post_purchase_automation_loops_for_retention_and_r",
-          "title": "Post-purchase automation loops for retention and repeat sales",
-          "description": "Capability feature: Post-purchase automation loops for retention and repeat sales"
-        },
-        {
-          "id": "customer_segmentation_by_ltv_and_churn_probability",
-          "title": "Customer segmentation by LTV and churn probability",
-          "description": "Capability feature: Customer segmentation by LTV and churn probability"
-        },
-        {
-          "id": "weekly_revenue_intelligence_dashboard_and_optimiza",
-          "title": "Weekly revenue intelligence dashboard and optimization roadmap",
-          "description": "Capability feature: Weekly revenue intelligence dashboard and optimization roadmap"
-        }
-      ],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "whatsapp_marketing_automation",
-      "title": "WhatsApp Marketing Automation",
-      "subtitle": "Conversational Commerce Automation Engine",
-      "description": "WhatsApp becomes a full-funnel revenue channel when it\u2019s engineered as a conversational system\u2014not manual broadcasting. We build automated, behaviour-triggered journeys that respond to user intent in real time: enquiry capture, qualification, product education, follow-ups, abandoned-cart recovery, and post-purchase retention. Our AI models classify conversation intent, predict drop-off risk, and trigger the next best message\u2014personalized by segment, context, and funnel stage. Generative workflows craft dynamic scripts that adapt tone and content based on user responses while enforcing brand consistency. Traditional WhatsApp marketing relies on blasts and human follow-up; our approach deploys intelligent sequences, automated routing, and performance learning loops. Every message is tracked for response rate, conversion impact, and revenue attribution. The result is faster lead conversion, reduced response latency, and scalable customer engagement that feels personalized\u2014without operational overhead.",
-      "keywords": [
-        "whatsapp",
-        "marketing",
-        "automation"
-      ],
-      "aliases": [
-        "whatsapp marketing automation"
-      ],
-      "features": [
-        {
-          "id": "intent_classification_and_automated_conversation_r",
-          "title": "Intent classification and automated conversation routing",
-          "description": "Capability feature: Intent classification and automated conversation routing"
-        },
-        {
-          "id": "funnel_stage_journeys:_lead_\u2192_nurture_\u2192_conversion",
-          "title": "Funnel-stage journeys: lead \u2192 nurture \u2192 conversion \u2192 retention",
-          "description": "Capability feature: Funnel-stage journeys: lead \u2192 nurture \u2192 conversion \u2192 retention"
-        },
-        {
-          "id": "abandoned_cart_and_drop_off_recovery_sequences",
-          "title": "Abandoned cart and drop-off recovery sequences",
-          "description": "Capability feature: Abandoned cart and drop-off recovery sequences"
-        },
-        {
-          "id": "dynamic_script_generation_with_brand_consistency_e",
-          "title": "Dynamic script generation with brand consistency enforcement",
-          "description": "Capability feature: Dynamic script generation with brand consistency enforcement"
-        },
-        {
-          "id": "lead_qualification_scoring_and_crm_ready_data_capt",
-          "title": "Lead qualification scoring and CRM-ready data capture",
-          "description": "Capability feature: Lead qualification scoring and CRM-ready data capture"
-        },
-        {
-          "id": "behaviour_based_segmentation_and_next_best_message",
-          "title": "Behaviour-based segmentation and next-best-message triggers",
-          "description": "Capability feature: Behaviour-based segmentation and next-best-message triggers"
-        },
-        {
-          "id": "performance_dashboards_(reply_rate,_conversion_rat",
-          "title": "Performance dashboards (reply rate, conversion rate, revenue attribution)",
-          "description": "Capability feature: Performance dashboards (reply rate, conversion rate, revenue attribution)"
-        }
-      ],
-      "benefits": [],
       "relationships": []
     }
   ],
-  "workflows": [],
-  "benefits": [],
-  "use_cases": [],
-  "faq": [],
+  "workflows": [
+    {
+      "step": 1,
+      "title": "01 — Discovery & Signal Ingest",
+      "description": "We ingest data from search, competitors, and audience behavior to map the market landscape."
+    },
+    {
+      "step": 2,
+      "title": "02 — Predictive Modeling",
+      "description": "AI simulates positioning scenarios and demand curves to identify high-value opportunities."
+    },
+    {
+      "step": 3,
+      "title": "03 — Strategy Formulation",
+      "description": "We build the core brand operating system: value proposition, offer architecture, and messaging."
+    },
+    {
+      "step": 4,
+      "title": "04 — Iterative Validation",
+      "description": "Continuous testing and refinement based on real-world engagement and revenue signals."
+    }
+  ],
+  "benefits": [
+    "+145% Growth",
+    "62%+ increase in qualified enquiries in 45 days (Luxury Real Estate)",
+    "2.4x consultation bookings in 60 days (Healthcare Services)",
+    "Strategy sprint typically completed in 2-3 weeks"
+  ],
+  "use_cases": [
+    "Luxury Real Estate – Brand Acceleration Engine (62%+ increase in qualified enquiries in 45 days)",
+    "Healthcare Services – Trust Conversion Engine (2.4x consultation bookings in 60 days)"
+  ],
+  "faq": [
+    {
+      "question": "How is this different from traditional branding?",
+      "answer": "We don't just guess; we use data. Our strategies are built on behavioral evidence and predictive intelligence, not just creative opinions."
+    },
+    {
+      "question": "What data sources do you use?",
+      "answer": "We analyze search intent, competitor messaging, audience behavior, conversion patterns, and sentiment analysis."
+    },
+    {
+      "question": "How long does the strategy process take?",
+      "answer": "Unlike traditional agencies that take months, our initial strategy sprint is typically completed in 2-3 weeks."
+    }
+  ],
   "relationships": [],
   "metadata": {
     "schema_version": "2.0",
     "content_version": "1.0",
-    "last_updated": "2026-07-19",
-    "source": "12_service_ai_powered_marketing.json",
+    "last_updated": "2026-08-10",
+    "source": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
     "confidence": 1.0,
     "language": "en"
   }

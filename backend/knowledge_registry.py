@@ -463,9 +463,10 @@ class KnowledgeRegistry:
 
         # Domain concept mappings for solutions & products
         domain_mappings = {
-            "pharma_os": ["pharma", "pharmaceutical", "pharmaceuticals", "hospital", "hospitals", "medical", "clinic", "clinics", "healthcare", "healthtech", "health tech"],
+            "martech_360": ["martech 360", "martech-360", "martech", "martech 360 service", "branding & strategy", "branding strategy", "ai brand architecture & strategy engine", "ai brand architecture and strategy engine", "ai-powered marketing solutions", "ai powered marketing solutions"],
+            "pharma_os": ["pharma", "pharmaceutical", "pharmaceuticals", "hospital", "hospitals", "medical", "clinic", "clinics", "healthcare os", "healthtech", "health tech"],
             "education_os": ["education", "college", "colleges", "institute", "institutes", "institution", "institutions", "university", "universities", "school", "schools", "academic", "academics", "edtech"],
-            "real_estate_os": ["real estate", "realestate", "construction", "property", "properties", "realty", "builder", "builders", "broker", "brokers", "housing"],
+            "real_estate_os": ["real estate os", "realestate os", "construction", "property", "properties", "realty", "builder", "builders", "broker", "brokers", "housing"],
             "ecommerce_os": ["ecommerce", "e-commerce", "retail", "retailers", "online store", "shopping", "merchant", "merchants"],
             "smart_cities_os": ["smart cities", "smart city", "urban", "municipality", "municipalities", "city management", "city planning"],
             "enterprise_ai_os": ["enterprise ai", "ai os", "ai platform", "ai middleware", "ai infrastructure", "agentic ai"]

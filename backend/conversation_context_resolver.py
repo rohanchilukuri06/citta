@@ -11,7 +11,8 @@ SECTION_ONLY_TRIGGERS = {
     "how does it work", "how it works", "workflow", "process", "working", "how to use",
     "benefits", "advantages", "pricing", "cost", "price", "plans",
     "features", "capabilities", "modules", "who is it for", "target audience",
-    "who should use", "industries", "faq", "faqs", "questions", "integrations", "implementation"
+    "who should use", "industries", "faq", "faqs", "questions", "integrations", "implementation",
+    "who is it designed for", "designed for", "who uses it", "batch release", "batch"
 }
 
 GENERIC_ENTITIES = {"company_info", "faq_general", "contact", "location"}

@@ -15,7 +15,9 @@
       "whatsapp business",
       "whatsapp marketing platform",
       "wa campaign",
-      "whatsapp marketing"
+      "whatsapp marketing",
+      "marketing products",
+      "marketing product"
     ],
     "secondary_keywords": [
       "inbox desk",
@@ -646,7 +648,48 @@
       "relationships": []
     }
   ],
-  "workflows": [],
+  "workflows": [
+    {
+      "step": 1,
+      "title": "Contact Import & Opt-In Synchronization",
+      "description": "Import subscriber databases, clean contact records, and verify official WhatsApp opt-in consents."
+    },
+    {
+      "step": 2,
+      "title": "Audience Segmentation & Cohort Tagging",
+      "description": "Segment contacts based on demographic attributes, past purchase behavior, engagement scores, and custom tags."
+    },
+    {
+      "step": 3,
+      "title": "Approved Template & Copy Creation",
+      "description": "Design interactive broadcast templates with buttons, media attachments, and submit them for Meta API approval."
+    },
+    {
+      "step": 4,
+      "title": "Mass Broadcast & Smart Rate Control",
+      "description": "Schedule and execute high-volume campaigns with automated rate-limiting to maintain high sender reputation."
+    },
+    {
+      "step": 5,
+      "title": "Automated Drip Campaign Execution",
+      "description": "Trigger multi-step automated messaging sequences based on user actions, sign-ups, or abandoned carts."
+    },
+    {
+      "step": 6,
+      "title": "Interactive AI Chatbot Hand-Off",
+      "description": "Engage incoming replies instantly with conversational AI bots or route high-intent leads to human agents."
+    },
+    {
+      "step": 7,
+      "title": "Multi-Agent Shared Inbox Collaboration",
+      "description": "Manage concurrent customer conversations with team assignment rules, tag tracking, and response templates."
+    },
+    {
+      "step": 8,
+      "title": "Campaign Analytics & ROI Tracking",
+      "description": "Measure message delivery, open rates, click-through rates, conversion metrics, and campaign ROI in real time."
+    }
+  ],
   "benefits": [],
   "use_cases": [],
   "faq": [],

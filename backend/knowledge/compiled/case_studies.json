@@ -4,8 +4,8 @@
     "registry_type": "CASE_STUDIES",
     "schema_version": "1.0",
     "content_version": "1.0",
-    "last_updated": "2026-07-25",
-    "knowledge_date": "2026-07-25",
+    "last_updated": "2026-08-10",
+    "knowledge_date": "2026-08-10",
     "priority": 85,
     "capabilities": {
       "reasoning": true,

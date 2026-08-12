@@ -105,6 +105,14 @@
       "content": "new/service_ai_powered_marketing.json"
     },
     {
+      "name": "service_martech_360",
+      "enabled": true,
+      "priority": 80,
+      "registry_id": "martech_360_v2",
+      "registry_type": "SERVICES",
+      "content": "new/service_martech_360.json"
+    },
+    {
       "name": "awards_recognition",
       "enabled": true,
       "priority": 75,

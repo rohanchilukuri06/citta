@@ -117,6 +117,15 @@ def clean_text(query: str) -> str:
     q = re.sub(r"\s+", " ", q).strip()
     return q
 
+STANDARD_BUSINESS_VOCABULARY = {
+    "sector", "sectors", "industry", "industries", "company", "companies",
+    "business", "businesses", "organization", "organizations", "university",
+    "universities", "college", "colleges", "school", "schools", "hospital",
+    "hospitals", "property", "properties", "management", "strategy", "support",
+    "contact", "location", "solutions", "services", "products", "platform", "platforms",
+    "weather", "cricket", "biryani", "recipe", "bitcoin"
+}
+
 def safe_spell_correction(
     query: str, 
     vocabulary_tokens: Set[str], 
@@ -126,9 +135,10 @@ def safe_spell_correction(
     Stage 2: Safe Spell Correction.
     Order per token:
       1. Explicit common typo replacement map (for compound words like realestate -> real estate)
-      2. RapidFuzz check using QRatio (exact full-token edit distance, match score >= spell_threshold)
-      3. Exact vocabulary check
-      4. Leave token unchanged if low confidence match or unknown token
+      2. Exact standard business vocabulary check (e.g. sector, industry, university)
+      3. RapidFuzz check using QRatio (exact full-token edit distance, match score >= spell_threshold)
+      4. Exact vocabulary check
+      5. Leave token unchanged if low confidence match or unknown token
     Never silently replaces a token with low confidence.
     """
     if not query:
@@ -154,6 +164,11 @@ def safe_spell_correction(
     for token in tokens:
         # Ignore numbers or short tokens
         if token.isdigit() or len(token) <= 2:
+            corrected_tokens.append(token)
+            continue
+
+        # Check standard business vocabulary to prevent over-correction (e.g. sector -> vector)
+        if token.lower() in STANDARD_BUSINESS_VOCABULARY:
             corrected_tokens.append(token)
             continue
             

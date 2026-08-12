@@ -21,7 +21,7 @@ class Phase3ReasoningEngine:
         self.formatter = get_structured_formatter()
         self.provider = provider
 
-    async def execute_reasoning(self, ctx: OrchestrationContext, model: str = "llama-3.1-70b-instruct") -> Dict[str, Any]:
+    async def execute_reasoning(self, ctx: OrchestrationContext, model: str = "llama-3.3-70b-versatile") -> Dict[str, Any]:
         start_time = time.time()
 
         # 1. Build Raw Evidence Package

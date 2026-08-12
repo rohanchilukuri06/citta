@@ -4,8 +4,8 @@
     "registry_type": "PRODUCTS",
     "schema_version": "1.0",
     "content_version": "1.0",
-    "last_updated": "2026-07-25",
-    "knowledge_date": "2026-07-25",
+    "last_updated": "2026-08-10",
+    "knowledge_date": "2026-08-10",
     "priority": 90,
     "capabilities": {
       "reasoning": false,
@@ -79,7 +79,7 @@
         "ecommerce_os",
         "ai_powered_marketing"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [
@@ -140,7 +140,7 @@
         "ecommerce_os",
         "ai_powered_marketing"
       ],
-      "last_updated": "2026-07-25",
+      "last_updated": "2026-08-10",
       "verified": true,
       "source": "cittaai_products_services.md",
       "aliases": [

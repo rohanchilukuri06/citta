@@ -235,7 +235,48 @@
       "relationships": []
     }
   ],
-  "workflows": [],
+  "workflows": [
+    {
+      "step": 1,
+      "title": "IoT & Urban Sensor Data Ingestion",
+      "description": "Stream real-time telemetry from traffic cameras, environmental sensors, water meters, and smart grid infrastructure."
+    },
+    {
+      "step": 2,
+      "title": "Unified Central Command Monitoring",
+      "description": "Consolidate city-wide operational metrics onto a single spatial dashboard for municipal authorities."
+    },
+    {
+      "step": 3,
+      "title": "Intelligent Traffic & Mobility Management",
+      "description": "Optimize signal timing dynamically, detect congestion bottlenecks, and coordinate public transit dispatching."
+    },
+    {
+      "step": 4,
+      "title": "Utility & Resource Distribution Optimization",
+      "description": "Monitor water supply pipelines, detect leakages, forecast energy consumption, and manage smart street lighting."
+    },
+    {
+      "step": 5,
+      "title": "Automated Waste Collection & Route Dispatch",
+      "description": "Track bin fill levels in real time and dynamically optimize waste collection truck routes for fuel efficiency."
+    },
+    {
+      "step": 6,
+      "title": "Public Safety & Incident Response",
+      "description": "Detect emergencies automatically, route incident alerts to emergency services, and coordinate field personnel."
+    },
+    {
+      "step": 7,
+      "title": "Citizen Grievance & Service Portal",
+      "description": "Allow citizens to report issues, track resolution status, and interact with automated municipal response agents."
+    },
+    {
+      "step": 8,
+      "title": "Urban Planning & Environmental Analytics",
+      "description": "Analyze air quality trends, carbon emissions, infrastructure wear, and population mobility to inform policy."
+    }
+  ],
   "benefits": [],
   "use_cases": [
     "Traffic AI",

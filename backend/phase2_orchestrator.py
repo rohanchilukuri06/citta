@@ -44,6 +44,9 @@ def check_general_catalog_query(query: str) -> bool:
         "whatsapp", "influencer", "enterprise ai", "martech", "social media",
         "leadership", "team", "founder", "contact", "address", "pricing", "cost"
     ]
+    if any(k in q_lower for k in ["case study", "case studies", "awards", "recognitions", "certifications", "apply for a job", "careers"]):
+        return True
+
     if any(k in q_lower for k in specific_keywords):
         return False
 
@@ -113,6 +116,38 @@ class Phase2Orchestrator:
             alias_index=self.reg.aliases,
             unified_vocabulary=self.reg.unified_vocabulary
         )
+
+        # Phase 5: Query Intelligence Engine Intercept for Semantic Category Mismatch & Intent Understanding
+        try:
+            from query_intelligence_engine import get_query_intelligence_engine
+            qi_engine = get_query_intelligence_engine()
+            active_ctx_entity = self.context_resolver.get_conversation_state(session_id).active_entity
+            import asyncio
+            # Synchronous dynamic interpretation call
+            try:
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    import concurrent.futures
+                    with concurrent.futures.ThreadPoolExecutor() as pool:
+                        qi = pool.submit(asyncio.run, qi_engine.interpret(original_query, normalized_query, session_id=session_id, active_entity=active_ctx_entity)).result()
+                else:
+                    qi = loop.run_until_complete(qi_engine.interpret(original_query, normalized_query, session_id=session_id, active_entity=active_ctx_entity))
+            except Exception:
+                # Direct fallback interpretation if event loop context differs
+                qi = asyncio.run(qi_engine.interpret(original_query, normalized_query, session_id=session_id, active_entity=active_ctx_entity))
+
+            ctx.metrics["query_interpretation"] = qi.to_dict()
+            ctx.metrics["category_mismatch"] = qi.category_mismatch
+            ctx.metrics["user_category_term"] = qi.category_term_used_by_user
+
+            # If Query Intelligence detects entity with high confidence (or handles category mismatch), override detected entity
+            if qi.primary_entity_id and (conf < 0.90 or qi.category_mismatch):
+                detected_entity_id = qi.primary_entity_id
+                conf = qi.confidence
+                matched_alias = f"Query Intelligence ({qi.interpretation})"
+                ctx.add_trace("QueryIntelligenceEngine", detected_entity_id, f"Resolved entity via Query Intelligence (conf={conf})")
+        except Exception as e:
+            logger.warning(f"QueryIntelligenceEngine orchestrator integration notice: {e}")
         
         # 2.1 Confidence Threshold Check: If conf < 0.90, invoke QueryUnderstandingAgent for Data-Driven selection
         if conf < 0.90 and not check_general_catalog_query(normalized_query):
