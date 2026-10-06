@@ -16,6 +16,8 @@
       "whatsapp marketing platform",
       "wa campaign",
       "whatsapp marketing",
+      "customer communication",
+      "customer messaging",
       "marketing products",
       "marketing product"
     ],
@@ -42,8 +44,11 @@
     "subdomain": null
   },
   "target_users": [
-    "Admin",
-    "User"
+    "D2C & Retail",
+    "Education",
+    "Healthcare",
+    "Local Services",
+    "Real Estate Lead Funnels"
   ],
   "capabilities": [
     {
@@ -690,7 +695,14 @@
       "description": "Measure message delivery, open rates, click-through rates, conversion metrics, and campaign ROI in real time."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Higher conversions",
+    "Faster support",
+    "Scalable lifecycle engagement",
+    "98% Open Rate",
+    "45–60% Click Rate",
+    "24/7 Engagement"
+  ],
   "use_cases": [],
   "faq": [],
   "relationships": [],
@@ -700,6 +712,14 @@
     "last_updated": "2026-07-19",
     "source": "01_product_whatsapp_marketing_platform.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats",
+        "target_users": "website bestFor / stakeholders"
+      },
+      "date": "2026-09-29"
+    }
   }
 }

@@ -50,18 +50,26 @@ class ExecutionStrategySelector:
             ctx.add_trace("ExecutionStrategySelector", ExecutionStrategy.ACTION.value, ctx.reason)
             return ctx
 
-        # Rule 2: Consultative (Business recommendations)
-        if ctx.intent == EnterpriseIntent.RECOMMENDATION.value or "should we choose" in q_lower or "recommend" in q_lower:
+        # Rule 2: Consultative (Business recommendations, collaboration, onboarding, next steps)
+        consultative_phrases = [
+            "collaborate", "proceed", "work together", "partner", "get started", "how to start", 
+            "next steps", "how can i proceed", "ready to work", "engage", "onboard", "how to engage",
+            "should we choose", "recommend", "best approach", "how should we", "advice", "guidance"
+        ]
+        if ctx.intent == EnterpriseIntent.RECOMMENDATION.value or any(phrase in q_lower for phrase in consultative_phrases):
             ctx.execution_strategy = ExecutionStrategy.CONSULTATIVE
             ctx.confidence = 0.95
-            ctx.reason = "Query requires business recommendation or scenario advice."
+            ctx.reason = "Query requires consultative business guidance, scenario advice, or onboarding steps."
             ctx.requires_llm = True
             ctx.add_trace("ExecutionStrategySelector", ExecutionStrategy.CONSULTATIVE.value, ctx.reason)
             return ctx
 
         # Rule 3: Reasoning (Comparison, Suitability, Integration, or Multi-entity synthesis)
         is_multi_entity = len(ctx.session_state.recently_compared_entities) >= 2 or (ctx.matched_entity_ids and len(ctx.matched_entity_ids) >= 2)
-        if (ctx.intent in [EnterpriseIntent.COMPARISON.value, EnterpriseIntent.SUITABILITY.value, EnterpriseIntent.INTEGRATION.value] or is_multi_entity) and not (ctx.resolved_entity_id and ctx.confidence >= 0.9):
+        # A confidently resolved entity only downgrades integration questions to a lookup;
+        # comparison / suitability questions need synthesis however sure we are of the entity.
+        confident_integration_lookup = ctx.intent == EnterpriseIntent.INTEGRATION.value and ctx.resolved_entity_id and ctx.confidence >= 0.9
+        if (ctx.intent in [EnterpriseIntent.COMPARISON.value, EnterpriseIntent.SUITABILITY.value, EnterpriseIntent.INTEGRATION.value] or is_multi_entity) and not confident_integration_lookup:
             ctx.execution_strategy = ExecutionStrategy.REASONING
             ctx.confidence = 0.95
             ctx.reason = f"Query intent '{ctx.intent}' requires evidence-grounded reasoning engine synthesis."

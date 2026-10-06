@@ -58,12 +58,11 @@
       "founder",
       "started the company",
       "founded the company",
-      "kiran kumar",
       "who leads",
       "who lead"
     ],
     "answer": {
-      "response": "\ud83d\udc64 **CittaAI Leadership**\n\nCittaAI was founded in **2022** by a team of researchers and engineers. The company is led by **Kiran Kumar** (Founder & CEO), Vinay Velivela (CEO of Fixity Technologies), Saladi Chandra Balaji (Co-Founder & COO), and Akhil Reddy (Co-Founder & CTO). We engineer research-grade intelligence at enterprise scale.",
+      "response": "\ud83d\udc64 **CittaAI Leadership**\n\nCittaAI was founded in **2022** by a team of researchers and engineers. The company is led by **Akhil Reddy** (CEO), with Saladi Chandra Balaji (Co-Founder & COO) and Ganesh Gandhi Vadalani (CMO). We engineer research-grade intelligence at enterprise scale.",
       "source": "Golden Answers",
       "verified": true,
       "navigation": "/about"

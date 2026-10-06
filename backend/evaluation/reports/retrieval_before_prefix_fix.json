@@ -1,0 +1,10 @@
+{
+  "label": "before_prefix_fix",
+  "n": 193,
+  "index_built": "2026-09-27T10:11:15.604751Z",
+  "passage_prefix": "unknown",
+  "entity_recall@1": 82.4,
+  "entity_recall@5": 95.3,
+  "entity_section_recall@5": 80.3,
+  "n_with_section": 137
+}

@@ -1,0 +1,4561 @@
+{
+  "manifest": {
+    "dataset_version": "1.4.0",
+    "dataset_sha": "fd780e2fb34d",
+    "registry_hash": null,
+    "code_sha": {
+      "query_intelligence_engine.py": "8e3f64496d8f",
+      "semantic_arbitration.py": "e3e58a594afd",
+      "semantic_decision.py": "148ff2ab93ff",
+      "semantic_entity_index.py": "6c827df84ed8",
+      "knowledge_tool_router.py": "cb8ca337e0b0",
+      "knowledge_operation_registry.py": "591dd628ccca",
+      "semantic_chat_pipeline.py": "8c1487bf9e2a",
+      "knowledge_operation_executor.py": "3254da482692"
+    },
+    "git_head": "71b4793",
+    "working_tree_dirty": true,
+    "embedding_model": "BAAI/bge-base-en-v1.5",
+    "llm_mode": "on",
+    "llm_provider": "nvidia",
+    "llm_model": "nvidia/nemotron-3-super-120b-a12b"
+  },
+  "split": "dev",
+  "n": 107,
+  "accuracy_pct": {
+    "entity": 95.3,
+    "scope": 95.3,
+    "aspect": 99.1,
+    "operation": 94.4,
+    "decision": 94.4
+  },
+  "catalog_leakage": 0,
+  "confidently_wrong": 1,
+  "clarification_rate_pct": 0.9,
+  "llm_requested_pct": 21.5,
+  "llm_invoked_pct": 21.5,
+  "calibration": {
+    "ece": 0.0729,
+    "bins": [
+      {
+        "range": "0.4-0.6",
+        "n": 8,
+        "avg_conf": 0.545,
+        "accuracy": 0.5
+      },
+      {
+        "range": "0.6-0.8",
+        "n": 17,
+        "avg_conf": 0.7,
+        "accuracy": 0.941
+      },
+      {
+        "range": "0.8-1.0",
+        "n": 81,
+        "avg_conf": 0.947,
+        "accuracy": 0.988
+      }
+    ]
+  },
+  "latency_ms_p50": 214.9,
+  "by_style": {
+    "Aspect": {
+      "n": 14,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Business": {
+      "n": 6,
+      "decision_pct": 83.3,
+      "entity_pct": 100.0
+    },
+    "Catalog": {
+      "n": 7,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "CategoryMismatch": {
+      "n": 2,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Company": {
+      "n": 7,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Context": {
+      "n": 7,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Conversational": {
+      "n": 8,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Detail": {
+      "n": 6,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Direct": {
+      "n": 7,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Indirect": {
+      "n": 11,
+      "decision_pct": 81.8,
+      "entity_pct": 81.8
+    },
+    "Informal": {
+      "n": 6,
+      "decision_pct": 83.3,
+      "entity_pct": 83.3
+    },
+    "Minimal": {
+      "n": 6,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Multi": {
+      "n": 3,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "OOD": {
+      "n": 2,
+      "decision_pct": 100.0,
+      "entity_pct": 100.0
+    },
+    "Problem-oriented": {
+      "n": 9,
+      "decision_pct": 88.9,
+      "entity_pct": 88.9
+    },
+    "Synonym": {
+      "n": 6,
+      "decision_pct": 83.3,
+      "entity_pct": 83.3
+    }
+  },
+  "failures": [
+    {
+      "id": "PARA_HC_03",
+      "style": "Indirect",
+      "q": "I manage a medical clinic. What AI systems are suitable for us?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.543,
+        "margin": 0.3354,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_05",
+      "style": "Informal",
+      "q": "what do u have for hospitals",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.46,
+        "margin": 0.4025,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_solution",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_06",
+      "style": "Synonym",
+      "q": "Any AI tech for health care facilities and doctors?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.664,
+        "margin": 0.5661,
+        "source": "bge+llm+rules",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_07",
+      "style": "Problem-oriented",
+      "q": "We are struggling with patient scheduling and clinical workflow automation.",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "ai_powered_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.585,
+        "margin": 0.4634,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "ai_powered_marketing"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_04",
+      "style": "Business",
+      "q": "We are residential builders looking for digital inventory and lead booking tools.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.914,
+        "margin": 0.902,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_target_users",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": false,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_HOSP_01",
+      "style": "Indirect",
+      "q": "We run three hospitals and want online appointment booking",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "ai_powered_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.559,
+        "margin": 0.2103,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "ai_powered_marketing"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    }
+  ],
+  "rows": [
+    {
+      "id": "D_DOC_01",
+      "style": "Indirect",
+      "q": "I run a university. What could you guys do for us?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES",
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.927,
+        "margin": 0.8978,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_02",
+      "style": "Indirect",
+      "q": "Our property business needs AI automation.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES",
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.94,
+        "margin": 0.928,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_03",
+      "style": "Conversational",
+      "q": "What can you do for universities?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.969,
+        "margin": 0.969,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_04",
+      "style": "Problem-oriented",
+      "q": "We need something to keep customers updated through messaging.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing",
+          "ai_powered_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES",
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.643,
+        "margin": 0.497,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_05",
+      "style": "CategoryMismatch",
+      "q": "What services do you have for WhatsApp?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.968,
+        "margin": 0.9606,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_product",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_06",
+      "style": "CategoryMismatch",
+      "q": "What features does your Education service have?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.926,
+        "margin": 0.9061,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_07",
+      "style": "Context",
+      "q": "Who is this meant for?",
+      "ctx": "education_os",
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "TARGET_USERS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.95,
+        "margin": 0.95,
+        "source": "context",
+        "clarify": false,
+        "llm": false,
+        "op": "get_target_users",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_08",
+      "style": "Context",
+      "q": "What can it actually do?",
+      "ctx": "education_os",
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.95,
+        "margin": 0.95,
+        "source": "context",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_09",
+      "style": "Context",
+      "q": "Why would a business use it?",
+      "ctx": "real_estate_os",
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.95,
+        "margin": 0.95,
+        "source": "context",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_10",
+      "style": "Context",
+      "q": "How does it work?",
+      "ctx": "whatsapp_marketing",
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "WORKFLOW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.95,
+        "margin": 0.95,
+        "source": "context",
+        "clarify": false,
+        "llm": false,
+        "op": "get_workflow",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_11",
+      "style": "Company",
+      "q": "How do I reach you?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "contact_info",
+          "company_info"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CONTACT"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "contact_info",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CONTACT",
+        "conf": 0.994,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "get_contact",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_12",
+      "style": "Catalog",
+      "q": "What solutions do you offer?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL_SOLUTIONS"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL_SOLUTIONS",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_solutions",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_13",
+      "style": "Direct",
+      "q": "What does your Education solution do?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.91,
+        "margin": 0.8702,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_14",
+      "style": "Multi",
+      "q": "Compare your Education and Pharma solutions.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os",
+          "pharma_os"
+        ],
+        "scope": [
+          "MULTI_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [
+          "education_os",
+          "pharma_os"
+        ],
+        "scope": "MULTI_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.95,
+        "margin": 0.5,
+        "source": "rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_15",
+      "style": "Company",
+      "q": "What companies have you worked with?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL",
+          "SINGLE_ENTITY",
+          "CLIENTS_SCOPE"
+        ],
+        "aspect": [
+          "CLIENTS_CASE_STUDIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "CLIENTS_SCOPE",
+        "aspect": "CLIENTS_CASE_STUDIES",
+        "conf": 0.9,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "list_case_studies",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_16",
+      "style": "Company",
+      "q": "How can I work with your team?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "contact_info",
+          "company_info"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CONTACT"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "contact_info",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CONTACT",
+        "conf": 0.911,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "get_contact",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DOC_17",
+      "style": "Conversational",
+      "q": "What can you do for colleges?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.97,
+        "margin": 0.9695,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_01",
+      "style": "Direct",
+      "q": "What solutions do you offer for education?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.901,
+        "margin": 0.8838,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_02",
+      "style": "Conversational",
+      "q": "What can you guys do for colleges?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.873,
+        "margin": 0.867,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_03",
+      "style": "Indirect",
+      "q": "I run a university. How could CittaAI help us?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS",
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.961,
+        "margin": 0.9546,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_04",
+      "style": "Business",
+      "q": "We operate an educational institution. What can you provide?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.862,
+        "margin": 0.8389,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_05",
+      "style": "Informal",
+      "q": "what u offer for college",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.931,
+        "margin": 0.919,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_06",
+      "style": "Synonym",
+      "q": "How can you help schools and academic centers?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS",
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.942,
+        "margin": 0.9245,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_07",
+      "style": "Problem-oriented",
+      "q": "We need to improve how our institution operates with AI.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS",
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.623,
+        "margin": 0.4263,
+        "source": "llm+rules",
+        "clarify": false,
+        "llm": true,
+        "op": "get_benefits",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_ED_08",
+      "style": "Minimal",
+      "q": "Anything for universities?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.836,
+        "margin": 0.8204,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_01",
+      "style": "Direct",
+      "q": "What solutions do you offer for healthcare?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.749,
+        "margin": 0.6139,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_02",
+      "style": "Conversational",
+      "q": "How do you help regional hospital networks manage patients?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.435,
+        "margin": 0.3962,
+        "source": "bge+llm",
+        "clarify": true,
+        "llm": true,
+        "op": "request_clarification",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": true
+      }
+    },
+    {
+      "id": "PARA_HC_03",
+      "style": "Indirect",
+      "q": "I manage a medical clinic. What AI systems are suitable for us?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.543,
+        "margin": 0.3354,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_04",
+      "style": "Business",
+      "q": "We operate a pharmaceutical distribution chain. What platform do you have?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.857,
+        "margin": 0.7962,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_05",
+      "style": "Informal",
+      "q": "what do u have for hospitals",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.46,
+        "margin": 0.4025,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_solution",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_06",
+      "style": "Synonym",
+      "q": "Any AI tech for health care facilities and doctors?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.664,
+        "margin": 0.5661,
+        "source": "bge+llm+rules",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_07",
+      "style": "Problem-oriented",
+      "q": "We are struggling with patient scheduling and clinical workflow automation.",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "ai_powered_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.585,
+        "margin": 0.4634,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "ai_powered_marketing"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_HC_08",
+      "style": "Minimal",
+      "q": "Anything for clinics?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "OUT_OF_DOMAIN",
+        "aspect": "OVERVIEW",
+        "conf": 0.7,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "decline_out_of_domain",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_01",
+      "style": "Direct",
+      "q": "What solutions do you offer for real estate?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.959,
+        "margin": 0.9528,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_02",
+      "style": "Conversational",
+      "q": "I operate a real estate brokerage firm. What automation tools do you offer?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.969,
+        "margin": 0.969,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_03",
+      "style": "Indirect",
+      "q": "Our property management group needs to track site visits and agent commissions.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW",
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.973,
+        "margin": 0.973,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_04",
+      "style": "Business",
+      "q": "We are residential builders looking for digital inventory and lead booking tools.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.914,
+        "margin": 0.902,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_target_users",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": false,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_05",
+      "style": "Informal",
+      "q": "what u got for realtors",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.925,
+        "margin": 0.9004,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_solution",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_06",
+      "style": "Synonym",
+      "q": "Do you have software for housing projects and property brokers?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.973,
+        "margin": 0.9726,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_07",
+      "style": "Problem-oriented",
+      "q": "Our real estate team is losing leads because follow-ups take too long.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS",
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.95,
+        "margin": 0.9349,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_RE_08",
+      "style": "Minimal",
+      "q": "Anything for brokers?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.973,
+        "margin": 0.9726,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_01",
+      "style": "Direct",
+      "q": "How can WhatsApp help my business run bulk notification campaigns?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "BENEFITS",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.968,
+        "margin": 0.9617,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_02",
+      "style": "Conversational",
+      "q": "Can I broadcast automated WhatsApp messages to 10000 customers at once?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.924,
+        "margin": 0.8739,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_03",
+      "style": "Indirect",
+      "q": "We want to connect our CRM with chat messaging for instant support alerts.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing",
+          "ai_powered_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.567,
+        "margin": 0.3434,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_04",
+      "style": "Business",
+      "q": "What is the official WhatsApp automation platform capability set?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.731,
+        "margin": 0.4926,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_05",
+      "style": "Informal",
+      "q": "can i send mass whatsapp msgs",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.974,
+        "margin": 0.9741,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_product",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_06",
+      "style": "Synonym",
+      "q": "How does text messaging automation integrate with Shopify or Salesforce?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing",
+          "ai_powered_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.494,
+        "margin": 0.1373,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_workflow",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_07",
+      "style": "Problem-oriented",
+      "q": "Our open rates on email are horrible and we need direct mobile channel reach.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS",
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.595,
+        "margin": 0.5577,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_benefits",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_WA_08",
+      "style": "Minimal",
+      "q": "WhatsApp bulk sender info?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.948,
+        "margin": 0.9221,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_01",
+      "style": "Direct",
+      "q": "What solutions do you offer for smart cities and urban municipalities?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.974,
+        "margin": 0.9737,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_02",
+      "style": "Conversational",
+      "q": "How can city planning councils monitor traffic and municipal infrastructure?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW",
+          "WORKFLOW",
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.973,
+        "margin": 0.973,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_03",
+      "style": "Indirect",
+      "q": "Our local government authority needs IoT and central command dashboard software.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.965,
+        "margin": 0.9651,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_04",
+      "style": "Business",
+      "q": "What is Smart Cities OS core architecture and sensor telemetry capability?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "WORKFLOW",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.974,
+        "margin": 0.9741,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_05",
+      "style": "Informal",
+      "q": "tech for city management",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.964,
+        "margin": 0.9568,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_06",
+      "style": "Synonym",
+      "q": "Do you serve civic bodies and public sector municipal corporations?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "TARGET_USERS",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.922,
+        "margin": 0.9056,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_target_users",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_07",
+      "style": "Problem-oriented",
+      "q": "We need unified monitoring for emergency response and waste management in our town.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS",
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.97,
+        "margin": 0.9704,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_SC_08",
+      "style": "Minimal",
+      "q": "Smart city tech?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.975,
+        "margin": 0.9745,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_01",
+      "style": "Direct",
+      "q": "What is Enterprise AI OS and how does agentic AI middleware function?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "WORKFLOW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.943,
+        "margin": 0.9162,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_02",
+      "style": "Conversational",
+      "q": "How do your autonomous AI agents coordinate complex multi-step workflows?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os",
+          "enterprise_agentic_ai"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "WORKFLOW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.771,
+        "margin": 0.6107,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_workflow",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_03",
+      "style": "Indirect",
+      "q": "We are a Fortune 500 company looking to deploy secure on-prem LLM agents.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os",
+          "enterprise_agentic_ai"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.642,
+        "margin": 0.4472,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_04",
+      "style": "Business",
+      "q": "What security, governance, and audit trails exist in Enterprise AI OS?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.765,
+        "margin": 0.6305,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_05",
+      "style": "Informal",
+      "q": "tell me about agentic ai platform",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os",
+          "enterprise_agentic_ai"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.821,
+        "margin": 0.7606,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_06",
+      "style": "Synonym",
+      "q": "Any cognitive operating systems for large business enterprises?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.93,
+        "margin": 0.9194,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_solution",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_07",
+      "style": "Problem-oriented",
+      "q": "Our existing AI tools lack enterprise data privacy and role-based access controls.",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os",
+          "enterprise_agentic_ai"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.752,
+        "margin": 0.6605,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_AI_08",
+      "style": "Minimal",
+      "q": "Enterprise AI OS details?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.966,
+        "margin": 0.966,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_CAT_01",
+      "style": "Catalog",
+      "q": "What products does CittaAI offer across different industries?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL_PRODUCTS",
+          "ALL"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_catalog",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_CAT_02",
+      "style": "Catalog",
+      "q": "Give me a summary of all your flagship enterprise OS solutions.",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL_SOLUTIONS"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL_SOLUTIONS",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_solutions",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_COMP_01",
+      "style": "Company",
+      "q": "Who founded CittaAI and who leads the executive team?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "leadership_info",
+          "company_info"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "LEADERSHIP"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "leadership_info",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "LEADERSHIP",
+        "conf": 1.0,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "get_leadership",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_COMP_02",
+      "style": "Company",
+      "q": "How do I get in touch with sales or request a product demo?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "contact_info",
+          "company_info"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CONTACT"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "contact_info",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CONTACT",
+        "conf": 1.0,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "get_contact",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_COMP_03",
+      "style": "Company",
+      "q": "What awards, press, or industry recognitions has CittaAI received?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "awards_recognition",
+          "company_info"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "RECOGNITION"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "awards_recognition",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "RECOGNITION",
+        "conf": 1.0,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "get_recognition",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_OOD_01",
+      "style": "OOD",
+      "q": "Can you write a Python script to scrape stock market data from Yahoo Finance?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "OUT_OF_DOMAIN",
+        "aspect": "OVERVIEW",
+        "conf": 0.7,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": true,
+        "op": "decline_out_of_domain",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "PARA_OOD_02",
+      "style": "OOD",
+      "q": "What is the best recipe for baking sourdough bread at home?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "OUT_OF_DOMAIN",
+        "aspect": "OVERVIEW",
+        "conf": 0.9,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "decline_out_of_domain",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_01",
+      "style": "Aspect",
+      "q": "Which teams inside a hospital would use Pharma OS day to day?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "TARGET_USERS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.975,
+        "margin": 0.9745,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_target_users",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_02",
+      "style": "Aspect",
+      "q": "Is Influencer Marketing a fit for local franchise businesses?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "influencer_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "TARGET_USERS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "influencer_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.963,
+        "margin": 0.9525,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_target_users",
+        "op_entity": "influencer_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_03",
+      "style": "Aspect",
+      "q": "What sort of companies buy Data Engineering from you?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "data_engineering"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "TARGET_USERS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "data_engineering",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "TARGET_USERS",
+        "conf": 0.941,
+        "margin": 0.935,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_target_users",
+        "op_entity": "data_engineering"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_04",
+      "style": "Aspect",
+      "q": "Describe the stages a lead goes through inside Real Estate OS",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "WORKFLOW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.973,
+        "margin": 0.9733,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_workflow",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_05",
+      "style": "Aspect",
+      "q": "What happens after we sign up for WhatsApp Marketing?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "WORKFLOW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.743,
+        "margin": 0.5105,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_workflow",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_06",
+      "style": "Aspect",
+      "q": "How is an AI Strategy engagement structured?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "ai_strategy"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "WORKFLOW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "ai_strategy",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.736,
+        "margin": 0.6229,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_workflow",
+        "op_entity": "ai_strategy"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_07",
+      "style": "Aspect",
+      "q": "What will Smart Cities OS actually improve for our citizens?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.975,
+        "margin": 0.9749,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_08",
+      "style": "Aspect",
+      "q": "What results can a brand expect from MarTech 360?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "martech_360"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "martech_360",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.975,
+        "margin": 0.9746,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "martech_360"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_09",
+      "style": "Aspect",
+      "q": "Why is Education OS worth it for a small college?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "BENEFITS"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.975,
+        "margin": 0.9748,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_10",
+      "style": "Aspect",
+      "q": "Which modules come with Pharma OS?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.974,
+        "margin": 0.9742,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_11",
+      "style": "Aspect",
+      "q": "Can E-Commerce OS handle abandoned carts and loyalty points?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "ecommerce_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "ecommerce_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.966,
+        "margin": 0.9658,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "ecommerce_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_12",
+      "style": "Aspect",
+      "q": "Does Enterprise AI OS support voice bots?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.752,
+        "margin": 0.5745,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_13",
+      "style": "Aspect",
+      "q": "What does Data Engineering cost?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "data_engineering"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "PRICING"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "data_engineering",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "PRICING",
+        "conf": 0.958,
+        "margin": 0.951,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_pricing",
+        "op_entity": "data_engineering"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ASP_14",
+      "style": "Aspect",
+      "q": "Common questions people ask about Real Estate OS",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "FAQ"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "FAQ",
+        "conf": 0.975,
+        "margin": 0.9748,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_faq",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DET_01",
+      "style": "Detail",
+      "q": "Does Data Engineering work with Databricks or BigQuery?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "data_engineering"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "FAQ",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "data_engineering",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.97,
+        "margin": 0.9696,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "data_engineering"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DET_02",
+      "style": "Detail",
+      "q": "How many weeks does a typical AI Strategy engagement last?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "ai_strategy"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "FAQ",
+          "WORKFLOW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "ai_strategy",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "FAQ",
+        "conf": 0.602,
+        "margin": 0.3329,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_faq",
+        "op_entity": "ai_strategy"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DET_03",
+      "style": "Detail",
+      "q": "Can the WhatsApp platform send carousel and catalog messages?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "FAQ"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.961,
+        "margin": 0.9465,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DET_04",
+      "style": "Detail",
+      "q": "what programming languages does education os coding lms support",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "education_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "FAQ"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "education_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.975,
+        "margin": 0.975,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "education_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DET_05",
+      "style": "Detail",
+      "q": "Is Enterprise & Agentic AI able to run models on our own servers?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_agentic_ai"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "FAQ",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "enterprise_agentic_ai",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.659,
+        "margin": 0.3474,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "enterprise_agentic_ai"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_DET_06",
+      "style": "Detail",
+      "q": "Which KPIs does Pharma OS track on its quality dashboards?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CAPABILITIES",
+          "FAQ"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.975,
+        "margin": 0.975,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_capabilities",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CAT_10",
+      "style": "Catalog",
+      "q": "wht products u have",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL_PRODUCTS"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL_PRODUCTS",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_products",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CAT_11",
+      "style": "Catalog",
+      "q": "Can you show me all the stuff you've built?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL",
+          "ALL_PRODUCTS",
+          "ALL_SOLUTIONS"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_catalog",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CAT_12",
+      "style": "Catalog",
+      "q": "which platforms do you sell?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL",
+          "ALL_PRODUCTS"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_catalog",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CAT_13",
+      "style": "Catalog",
+      "q": "What types of services does your team offer?",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "ALL_SERVICES"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": null,
+        "entities": [],
+        "scope": "ALL_SERVICES",
+        "aspect": "CATALOG_LIST",
+        "conf": 0.95,
+        "margin": 0.0,
+        "source": "none",
+        "clarify": false,
+        "llm": false,
+        "op": "list_services",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ROLE_01",
+      "style": "Indirect",
+      "q": "I'm the CTO of a bank and we want to put LLM agents into production",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "enterprise_ai_os",
+          "enterprise_agentic_ai"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "enterprise_ai_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "WORKFLOW",
+        "conf": 0.555,
+        "margin": 0.4048,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_workflow",
+        "op_entity": "enterprise_ai_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_ROLE_02",
+      "style": "Indirect",
+      "q": "As a CEO of a retail chain I need better customer retention on WhatsApp",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "whatsapp_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.858,
+        "margin": 0.759,
+        "source": "bge+rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_benefits",
+        "op_entity": "whatsapp_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_MUL_10",
+      "style": "Multi",
+      "q": "How is Real Estate OS different from E-Commerce OS?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "real_estate_os",
+          "ecommerce_os"
+        ],
+        "scope": [
+          "MULTI_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "real_estate_os",
+        "entities": [
+          "real_estate_os",
+          "ecommerce_os"
+        ],
+        "scope": "MULTI_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.95,
+        "margin": 0.5,
+        "source": "rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "real_estate_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_MUL_11",
+      "style": "Multi",
+      "q": "what distinguishes influencer marketing from whatsapp marketing",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "influencer_marketing",
+          "whatsapp_marketing"
+        ],
+        "scope": [
+          "MULTI_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": null
+      },
+      "got": {
+        "ent": "influencer_marketing",
+        "entities": [
+          "influencer_marketing",
+          "whatsapp_marketing"
+        ],
+        "scope": "MULTI_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.95,
+        "margin": 0.5,
+        "source": "rules",
+        "clarify": false,
+        "llm": false,
+        "op": "get_product",
+        "op_entity": "influencer_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CTX_20",
+      "style": "Context",
+      "q": "and the other one?",
+      "ctx": "education_os",
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.95,
+        "margin": 0.95,
+        "source": "context",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CTX_21",
+      "style": "Context",
+      "q": "tell me about the other option",
+      "ctx": "real_estate_os",
+      "expected": {
+        "ent": [
+          "smart_cities_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "smart_cities_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "OVERVIEW",
+        "conf": 0.95,
+        "margin": 0.95,
+        "source": "context",
+        "clarify": false,
+        "llm": false,
+        "op": "get_solution",
+        "op_entity": "smart_cities_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_COST_01",
+      "style": "Problem-oriented",
+      "q": "Our cost per lead on Facebook ads keeps rising and we need better campaigns",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "ai_powered_marketing",
+          "influencer_marketing"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "ai_powered_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.884,
+        "margin": 0.8732,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "ai_powered_marketing"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_COST_02",
+      "style": "Problem-oriented",
+      "q": "Manual batch record checks cost us two weeks every release",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "pharma_os"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "OVERVIEW",
+          "BENEFITS",
+          "CAPABILITIES"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "pharma_os",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "BENEFITS",
+        "conf": 0.956,
+        "margin": 0.9483,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_benefits",
+        "op_entity": "pharma_os"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CASE_01",
+      "style": "Company",
+      "q": "What results did the FMCG brand get?",
+      "ctx": null,
+      "expected": {
+        "ent": [
+          "fmcg_social_growth"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "CLIENTS_CASE_STUDIES",
+          "OVERVIEW"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "fmcg_social_growth",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CLIENTS_CASE_STUDIES",
+        "conf": 0.662,
+        "margin": 0.4752,
+        "source": "llm+rules",
+        "clarify": false,
+        "llm": true,
+        "op": "get_case_study",
+        "op_entity": "fmcg_social_growth"
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_CTX_22",
+      "style": "Context",
+      "q": "who is the founder?",
+      "ctx": "education_os",
+      "expected": {
+        "ent": [
+          "leadership_info",
+          "company_info"
+        ],
+        "scope": [
+          "SINGLE_ENTITY"
+        ],
+        "aspect": [
+          "LEADERSHIP"
+        ],
+        "clarify": null
+      },
+      "got": {
+        "ent": "leadership_info",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "LEADERSHIP",
+        "conf": 1.0,
+        "margin": 1.0,
+        "source": "aspect",
+        "clarify": false,
+        "llm": false,
+        "op": "get_leadership",
+        "op_entity": null
+      },
+      "grade": {
+        "entity": true,
+        "scope": true,
+        "aspect": true,
+        "operation": true,
+        "decision": true,
+        "clarified": false
+      }
+    },
+    {
+      "id": "D_HOSP_01",
+      "style": "Indirect",
+      "q": "We run three hospitals and want online appointment booking",
+      "ctx": null,
+      "expected": {
+        "ent": [],
+        "scope": [
+          "NONE",
+          "OUT_OF_DOMAIN"
+        ],
+        "aspect": null,
+        "clarify": "ok"
+      },
+      "got": {
+        "ent": "ai_powered_marketing",
+        "entities": [],
+        "scope": "SINGLE_ENTITY",
+        "aspect": "CAPABILITIES",
+        "conf": 0.559,
+        "margin": 0.2103,
+        "source": "bge+llm",
+        "clarify": false,
+        "llm": true,
+        "op": "get_capabilities",
+        "op_entity": "ai_powered_marketing"
+      },
+      "grade": {
+        "entity": false,
+        "scope": false,
+        "aspect": true,
+        "operation": false,
+        "decision": false,
+        "clarified": false
+      }
+    }
+  ]
+}

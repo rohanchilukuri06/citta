@@ -1,33 +1,28 @@
 import { motion } from "framer-motion";
+import { Workflow, ShieldCheck, TrendingUp } from "lucide-react";
 import { HOMEPAGE } from "@/data/content";
-import SectionHeader from "@/components/SectionHeader";
+import SectionHeader, { rise } from "@/components/SectionHeader";
+
+const ICONS = [Workflow, ShieldCheck, TrendingUp];
+const ACCENT = ["cobalt", "jade", "saffron"];
 
 export default function Why() {
   const W = HOMEPAGE.why;
   return (
-    <section id="why" className="relative section-dark py-28 overflow-hidden" data-testid="why-section">
-      <div className="aurora opacity-45" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader eyebrow={W.eyebrow} title={W.title} sub={W.sub} />
+    <section className="section section-alt" data-accent="cobalt" data-testid="why-section">
+      <div className="container-x">
+        <SectionHeader eyebrow={W.eyebrow} title={W.title} sub={W.sub} align="center" />
         <div className="mt-14 grid md:grid-cols-3 gap-5">
-          {W.items.map((it, i) => (
-            <motion.div
-              key={it.n}
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="glass-dark rounded-3xl p-7 tilt relative overflow-hidden"
-              data-testid={`why-item-${i}`}
-            >
-              <div className="absolute top-0 right-0 h-32 w-32 bg-gradient-to-br from-brand-blue/20 to-transparent blur-2xl" />
-              <div className="relative">
-                <div className="mb-5 h-12 w-12 rounded-2xl bg-gradient-to-br from-brand-blue to-brand-light text-white grid place-items-center font-display font-bold text-lg">
-                  {it.n}
-                </div>
-                <h3 className="font-display text-2xl font-semibold text-white leading-tight">{it.title}</h3>
-                <p className="mt-3 text-white/60 leading-relaxed">{it.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+          {W.items.map((it, i) => {
+            const Icon = ICONS[i];
+            return (
+              <motion.article key={it.title} {...rise(0.08 * i)} data-accent={ACCENT[i]} className="card card-hover p-8">
+                <div className="icon-tile h-12 w-12 mb-6"><Icon className="h-5 w-5" /></div>
+                <h3 className="font-display text-xl font-semibold text-ink">{it.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{it.desc}</p>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,2 +1,2 @@
-/* App-level overrides */
-.App { min-height: 100vh; background: #050816; }
+/* App-level overrides — the page colour comes from the theme tokens in index.css */
+.App { min-height: 100vh; background: rgb(var(--c-canvas)); }

@@ -30,6 +30,15 @@ GROUNDING RULES:
 
 VERIFIED ENTERPRISE REGISTRY EVIDENCE PACKAGE:
 {evidence_json}
+
+SPECIAL INSTRUCTION FOR CONSULTATIVE & COLLABORATION QUERIES:
+If the query asks how to collaborate, partner, onboard, or get started with CittaAI:
+- Provide a warm, executive, consultative guide on how to proceed.
+- Outline CittaAI's standard engagement process:
+  1. Discovery & Needs Assessment (aligning business objectives and AI/Data readiness).
+  2. Solution Blueprinting (selecting from CittaAI's Industry Operating Systems, Enterprise AI, or Data Engineering services).
+  3. PoC & Implementation (phased rollout with enterprise governance and data privacy).
+- Provide CittaAI contact channels (info@cittaai.com | +91 9392655040 | HITEC City, Hyderabad) so the user can initiate the partnership.
 """
 
 class PromptBuilder:

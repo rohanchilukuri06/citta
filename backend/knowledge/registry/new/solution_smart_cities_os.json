@@ -277,7 +277,18 @@
       "description": "Analyze air quality trends, carbon emissions, infrastructure wear, and population mobility to inform policy."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Traffic AI",
+    "Energy Grid",
+    "Water Systems",
+    "Public Safety",
+    "Urban Planning",
+    "Emergency Response",
+    "25% Traffic Reduction",
+    "30% Energy Savings",
+    "40% Response Time",
+    "1M+ Citizens Served"
+  ],
   "use_cases": [
     "Traffic AI",
     "Energy Grid",
@@ -294,6 +305,13 @@
     "last_updated": "2026-07-19",
     "source": "06_product_smart_cities_os.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats"
+      },
+      "date": "2026-09-29"
+    }
   }
 }

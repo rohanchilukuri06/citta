@@ -1,5 +1,6 @@
 import sys
 import os
+import argparse
 import asyncio
 import logging
 from pathlib import Path
@@ -12,52 +13,29 @@ logger = logging.getLogger(__name__)
 ROOT_DIR = Path(__file__).resolve().parent
 sys.path.append(str(ROOT_DIR))
 
-import config
-import vector_store
-import rag_service
-from llm_provider import NvidiaProvider
+from vector_indexer import build_vector_database
+from inspect_index import inspect_unified_index
 
 async def main():
-    logger.info("Initializing RAG database builder...")
-    
-    # 1. Check/create vector database
-    vstore = vector_store.VectorStore()
-    
-    # 2. Rebuild database (clean schema)
-    logger.info("Rebuilding vector database schema...")
-    vstore.rebuild_db()
-    
-    # 3. Initialize RAG Service with Nvidia provider to load local embedding model
-    provider = NvidiaProvider()
-    rag = rag_service.RAGService(provider=provider, vector_store=vstore)
-    
-    # 4. Parse content.js
-    content_js_path = os.path.join(ROOT_DIR, "..", "frontend", "src", "data", "content.js")
-    logger.info(f"Parsing website content from {content_js_path}...")
-    chunks = vector_store.parse_content_js(content_js_path)
-    
-    if not chunks:
-        logger.error("No chunks found in content.js. Check file path.")
+    parser = argparse.ArgumentParser(description="CittaAI Unified Vector Database Builder & Diagnostic Tool")
+    parser.add_argument("--force", action="store_true", help="Force rebuild of vector database even if hash matches")
+    parser.add_argument("--inspect", action="store_true", help="Only run index inspection and print diagnostics")
+    args = parser.parse_args()
+
+    if args.inspect:
+        inspect_unified_index()
         return
-        
-    logger.info(f"Generating embeddings for {len(chunks)} chunks using {config.EMBEDDING_MODEL}...")
-    
-    # Process sequentially
-    for i, chunk in enumerate(chunks):
-        chunk_id = f"content_js_{i}"
-        # Fetch embedding using 'passage' input type for documentation indexing
-        emb = await rag.get_embedding(chunk["content"], input_type="passage")
-        
-        vstore.add_chunk(
-            chunk_id=chunk_id,
-            content=chunk["content"],
-            embedding=emb,
-            metadata=chunk["metadata"]
-        )
-        if (i + 1) % 10 == 0 or (i + 1) == len(chunks):
-            logger.info(f"Indexed {i + 1}/{len(chunks)} chunks...")
-            
-    logger.info("Explicit indexing complete! Vector store has been populated.")
+
+    logger.info("Initializing CittaAI Unified Vector Database Builder...")
+    success = await build_vector_database(force=args.force)
+
+    if success:
+        logger.info("\n--- Unified Index Build Successful! ---")
+        inspect_unified_index()
+    else:
+        logger.error("Unified Index Build Failed!")
+        sys.exit(1)
 
 if __name__ == "__main__":
     asyncio.run(main())
+

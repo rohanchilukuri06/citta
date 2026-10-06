@@ -252,7 +252,8 @@ class VectorStore:
         query_embedding: List[float], 
         intent: str = None, 
         top_k: int = 5,
-        domain: str = None
+        domain: str = None,
+        requested_sections: List[str] = None
     ) -> List[Dict[str, Any]]:
         start_time = time.time()
         target_path = self._get_resolved_path()
@@ -264,7 +265,7 @@ class VectorStore:
 
         logger.debug(
             f"[VectorStore] query_hybrid called target_path={target_path}, "
-            f"query_text='{query_text[:50] if query_text else ''}', domain={domain}, intent={intent}, top_k={top_k}"
+            f"query_text='{query_text[:50] if query_text else ''}', domain={domain}, intent={intent}, requested_sections={requested_sections}, top_k={top_k}"
         )
 
         if not os.path.exists(target_path):
@@ -315,6 +316,7 @@ class VectorStore:
         logger.info(f"[DEBUG] USER QUERY: {query_text}")
         logger.info(f"[DEBUG] DOMAIN: {domain}")
         logger.info(f"[DEBUG] INTENT: {intent}")
+        logger.info(f"[DEBUG] REQUESTED SECTIONS: {requested_sections}")
         logger.info(f"[DEBUG] QUERY EMBEDDING DIMENSION: {expected_dim}")
 
         # Stopwords set for token extraction
@@ -338,14 +340,14 @@ class VectorStore:
 
         # Domain Alias Mapping for CittaAI Registries & Categories
         DOMAIN_ALIASES = {
-            "whatsapp": ["whatsapp", "product", "products", "whatsapp-marketing", "marketing"],
-            "influencer": ["influencer", "product", "products", "influencer-marketing"],
-            "ecommerce": ["ecommerce", "solution", "solutions", "ecommerce-os"],
-            "realestate": ["realestate", "real-estate", "real estate", "solution", "solutions", "real-estate-os"],
-            "pharma": ["pharma", "solution", "solutions", "pharma-os"],
-            "smartcities": ["smartcities", "smart-cities", "smart cities", "solution", "solutions", "smart-cities-os"],
-            "education": ["education", "solution", "solutions", "education-os"],
-            "enterpriseai": ["enterpriseai", "enterprise-ai", "enterprise ai", "solution", "solutions", "enterprise-ai-os"],
+            "whatsapp": ["whatsapp", "product", "products", "whatsapp-marketing", "marketing", "whatsapp_marketing"],
+            "influencer": ["influencer", "product", "products", "influencer-marketing", "influencer_marketing"],
+            "ecommerce": ["ecommerce", "solution", "solutions", "ecommerce-os", "ecommerce_os"],
+            "realestate": ["realestate", "real-estate", "real estate", "solution", "solutions", "real-estate-os", "real_estate_os"],
+            "pharma": ["pharma", "solution", "solutions", "pharma-os", "pharma_os"],
+            "smartcities": ["smartcities", "smart-cities", "smart cities", "solution", "solutions", "smart-cities-os", "smart_cities_os"],
+            "education": ["education", "solution", "solutions", "education-os", "education_os"],
+            "enterpriseai": ["enterpriseai", "enterprise-ai", "enterprise ai", "solution", "solutions", "enterprise-ai-os", "enterprise_ai_os"],
             "products": ["product", "products", "whatsapp", "influencer"],
             "services": ["service", "services", "solution", "solutions"],
             "solutions": ["solution", "solutions", "ecommerce", "realestate", "pharma", "smartcities", "education", "enterpriseai"],
@@ -403,11 +405,17 @@ class VectorStore:
             title_clean = str(metadata.get("title", "")).strip().lower()
             source_clean = str(source).strip().lower()
             page_clean = str(metadata.get("page", "")).strip().lower()
+            entity_id_clean = str(metadata.get("entity_id", "")).strip().lower()
+            entity_type_clean = str(metadata.get("entity_type", "")).strip().lower()
+            section_clean = str(metadata.get("section", "")).strip().lower()
 
             # 3. Soft Domain Matching via Alias Expansion
             is_domain_match = False
             if target_aliases:
-                chunk_terms = {chunk_domain, chunk_category, title_clean, source_clean, page_clean}
+                chunk_terms = {
+                    chunk_domain, chunk_category, title_clean, source_clean, page_clean,
+                    entity_id_clean, entity_type_clean, section_clean
+                }
                 chunk_terms_clean = {t.replace("-", "").replace("_", "").replace(" ", "") for t in chunk_terms if t}
                 
                 for alias in target_aliases:
@@ -417,7 +425,7 @@ class VectorStore:
                         domain_match_count += 1
                         break
 
-            # 4. Soft Intent Matching
+            # 4. Soft Intent & Aspect Section Matching
             is_intent_match = False
             if intent and intent.lower() != "generalai":
                 intent_clean = intent.lower()
@@ -429,6 +437,34 @@ class VectorStore:
                    (intent_clean == "casestudies" and chunk_category in ["casestudies", "cases"]) or \
                    (intent_clean == "contact" and chunk_category == "contact"):
                     is_intent_match = True
+
+            # Aspect-Aware Section Boost
+            is_section_match = False
+            if requested_sections and section_clean:
+                SECTION_ALIASES = {
+                    "workflows": ["workflows", "how_it_works", "process", "implementation", "hero"],
+                    "how_it_works": ["workflows", "how_it_works", "process", "implementation"],
+                    "capabilities": ["capabilities", "features", "specs", "hero"],
+                    "benefits": ["benefits", "why_us"],
+                    "overview": ["overview", "hero", "about_lead", "about_story", "brand"],
+                    "target_users": ["target_users", "audience"],
+                    "pricing": ["pricing", "cost"],
+                    "contact": ["contact", "contact_info", "location"],
+                    "faq": ["faq"],
+                    "case_study": ["cases", "case_study", "case_studies"],
+                    "recognition": ["awards", "recognition"]
+                }
+                for req_sec in requested_sections:
+                    sec_clean = str(req_sec).strip().lower()
+                    if not sec_clean:
+                        continue
+                    if sec_clean in section_clean or section_clean in sec_clean:
+                        is_section_match = True
+                        break
+                    aliases = SECTION_ALIASES.get(sec_clean, [])
+                    if any(a in section_clean or section_clean in a for a in aliases):
+                        is_section_match = True
+                        break
 
             # 5. Embedding Unpacking & Dimension Validation
             semantic_score = 0.0
@@ -484,6 +520,8 @@ class VectorStore:
                 fusion_score += 0.15
             if is_intent_match:
                 fusion_score += 0.05
+            if is_section_match:
+                fusion_score += 0.10
 
             fusion_score = float(min(1.0, max(0.0, fusion_score)))
 
@@ -497,6 +535,7 @@ class VectorStore:
                 "keyword_score": float(keyword_score),
                 "domain_match": is_domain_match,
                 "intent_match": is_intent_match,
+                "section_match": is_section_match,
                 "derived_domain": chunk_domain
             })
 
@@ -572,17 +611,17 @@ def parse_content_js(file_path: str) -> List[Dict[str, Any]]:
     timestamp = str(os.path.getmtime(file_path))
 
     sections_to_parse = [
-        ("WHATSAPP", "product", "/products/whatsapp-marketing"),
-        ("INFLUENCER", "product", "/products/influencer-marketing"),
-        ("ECOMMERCE", "solution", "/solutions/ecommerce-os"),
-        ("REALESTATE", "solution", "/solutions/real-estate-os"),
-        ("PHARMA", "solution", "/solutions/pharma-os"),
-        ("SMARTCITIES", "solution", "/solutions/smart-cities-os"),
-        ("EDUCATION", "solution", "/solutions/education-os"),
-        ("ENTERPRISEAI", "solution", "/solutions/enterprise-ai-os"),
+        ("WHATSAPP", "product", "/products/whatsapp-marketing", "whatsapp_marketing"),
+        ("INFLUENCER", "product", "/products/influencer-marketing", "influencer_marketing"),
+        ("ECOMMERCE", "solution", "/solutions/ecommerce-os", "ecommerce_os"),
+        ("REALESTATE", "solution", "/solutions/real-estate-os", "real_estate_os"),
+        ("PHARMA", "solution", "/solutions/pharma-os", "pharma_os"),
+        ("SMARTCITIES", "solution", "/solutions/smart-cities-os", "smart_cities_os"),
+        ("EDUCATION", "solution", "/solutions/education-os", "education_os"),
+        ("ENTERPRISEAI", "solution", "/solutions/enterprise-ai-os", "enterprise_ai_os"),
     ]
 
-    for var_name, kind, url in sections_to_parse:
+    for var_name, kind, url, ent_id in sections_to_parse:
         pattern = rf"export\s+const\s+{var_name}\s*=\s*\{{([\s\S]*?)\}};"
         match = re.search(pattern, content)
         if match:
@@ -600,6 +639,7 @@ def parse_content_js(file_path: str) -> List[Dict[str, Any]]:
                 "content": main_text,
                 "metadata": {
                     "source": "content.js",
+                    "entity_id": ent_id,
                     "page": url,
                     "section": "hero",
                     "title": name,
@@ -618,6 +658,7 @@ def parse_content_js(file_path: str) -> List[Dict[str, Any]]:
                     "content": f"CittaAI {name} Capability: {title} - {desc}",
                     "metadata": {
                         "source": "content.js",
+                        "entity_id": ent_id,
                         "page": url,
                         "section": "capabilities",
                         "title": f"{name} - {title}",

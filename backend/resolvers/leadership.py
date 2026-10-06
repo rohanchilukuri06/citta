@@ -6,8 +6,8 @@ from knowledge_registry import get_registry
 logger = logging.getLogger(__name__)
 
 ROLE_ALIAS_MAP = {
-    "ceo": ["ceo", "chief executive officer", "chief exec", "vinay", "vinay velivela"],
-    "cto": ["cto", "chief technology officer", "akhil", "akhil reddy", "technology head", "technical founder", "who leads technology", "leads technology"],
+    "ceo": ["ceo", "chief executive officer", "chief exec", "akhil", "akhil reddy"],
+    "fixity_ceo": ["vinay", "vinay velivela", "fixity"],
     "coo": ["coo", "chief operating officer", "saladi", "saladi chandra balaji", "operations head", "who leads operations", "responsible for operations"],
     "cmo": ["cmo", "chief marketing officer", "ganesh", "ganesh gandhi vadalani", "marketing head", "who leads marketing", "who handles marketing", "handles marketing"],
     "sales_head": ["sales head", "sales lead", "harish", "harish nerati", "operations and sales head"],
@@ -40,13 +40,13 @@ class LeadershipResolver:
                 {
                     "id": "vinay_velivela",
                     "name": "Vinay Velivela",
-                    "designation": "CEO",
+                    "designation": "CEO of Fixity Technologies",
                     "department": "Executive Leadership",
                     "reports_to": None,
                     "bio": "Visionary leader driving innovation and organizational growth.",
                     "responsibilities": ["Company Vision", "Business Strategy", "Innovation", "Enterprise Growth"],
-                    "keywords": ["CEO", "Chief Executive Officer", "Founder", "Leadership"],
-                    "aliases": ["Chief Executive Officer", "CEO", "vinay", "vinay velivela"]
+                    "keywords": ["Fixity Technologies", "Leadership"],
+                    "aliases": ["vinay", "vinay velivela"]
                 },
                 {
                     "id": "saladi_chandra_balaji",
@@ -62,13 +62,13 @@ class LeadershipResolver:
                 {
                     "id": "akhil_reddy",
                     "name": "Akhil Reddy",
-                    "designation": "Co-Founder & CTO",
+                    "designation": "CEO",
                     "department": "Technology",
                     "reports_to": "vinay_velivela",
                     "bio": "Architecting enterprise AI platforms and advanced technology solutions.",
                     "responsibilities": ["Technology Strategy", "AI Architecture", "Engineering", "Research & Development"],
-                    "keywords": ["CTO", "Chief Technology Officer", "Technology", "AI"],
-                    "aliases": ["CTO", "Technology Head", "Technical Founder", "akhil", "akhil reddy"]
+                    "keywords": ["CEO", "Chief Executive Officer", "Leadership", "AI"],
+                    "aliases": ["CEO", "Chief Executive Officer", "akhil", "akhil reddy"]
                 },
                 {
                     "id": "ganesh_gandhi_vadalani",
@@ -219,7 +219,10 @@ class LeadershipResolver:
         # 5. Role Map Aliases & Question Patterns
         for role_code, aliases in ROLE_ALIAS_MAP.items():
             if any(a in target_clean for a in aliases):
-                for m in members:
+                # Exact alias/keyword matches first, so "ceo" finds the CEO rather than "CEO of Fixity Technologies"
+                def exact(m):
+                    return any(a in [str(x).lower() for x in m.get("aliases", []) + m.get("keywords", [])] for a in aliases)
+                for m in sorted(members, key=lambda m: not exact(m)):
                     m_desig = m.get("designation", "").lower()
                     m_aliases = [str(a).lower() for a in m.get("aliases", [])]
                     m_keywords = [str(k).lower() for k in m.get("keywords", [])]

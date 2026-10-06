@@ -473,7 +473,13 @@
       "description": "Evaluate total campaign reach, impression quality, click volume, cost-per-engagement (CPE), and total revenue generated."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Faster creator sourcing",
+    "Smoother execution",
+    "Measurable ROI with affiliate attribution",
+    "E2E Campaign Mgmt",
+    "100% Verified Creators"
+  ],
   "use_cases": [],
   "faq": [],
   "relationships": [],
@@ -483,6 +489,13 @@
     "last_updated": "2026-07-19",
     "source": "02_product_influencer_marketing_platform.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats"
+      },
+      "date": "2026-09-29"
+    }
   }
 }

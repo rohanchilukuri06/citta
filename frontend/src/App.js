@@ -9,6 +9,7 @@ import Services from "@/pages/Services";
 import ServiceSubPage from "@/pages/ServiceSubPage";
 import PSPage from "@/pages/PSPage";
 import AdminConsultant from "@/pages/AdminConsultant";
+import SceneGallery from "@/pages/SceneGallery";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin-consultant" element={<AdminConsultant />} />
+            {process.env.NODE_ENV !== "production" && <Route path="/__scenes" element={<SceneGallery />} />}
           </Routes>
         </main>
         <Footer />

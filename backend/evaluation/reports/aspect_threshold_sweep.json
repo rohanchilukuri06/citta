@@ -1,0 +1,1198 @@
+{
+  "n": 73,
+  "no_llm_acc": 0.9315068493150684,
+  "always_llm_acc": 0.9726027397260274,
+  "grid": [
+    {
+      "conf": 0.3,
+      "margin": 0.0,
+      "aspect_acc": 0.959,
+      "llm_rate": 0.068
+    },
+    {
+      "conf": 0.3,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.082
+    },
+    {
+      "conf": 0.3,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.082
+    },
+    {
+      "conf": 0.3,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.096
+    },
+    {
+      "conf": 0.3,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.11
+    },
+    {
+      "conf": 0.3,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.397
+    },
+    {
+      "conf": 0.4,
+      "margin": 0.0,
+      "aspect_acc": 0.959,
+      "llm_rate": 0.068
+    },
+    {
+      "conf": 0.4,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.082
+    },
+    {
+      "conf": 0.4,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.082
+    },
+    {
+      "conf": 0.4,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.096
+    },
+    {
+      "conf": 0.4,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.11
+    },
+    {
+      "conf": 0.4,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.397
+    },
+    {
+      "conf": 0.5,
+      "margin": 0.0,
+      "aspect_acc": 0.959,
+      "llm_rate": 0.356
+    },
+    {
+      "conf": 0.5,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.37
+    },
+    {
+      "conf": 0.5,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.37
+    },
+    {
+      "conf": 0.5,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.384
+    },
+    {
+      "conf": 0.5,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.397
+    },
+    {
+      "conf": 0.5,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.397
+    },
+    {
+      "conf": 0.6,
+      "margin": 0.0,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.384
+    },
+    {
+      "conf": 0.6,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.384
+    },
+    {
+      "conf": 0.6,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.384
+    },
+    {
+      "conf": 0.6,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.384
+    },
+    {
+      "conf": 0.6,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.397
+    },
+    {
+      "conf": 0.6,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.397
+    },
+    {
+      "conf": 0.7,
+      "margin": 0.0,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.411
+    },
+    {
+      "conf": 0.7,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.411
+    },
+    {
+      "conf": 0.7,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.411
+    },
+    {
+      "conf": 0.7,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.411
+    },
+    {
+      "conf": 0.7,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.411
+    },
+    {
+      "conf": 0.7,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.411
+    },
+    {
+      "conf": 0.8,
+      "margin": 0.0,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.452
+    },
+    {
+      "conf": 0.8,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.452
+    },
+    {
+      "conf": 0.8,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.452
+    },
+    {
+      "conf": 0.8,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.452
+    },
+    {
+      "conf": 0.8,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.452
+    },
+    {
+      "conf": 0.8,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.452
+    },
+    {
+      "conf": 0.9,
+      "margin": 0.0,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.493
+    },
+    {
+      "conf": 0.9,
+      "margin": 0.1,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.493
+    },
+    {
+      "conf": 0.9,
+      "margin": 0.2,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.493
+    },
+    {
+      "conf": 0.9,
+      "margin": 0.3,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.493
+    },
+    {
+      "conf": 0.9,
+      "margin": 0.4,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.493
+    },
+    {
+      "conf": 0.9,
+      "margin": 0.5,
+      "aspect_acc": 0.973,
+      "llm_rate": 0.493
+    }
+  ],
+  "rows": [
+    {
+      "id": "D_DOC_01",
+      "q": "I run a university. What could you guys do for us?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES",
+        "BENEFITS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.5301,
+      "margin": 0.216,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_02",
+      "q": "Our property business needs AI automation.",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES",
+        "BENEFITS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_03",
+      "q": "What can you do for universities?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_04",
+      "q": "We need something to keep customers updated through messaging.",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES",
+        "BENEFITS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_05",
+      "q": "What services do you have for WhatsApp?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.8521,
+      "margin": 0.7042,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_06",
+      "q": "What features does your Education service have?",
+      "gold": [
+        "CAPABILITIES"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 0.9582,
+      "margin": 0.9164,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_07",
+      "q": "Who is this meant for?",
+      "gold": [
+        "TARGET_USERS"
+      ],
+      "arbitrated": "TARGET_USERS",
+      "conf": 0.9657,
+      "margin": 0.9443,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_08",
+      "q": "What can it actually do?",
+      "gold": [
+        "CAPABILITIES"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_09",
+      "q": "Why would a business use it?",
+      "gold": [
+        "BENEFITS"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 0.8746,
+      "margin": 0.7956,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_10",
+      "q": "How does it work?",
+      "gold": [
+        "WORKFLOW"
+      ],
+      "arbitrated": "WORKFLOW",
+      "conf": 0.9802,
+      "margin": 0.9604,
+      "llm": "WORKFLOW",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_11",
+      "q": "How do I reach you?",
+      "gold": [
+        "CONTACT"
+      ],
+      "arbitrated": "CONTACT",
+      "conf": 0.9941,
+      "margin": 0.9882,
+      "llm": null,
+      "entity_directed": false
+    },
+    {
+      "id": "D_DOC_13",
+      "q": "What does your Education solution do?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 0.7609,
+      "margin": 0.5494,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_DOC_15",
+      "q": "What companies have you worked with?",
+      "gold": [
+        "CLIENTS_CASE_STUDIES"
+      ],
+      "arbitrated": "CLIENTS_CASE_STUDIES",
+      "conf": 0.8658,
+      "margin": 0.7943,
+      "llm": null,
+      "entity_directed": false
+    },
+    {
+      "id": "D_DOC_16",
+      "q": "How can I work with your team?",
+      "gold": [
+        "CONTACT"
+      ],
+      "arbitrated": "CONTACT",
+      "conf": 0.9112,
+      "margin": 0.8469,
+      "llm": null,
+      "entity_directed": false
+    },
+    {
+      "id": "D_DOC_17",
+      "q": "What can you do for colleges?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_01",
+      "q": "What solutions do you offer for education?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.9616,
+      "margin": 0.9372,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_02",
+      "q": "What can you guys do for colleges?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 0.847,
+      "margin": 0.7344,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_03",
+      "q": "I run a university. How could CittaAI help us?",
+      "gold": [
+        "BENEFITS",
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 0.7747,
+      "margin": 0.5784,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_04",
+      "q": "We operate an educational institution. What can you provide?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 0.6889,
+      "margin": 0.5103,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_05",
+      "q": "what u offer for college",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.7661,
+      "margin": 0.5951,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_06",
+      "q": "How can you help schools and academic centers?",
+      "gold": [
+        "BENEFITS",
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": -0.1872,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_07",
+      "q": "We need to improve how our institution operates with AI.",
+      "gold": [
+        "BENEFITS",
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 0.9938,
+      "margin": 0.9876,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_ED_08",
+      "q": "Anything for universities?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_HC_01",
+      "q": "What solutions do you offer for healthcare?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.9616,
+      "margin": 0.9372,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_HC_04",
+      "q": "We operate a pharmaceutical distribution chain. What platform do you have?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.967,
+      "margin": 0.934,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_HC_05",
+      "q": "what do u have for hospitals",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": null,
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_HC_06",
+      "q": "Any AI tech for health care facilities and doctors?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": null,
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_HC_08",
+      "q": "Anything for clinics?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": null,
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_01",
+      "q": "What solutions do you offer for real estate?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.9616,
+      "margin": 0.9372,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_02",
+      "q": "I operate a real estate brokerage firm. What automation tools do you offer?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_03",
+      "q": "Our property management group needs to track site visits and agent commissions.",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW",
+        "BENEFITS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_04",
+      "q": "We are residential builders looking for digital inventory and lead booking tools.",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_05",
+      "q": "what u got for realtors",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.9389,
+      "margin": 0.8778,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_06",
+      "q": "Do you have software for housing projects and property brokers?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_07",
+      "q": "Our real estate team is losing leads because follow-ups take too long.",
+      "gold": [
+        "BENEFITS",
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_RE_08",
+      "q": "Anything for brokers?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_WA_01",
+      "q": "How can WhatsApp help my business run bulk notification campaigns?",
+      "gold": [
+        "CAPABILITIES",
+        "BENEFITS",
+        "OVERVIEW"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_WA_02",
+      "q": "Can I broadcast automated WhatsApp messages to 10000 customers at once?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_WA_04",
+      "q": "What is the official WhatsApp automation platform capability set?",
+      "gold": [
+        "CAPABILITIES"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_WA_05",
+      "q": "can i send mass whatsapp msgs",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_WA_07",
+      "q": "Our open rates on email are horrible and we need direct mobile channel reach.",
+      "gold": [
+        "BENEFITS",
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_WA_08",
+      "q": "WhatsApp bulk sender info?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4841,
+      "margin": -0.0318,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_01",
+      "q": "What solutions do you offer for smart cities and urban municipalities?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_02",
+      "q": "How can city planning councils monitor traffic and municipal infrastructure?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW",
+        "WORKFLOW",
+        "BENEFITS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_03",
+      "q": "Our local government authority needs IoT and central command dashboard software.",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_04",
+      "q": "What is Smart Cities OS core architecture and sensor telemetry capability?",
+      "gold": [
+        "CAPABILITIES",
+        "WORKFLOW",
+        "OVERVIEW"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 0.6923,
+      "margin": 0.3846,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_05",
+      "q": "tech for city management",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.2087,
+      "margin": -0.4682,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_06",
+      "q": "Do you serve civic bodies and public sector municipal corporations?",
+      "gold": [
+        "TARGET_USERS",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_07",
+      "q": "We need unified monitoring for emergency response and waste management in our town.",
+      "gold": [
+        "BENEFITS",
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_SC_08",
+      "q": "Smart city tech?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_AI_01",
+      "q": "What is Enterprise AI OS and how does agentic AI middleware function?",
+      "gold": [
+        "OVERVIEW",
+        "WORKFLOW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 0.9026,
+      "margin": 0.8052,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_AI_02",
+      "q": "How do your autonomous AI agents coordinate complex multi-step workflows?",
+      "gold": [
+        "WORKFLOW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "WORKFLOW",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "WORKFLOW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_AI_04",
+      "q": "What security, governance, and audit trails exist in Enterprise AI OS?",
+      "gold": [
+        "CAPABILITIES",
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_AI_05",
+      "q": "tell me about agentic ai platform",
+      "gold": [
+        "OVERVIEW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_AI_06",
+      "q": "Any cognitive operating systems for large business enterprises?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_AI_08",
+      "q": "Enterprise AI OS details?",
+      "gold": [
+        "OVERVIEW",
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "OVERVIEW",
+      "entity_directed": true
+    },
+    {
+      "id": "PARA_COMP_01",
+      "q": "Who founded CittaAI and who leads the executive team?",
+      "gold": [
+        "LEADERSHIP"
+      ],
+      "arbitrated": "LEADERSHIP",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": null,
+      "entity_directed": false
+    },
+    {
+      "id": "PARA_COMP_02",
+      "q": "How do I get in touch with sales or request a product demo?",
+      "gold": [
+        "CONTACT"
+      ],
+      "arbitrated": "CONTACT",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": null,
+      "entity_directed": false
+    },
+    {
+      "id": "PARA_COMP_03",
+      "q": "What awards, press, or industry recognitions has CittaAI received?",
+      "gold": [
+        "RECOGNITION"
+      ],
+      "arbitrated": "RECOGNITION",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": null,
+      "entity_directed": false
+    },
+    {
+      "id": "D_ASP_01",
+      "q": "Which teams inside a hospital would use Pharma OS day to day?",
+      "gold": [
+        "TARGET_USERS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_02",
+      "q": "Is Influencer Marketing a fit for local franchise businesses?",
+      "gold": [
+        "TARGET_USERS"
+      ],
+      "arbitrated": "TARGET_USERS",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_03",
+      "q": "What sort of companies buy Data Engineering from you?",
+      "gold": [
+        "TARGET_USERS"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.2938,
+      "margin": -0.1328,
+      "llm": "TARGET_USERS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_04",
+      "q": "Describe the stages a lead goes through inside Real Estate OS",
+      "gold": [
+        "WORKFLOW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.5158,
+      "margin": 0.0316,
+      "llm": "WORKFLOW",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_05",
+      "q": "What happens after we sign up for WhatsApp Marketing?",
+      "gold": [
+        "WORKFLOW"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": -0.1289,
+      "llm": "WORKFLOW",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_06",
+      "q": "How is an AI Strategy engagement structured?",
+      "gold": [
+        "WORKFLOW"
+      ],
+      "arbitrated": "WORKFLOW",
+      "conf": 0.9616,
+      "margin": 0.9402,
+      "llm": "WORKFLOW",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_07",
+      "q": "What will Smart Cities OS actually improve for our citizens?",
+      "gold": [
+        "BENEFITS"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_08",
+      "q": "What results can a brand expect from MarTech 360?",
+      "gold": [
+        "BENEFITS"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_09",
+      "q": "Why is Education OS worth it for a small college?",
+      "gold": [
+        "BENEFITS"
+      ],
+      "arbitrated": "BENEFITS",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "BENEFITS",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_10",
+      "q": "Which modules come with Pharma OS?",
+      "gold": [
+        "CAPABILITIES"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_11",
+      "q": "Can E-Commerce OS handle abandoned carts and loyalty points?",
+      "gold": [
+        "CAPABILITIES"
+      ],
+      "arbitrated": "OVERVIEW",
+      "conf": 0.4,
+      "margin": 0.4,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_12",
+      "q": "Does Enterprise AI OS support voice bots?",
+      "gold": [
+        "CAPABILITIES"
+      ],
+      "arbitrated": "CAPABILITIES",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "CAPABILITIES",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_13",
+      "q": "What does Data Engineering cost?",
+      "gold": [
+        "PRICING"
+      ],
+      "arbitrated": "PRICING",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "PRICING",
+      "entity_directed": true
+    },
+    {
+      "id": "D_ASP_14",
+      "q": "Common questions people ask about Real Estate OS",
+      "gold": [
+        "FAQ"
+      ],
+      "arbitrated": "FAQ",
+      "conf": 1.0,
+      "margin": 1.0,
+      "llm": "FAQ",
+      "entity_directed": true
+    }
+  ]
+}

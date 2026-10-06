@@ -11,16 +11,17 @@ logger = logging.getLogger(__name__)
 class GroqClient:
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         self.api_key = api_key or config.GROQ_API_KEY or os.environ.get("GROQ_API_KEY", "")
-        self.model = model or config.GROQ_MODEL or "llama-3.3-70b-versatile"
+        self.model = model or config.GROQ_MODEL or "openai/gpt-oss-20b"
         self.timeout = getattr(config, "TIMEOUT", 60)
-        self.max_tokens = getattr(config, "MAX_OUTPUT_TOKENS", 500)
+        self.max_tokens = getattr(config, "MAX_OUTPUT_TOKENS", 1500)
 
     def _get_client(self, api_key_override: Optional[str] = None):
         from groq import AsyncGroq
         key = api_key_override if api_key_override is not None else self.api_key
         if not key:
             raise ValueError("Groq API key is missing. Please configure GROQ_API_KEY.")
-        return AsyncGroq(api_key=key, timeout=self.timeout)
+        # No SDK-level 429 retries with backoff: they eat the first-token budget; FallbackProvider moves on instead
+        return AsyncGroq(api_key=key, timeout=self.timeout, max_retries=0)
 
     def _sanitize_error(self, err_msg: str) -> str:
         """Strip sensitive credentials if present in string."""
@@ -105,20 +106,11 @@ class GroqClient:
                     max_tokens=target_max_tokens,
                     stream=False
                 )
-            except Exception as rate_err:
-                if ("rate_limit" in str(rate_err).lower() or "429" in str(rate_err)) and target_model != "llama-3.1-8b-instant":
-                    logger.warning(f"Groq primary model '{target_model}' hit rate limit. Auto-falling back to 'llama-3.1-8b-instant'.")
-                    target_model = "llama-3.1-8b-instant"
-                    response = await client.chat.completions.create(
-                        model=target_model,
-                        messages=messages,
-                        temperature=temperature,
-                        top_p=top_p,
-                        max_tokens=target_max_tokens,
-                        stream=False
-                    )
-                else:
-                    raise rate_err
+            except Exception as primary_err:
+                # Cross-provider fallback lives in llm_provider.FallbackProvider (the NVIDIA model used
+                # here previously reached end-of-life and returned HTTP 410).
+                logger.warning(f"Groq primary call failed ({primary_err}).")
+                raise primary_err
             t_gen_end = time.perf_counter()
             generation_ms = (t_gen_end - t_gen_start) * 1000.0
             total_ms = (time.perf_counter() - t0) * 1000.0
@@ -266,9 +258,9 @@ class GroqClient:
                     stream=True
                 )
             except Exception as rate_err:
-                if ("rate_limit" in str(rate_err).lower() or "429" in str(rate_err)) and target_model != "llama-3.1-8b-instant":
-                    logger.warning(f"Groq primary model '{target_model}' hit rate limit. Auto-falling back to 'llama-3.1-8b-instant'.")
-                    target_model = "llama-3.1-8b-instant"
+                if ("rate_limit" in str(rate_err).lower() or "429" in str(rate_err)) and target_model != "openai/gpt-oss-120b":
+                    logger.warning(f"Groq primary model '{target_model}' hit rate limit. Auto-falling back to 'openai/gpt-oss-120b'.")
+                    target_model = "openai/gpt-oss-120b"
                     stream_metrics["model"] = target_model
                     response_stream = await client.chat.completions.create(
                         model=target_model,

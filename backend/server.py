@@ -20,7 +20,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI, APIRouter, UploadFile, File, Form, HTTPException, Depends, BackgroundTasks
+from fastapi import FastAPI, APIRouter, UploadFile, File, Form, HTTPException, Depends, BackgroundTasks, Request
+from api_security import require_admin
 from fastapi.responses import StreamingResponse, RedirectResponse
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -67,13 +68,18 @@ if vdb_exists:
     logging.info(f"Runtime DB Metadata: {tmp_store.get_metadata()}")
 logging.info(f"==========================================")
 
-@app.on_event("startup")
 async def prewarm_rag_embedding_model():
     t_start = time.perf_counter()
     logger.info("=== PRE-WARMING BGE EMBEDDING MODEL & RAG SERVICE ===")
     try:
         rag_serv = get_rag_service()
         await rag_serv.get_embedding_model()
+        # Load the semantic pipeline (entity index, registry, memory store) before the first visitor arrives
+        from semantic_chat_pipeline import get_semantic_chat_pipeline, ConversationState
+        pipeline = get_semantic_chat_pipeline(provider=rag_serv.provider)
+        await asyncio.to_thread(pipeline.decide, "What solutions does CittaAI offer?", ConversationState())
+        purged = pipeline.memory.purge_expired() if pipeline.memory else 0
+        logger.info(f"=== SEMANTIC PIPELINE WARM (expired conversations purged: {purged}) ===")
         t_end = time.perf_counter()
         duration_ms = round((t_end - t_start) * 1000.0, 2)
         logger.info(f"=== EMBEDDING MODEL PRE-WARM COMPLETE: {duration_ms} ms ===")
@@ -92,6 +98,8 @@ async def root_health_check():
 # Production & Local CORS Middleware Configuration
 cors_env = os.environ.get('CORS_ORIGINS', '').strip()
 default_origins = [
+    "https://cittaai.com",
+    "https://www.cittaai.com",
     "https://citta-omega.vercel.app",
     "https://citta-ten-sable.vercel.app",
     "https://citta-jbi1az638-rohanchilukuri06-8472s-projects.vercel.app",
@@ -109,7 +117,8 @@ else:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_origin_regex=r"https:\/\/.*\.vercel\.app",
+    # Only this project's Vercel preview deployments (previously any *.vercel.app site, with credentials)
+    allow_origin_regex=r"https://citta-[a-z0-9]+-rohanchilukuri06-8472s-projects\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -311,8 +320,8 @@ def get_rag_service() -> rag_service.RAGService:
 
 # ---------------- API MODELS ----------------
 class ChatMessageInput(BaseModel):
-    session_id: str
-    message: str
+    session_id: str = Field(..., min_length=1, max_length=128)
+    message: str = Field(..., min_length=1, max_length=config.CHAT_MAX_MESSAGE_CHARS)
 
 class ConfigUpdateInput(BaseModel):
     provider: str
@@ -407,6 +416,13 @@ async def lifespan(app: FastAPI):
         count = val.get("count", 0)
         logging.info(f"Vector database active with {count} chunks. DB Version: {val.get('metadata', {}).get('version', '1.0.0')}")
 
+    # 1b. Stale-index detection: warn loudly in development, block chat in production until rebuilt
+    try:
+        from index_integrity import refresh_status
+        app.state.index_integrity = refresh_status()
+    except Exception as e:
+        logging.critical(f"Vector index integrity check could not run: {e}")
+
     # Initialize and validate Knowledge Registry startup consistency checks
     try:
         from knowledge_registry import get_registry
@@ -423,8 +439,13 @@ async def lifespan(app: FastAPI):
         watcher_task = asyncio.create_task(watch_content_js_changes())
     else:
         logging.info("Production environment detected: filesystem watcher disabled.")
-    
+
+    # 3. Warm the embedding model + semantic pipeline in the background (health checks stay responsive)
+    warm_task = asyncio.create_task(prewarm_rag_embedding_model())
+
     yield
+
+    warm_task.cancel()
     
     # Shutdown tasks
     if watcher_task:
@@ -601,7 +622,7 @@ class TenantOnboardInput(BaseModel):
     logo_url: Optional[str] = ""
     brand_settings: Optional[Dict[str, Any]] = None
 
-@api_router.post("/tenants/onboard")
+@api_router.post("/tenants/onboard", dependencies=[Depends(require_admin)])
 async def onboard_tenant_endpoint(data: TenantOnboardInput):
     """Onboard a new company tenant simply by providing name and website URL."""
     try:
@@ -646,9 +667,40 @@ async def log_feedback_endpoint(data: FeedbackInput):
         logger.error(f"Failed to log feedback: {e}")
         raise HTTPException(status_code=500, detail="Database insertion error")
 
+class ContactFormInput(BaseModel):
+    name: str = Field(..., min_length=1, max_length=80)
+    email: str = Field(..., min_length=5, max_length=120)
+    phone: str = Field(..., min_length=7, max_length=20)
+    company: Optional[str] = Field(default="", max_length=120)
+    inquiry: str = Field(..., min_length=1, max_length=60)
+    message: str = Field(..., min_length=2, max_length=2000)
+    timing: Optional[str] = Field(default="", max_length=200)
+
+
+@api_router.post("/contact")
+async def contact_endpoint(form: ContactFormInput, request: Request):
+    """Website contact form: same storage and two emails (visitor + company) as the chat's meeting agent."""
+    from api_security import chat_rate_limiter
+    from meeting_agent import get_meeting_agent, find_email, find_phone, valid_name, _clean
+    chat_rate_limiter.check(request, f"contact-form:{request.client.host if request.client else 'unknown'}")
+    email, phone, name = find_email(form.email), find_phone(form.phone), valid_name(form.name)
+    if not (email and phone and name):
+        bad = [k for k, v in (("name", name), ("email", email), ("phone", phone)) if not v]
+        raise HTTPException(status_code=422, detail={"invalid": bad})
+    purpose = f"{form.inquiry}: {form.message}" + (f" (Company: {form.company})" if form.company else "")
+    details = {"name": name, "email": email, "phone": phone, "purpose": _clean(purpose, "purpose"),
+               "timing": _clean(form.timing or "Not specified — please suggest a time", "timing")}
+    agent = get_meeting_agent()
+    rid, statuses = await agent.deliver(f"contact-form-{uuid.uuid4().hex[:8]}", details, {"source": "website contact form"},
+                                        "For details, contact info@cittaai.com")
+    return {"reference": rid, "company_email": statuses["company"], "visitor_email": statuses["user"]}
+
+
 @api_router.post("/chat")
-async def chat_endpoint(input_data: ChatMessageInput, background_tasks: BackgroundTasks):
-    """Streaming chat completions using Server Sent Events (SSE) routed through RAGService & DeterministicEngine."""
+async def chat_endpoint(input_data: ChatMessageInput, background_tasks: BackgroundTasks, request: Request):
+    """Streaming chat completions (SSE) through the unified semantic pipeline (RAGService.chat_stream)."""
+    from api_security import chat_rate_limiter
+    chat_rate_limiter.check(request, input_data.session_id)
     try:
         session_id = input_data.session_id
         message = input_data.message
@@ -680,7 +732,14 @@ async def clear_chat_endpoint(data: Dict[str, str]):
 
 # ---------------- ADMIN APIS ----------------
 
-@api_router.get("/admin/status")
+@api_router.get("/admin/meeting-requests", dependencies=[Depends(require_admin)])
+async def admin_meeting_requests(limit: int = 50):
+    """Meeting / contact requests collected by the chat's meeting agent, newest first, with email delivery status."""
+    from meeting_agent import get_meeting_agent
+    return {"requests": get_meeting_agent().store.recent(max(1, min(limit, 500)))}
+
+
+@api_router.get("/admin/status", dependencies=[Depends(require_admin)])
 async def admin_status():
     """Retrieve config status and DB health metric."""
     count = vstore.get_chunk_count()
@@ -698,7 +757,7 @@ async def admin_status():
         "nvidia_status": "Connected" if nvidia_healthy else "Disconnected"
     }
 
-@api_router.post("/admin/config")
+@api_router.post("/admin/config", dependencies=[Depends(require_admin)])
 async def admin_update_config(data: ConfigUpdateInput):
     """Change LLM Provider / Model."""
     global _rag_service_instance
@@ -725,11 +784,27 @@ async def health_check():
     except Exception as e:
         emb_status = f"Unhealthy: {str(e)}"
 
-    # 3. NVIDIA API status check
-    api_status = "Available" if config.API_KEY else "Missing API Key"
+    # 3. Configured LLM providers (keys present; no secrets are returned)
+    primary_key = {"groq": config.GROQ_API_KEY, "gemini": config.GEMINI_API_KEY, "nvidia": config.NVIDIA_API_KEY}.get(config.LLM_PROVIDER.lower(), "")
+    api_status = "Configured" if primary_key else "Missing API Key"
+    fallback = str(getattr(config, "LLM_FALLBACK_PROVIDER", "none")).lower()
+    fallback_status = "Configured" if fallback == "gemini" and config.GEMINI_API_KEY else "None"
 
+    # 4. Vector index integrity (stale index blocks chat in production)
+    try:
+        from index_integrity import get_status
+        integ = get_status()
+        index_status = {"fresh": integ["fresh"], "rebuild_required": integ.get("rebuild_required", False),
+                        "index_version": integ.get("index_version"), "built_at": integ.get("built_at"), "reasons": integ.get("reasons", [])}
+    except Exception as e:
+        index_status = {"fresh": False, "error": str(e)}
+
+    healthy = ("Unhealthy" not in db_status and "Unhealthy" not in emb_status and index_status.get("fresh")
+               and api_status == "Configured")
     return {
-        "status": "Healthy" if "Unhealthy" not in db_status and "Unhealthy" not in emb_status else "Degraded",
+        "status": "Healthy" if healthy else "Degraded",
+        "vector_index": index_status,
+        "llm_fallback": {"provider": fallback, "model": config.GEMINI_MODEL if fallback == "gemini" else None, "status": fallback_status},
         "database": db_status,
         "embedding_model": {
             "model_name": config.EMBEDDING_MODEL,
@@ -781,7 +856,7 @@ async def process_document_background(filename: str, page: str, section: str, ti
         )
     logging.info(f"Successfully processed and indexed {len(chunks)} chunks from {filename} in background.")
 
-@api_router.get("/health/details")
+@api_router.get("/health/details", dependencies=[Depends(require_admin)])
 async def detailed_health_check() -> Dict[str, Any]:
     """Production health & diagnostic status endpoint."""
     meta = vstore.get_metadata()
@@ -807,7 +882,7 @@ async def detailed_health_check() -> Dict[str, Any]:
         "environment": getattr(config, "ENVIRONMENT", "production")
     }
 
-@api_router.post("/admin/reindex", status_code=202)
+@api_router.post("/admin/reindex", status_code=202, dependencies=[Depends(require_admin)])
 async def admin_reindex(background_tasks: BackgroundTasks):
     """Manual async background re-index API."""
     job_id = str(uuid.uuid4())
@@ -818,7 +893,7 @@ async def admin_reindex(background_tasks: BackgroundTasks):
         "state": "running"
     }
 
-@api_router.post("/admin/upload")
+@api_router.post("/admin/upload", dependencies=[Depends(require_admin)])
 async def admin_upload(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
@@ -845,23 +920,23 @@ async def admin_upload(
     background_tasks.add_task(process_document_background, filename, page, section, title, extracted_text, ext)
     return {"message": f"Successfully uploaded {filename}. Processing and indexing started in the background."}
 
-@api_router.get("/admin/documents")
+@api_router.get("/admin/documents", dependencies=[Depends(require_admin)])
 async def admin_get_documents():
     """Retrieve list of indexed document sources."""
     return vstore.get_all_documents()
 
-@api_router.delete("/admin/documents/{source_name:path}")
+@api_router.delete("/admin/documents/{source_name:path}", dependencies=[Depends(require_admin)])
 async def admin_delete_document(source_name: str):
     """Deletes chunks matching document source."""
     deleted_count = vstore.delete_document(source_name)
     return {"message": f"Deleted {deleted_count} chunks for source '{source_name}'."}
 
-@api_router.get("/admin/chunks")
+@api_router.get("/admin/chunks", dependencies=[Depends(require_admin)])
 async def admin_get_chunks():
     """Lists indexed chunks for verification."""
     return vstore.get_all_chunks()
 
-@api_router.get("/admin/analytics")
+@api_router.get("/admin/analytics", dependencies=[Depends(require_admin)])
 async def admin_analytics():
     """Computes administrative dashboard analytics statistics (queries, success rates, latency)."""
     conn = sqlite3.connect(ANALYTICS_DB_PATH)
@@ -920,7 +995,7 @@ async def admin_analytics():
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-@api_router.post("/status", response_model=StatusCheck)
+@api_router.post("/status", response_model=StatusCheck, dependencies=[Depends(require_admin)])
 async def create_status_check(input: StatusCheckCreate) -> StatusCheck:
     status_obj = StatusCheck(**input.model_dump())
     doc: Dict[str, Any] = status_obj.model_dump()
@@ -932,7 +1007,7 @@ async def create_status_check(input: StatusCheckCreate) -> StatusCheck:
         pass
     return status_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
+@api_router.get("/status", response_model=List[StatusCheck], dependencies=[Depends(require_admin)])
 async def get_status_checks() -> List[Dict[str, Any]]:
     try:
         status_checks: List[Dict[str, Any]] = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
@@ -947,7 +1022,7 @@ class DebugQueryInput(BaseModel):
     message: str
     session_id: Optional[str] = "debug_session"
 
-@api_router.post("/debug/query")
+@api_router.post("/debug/query", dependencies=[Depends(require_admin)])
 async def debug_query_endpoint(input_data: DebugQueryInput):
     """Developer-only diagnostic endpoint returning granular query classifier details."""
     import time

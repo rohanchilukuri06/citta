@@ -15,12 +15,6 @@
       "pharma os",
       "pharmaa os",
       "pharmaa",
-      "prescription",
-      "prescription refill",
-      "refill",
-      "hospital",
-      "medical",
-      "clinical",
       "healthcare"
     ],
     "secondary_keywords": [
@@ -37,20 +31,11 @@
       "pharma & healthcare",
       "pharma and healthcare",
       "pharma services",
-      "medical services",
-      "hospital services",
       "pharmaceutical services",
       "pharma",
       "pharmaceutical",
       "pharmaceuticals",
-      "hospital",
-      "hospitals",
-      "medical",
-      "clinic",
-      "clinics",
-      "healthcare",
-      "healthtech",
-      "health tech"
+      "healthcare"
     ],
     "synonyms": []
   },
@@ -483,7 +468,17 @@
       "description": "Generate real-time compliance dashboards, operational efficiency reports, and market intelligence insights."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Faster Documentation",
+    "Compliance Readiness",
+    "Process Visibility",
+    "Consistent Workflows",
+    "Automated Reporting",
+    "Batch Reliability",
+    "50% Faster Reviews",
+    "100% Audit Readiness",
+    "3x Faster Release"
+  ],
   "use_cases": [
     "Faster Documentation",
     "Compliance Readiness",
@@ -500,6 +495,36 @@
     "last_updated": "2026-07-19",
     "source": "05_product_pharma_os.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats"
+      },
+      "date": "2026-09-29"
+    },
+    "content_decisions": [
+      {
+        "date": "2026-09-29",
+        "decision": "Removed hospital/clinic/medical/prescription search aliases",
+        "removed": [
+          "clinic",
+          "clinical",
+          "clinics",
+          "health tech",
+          "healthtech",
+          "hospital",
+          "hospital services",
+          "hospitals",
+          "medical",
+          "medical services",
+          "prescription",
+          "prescription refill",
+          "refill"
+        ],
+        "reason": "Live website and registry content describe pharmaceutical QA/compliance (batch review, APQR, CPV, quality dashboards); no hospital, clinic or patient functionality is published. The older registry/solutions.json describing hospital features is not loaded and contradicts the site.",
+        "revert": "Restore the removed terms to search.aliases / search.primary_keywords if Pharma OS is meant to serve hospitals, and publish that content."
+      }
+    ]
   }
 }

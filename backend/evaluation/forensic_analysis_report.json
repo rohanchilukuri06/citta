@@ -1,0 +1,378 @@
+[
+  {
+    "id": "HOLDOUT_001",
+    "query": "I run a college with 5000 students. What can CittaAI do for us?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_002",
+    "query": "We are a regional hospital network looking for patient management AI solutions. How do you help?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_003",
+    "query": "I operate a real estate brokerage firm. What automation tools do you offer?",
+    "expected_entity": "realty_os",
+    "expected_keywords": [
+      "property",
+      "realty",
+      "broker",
+      "estate",
+      "listing"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_004",
+    "query": "How can WhatsApp help my business run bulk notification and customer support campaigns?",
+    "expected_entity": "whatsapp_marketing",
+    "expected_keywords": [
+      "whatsapp",
+      "broadcast",
+      "campaign",
+      "notification",
+      "messaging"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_005",
+    "query": "Who founded CittaAI and who leads the company today?",
+    "expected_entity": "cittaai_company",
+    "expected_keywords": [
+      "founder",
+      "ceo",
+      "leadership",
+      "executive"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_006",
+    "query": "What industry recognition, press, or awards has CittaAI received recently?",
+    "expected_entity": "cittaai_company",
+    "expected_keywords": [
+      "award",
+      "recognition",
+      "honored",
+      "featured"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_007",
+    "query": "we are an educational institution looking for AI solutions for student attendance and grading",
+    "expected_entity": "education_os",
+    "expected_keywords": [
+      "attendance",
+      "grading",
+      "education",
+      "student"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_008",
+    "query": "what do u offer for medical institutes and clinics?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_009",
+    "query": "Can your platform manage property listings, lead capture, and client follow-ups for realtors?",
+    "expected_entity": "realty_os",
+    "expected_keywords": [
+      "listing",
+      "lead",
+      "realtor",
+      "property"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_010",
+    "query": "How do I get in touch with your sales team or request a demo?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_011",
+    "query": "Tell me about Education OS capabilities for universities and polytechnics.",
+    "expected_entity": "education_os",
+    "expected_keywords": [
+      "university",
+      "education",
+      "institution",
+      "academic"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_012",
+    "query": "What core features does Healthcare OS provide for outpatient departments?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_013",
+    "query": "Does Realty OS support multi-agent commissions and site-visit tracking?",
+    "expected_entity": "realty_os",
+    "expected_keywords": [
+      "commission",
+      "agent",
+      "realty",
+      "property"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_014",
+    "query": "Can WhatsApp Marketing platform integrate with our existing CRM?",
+    "expected_entity": "whatsapp_marketing",
+    "expected_keywords": [
+      "crm",
+      "integration",
+      "whatsapp",
+      "connect"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_015",
+    "query": "What AI strategy consulting services does CittaAI provide for enterprises?",
+    "expected_entity": "ai_advisory_services",
+    "expected_keywords": [
+      "advisory",
+      "consulting",
+      "strategy",
+      "enterprise"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_016",
+    "query": "Can you write a Python script to scrape stock market data from Yahoo Finance?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_017",
+    "query": "What is the best recipe for baking sourdough bread at home?",
+    "stage": "EVIDENCE_GATE",
+    "reason": "Top retrieved chunks failed evidence gate thresholds",
+    "chunks_count": 5
+  },
+  {
+    "id": "HOLDOUT_018",
+    "query": "What products does CittaAI offer across different industries?",
+    "expected_entity": "catalog_overview",
+    "expected_keywords": [
+      "education",
+      "healthcare",
+      "realty",
+      "whatsapp"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_019",
+    "query": "Give me a summary of your flagship enterprise OS solutions.",
+    "expected_entity": "catalog_overview",
+    "expected_keywords": [
+      "enterprise",
+      "os",
+      "platform",
+      "solution"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_020",
+    "query": "How does Education OS handle examination scheduling and result generation?",
+    "expected_entity": "education_os",
+    "expected_keywords": [
+      "exam",
+      "scheduling",
+      "result",
+      "grade"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_021",
+    "query": "Does CittaAI have ISO certification or data security compliance standard support?",
+    "expected_entity": "cittaai_company",
+    "expected_keywords": [
+      "security",
+      "compliance",
+      "iso",
+      "privacy"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_022",
+    "query": "What companies or institutions have implemented CittaAI solutions?",
+    "expected_entity": "cittaai_company",
+    "expected_keywords": [
+      "institution",
+      "client",
+      "customer",
+      "partner"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_023",
+    "query": "Can I broadcast automated WhatsApp messages to 10,000 customers at once?",
+    "expected_entity": "whatsapp_marketing",
+    "expected_keywords": [
+      "broadcast",
+      "bulk",
+      "message",
+      "whatsapp"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_024",
+    "query": "How does Healthcare OS ensure HIPAA compliance or patient data privacy?",
+    "expected_entity": "healthcare_os",
+    "expected_keywords": [
+      "hipaa",
+      "privacy",
+      "compliance",
+      "security",
+      "patient"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  },
+  {
+    "id": "HOLDOUT_025",
+    "query": "What is the main value proposition of CittaAI compared to generic AI tools?",
+    "expected_entity": "cittaai_company",
+    "expected_keywords": [
+      "cittaai",
+      "vertical",
+      "operating system",
+      "ai"
+    ],
+    "is_valid": false,
+    "has_keywords": false,
+    "status": "FAILED",
+    "validator_reasons": [
+      "Empty response text"
+    ],
+    "response_snippet": ""
+  }
+]

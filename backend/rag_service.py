@@ -123,6 +123,7 @@ class RAGService:
         self.entity_extractor = get_entity_extractor()
         self.context_manager = get_context_manager()
         self.confidence_router = get_confidence_router()
+        self.reranker = get_retrieval_reranker(self.vector_store)
         self.phase2_orchestrator = get_phase2_orchestrator()
         from phase3_reasoning_engine import get_phase3_reasoning_engine
         self.phase3_reasoning_engine = get_phase3_reasoning_engine(provider=self.provider)
@@ -182,6 +183,11 @@ class RAGService:
             logger.warning(f"Failed to build unindexed routes registry: {e}")
 
     def clear_session(self, session_id: str):
+        try:
+            from semantic_chat_pipeline import get_semantic_chat_pipeline
+            get_semantic_chat_pipeline().clear(session_id)
+        except Exception as e:
+            logger.warning(f"Could not clear semantic pipeline state for {session_id}: {e}")
         if session_id in self.session_memory:
             del self.session_memory[session_id]
         if session_id in self.user_preferences:
@@ -229,12 +235,75 @@ class RAGService:
             logger.warning(f"Embedding model warmup failed: {e}")
 
     async def chat_stream(
-        self, 
-        session_id: str, 
-        message: str, 
+        self,
+        session_id: str,
+        message: str,
         model: str,
         tenant_id: str = "cittaai"
     ) -> AsyncGenerator[Dict[str, Any], None]:
+        """
+        /api/chat entry point. Normal path: SemanticChatPipeline (one SemanticDecision, one conversation
+        state, KnowledgeToolRouter, section-level evidence, validated generation). The legacy path below
+        runs only for action requests, or as a loudly-logged emergency fallback if the pipeline fails
+        before emitting any text.
+        """
+        import uuid
+        request_id = uuid.uuid4().hex[:12]
+
+        from index_integrity import rebuild_required
+        if rebuild_required():
+            yield {"text": "CittaAI's knowledge base is being updated right now. Please try again in a few minutes.", "done": False}
+            yield {"done": True, "citations": [], "suggested_questions": [], "redirect": None, "source": "index_integrity",
+                   "verified": False, "confidence": 0.0,
+                   "metrics": {"request_id": request_id, "pipeline": "blocked", "index_rebuild_required": True}}
+            return
+
+        # Greetings and small talk are handled by the semantic pipeline's conversation layer
+        if self.is_prompt_injection(message) or self._is_action_request(message):
+            async for chunk in self._legacy_chat_stream(session_id, message, model, tenant_id):
+                yield chunk
+            return
+
+        from semantic_chat_pipeline import get_semantic_chat_pipeline
+        emitted = False
+        try:
+            pipeline = get_semantic_chat_pipeline(provider=self.provider)
+            async for chunk in pipeline.stream(session_id, message, model, request_id=request_id):
+                emitted = True
+                yield chunk
+            return
+        except Exception as e:
+            logger.exception(json.dumps({
+                "event": "semantic_fallback", "semantic_fallback": True, "request_id": request_id,
+                "session_id": session_id, "reason": f"{type(e).__name__}: {e}", "emitted_before_failure": emitted,
+            }))
+            if emitted:
+                yield {"text": "\n\nSorry — something went wrong while answering. Please try again.", "done": False}
+                yield {"done": True, "citations": [], "suggested_questions": [], "redirect": None,
+                       "source": "error", "verified": False, "confidence": 0.0,
+                       "metrics": {"request_id": request_id, "pipeline": "semantic", "error": type(e).__name__}}
+                return
+        async for chunk in self._legacy_chat_stream(session_id, message, model, tenant_id):
+            if chunk.get("done"):
+                chunk.setdefault("metrics", {})
+                if isinstance(chunk["metrics"], dict):
+                    chunk["metrics"].update({"request_id": request_id, "pipeline": "legacy", "semantic_fallback": True})
+            yield chunk
+
+    @staticmethod
+    def _is_action_request(message: str) -> bool:
+        q = message.lower()
+        # Meetings, demos and callbacks are handled by the semantic pipeline's meeting agent (meeting_agent.py)
+        return any(p in q for p in ("create a support ticket", "raise a ticket", "send proposal", "send me a proposal"))
+
+    async def _legacy_chat_stream(
+        self,
+        session_id: str,
+        message: str,
+        model: str,
+        tenant_id: str = "cittaai"
+    ) -> AsyncGenerator[Dict[str, Any], None]:
+        """Pre-unification pipeline. Kept only for action requests and as the emergency fallback."""
         start_time = time.time()
         
         # 1. Injection Protection
@@ -472,6 +541,35 @@ class RAGService:
             }
             return
 
+        # Dispatch 4.3.5: General Catalog Deterministic Intercept Check (Zero-LLM)
+        from deterministic_engine import get_deterministic_engine
+        from intent_analyzer import get_intent_analyzer
+        from phase2_orchestrator import check_general_catalog_query
+        if check_general_catalog_query(message):
+            intent_analysis = get_intent_analyzer().analyze(message)
+            det_res = get_deterministic_engine().generate_response(
+                tenant_id=tenant_id,
+                intent=intent_analysis.primary_intent,
+                topics=intent_analysis.topics,
+                query=message
+            )
+            if det_res and det_res.get("response"):
+                resp_text = det_res["response"]
+                self.session_memory[session_id].append({"role": "user", "content": message})
+                self.session_memory[session_id].append({"role": "assistant", "content": resp_text})
+                yield {"text": resp_text, "done": False}
+                yield {
+                    "done": True,
+                    "citations": [],
+                    "suggested_questions": det_res.get("suggestions", []),
+                    "redirect": det_res.get("navigation"),
+                    "source": det_res.get("source", "Deterministic Knowledge Engine"),
+                    "verified": det_res.get("verified", True),
+                    "confidence": det_res.get("confidence", 1.0),
+                    "metrics": p2_ctx.metrics
+                }
+                return
+
         # Dispatch 4.4: Phase 3 Evidence-Grounded Reasoning Engine (REASONING & CONSULTATIVE)
         from orchestration_context import ExecutionStrategy
         if p2_ctx.execution_strategy in [ExecutionStrategy.REASONING, ExecutionStrategy.CONSULTATIVE]:
@@ -524,13 +622,17 @@ class RAGService:
         p2_ent = p2_qi.get("primary_entity_id")
         p2_scope = p2_qi.get("answer_scope", "GENERAL")
 
-        has_specific_scope = p2_ent is not None or p2_scope not in ["GENERAL", "ALL_PRODUCTS", "ALL_SERVICES", "ALL_SOLUTIONS"]
+        has_specific_scope = p2_ent is not None or p2_scope not in ["GENERAL", "ALL", "ALL_PRODUCTS", "ALL_SERVICES", "ALL_SOLUTIONS"]  # CLIENTS_SCOPE / OUT_OF_DOMAIN stay specific
+        # Catalog scope comes from the semantic decision; raw phrases like "what solutions" are not enough
+        # ("what solutions do you offer for education?" is a single-entity question).
+        is_catalog_scope = p2_scope in ["ALL", "ALL_PRODUCTS", "ALL_SOLUTIONS", "ALL_SERVICES", "CATALOG_SCOPE"] or (
+            not p2_qi and ("what products" in q_lower or "what solutions" in q_lower or "what services" in q_lower))
         is_exact_deterministic = (
             not has_specific_scope and (
                 intent_analysis.primary_intent in ["LIST", "COUNT", "GREETING"] or
                 "how many" in q_lower or "list all" in q_lower or q_lower in ["hi", "hello", "hey", "help"]
             )
-        )
+        ) or is_catalog_scope
 
         if is_exact_deterministic:
             det_response = get_deterministic_engine().generate_response(
@@ -746,7 +848,8 @@ class RAGService:
                 ent_score = 0.0
                 ent_alias = None
                 ent_clar = None
-            elif p2_ctx and p2_ctx.metrics.get("query_interpretation", {}).get("primary_entity_id"):
+            elif (p2_ctx and p2_ctx.metrics.get("query_interpretation", {}).get("primary_entity_id")
+                  and not p2_ctx.metrics["query_interpretation"].get("needs_clarification")):
                 qi_dict = p2_ctx.metrics["query_interpretation"]
                 raw_ent = qi_dict["primary_entity_id"]
                 res_entity = reg.entity_lookup.get(raw_ent, raw_ent)
@@ -812,6 +915,7 @@ class RAGService:
                 state["active_section"] = res_section
 
         route_path = router_res["explainability"]["route"]
+        curr_qi = p2_ctx.metrics.get("query_interpretation", {}) if (p2_ctx and hasattr(p2_ctx, "metrics") and isinstance(p2_ctx.metrics, dict)) else {}
         
         # Check if provider is Groq
         active_provider_name = config.LLM_PROVIDER.lower()
@@ -832,8 +936,8 @@ class RAGService:
             else:
                 compact_ctx = router_res.get("response", "")
 
-            curr_qi = p2_ctx.metrics.get("query_interpretation", {})
             curr_scope = curr_qi.get("answer_scope", "GENERAL")
+
             scope_mandate = ""
             if curr_scope and curr_scope != "GENERAL":
                 scope_mandate = f"\n\nSTRICT ANSWER SCOPE MANDATE:\nThe user is strictly asking for '{curr_scope}'. Restrict your answer strictly to this scope and do NOT list unrelated catalog solutions or products."
@@ -1059,17 +1163,47 @@ class RAGService:
         retrieval_start = time.time()
         search_domain = res_registry if res_registry else None
         
-        top_chunks = self.vector_store.query_hybrid(
+        req_sections = curr_qi.get("requested_sections", [res_section] if res_section else []) if isinstance(curr_qi, dict) else []
+        target_reg_types = curr_qi.get("target_registry_types", []) if isinstance(curr_qi, dict) else []
+        ans_scope = curr_qi.get("answer_scope", "GENERAL") if isinstance(curr_qi, dict) else "GENERAL"
+        p_ent_id = curr_qi.get("primary_entity_id") or res_entity
+
+        # Broad candidate retrieval from VectorStore
+        candidate_chunks = self.vector_store.query_hybrid(
             query_text=message,
             query_embedding=query_vector,
             intent=None,
-            top_k=config.TOP_K,
-            domain=search_domain
+            top_k=config.TOP_K * 2,
+            domain=search_domain,
+            requested_sections=req_sections
         )
         
+        # Bounded Composite Reranking & Scope Diversification
+        reranked_chunks = self.reranker.rerank(
+            query=message,
+            chunks=candidate_chunks,
+            top_n=config.RERANK_TOP_K,
+            domain_filter=search_domain,
+            requested_sections=req_sections,
+            target_entity_id=p_ent_id,
+            target_registry_types=target_reg_types,
+            answer_scope=ans_scope
+        )
+
+        # EvidenceGate Scope & Entity Compliance Validation (Triple-Validation)
+        ev_gate = get_evidence_gate()
+        valid_scope_chunks = ev_gate.validate_retrieved_evidence_scope(
+            chunks=reranked_chunks,
+            target_entity_id=p_ent_id,
+            answer_scope=ans_scope
+        )
+
+        if not valid_scope_chunks:
+            valid_scope_chunks = reranked_chunks or candidate_chunks
+
         unique_chunks = []
         seen_contents = set()
-        for chunk in top_chunks:
+        for chunk in valid_scope_chunks:
             norm_content = chunk["content"].strip().lower()
             if norm_content not in seen_contents:
                 seen_contents.add(norm_content)
@@ -1414,6 +1548,31 @@ class RAGService:
                 "builder_ms": 0.0,
                 "rag_ms": retrieval_time * 1000.0
             }
+        }
+
+    async def process_query(self, query: str, session_id: str = "default", model: str = config.MODEL_NAME) -> Dict[str, Any]:
+        """
+        Non-streaming RAG processing entrypoint.
+        Consolidates chat_stream chunks into a single response object.
+        """
+        full_text = ""
+        final_meta = {}
+        async for chunk in self.chat_stream(session_id=session_id, message=query, model=model):
+            if chunk.get("done"):
+                final_meta = chunk
+            else:
+                full_text += chunk.get("text", "")
+
+        return {
+            "answer": full_text.strip(),
+            "response": full_text.strip(),
+            "citations": final_meta.get("citations", []),
+            "suggested_questions": final_meta.get("suggested_questions", []),
+            "redirect": final_meta.get("redirect"),
+            "source": final_meta.get("source", "Unified RAG Engine"),
+            "verified": final_meta.get("verified", True),
+            "confidence": final_meta.get("confidence", 1.0),
+            "metrics": final_meta.get("metrics", {})
         }
 
     async def extract_preferences(self, query: str, response: str, session_id: str, model: str):

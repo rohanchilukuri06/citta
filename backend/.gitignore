@@ -106,3 +106,13 @@ memory/test_credentials.md
 # Mobile development
 android-sdk/frontend/node_modules/.cache/default-development/5.pack
 frontend/node_modules/.cache/default-development/5.pack
+
+# Runtime data: visitor conversations, questions and contact details (never commit)
+*.db-wal
+*.db-shm
+*.db-journal
+logs/semantic_decisions.jsonl
+# Generated caches and backups
+data/semantic_index_cache/
+knowledge/runtime/*.bak*
+__pycache__/

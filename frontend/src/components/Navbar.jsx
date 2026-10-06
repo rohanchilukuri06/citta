@@ -1,32 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Globe, ChevronDown, ArrowUpRight } from "lucide-react";
-import { NAV, BRAND } from "@/data/content";
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
+import { NAV } from "@/data/content";
+import ThemeToggle from "@/components/ThemeToggle";
 
-function NavLink({ item }) {
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+function MenuGroup({ item }) {
   const [open, setOpen] = useState(false);
-  const hasChildren = !!item.children?.length;
-
-  if (!hasChildren) {
-    return (
-      <Link
-        to={item.to}
-        data-testid={`nav-link-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-        className="text-sm text-white/85 hover:text-white transition-colors relative group py-2"
-      >
-        {item.label}
-        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-brand-light group-hover:w-full transition-all duration-300" />
-      </Link>
-    );
-  }
-
+  const wide = item.children.length > 4;
   return (
     <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
+        type="button"
         onClick={() => setOpen((v) => !v)}
-        data-testid={`nav-menu-${item.label.toLowerCase()}`}
-        className="text-sm text-white/85 hover:text-white transition-colors relative group inline-flex items-center gap-1 py-2"
+        aria-expanded={open}
+        data-testid={`nav-menu-${slug(item.label)}`}
+        className="inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium text-ink-soft hover:text-ink hover:bg-ink/5 transition-colors"
       >
         {item.label}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -34,24 +25,23 @@ function NavLink({ item }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: [0.2, 0.7, 0.2, 1] }}
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.18 }}
             className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50"
           >
-            <div className="glass-strong rounded-2xl p-3 min-w-[280px] shadow-2xl">
+            <div className={`card p-2.5 grid gap-1 ${wide ? "grid-cols-2 w-[540px]" : "w-[320px]"}`}>
               {item.children.map((c) => (
                 <Link
                   key={c.label}
                   to={c.to}
-                  className="group flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-white/6 transition-colors"
+                  data-accent={c.accent}
+                  className="group flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-accent/10 transition-colors"
                 >
-                  <div className="mt-1 h-1.5 w-1.5 rounded-full bg-brand-light shrink-0 group-hover:scale-125 transition-transform" />
-                  <div>
-                    <div className="text-white text-sm font-medium">{c.label}</div>
-                    {c.note && <div className="text-white/50 text-[11px] font-mono uppercase tracking-wider mt-0.5">{c.note}</div>}
-                  </div>
+                  <span className="mt-1.5 h-2.5 w-2.5 rounded-[4px] rotate-45 bg-accent shrink-0" />
+                  <span>
+                    <span className="block text-sm font-semibold text-ink group-hover:text-accent transition-colors">{c.label}</span>
+                    {c.note && <span className="block text-xs text-ink-muted mt-0.5">{c.note}</span>}
+                  </span>
                 </Link>
               ))}
             </div>
@@ -70,99 +60,90 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50" data-testid="site-navbar">
-      <motion.div
-        initial={{ y: -24, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1] }}
-        className="mx-auto mt-4 max-w-7xl px-4 sm:px-6"
-      >
-        {/* Outer row: logo left + pill right */}
-        <div className="flex items-center gap-4">
-
-          {/* ── Full logo — outside the pill ── */}
-          <Link to="/" data-testid="nav-brand" className="shrink-0 group">
-            <img
-              src="/assets/brand/logo-wide.png"
-              alt="CittaAI — Driven by Fixity"
-              className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
-              style={{ maxWidth: "240px", mixBlendMode: "screen" }}
-            />
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 btn btn-solid">Skip to main content</a>
+      <div className="container-x mt-3">
+        <div className={`flex items-center justify-between gap-4 rounded-full pl-4 pr-2 py-2 transition-all duration-300 ${scrolled ? "glass shadow-[var(--shadow-card)]" : "bg-transparent border border-transparent"}`}>
+          <Link to="/" data-testid="nav-brand" className="shrink-0" aria-label="CittaAI home">
+            <span className="block rounded-xl dark:bg-white dark:px-2 dark:py-0.5">
+              <img src="/assets/brand/logo-wide.png" alt="CittaAI — Driven by Fixity" className="h-11 w-auto object-contain mix-blend-multiply" />
+            </span>
           </Link>
 
-          {/* ── Nav pill ── */}
-          <div className={`flex flex-1 items-center justify-between rounded-full pl-5 pr-2 py-2 transition-all duration-300 ${
-            scrolled ? "glass-strong shadow-2xl" : "glass-dark"
-          }`}>
-            <nav className="hidden lg:flex items-center gap-7">
-              {NAV.primary.map((item) => <NavLink key={item.label} item={item} />)}
-            </nav>
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Main">
+            {NAV.primary.map((item) => (item.children?.length
+              ? <MenuGroup key={item.label} item={item} />
+              : (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  data-testid={`nav-link-${slug(item.label)}`}
+                  className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${pathname === item.to ? "text-accent bg-accent/10" : "text-ink-soft hover:text-ink hover:bg-ink/5"}`}
+                >
+                  {item.label}
+                </Link>
+              )))}
+          </nav>
 
-            <div className="hidden lg:flex items-center gap-2">
-              <button className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white px-3 py-2 rounded-full transition-colors" data-testid="nav-lang">
-                <Globe className="h-4 w-4" /> {NAV.language}
-              </button>
-              <Link to={NAV.cta.to} data-testid="nav-cta" className="btn-primary !py-2 !px-4 !text-[13px]">
-                {NAV.cta.label} <ArrowUpRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Link to={NAV.cta.to} data-testid="nav-cta" className="hidden sm:inline-flex btn btn-solid !h-10 !px-4 !text-[13px]">
+              {NAV.cta.label} <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
             <button
+              type="button"
               onClick={() => setOpen((v) => !v)}
               data-testid="nav-mobile-toggle"
-              className="lg:hidden h-10 w-10 rounded-full grid place-items-center border border-white/10 text-white"
-              aria-label="Menu"
+              className="lg:hidden h-10 w-10 rounded-full grid place-items-center border border-line/15 text-ink"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
-          </div>{/* end pill */}
-        </div>{/* end outer row */}
+          </div>
+        </div>
 
         <AnimatePresence>
           {open && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className="lg:hidden mt-2 rounded-2xl glass-strong p-4"
+            <motion.nav
+              initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+              className="lg:hidden mt-2 card p-3 max-h-[75vh] overflow-y-auto"
               data-testid="mobile-menu"
+              aria-label="Mobile"
             >
-              <div className="flex flex-col divide-y divide-white/5">
-                {NAV.primary.map((item) => (
-                  <div key={item.label} className="py-2">
-                    {item.children?.length ? (
-                      <details className="group">
-                        <summary className="flex items-center justify-between cursor-pointer text-white/90 py-2 list-none">
-                          <span className="font-medium">{item.label}</span>
-                          <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-                        </summary>
-                        <div className="pl-3 py-1 space-y-1">
-                          {item.children.map((c) => (
-                            <Link key={c.label} to={c.to} className="block text-sm text-white/70 hover:text-white py-1.5">
-                              {c.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </details>
-                    ) : (
-                      <Link to={item.to} className="block text-white/90 py-2 font-medium">{item.label}</Link>
-                    )}
-                  </div>
-                ))}
-                <Link to={NAV.cta.to} className="btn-primary justify-center mt-4">
-                  {NAV.cta.label}
-                </Link>
-              </div>
-            </motion.div>
+              {NAV.primary.map((item) => (
+                <div key={item.label} className="border-b border-line/10 last:border-0">
+                  {item.children?.length ? (
+                    <details className="group">
+                      <summary className="flex items-center justify-between cursor-pointer list-none py-3 px-2 font-semibold text-ink">
+                        {item.label}
+                        <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+                      </summary>
+                      <div className="pb-2">
+                        {item.children.map((c) => (
+                          <Link key={c.label} to={c.to} data-accent={c.accent} className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-accent/10">
+                            <span className="h-2 w-2 rotate-45 rounded-[3px] bg-accent" />
+                            <span className="text-sm text-ink-soft">{c.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </details>
+                  ) : (
+                    <Link to={item.to} className="block py-3 px-2 font-semibold text-ink">{item.label}</Link>
+                  )}
+                </div>
+              ))}
+              <Link to={NAV.cta.to} className="btn btn-solid w-full mt-3">{NAV.cta.label}</Link>
+            </motion.nav>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </header>
   );
 }

@@ -6,8 +6,8 @@
   "name": "Real Estate OS",
   "title": "Real Estate OS",
   "tagline": "One-Stop Platform for Real Estate Operations",
-  "overview": "Unify the entire lifecycle: listings \u2192 leads \u2192 site visits \u2192 agreements \u2192 post-sale \u2192 analytics.",
-  "description": "Unify the entire lifecycle: listings \u2192 leads \u2192 site visits \u2192 agreements \u2192 post-sale \u2192 analytics.",
+  "overview": "Unify the entire lifecycle: listings → leads → site visits → agreements → post-sale → analytics.",
+  "description": "Unify the entire lifecycle: listings → leads → site visits → agreements → post-sale → analytics.",
   "cta": "Talk to Sales",
   "url": "/solutions/real-estate-os",
   "search": {
@@ -546,7 +546,16 @@
       "description": "Analyze traffic sources, lead conversions, sales performance, ROI, and portfolio-wide business insights."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Listings Mgmt",
+    "Lead Tracking",
+    "Journey Map",
+    "Broker Network",
+    "ROI Analytics",
+    "E2E Lifecycle Mgmt",
+    "24/7 Automated Engagement",
+    "360° Portfolio View"
+  ],
   "use_cases": [
     "Listings Mgmt",
     "Lead Tracking",
@@ -563,6 +572,13 @@
     "last_updated": "2026-07-19",
     "source": "04_product_real_estate_os.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats"
+      },
+      "date": "2026-09-29"
+    }
   }
 }

@@ -38,8 +38,9 @@ class ConversationContextResolver:
         
         q_lower = ctx.normalized_query.lower().strip()
         
-        # 1. Multi-entity detection for session memory
-        if detected_entities and len(detected_entities) >= 2:
+        # 1. Multi-entity detection for session memory (only if explicit comparison keywords exist)
+        is_explicit_comparison = any(k in q_lower for k in ["compare", " vs ", "versus", "difference", "differ", "better than", "which one", "comparison"])
+        if is_explicit_comparison and detected_entities and len(detected_entities) >= 2:
             sess_state.recently_compared_entities = list(dict.fromkeys(detected_entities))
             for ent in detected_entities:
                 if ent not in sess_state.recent_entities:
@@ -47,11 +48,14 @@ class ConversationContextResolver:
             ctx.add_trace(
                 stage="ConversationContextResolver",
                 result=f"Multi-entity context set: {detected_entities}",
-                reason="Multiple entities detected in single query"
+                reason="Multiple entities detected in explicit comparison query"
             )
             ctx.conversation_state = conv_state
             ctx.session_state = sess_state
             return ctx
+        else:
+            # Clear stale multi-entity comparison state for single entity inquiries
+            sess_state.recently_compared_entities = []
 
         # 2. Section or Pronoun trigger over active entity
         has_pronoun = any(p in q_lower.split() or f" {p} " in f" {q_lower} " for p in PRONOUNS)

@@ -625,7 +625,7 @@ def migrate_leadership():
         "url": "/about",
         "search": {
             "primary_keywords": ["leadership", "leaders", "team", "who is the ceo"],
-            "secondary_keywords": ["kiran kumar", "founders", "cto", "coo", "leadership_info"],
+            "secondary_keywords": ["founders", "cto", "coo", "leadership_info"],
             "aliases": ["leaders", "team", "founder", "ceo", "cto", "coo"],
             "synonyms": ["founders", "management"]
         },

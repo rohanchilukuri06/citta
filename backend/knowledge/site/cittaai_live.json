@@ -1,0 +1,1559 @@
+{
+ "source": "https://cittaai.com",
+ "bundle": "https://cittaai.com/assets/index-BKYl7mUu.js",
+ "crawled": "2026-09-30",
+ "sitemap_pages": [
+  "https://cittaai.com/",
+  "https://cittaai.com/about",
+  "https://cittaai.com/contact",
+  "https://cittaai.com/recognition",
+  "https://cittaai.com/careers",
+  "https://cittaai.com/solutions/ecommerce",
+  "https://cittaai.com/solutions/real-estate",
+  "https://cittaai.com/solutions/pharma",
+  "https://cittaai.com/solutions/smart-cities",
+  "https://cittaai.com/services/ai-powered-martech/seo",
+  "https://cittaai.com/privacy-policy",
+  "https://cittaai.com/terms-of-service"
+ ],
+ "documents": [
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "overview",
+   "title": "Data Engineering — Real-time data pipelines",
+   "text": "Real-time data pipelines: Stream processing with minimal latency. Build resilient, low-latency data pipelines that power real-time analytics and AI applications. We handle the complexity of streaming data at scale.",
+   "url": "https://cittaai.com/services/data-engineering/real-time-data-pipelines",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "capabilities",
+   "title": "Data Engineering — Real-time data pipelines",
+   "text": "Real-time data pipelines features: Apache Kafka & Flink implementation; Real-time ETL/ELT; Stream processing architectures; Data quality monitoring",
+   "url": "https://cittaai.com/services/data-engineering/real-time-data-pipelines",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "benefits",
+   "title": "Data Engineering — Real-time data pipelines",
+   "text": "Real-time data pipelines benefits: {'title': 'Real-Time Insights', 'description': 'Make decisions on second-old data', 'icon': None}; {'title': 'Reliability', 'description': '99.99% uptime SLAs', 'icon': None}; {'title': 'Scalability', 'description': 'Handle petabytes of throughput', 'icon': None}",
+   "url": "https://cittaai.com/services/data-engineering/real-time-data-pipelines",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "overview",
+   "title": "Data Engineering — Cloud data warehouse",
+   "text": "Cloud data warehouse: Snowflake/BigQuery architecture. Design and implement modern cloud data warehouses that serve as the single source of truth for your enterprise. We optimize for performance, cost, and usability.",
+   "url": "https://cittaai.com/services/data-engineering/cloud-data-warehouse",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "capabilities",
+   "title": "Data Engineering — Cloud data warehouse",
+   "text": "Cloud data warehouse features: Snowflake / BigQuery / Redshift; Data modeling (Star/Snowflake schema); Cost optimization strategies; RBAC & innovative security",
+   "url": "https://cittaai.com/services/data-engineering/cloud-data-warehouse",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "benefits",
+   "title": "Data Engineering — Cloud data warehouse",
+   "text": "Cloud data warehouse benefits: {'title': 'Single Source of Truth', 'description': 'Unified data for all departments', 'icon': None}; {'title': 'Cost Efficency', 'description': 'Pay only for what you query', 'icon': None}; {'title': 'Performance', 'description': 'Sub-second query responses', 'icon': None}",
+   "url": "https://cittaai.com/services/data-engineering/cloud-data-warehouse",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "overview",
+   "title": "Data Engineering — Data lake architecture",
+   "text": "Data lake architecture: Scalable storage for unstructured data. Unlock the value of unstructured data. Our data lake solutions provide a secure, scalable repository for all your raw data, ready for machine learning and advanced analytics.",
+   "url": "https://cittaai.com/services/data-engineering/data-lake-architecture",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "capabilities",
+   "title": "Data Engineering — Data lake architecture",
+   "text": "Data lake architecture features: S3 / ADLS implementation; Delta Lake / Iceberg formats; Data cataloging & discovery; Automated lifecycle policies",
+   "url": "https://cittaai.com/services/data-engineering/data-lake-architecture",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "benefits",
+   "title": "Data Engineering — Data lake architecture",
+   "text": "Data lake architecture benefits: {'title': 'Flexibility', 'description': 'Store any data format', 'icon': None}; {'title': 'ML Ready', 'description': 'Direct access for data scientists', 'icon': None}; {'title': 'Low Cost', 'description': 'Economical long-term storage', 'icon': None}",
+   "url": "https://cittaai.com/services/data-engineering/data-lake-architecture",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "overview",
+   "title": "Data Engineering — Master data management",
+   "text": "Master data management: Golden record creation & governance. Ensure data consistency across your organization. We build Master Data Management (MDM) systems that create a trustworthy 'golden record' for your critical business entities.",
+   "url": "https://cittaai.com/services/data-engineering/master-data-management",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "capabilities",
+   "title": "Data Engineering — Master data management",
+   "text": "Master data management features: Entity resolution & matching; Data stewardship workflows; Reference data management; Data quality firewalls",
+   "url": "https://cittaai.com/services/data-engineering/master-data-management",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "data_engineering"
+   ],
+   "section": "benefits",
+   "title": "Data Engineering — Master data management",
+   "text": "Master data management benefits: {'title': 'Trusted Data', 'description': 'Eliminate duplicates and errors', 'icon': None}; {'title': 'Compliance', 'description': 'Meet regulatory requirements', 'icon': None}; {'title': '360 View', 'description': 'Complete view of customers/products', 'icon': None}",
+   "url": "https://cittaai.com/services/data-engineering/master-data-management",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "overview",
+   "title": "Enterprise & Agentic AI — Custom LLM fine-tuning",
+   "text": "Custom LLM fine-tuning: Tailored models for your domain. Adapt state-of-the-art Large Language Models to your specific industry language and use cases. We handle dataset preparation, fine-tuning, and evaluation.",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/custom-llm-fine-tuning",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "capabilities",
+   "title": "Enterprise & Agentic AI — Custom LLM fine-tuning",
+   "text": "Custom LLM fine-tuning features: Llama 3 / Mistral fine-tuning; Domain-specific dataset creation; Parameter-efficient tuning (LoRA); Model evaluation benchmarks",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/custom-llm-fine-tuning",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "benefits",
+   "title": "Enterprise & Agentic AI — Custom LLM fine-tuning",
+   "text": "Custom LLM fine-tuning benefits: {'title': 'Accuracy', 'description': 'Models that speak your language', 'icon': None}; {'title': 'Privacy', 'description': 'Keep data within your VPC', 'icon': None}; {'title': 'Control', 'description': 'Own your model weights', 'icon': None}",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/custom-llm-fine-tuning",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "overview",
+   "title": "Enterprise & Agentic AI — Multi-agent systems",
+   "text": "Multi-agent systems: Autonomous swarms for complex tasks. Deploy collaborative swarms of AI agents that can break down complex objectives, assign tasks, and execute workflows autonomously, mimicking human teamwork.",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/multi-agent-systems",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "capabilities",
+   "title": "Enterprise & Agentic AI — Multi-agent systems",
+   "text": "Multi-agent systems features: Autogen / CrewAI frameworks; Role-based agent design; Inter-agent communication protocols; Human-in-the-loop workflows",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/multi-agent-systems",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "benefits",
+   "title": "Enterprise & Agentic AI — Multi-agent systems",
+   "text": "Multi-agent systems benefits: {'title': 'Productivity', 'description': 'Automate entire departments', 'icon': None}; {'title': 'Complexity', 'description': 'Solve non-linear problems', 'icon': None}; {'title': 'Scalability', 'description': 'Spin up agents on demand', 'icon': None}",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/multi-agent-systems",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "overview",
+   "title": "Enterprise & Agentic AI — RAG solutions",
+   "text": "RAG solutions: Chat with your enterprise data. Ground your AI in reality with Retrieval Augmented Generation (RAG). We build systems that let users query your proprietary documents with high accuracy and source attribution.",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/rag-solutions",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "capabilities",
+   "title": "Enterprise & Agentic AI — RAG solutions",
+   "text": "RAG solutions features: Vector database integration; Hybrid search algorithms; Citation & source tracking; Document parsing pipelines",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/rag-solutions",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "benefits",
+   "title": "Enterprise & Agentic AI — RAG solutions",
+   "text": "RAG solutions benefits: {'title': 'Truthfulness', 'description': 'Eliminate hallucinations', 'icon': None}; {'title': 'Access', 'description': 'Unlock siloed knowledge', 'icon': None}; {'title': 'Security', 'description': 'Rbac-aware retrieval', 'icon': None}",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/rag-solutions",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "overview",
+   "title": "Enterprise & Agentic AI — Conversational AI",
+   "text": "Conversational AI: Voice & text agents. Create natural, human-like voice and text interfaces for your applications. Our conversational agents handle complex intent and maintain context over long interactions.",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/conversational-ai",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "capabilities",
+   "title": "Enterprise & Agentic AI — Conversational AI",
+   "text": "Conversational AI features: NLU / NLP pipeline design; Voice synthesis & recognition; Dialog state management; Omnichannel deployment",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/conversational-ai",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "enterprise_agentic_ai"
+   ],
+   "section": "benefits",
+   "title": "Enterprise & Agentic AI — Conversational AI",
+   "text": "Conversational AI benefits: {'title': 'Experience', 'description': 'Natural, fluid interactions', 'icon': None}; {'title': 'Efficiency', 'description': 'Deflect routine calls', 'icon': None}; {'title': '24/7', 'description': 'Always-on service', 'icon': None}",
+   "url": "https://cittaai.com/services/enterprise-and-agentic-ai/conversational-ai",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "overview",
+   "title": "AI Strategy & Advisory — AI readiness assessment",
+   "text": "AI readiness assessment: Technical & cultural audit. Before you build, know where you stand. We evaluate your data infrastructure, talent, and processes to determine your readiness for AI adoption.",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/ai-readiness-assessment",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "capabilities",
+   "title": "AI Strategy & Advisory — AI readiness assessment",
+   "text": "AI readiness assessment features: Data maturity scoring; Infrastructure audit; Skills gap analysis; ROI projection modeling",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/ai-readiness-assessment",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "benefits",
+   "title": "AI Strategy & Advisory — AI readiness assessment",
+   "text": "AI readiness assessment benefits: {'title': 'Clarity', 'description': 'Know exactly where to start', 'icon': None}; {'title': 'Risk Reduction', 'description': 'Avoid costly failed pilots', 'icon': None}; {'title': 'Roadmap', 'description': 'Clear path to value', 'icon': None}",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/ai-readiness-assessment",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "overview",
+   "title": "AI Strategy & Advisory — Strategic roadmap",
+   "text": "Strategic roadmap: Phased implementation plans. We build comprehensive, multi-year AI roadmaps that align with your business goals, ensuring every initiative drives tangible value.",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/strategic-roadmap",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "capabilities",
+   "title": "AI Strategy & Advisory — Strategic roadmap",
+   "text": "Strategic roadmap features: Milestone planning; Resource allocation; Technology selection; KPI definition",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/strategic-roadmap",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "benefits",
+   "title": "AI Strategy & Advisory — Strategic roadmap",
+   "text": "Strategic roadmap benefits: {'title': 'Alignment', 'description': 'Business & Tech in sync', 'icon': None}; {'title': 'Momentum', 'description': 'Quick wins to build trust', 'icon': None}; {'title': 'Vision', 'description': 'Long-term competitive advantage', 'icon': None}",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/strategic-roadmap",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "overview",
+   "title": "AI Strategy & Advisory — Use case prioritization",
+   "text": "Use case prioritization: Impact vs effort matrix. Not all AI ideas are equal. We help you identify and prioritize high-impact, low-effort use cases that demonstrate value quickly.",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/use-case-prioritization",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "capabilities",
+   "title": "AI Strategy & Advisory — Use case prioritization",
+   "text": "Use case prioritization features: Feasibility workshops; Value estimation; Risk assessment; Pilot definitions",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/use-case-prioritization",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "benefits",
+   "title": "AI Strategy & Advisory — Use case prioritization",
+   "text": "Use case prioritization benefits: {'title': 'Focus', 'description': 'Work on what matters', 'icon': None}; {'title': 'Success Rate', 'description': 'Higher probability of success', 'icon': None}; {'title': 'Budget', 'description': 'Efficient capital allocation', 'icon': None}",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/use-case-prioritization",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "overview",
+   "title": "AI Strategy & Advisory — AI governance",
+   "text": "AI governance: Ethics, safety & compliance. Scale AI responsibly. We establish governance frameworks that ensure your AI systems are ethical, compliant, and secure.",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/ai-governance",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "capabilities",
+   "title": "AI Strategy & Advisory — AI governance",
+   "text": "AI governance features: Ethical guidelines; Model monitoring frameworks; Compliance auditing (EU AI Act); Bias detection",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/ai-governance",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_strategy"
+   ],
+   "section": "benefits",
+   "title": "AI Strategy & Advisory — AI governance",
+   "text": "AI governance benefits: {'title': 'Trust', 'description': 'Build automated trust', 'icon': None}; {'title': 'Safety', 'description': 'Prevent reputational damage', 'icon': None}; {'title': 'Compliance', 'description': 'Stay ahead of regulations', 'icon': None}",
+   "url": "https://cittaai.com/services/ai-strategy-and-advisory/ai-governance",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Branding & Strategy: AI Brand Architecture & Strategy Engine. This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system. Our AI models map category white-spaces, predict demand curves, and simulate positioning scenarios before a single asset is produced. We deploy automated audience segmentation, narrative testing workflows, and message scoring systems that learn from engagement and revenue outcomes. Instead of static brand decks, you receive a continuously optimized brand operating system: value proposition logic, offer architecture, pricing perception modelling, and a measurable communication framework. Traditional strategy relies on opinions and workshops; our approach runs on behavioural evidence, predictive intelligence, and iterative validation. The result is a brand that adapts to market shifts in real time, aligns every channel to a single growth thesis, and accelerates revenue velocity with fewer wasted cycles.",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Branding & Strategy features: Predictive positioning analysis using competitor and intent intelligence; AI-driven customer persona clusters based on behaviour + conversion data; Narrative and messaging scorecards with automated iteration loops; Offer architecture design using elasticity and conversion likelihood modelling; Brand tone system generation with consistency enforcement workflows; Funnel-aligned brand guidelines for multi-channel execution; Quarterly strategy recalibration powered by performance signals",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Branding & Strategy process: 1. Discovery & Signal Ingest: We ingest data from search, competitors, and audience behavior to map the market landscape. 2. Predictive Modeling: AI simulates positioning scenarios and demand curves to identify high-value opportunities. 3. Strategy Formulation: We build the core brand operating system: value proposition, offer architecture, and messaging. 4. Iterative Validation: Continuous testing and refinement based on real-world engagement and revenue signals.",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Q: How is this different from traditional branding? A: We don't just guess; we use data. Our strategies are built on behavioral evidence and predictive intelligence, not just creative opinions.",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Q: What data sources do you use? A: We analyze search intent, competitor messaging, audience behavior, conversion patterns, and sentiment analysis.",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Q: How long does the strategy process take? A: Unlike traditional agencies that take months, our initial strategy sprint is typically completed in 2-3 weeks.",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Branding & Strategy case study — Luxury Real Estate – Brand Acceleration Engine: AI-led positioning map; Demand forecasting and audience segmentation; Narrative scoring framework. Result: 62%+ increase in qualified enquiries in 45 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Branding & Strategy",
+   "text": "Branding & Strategy case study — Healthcare Services – Trust Conversion Engine: Authority-led messaging architecture; Sentiment intelligence and objections modelling; Conversion probability scoring. Result: 2.4x consultation bookings in 60 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/branding-and-strategy",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Social Media Marketing: Autonomous Social Growth Engine. Social media is treated as a real-time signal laboratory, not a posting calendar. Our system monitors audience micro-behaviours—watch time, saves, taps, replies, profile actions—and trains prediction models to identify what will scale before it trends. We deploy generative content pipelines that produce multiple creative angles per theme, then automatically test hooks, pacing, and CTA variants through controlled release cycles. Behaviour tracking feeds a continuous optimization loop: formats evolve weekly, messaging adapts daily, and distribution decisions are guided by performance probability—not guesswork. Traditional SMM depends on “best practices”; our SMM runs on experimentation engines, audience modelling, and automated creative iteration. We build growth loops through community triggers, UGC capture systems, and retention sequences that turn attention into repeat exposure. The outcome is measurable: higher reach quality, faster creative learning, and compounding engagement that translates into leads and revenue.",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Social Media Marketing features: Predictive content planning based on trend + audience intent signals; Automated hook and caption generation with performance scoring; Multi-variant creative testing system (formats, CTAs, pacing); Behavioural analytics dashboard (saves, shares, watch-time, clicks); Community growth loops and UGC harvesting automations; Retargeting audiences built from engagement micro-events; Weekly creative intelligence reports and next-action automation",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Social Media Marketing process: 1. Signal Analysis: We monitor watch time, shares, and engagement to identify trending topics and formats. 2. Generative Production: Our AI pipelines create multiple creative variants (hooks, visuals, captions) per theme. 3. A/B Testing: We automatically test variants to find the highest-performing content before scaling. 4. Growth Loop: Winning content is amplified, and insights are fed back into the model for the next cycle.",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Q: Do you post manually or is it automated? A: We use a hybrid approach. Strategy and creativity are human-led, while scheduling, posting, and initial engagement are often automated for efficiency.",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Q: How do you capture our brand voice? A: We build a custom 'Brand Tone System' that learns your voice and enforces consistency across all generated content.",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Q: What metrics define success? A: We focus on 'Reach Quality' and 'Conversion Actions'—not just vanity metrics like likes. We track saves, shares, and clicks.",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Social Media Marketing case study — Premium Skincare – Social Demand Engine: AI creative variant generator; Engagement-based audience modelling; Automated experimentation framework. Result: 310%+ reach growth | 4.1x website clicks in 30 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Social Media Marketing",
+   "text": "Social Media Marketing case study — B2B SaaS – Pipeline Attention Engine: Founder-led narrative system; Predictive post scoring and distribution optimization; Behaviour-triggered retargeting loop. Result: 78%+ increase in inbound demos in 60 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/social-media-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Content & Design: Generative Content & Design Intelligence Studio. Content becomes a production system—designed to learn and compound. We generate assets through an AI-guided pipeline that aligns brand voice, audience intent, and conversion psychology. Our models map content gaps, predict high-impact topics, and create multi-format outputs (static, short-form, long-form, landing content) with consistency enforcement. Design is engineered using attention heatmap logic and emotion-response modelling—layouts are built to control scroll behaviour, comprehension, and click probability. Every asset is tagged, tracked, and scored by performance metrics, then fed back into the system to improve future outputs. Traditional content teams create “what looks good”; we generate what is statistically likely to win. The result is a scalable content engine that produces high-volume, premium-quality assets with faster iteration, stronger narrative coherence, and measurable business outcomes—without creative fatigue or inconsistency.",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Content & Design features: Topic intelligence and content gap prediction system; Brand voice model and consistency enforcement workflows; Multi-format generative content production (reels, carousels, blogs, ads); Design system optimized for attention flow and conversion triggers; Automated A/B creative iteration and winner amplification; Asset tagging + performance scoring for continuous learning; Conversion-aligned content calendars built from predictive signals",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Content & Design process: 1. Topic Intelligence: We identify high-impact topics based on search intent and content gap analysis. 2. Asset Generation: Our system produces multi-format assets (images, copy, layouts) tailored to your brand. 3. Performance Scoring: Every asset is scored based on predicted performance before it goes live. 4. Feedback Loop: Real-time performance data refines future content generation for continuous improvement.",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Q: Is the content generic AI output? A: No. We use AI as a tool for scale, but every piece is engineered with brand-specific training and human creative oversight.",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Q: Can we edit the content before publishing? A: Absolutely. You have full approval rights. Our system learns from your edits to minimize future corrections.",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Q: How do you ensure visual consistency? A: We implement strict design systems and style guides within our generation models to ensure pixel-perfect brand alignment.",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Content & Design case study — D2C Nutrition – Conversion Content Engine: Intent-based topic mining; Generative creative pipeline; Attention-optimized design framework. Result: 2.9x add-to-cart rate from content-led landing flows in 45 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Content & Design",
+   "text": "Content & Design case study — Education Services – Authority Content Engine: Narrative sequencing system; Automated script + carousel generation; Performance-based creative scoring. Result: 180%+ increase in lead submissions in 30 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/content-and-design",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "SEO: Predictive SEO Compounding Engine. SEO is executed as an algorithmic advantage—not a checklist. We build predictive keyword ecosystems by analysing intent clusters, competitor authority patterns, and conversion pathways. Our system auto-generates topic maps, internal linking architectures, and content briefs that target ranking probability, not just volume. Machine learning models forecast which pages will win based on SERP volatility, content depth requirements, and authority gaps—then prioritize execution for maximum compounding impact. Technical SEO is monitored continuously through automated crawls, anomaly detection, and performance regression alerts. Traditional SEO reacts monthly; our SEO adapts weekly through predictive insights and automated optimization loops. We combine behavioural tracking (dwell time, scroll depth, CTR) with content refinement workflows to increase relevance signals over time. The result is durable visibility, rising authority, and consistent inbound lead generation driven by an intelligence system that learns from search behaviour and business outcomes.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "SEO features: Predictive keyword + intent clustering and opportunity forecasting; Automated topic maps, content briefs, and semantic coverage models; Internal linking architecture generation for authority flow; Continuous technical SEO monitoring with anomaly detection; Behaviour-driven content optimization (CTR, dwell time, scroll depth); SERP volatility tracking and rapid response update workflows; Monthly compounding growth report with next-best actions",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "SEO process: 1. Intent Clustering: We group keywords by user intent to target entire topic clusters, not just single terms. 2. Topic Mapping: We generate comprehensive content briefs and site architectures to maximize authority. 3. Content Optimization: Existing and new content is optimized for relevance, readability, and conversion. 4. Technical Monitoring: Continuous crawls detect and fix technical issues that could hinder performance.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "Q: How fast will I see rankings improve? A: While SEO is a long-term game, our predictive approach often yields quicker 'quick wins' in 3-4 months, with compounding growth thereafter.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "Q: Do you do link building? A: Yes, but we focus on 'Authority Flow'—earning high-quality, relevant links rather than spammy, low-value citations.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "Q: Is this 'Black Hat' SEO? A: Never. We strictly adhere to search engine guidelines. Our advantage comes from data density and execution speed, not tricks.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "SEO case study — Legal Services – Organic Acquisition Engine: Intent cluster mapping; Predictive content prioritization; Automated technical monitoring. Result: 3.6x organic leads in 90 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — SEO",
+   "text": "SEO case study — Home Interiors – Local Discovery Engine: Location-intent content grid; Behaviour-led content refinement loop; Authority flow internal linking system. Result: 240%+ growth in non-branded organic traffic in 75 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "PPC Advertising: AI Performance Advertising Optimization Engine. Paid media becomes a self-optimizing revenue machine when AI governs decisions. We build predictive bidding and budget allocation models that prioritize conversion probability and marginal ROI, not vanity metrics. Our system generates ad variations at scale—headlines, visuals, angles, and CTAs—then runs automated testing cycles to identify winners faster than manual optimization. Behaviour tracking connects ad engagement to on-site actions, enabling micro-segment retargeting and funnel-stage personalization. We deploy anomaly detection to prevent budget leakage, automated negative targeting refinement, and creative fatigue prediction to maintain performance stability. Traditional PPC teams adjust campaigns; our engine continuously recalibrates based on real-time signals. The result is lower acquisition costs, stronger conversion rates, and performance consistency even in volatile markets—powered by automation, machine learning optimization, and rapid creative iteration.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "PPC Advertising features: Predictive budget allocation and bid optimization workflows; Multi-variant ad creative generation and automated testing; Funnel-stage audience modelling and micro-segment retargeting; Conversion path analytics and drop-off prevention experiments; Creative fatigue prediction and rotation automation; Anomaly detection for spend waste and performance regression; Weekly performance intelligence report with next-best actions",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "PPC Advertising process: 1. Audience Modeling: We build high-intent audience segments based on first-party data and behavioral signals. 2. Creative Generation: We produce hundreds of ad variants to test different angles, hooks, and visuals. 3. Automated Bidding: Our algorithms adjust bids in real-time to maximize conversion probability at the lowest cost. 4. Performance Scaling: Budget is automatically reallocated to the top-performing campaigns and creatives.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "Q: What platforms do you support? A: We manage campaigns across Google, Meta (Facebook/Instagram), LinkedIn, and emerging platforms like TikTok.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "Q: How does AI improve ROI? A: AI analyzes thousands of data points per second to make smarter bidding decisions than any human could, reducing wasted spend.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "Q: What is the recommended minimum budget? A: We generally recommend a starting media budget of $2k/month to generate sufficient data for our AI models to optimize effectively.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "PPC Advertising case study — Luxury Jewellery – Profit Efficiency Engine: High-intent audience modelling; Automated creative testing framework; Conversion probability bidding. Result: 34% lower CPA | 2.2x ROAS in 30 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — PPC Advertising",
+   "text": "PPC Advertising case study — B2B Consulting – Pipeline Acquisition Engine: Lead-quality scoring loop; Behaviour-triggered retargeting; Anomaly-based budget reallocation. Result: 41% increase in qualified leads in 45 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/ppc-advertising",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "E-commerce Growth: E-commerce Revenue Intelligence & Growth Loops. E-commerce growth is engineered through predictive conversion science and automated retention systems. We track behaviour at every micro-step—product views, scroll depth, cart actions, checkout drop-offs—and use machine learning to identify friction points and high-value customer patterns. Our system predicts purchase likelihood and deploys personalized interventions: product recommendations, offer sequencing, and dynamic messaging across channels. We implement growth loops that convert buyers into repeat purchasers through automated post-purchase journeys, replenishment triggers, and loyalty activation workflows. Traditional e-commerce marketing runs campaigns; our approach builds an always-on revenue system that learns from every transaction. Generative AI accelerates creative production for product storytelling, bundles, and seasonal drops, while analytics models measure revenue impact per action. The outcome is higher conversion rates, stronger average order value, and compounding customer lifetime value driven by intelligence, not manual effort.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "E-commerce Growth features: Behaviour tracking across product → cart → checkout journeys; Conversion friction detection and automated experimentation; Predictive purchase intent modelling and personalization rules; Dynamic offer and bundle architecture for AOV optimization; Post-purchase automation loops for retention and repeat sales; Customer segmentation by LTV and churn probability; Weekly revenue intelligence dashboard and optimization roadmap",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "E-commerce Growth process: 1. Behavioral Tracking: We track every user interaction to understand where users drop off and why. 2. Friction Analysis: AI identifies usability issues and conversion blockers in the customer journey. 3. Intervention: We deploy personalized offers, pop-ups, or emails to recover lost sales. 4. Retention Loops: Post-purchase automation turns one-time buyers into loyal, repeat customers.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "Q: Does this work for Shopify stores? A: Yes, our systems integrate seamlessly with Shopify, WooCommerce, Magento, and custom stacks.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "Q: How do you increase Lifetime Value (LTV)? A: By automating post-purchase journeys— upsells, cross-sells, and replenishment reminders—timed perfectly to customer needs.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "Q: Is customer data kept private? A: Absolutely. We adhere to strict data privacy standards (GDPR/CCPA compliant) and use data solely for optimization.",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "E-commerce Growth case study — D2C Apparel – Checkout Conversion Engine: Funnel friction modelling; Predictive offer sequencing; Automated creative iteration loop. Result: 27%+ uplift in conversion rate in 40 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — E-commerce Growth",
+   "text": "E-commerce Growth case study — Beauty Commerce – LTV Expansion Engine: Churn prediction segmentation; Post-purchase automation journeys; Personalized recommendation framework. Result: 1.8x repeat purchase rate in 90 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/ecommerce-growth",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "WhatsApp Marketing Automation: Conversational Commerce Automation Engine. WhatsApp becomes a full-funnel revenue channel when it’s engineered as a conversational system—not manual broadcasting. We build automated, behaviour-triggered journeys that respond to user intent in real time: enquiry capture, qualification, product education, follow-ups, abandoned-cart recovery, and post-purchase retention. Our AI models classify conversation intent, predict drop-off risk, and trigger the next best message—personalized by segment, context, and funnel stage. Generative workflows craft dynamic scripts that adapt tone and content based on user responses while enforcing brand consistency. Traditional WhatsApp marketing relies on blasts and human follow-up; our approach deploys intelligent sequences, automated routing, and performance learning loops. Every message is tracked for response rate, conversion impact, and revenue attribution. The result is faster lead conversion, reduced response latency, and scalable customer engagement that feels personalized—without operational overhead.",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "WhatsApp Marketing Automation features: Intent classification and automated conversation routing; Funnel-stage journeys: lead → nurture → conversion → retention; Abandoned cart and drop-off recovery sequences; Dynamic script generation with brand consistency enforcement; Lead qualification scoring and CRM-ready data capture; Behaviour-based segmentation and next-best-message triggers; Performance dashboards (reply rate, conversion rate, revenue attribution)",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "WhatsApp Marketing Automation process: 1. Flow Design: We map out conversational journeys for different user intents (support, sales, recovery). 2. Integration: We connect WhatsApp API with your CRM and e-commerce platforms. 3. Automated Triggering: Messages are sent automatically based on user actions (e.g., abandoned cart). 4. Performance Tracking: We monitor open rates, reply rates, and conversion value to optimize scripts.",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "Q: Will this feel like spam to my customers? A: No. We prioritize relevance and context. Messages are triggered by user actions, making them helpful, not intrusive.",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "Q: Can the bot handle complex queries? A: Our AI agents handle 80% of common queries. For complex issues, the conversation is seamlessly handed off to a human agent.",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "Q: Is WhatsApp API expensive? A: It depends on volume, but the ROI is typically very high. We help optimize message templates to keep costs manageable.",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "WhatsApp Marketing Automation case study — D2C Electronics – Recovery Revenue Engine: Abandonment intent detection; Automated follow-up sequencing; Conversion-trigger message optimization. Result: ₹18 Lakhs+ recovered revenue in 60 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — WhatsApp Marketing Automation",
+   "text": "WhatsApp Marketing Automation case study — Healthcare Clinics – Appointment Automation Engine: Lead qualification scoring; Intent-based conversation flows; No-show reduction messaging system. Result: 53%+ increase in confirmed appointments in 45 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/whatsapp-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "overview",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Influencer Marketing: AI Influencer Intelligence & Amplification Engine. Influencer marketing becomes predictable when selection and execution are driven by data—not popularity. We use AI to identify creator-audience fit through engagement authenticity signals, audience overlap mapping, content resonance scoring, and purchase-intent alignment. Our system forecasts expected outcomes per creator and recommends optimized collaboration structures: UGC pipelines, affiliate loops, product drops, or story-driven campaigns. We deploy automated outreach, contract workflows, and content briefing systems that preserve brand consistency while allowing creator-native performance. Post-launch, we track creator-specific conversion pathways and refine future selections using performance learning loops. Traditional influencer campaigns gamble on reach; our approach operates as an intelligence engine optimizing for measurable outcomes: conversions, CAC efficiency, and brand lift. The result is a scalable creator ecosystem that compounds—where every collaboration improves the next one through predictive modelling and continuous optimization.",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Influencer Marketing features: Creator discovery via audience-fit and authenticity scoring; Predictive performance forecasting per creator and campaign type; Automated outreach, briefing, approvals, and compliance workflows; UGC production loops and content repurposing systems; Conversion attribution tracking per creator and content asset; Fraud and engagement anomaly detection; Creator portfolio optimization for compounding ROI",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "workflows",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Influencer Marketing process: 1. Discovery & Matching: We use AI to scan thousands of creators to find those with genuine audience fit. 2. Campaign Forecasting: We predict the expected reach, engagement, and conversion for each creator. 3. Outreach & Briefing: We automate the negotiation and briefing process to ensure clear deliverables. 4. Performance Attribution: We track sales and conversions back to specific creators to measure true ROI.",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Q: How do you verify influencers are real? A: Our system analyzes follower growth patterns, engagement quality, and audience demographics to flag fake followers.",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Q: Do you handle payments to influencers? A: Yes, we manage the entire financial workflow, ensuring creators are paid on time and contracts are honored.",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Q: What if an influencer underperforms? A: We use performance clauses in contracts and continually optimize the mix. Our predictive model helps minimize this risk upfront.",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Influencer Marketing case study — Luxury Beauty – Creator Conversion Engine: Audience-fit scoring model; UGC automation pipeline; Predictive campaign forecasting. Result: 3.1x ROAS | 120+ UGC assets in 45 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "case_studies",
+   "title": "AI-Powered Marketing — Influencer Marketing",
+   "text": "Influencer Marketing case study — Fitness Supplements – Community Growth Engine: Creator clustering and overlap mapping; Affiliate loop automation; Performance learning optimization framework. Result: 68% lower CAC | 2.6x monthly order volume in 90 days",
+   "url": "https://cittaai.com/services/ai-powered-martech/influencer-marketing",
+   "kind": "service_page"
+  },
+  {
+   "entities": [
+    "company_info"
+   ],
+   "section": "overview",
+   "title": "Why CittaAI",
+   "text": "Fragmented Data: Siloed data lakes and warehouses create blind spots. Your data potential is locked behind incompatible formats and legacy systems. (solution: Unified Ingestion Engine) AI Stuck in Pilots: 80% of enterprise AI projects fail to scale beyond the proof-of-concept stage due to infrastructure gaps. (solution: MLOps Pipeline) Siloed Systems: Legacy ERPs and CRMs remain disconnected siloes, blocking intelligent workflows and decision making. (solution: Universal API Layer) Manual Overhead: High-value talent is wasted on repetitive data entry instead of focusing on strategic growth and innovation. (solution: Autonomous Agents) Automation Without Autonomy: Traditional automation is brittle and rule-based. True scalability requires systems that can reason and adapt. (solution: Reasoning Engine)",
+   "url": "https://cittaai.com/",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "company_info"
+   ],
+   "section": "overview",
+   "title": "Why CittaAI",
+   "text": "Data Engineering: Modern data architectures, real-time pipelines, analytics foundations, and AI-ready ecosystems. Enterprise & Agentic AI: Enterprise AI applications, autonomous agents, copilots, ERP/LMS/Pharma/GovTech systems. AI Strategy & Advisory: AI readiness, roadmap, governance, responsible AI, and CoE setup. 360° AI-Powered Digital Marketing: AI-driven acquisition, engagement, conversion, and revenue optimization.",
+   "url": "https://cittaai.com/",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "company_info"
+   ],
+   "section": "overview",
+   "title": "Why CittaAI",
+   "text": "RAG-Based Intelligence: AI trained on documents, SOPs, policies, databases. Secure, permission-based, factual responses. Enterprise-grade knowledge systems. AI Chat Agents: Customer support, internal helpdesks, sales, workflows. Always available, always learning conversational AI. Voice AI Agents: Inbound & outbound calls, reminders, onboarding. Natural voice interactions that feel human. Video AI Agents: Training, onboarding, education, sales enablement. Interactive video experiences powered by AI.",
+   "url": "https://cittaai.com/",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "company_info"
+   ],
+   "section": "overview",
+   "title": "Why CittaAI",
+   "text": "MarkTech Products: AI-Driven Growth, Engineered for Scale. Unify customer data and automate personalized engagement. Agentic AI Platforms: Deployment-ready autonomous agents for customer support and sales. LMS & Education: Adaptive learning platforms for institutions. Pharma AI Suite: Compliance & batch review automation. GovTech Applications: Secure public sector digital infrastructure.",
+   "url": "https://cittaai.com/",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "ecommerce_os"
+   ],
+   "section": "overview",
+   "title": "E-Commerce OS",
+   "text": "E-Commerce OS: AI-Native 'Vibe Coding' Platform for E-commerce with AI-powered, prompt-driven store creation. AI-Native 'Vibe Coding' Platform ; Built-In Marketing & Lead Generation Engine ; Intelligent Sales & Revenue Automation",
+   "url": "https://cittaai.com/solutions/ecommerce",
+   "kind": "solutions_list"
+  },
+  {
+   "entities": [
+    "real_estate_os"
+   ],
+   "section": "overview",
+   "title": "Real Estate OS",
+   "text": "Real Estate OS: AI-powered lead, inventory, pricing, and demand intelligence for property ecosystems. Unified Property Intelligence In both domains, decisions flow directly into sales, marketing, and operational systems. System-level intelligence replaces isolated analytics, creating truly intelligent urban and property ecosystems.",
+   "url": "https://cittaai.com/solutions/real-estate",
+   "kind": "solutions_list"
+  },
+  {
+   "entities": [
+    "pharma_os"
+   ],
+   "section": "overview",
+   "title": "Pharma & Healthcare OS",
+   "text": "Pharma & Healthcare OS: Reimagining how pharmaceutical and healthcare operations function at their core. Inventory Optimisation ; Demand Forecasting ; Compliance Alerts ; Operational Decisions This is not about adding AI features to existing systems—it's about reimagining how pharmaceutical and healthcare operations function at their core.",
+   "url": "https://cittaai.com/solutions/pharma",
+   "kind": "solutions_list"
+  },
+  {
+   "entities": [
+    "smart_cities_os"
+   ],
+   "section": "overview",
+   "title": "Smart Cities OS",
+   "text": "Smart Cities OS: AI-driven insights from IoT, mobility, utilities, and citizen data for smarter city planning. Urban Intelligence Platform In both domains, decisions flow directly into sales, marketing, and operational systems. System-level intelligence replaces isolated analytics, creating truly intelligent urban and property ecosystems.",
+   "url": "https://cittaai.com/solutions/smart-cities",
+   "kind": "solutions_list"
+  },
+  {
+   "entities": [
+    "company_info"
+   ],
+   "section": "overview",
+   "title": "Why CittaAI",
+   "text": "AI Centre of Excellence + Product: We don't just ship code; we build scalable platforms. Our 'Centre of Excellence' model ensures specific architectural standards. Agentic-first Architecture: Every system designed for autonomy. Cognitive architectures that reason, plan, and execute workflows with minimal oversight. Strong Data → AI → Autonomy Foundation: Structured approach from data infrastructure through to intelligent automation. Good AI starts with great data engineering. Proven across Enterprise, Pharma, FMCG, GovTech: Battle-tested across diverse industries. We understand the unique challenges and compliance requirements of each sector. Built for Scale, Security, and Measurable ROI: Every engagement tied to business outcomes. We optimize for revenue impact and operational efficiency, not just novelty.",
+   "url": "https://cittaai.com/",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "SEO services",
+   "text": "Page 1 Rankings: Be discoverable across traditional and emerging search experiences. AI-Ready Strategy: Prepare your content for AI-powered search and discovery. Data-Driven SEO: Turn search data into actionable growth opportunities. Technical Excellence: Build a strong foundation for crawling, indexing, and performance. Content That Answers: Create useful, authoritative content built around real search intent. Reporting and Analytics: Track rankings, traffic, visibility, and conversions with clear, actionable SEO insights.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "capabilities",
+   "title": "SEO services",
+   "text": "On-Page SEO: Optimize content, headings, meta tags, and internal links for better rankings. Off-Page SEO: Build authority with quality backlinks, digital PR, and strategic outreach. Technical SEO: Fix crawlability, indexing, site speed, and technical issues that impact rankings. Local SEO: Improve local visibility and reach customers searching for your business nearby. Ecommerce SEO: Optimize product and category pages to increase visibility, traffic, and sales. Mobile SEO: Optimize your website for mobile speed, usability, and search visibility across devices. GEO – Generative Engine Optimization: Optimize your brand and content to improve visibility across AI-powered search and generative engines. AEO – Answer Engine Optimization: Structure content to provide clear, authoritative answers and increase visibility in answer-driven search. AIO – AI Optimization: Strengthen your digital presence to improve how AI platforms understand, surface, and recommend your brand. Shopify SEO: Strengthen your Shopify store with technical, content, and on-site SEO. WordPress SEO: Optimize your WordPress website for speed, search visibility, and performance. SEO Analytics & Reporting: Track rankings, organic traffic, visibility, and conversions with actionable SEO insights.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "site_cards"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: What's included in CittaAI's SEO packages? A: CittaAI's SEO packages typically include a technical audit, on-page optimization, content strategy, backlink building, and monthly performance reporting — scoped around your specific goals rather than a fixed, one-size-fits-all bundle.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: Which is the best SEO company in Hyderabad? A: CittaAI is recognized as a leading SEO company in Hyderabad, delivering AI-powered SEO, AEO, and GEO strategies that drive rankings, traffic, and measurable business growth.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: How is CittaAI different from a traditional SEO agency? A: Unlike agencies focused only on Google rankings, CittaAI also optimizes for AI-powered search — helping your brand get cited by tools like ChatGPT and Gemini through AEO and GEO, alongside standard SEO fundamentals.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: What reports will I actually receive each month? A: You'll receive monthly reports built on real Google Search Console and GA4 data — covering keyword rankings, organic traffic, click-through rates, and conversions — not vanity metrics or inflated projections.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: Do I need a long-term contract to work with you? A: CittaAI offers flexible engagement models, since SEO is a long-term investment but shouldn't require you to be locked into rigid multi-year contracts to see if the partnership is working.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: My website already has some traffic — do I still need SEO? A: Yes — existing traffic doesn't mean you're capturing your full search potential; an audit often reveals untapped keyword opportunities, technical issues suppressing rankings, or competitors outranking you on high-intent terms you're missing entirely.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: Do you provide local SEO services for Hyderabad-based businesses? A: Yes, CittaAI provides dedicated local SEO for Hyderabad businesses, including Google Business Profile optimization, geo-targeted content, local citations, and location-based schema markup to help you rank in \"near me\" searches and Google Maps.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: Is SEO still worth it with AI tools like ChatGPT changing search? A: SEO is more important than ever, since the same technical and content foundation that ranks you on Google is also what determines whether AI tools cite and recommend your brand — ignoring SEO now risks losing visibility across both channels.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: Are your SEO services customized? A: Yes, every SEO strategy at CittaAI is tailored to your industry, target audience, and business goals — there's no one-size-fits-all package, since keyword opportunity and competitive landscape differ for every business.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "ai_powered_marketing"
+   ],
+   "section": "faq",
+   "title": "SEO — FAQ",
+   "text": "Q: Do you integrate SEO with AEO and GEO for AI-powered search? A: Yes, CittaAI integrates traditional SEO with AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization) — ensuring your brand is not only ranked on Google, but also cited and recommended by AI assistants like ChatGPT and Gemini.",
+   "url": "https://cittaai.com/services/ai-powered-martech/seo",
+   "kind": "seo_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Vinay Velivela — CEO of Fixity Technologies. Visionary leader driving innovation and growth.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Saladi Chandra Balaji — Co-Founder & COO. Leading operations and strategic vision.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Akhil Reddy — CEO. Architecting enterprise AI solutions.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Ganesh Gandhi Vadalani — CMO. Driving global marketing strategies.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Harish Nerati — Operations and Sales Head. Optimizing operations and sales growth.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Aravind Reddy — E-Commerce Head. Specializing in digital commerce platforms.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "leadership_info"
+   ],
+   "section": "leadership",
+   "title": "Leadership",
+   "text": "Parvatha Mohan — Business Development Head. Expanding strategic partnerships.",
+   "url": "https://cittaai.com/about",
+   "kind": "about_page"
+  },
+  {
+   "entities": [
+    "ecommerce_os"
+   ],
+   "section": "overview",
+   "title": "MarkTech Products",
+   "text": "MarkTech Products (Industry Operating System): The autonomous brain for online retail. From AI-powered store creation to intelligent sales automation—everything you need to dominate e-commerce.",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "ecommerce_os"
+   ],
+   "section": "benefits",
+   "title": "MarkTech Products",
+   "text": "MarkTech Products results: 35% Average Conversion Lift; 60% Faster Store Launch; 3.5x Marketing ROI; 24/7 AI Support Coverage",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "ecommerce_os"
+   ],
+   "section": "capabilities",
+   "title": "MarkTech Products",
+   "text": "AI-Native 'Vibe Coding' Platform (AI-powered, prompt-driven store creation): Build beautiful, high-converting stores using natural language. No coding required. No/low-code experience with AI-generated UI, content, and workflows; Modular, API-extensible platform built for rapid MVP launches; Prompt-to-product: describe what you want, AI builds it; Pre-built templates optimized for conversion",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "ecommerce_os"
+   ],
+   "section": "capabilities",
+   "title": "MarkTech Products",
+   "text": "Built-In Marketing & Lead Gen (AI-powered multi-channel campaign creation): Automate your entire marketing funnel from awareness to conversion. Auto-generated creatives, ads, and landing pages; End-to-end journey tracking with ROI dashboards; Multi-channel orchestration across Meta, Google, and more; AI-optimized bidding and budget allocation",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "ecommerce_os"
+   ],
+   "section": "capabilities",
+   "title": "MarkTech Products",
+   "text": "Intelligent Sales Automation (Automated follow-ups across WhatsApp & SMS): Convert more visitors into customers with AI-powered sales agents. AI sales agents for qualification, support, and order help; Behavior-based offers with cart recovery workflows; Intelligent upsell and cross-sell recommendations; Automated review collection and social proof",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "enterprise_ai_os"
+   ],
+   "section": "overview",
+   "title": "Agentic AI Platforms",
+   "text": "Agentic AI Platforms (Autonomous Brains for Business): Deployment-ready autonomous agents for customer support, sales, and internal operations. Reimagining human-AI collaboration.",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "enterprise_ai_os"
+   ],
+   "section": "benefits",
+   "title": "Agentic AI Platforms",
+   "text": "Agentic AI Platforms results: 85% Task Automation Rate; 70% Lower Operational Costs; 3ms Average Response Time; 1M+ Daily Decisions",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "enterprise_ai_os"
+   ],
+   "section": "capabilities",
+   "title": "Agentic AI Platforms",
+   "text": "Autonomous Sales Agents (The ultimate growth-engine): Agents that hunt, nurture, and close leads without intervention. Real-time prospect research and qualification; Hyper-personalized outreach across channels; Dynamic negotiation and objection handling; Seamless CRM integration and data logging",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "enterprise_ai_os"
+   ],
+   "section": "capabilities",
+   "title": "Agentic AI Platforms",
+   "text": "Universal Support Swarms (Beyond the chatbot): Multi-agent systems that solve complex customer issues collaboratively. Intelligent ticket classification and routing; Self-healing technical support workflows; Multilingual support in 50+ languages; Integration with internal knowledge bases",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "enterprise_ai_os"
+   ],
+   "section": "capabilities",
+   "title": "Agentic AI Platforms",
+   "text": "Strategic Decision Engines (AI that thinks, then acts): Agents that analyze business data and suggest or execute strategic moves. Market signal monitoring and alert systems; Competitor move analysis and counter-strategy; Supply chain risk detection and mitigation; Executive-level reporting and forecasting",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "education_os"
+   ],
+   "section": "overview",
+   "title": "LMS & Education",
+   "text": "LMS & Education (Adaptive Learning Systems): Adaptive learning platforms for institutions that personalize the student journey at scale using sovereign AI models.",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "education_os"
+   ],
+   "section": "benefits",
+   "title": "LMS & Education",
+   "text": "LMS & Education results: 40% Engagement Increase; 92% Student Satisfaction; 2x Knowledge Retention; 15min Teacher Time Saved/Day",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "education_os"
+   ],
+   "section": "capabilities",
+   "title": "LMS & Education",
+   "text": "Adaptive Learning Paths (Truly personalized education): AI that adjusts content based on real-time student performance and style. Dynamic difficulty adjustment (DDA); Personalized content recommendation; Micro-milestone tracking and nudges; Identification of learning gaps",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "education_os"
+   ],
+   "section": "capabilities",
+   "title": "LMS & Education",
+   "text": "Institutional Intelligence (The operational cockpit): A centralized view of academic and operational health for administrators. Student success prediction and early warnings; Resource allocation optimization; Compliance and accreditation tracking; Placement and career trajectory mapping",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "education_os"
+   ],
+   "section": "capabilities",
+   "title": "LMS & Education",
+   "text": "AI Teaching Assistants (24/7 learning support): Assistants that grade, tutor, and answer student queries instantly. Automated grading and feedback loops; Context-aware tutoring and explanations; Discussion forum moderation; Administrative task automation",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "pharma_os"
+   ],
+   "section": "overview",
+   "title": "Pharma AI Suite",
+   "text": "Pharma AI Suite (Industry Operating System): This is not about adding AI features to existing systems—it's about reimagining how pharmaceutical and healthcare operations function at their core.",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "pharma_os"
+   ],
+   "section": "benefits",
+   "title": "Pharma AI Suite",
+   "text": "Pharma AI Suite results: 30% Inventory Cost Reduction; 95% Forecast Accuracy; 100% Compliance Rate; 40% Faster Decisions",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "pharma_os"
+   ],
+   "section": "capabilities",
+   "title": "Pharma AI Suite",
+   "text": "Inventory Optimisation (AI-driven stock management): Ensure the right products are available at the right time across your supply chain. Real-time inventory visibility; AI-powered demand-supply matching; Automated reorder point optimization; Expiry management and FIFO compliance",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "pharma_os"
+   ],
+   "section": "capabilities",
+   "title": "Pharma AI Suite",
+   "text": "Demand Forecasting (Predictive supply planning): Anticipate market needs with high-accuracy demand predictions. ML-based demand prediction models; Seasonal and trend analysis; New product launch forecasting; Promotional impact modeling",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "pharma_os"
+   ],
+   "section": "capabilities",
+   "title": "Pharma AI Suite",
+   "text": "Compliance Alerts (Automated regulatory monitoring): Stay compliant with automated monitoring and proactive alerts. Real-time regulatory change tracking; Automated compliance documentation; Audit trail management; License monitoring",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "smart_cities_os"
+   ],
+   "section": "overview",
+   "title": "GovTech Applications",
+   "text": "GovTech Applications (Industry Operating System): AI-driven insights from IoT, mobility, utilities, and citizen data for smarter city planning. Create truly intelligent urban ecosystems.",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "smart_cities_os"
+   ],
+   "section": "benefits",
+   "title": "GovTech Applications",
+   "text": "GovTech Applications results: 25% Traffic Reduction; 30% Energy Savings; 40% Response Time; 1M+ Citizens Served",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "smart_cities_os"
+   ],
+   "section": "capabilities",
+   "title": "GovTech Applications",
+   "text": "Unified City Data Platform (AI-driven insights from IoT): Consolidate all urban data sources into a single intelligent platform. Real-time data ingestion from IoT sensors; Cross-domain data correlation; Citizen sentiment integration; Open data APIs",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "smart_cities_os"
+   ],
+   "section": "capabilities",
+   "title": "GovTech Applications",
+   "text": "Smart Mobility Intelligence (Traffic & transport planning): Reduce congestion and improve urban mobility with AI-driven insights. Real-time traffic flow optimization; Predictive congestion management; Public transit demand forecasting; Parking availability prediction",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  },
+  {
+   "entities": [
+    "smart_cities_os"
+   ],
+   "section": "capabilities",
+   "title": "GovTech Applications",
+   "text": "Utility & Resource Mgmt (Energy, water, and waste): Maximize resource efficiency across all city utilities. Smart grid load balancing; Water distribution optimization; Waste collection route optimization; Energy consumption forecasting",
+   "url": "https://cittaai.com/solutions",
+   "kind": "industry_page"
+  }
+ ]
+}

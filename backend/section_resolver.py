@@ -91,16 +91,24 @@ SECTION_SYNONYMS: Dict[str, List[str]] = {
 
 def resolve_sections_dynamic(
     query: str,
-    entity_data: Optional[Dict[str, Any]],
-    registry_meta: Optional[Dict[str, Any]],
+    entity_data: Optional[Dict[str, Any]] = None,
+    registry_meta: Optional[Dict[str, Any]] = None,
     active_section: Optional[str] = None,
     intent: Optional[str] = None
 ) -> List[str]:
     """
     Multi-section Resolver:
-    Identifies ALL requested sections in a query (e.g. 'company, mission, and vision').
-    Returns an ordered list of matched sections.
+    Delegates to QueryIntelligenceEngine for schema-aware aspect section mapping.
     """
+    try:
+        from query_intelligence_engine import get_query_intelligence_engine
+        qi = get_query_intelligence_engine()
+        interp = qi.analyze_query(query)
+        if interp.requested_sections:
+            return interp.requested_sections
+    except Exception as e:
+        logger.warning(f"Section resolver delegation to QueryIntelligenceEngine notice: {e}")
+
     q_lower = query.lower()
     matched_sections = []
     
@@ -121,12 +129,6 @@ def resolve_sections_dynamic(
                     
         if hit and sec_name not in matched_sections:
             matched_sections.append(sec_name)
-            
-    # Give explicit sub-sections priority over generic 'overview'
-    if len(matched_sections) > 1 and "overview" in matched_sections and any(s in matched_sections for s in ["benefits", "features", "how_it_works", "mission", "vision", "case_studies"]):
-        matched_sections.remove("overview")
-        if "company" in q_lower or "about" in q_lower:
-            matched_sections.insert(0, "overview")
 
     return matched_sections if matched_sections else ["overview"]
 

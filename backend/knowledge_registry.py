@@ -143,10 +143,11 @@ class KnowledgeRegistry:
                 self.registry_by_capability[cap.id] = cap_entry
                 self.registry_by_capability[cap.title.lower()] = cap_entry
                 for kw in cap.keywords:
-                    if len(kw) > 8 and kw.lower() not in ["strategy", "marketing", "data", "design", "analytics", "systems"]:
+                    if (len(kw.split()) >= 2 or len(kw) > 12) and kw.lower() not in ["strategy", "marketing", "data", "design", "analytics", "systems", "communication", "management"]:
                         self.registry_by_capability[kw.lower()] = cap_entry
                 for alias in cap.aliases:
-                    self.registry_by_capability[alias.lower()] = cap_entry
+                    if (len(alias.split()) >= 2 or len(alias) > 12) and alias.lower() not in ["communication", "strategy", "marketing", "data", "design", "analytics", "systems"]:
+                        self.registry_by_capability[alias.lower()] = cap_entry
                     
                 for feat in cap.features:
                     feat_entry = {"feature": feat, "capability": cap, "parent": obj}
@@ -227,7 +228,7 @@ class KnowledgeRegistry:
                 "description": company_obj.description,
                 "vision": "Empower global enterprises with autonomous cognitive operating systems.",
                 "mission": "Bridge research-grade AI to enterprise scale with security, governance, and measurable ROI.",
-                "founder": "Kiran Kumar"
+                "ceo": "Akhil Reddy"
             }
         
         # products
@@ -335,17 +336,6 @@ class KnowledgeRegistry:
         # 3. Add Leadership members
         lead_obj = self.registry_by_id.get("leadership_info")
         
-        # Add Kiran Kumar (Founder & CEO) legacy/canonical entity
-        self.entities["founder"] = {
-            "id": "founder",
-            "name": "Kiran Kumar",
-            "title": "Founder & CEO",
-            "description": "CittaAI Founder and Chief Executive officer.",
-            "aliases": ["kiran", "kiran kumar", "founder", "ceo"],
-            "type": "leadership",
-            "route": "/about"
-        }
-
         if your_lead_obj := lead_obj:
             self.entities["leadership_info"] = {
                 "id": "leadership_info",
@@ -414,7 +404,9 @@ class KnowledgeRegistry:
                     self.alias_lookup[a_clean] = ent_id
                     self.aliases[a_clean] = ent_id
                 for kw in search_data.primary_keywords:
-                    self.keyword_lookup[self._clean_key(kw)] = ent_id
+                    clean_kw = self._clean_key(kw)
+                    self.keyword_lookup[clean_kw] = ent_id
+                    self.alias_lookup[clean_kw] = ent_id
                 for kw in search_data.secondary_keywords:
                     self.keyword_lookup[self._clean_key(kw)] = ent_id
             
@@ -451,11 +443,10 @@ class KnowledgeRegistry:
         self.aliases[self._clean_key("cittaai")] = "company_info"
         self.aliases[self._clean_key("citta")] = "company_info"
         self.aliases[self._clean_key("company")] = "company_info"
-        self.aliases[self._clean_key("founder")] = "founder"
-        self.aliases[self._clean_key("ceo")] = "founder"
-        self.aliases[self._clean_key("cto")] = "akhil_reddy"
+        # Akhil Reddy is CEO (owner-confirmed, matches cittaai.com); no CTO or sole founder is published
+        self.aliases[self._clean_key("founder")] = "leadership_info"
+        self.aliases[self._clean_key("ceo")] = "akhil_reddy"
         self.aliases[self._clean_key("coo")] = "saladi_chandra_balaji"
-        self.aliases[self._clean_key("kiran kumar")] = "founder"
         self.aliases[self._clean_key("vinay velivela")] = "vinay_velivela"
         self.aliases[self._clean_key("vinay")] = "vinay_velivela"
         self.aliases[self._clean_key("akhil")] = "akhil_reddy"
@@ -463,8 +454,10 @@ class KnowledgeRegistry:
 
         # Domain concept mappings for solutions & products
         domain_mappings = {
-            "martech_360": ["martech 360", "martech-360", "martech", "martech 360 service", "branding & strategy", "branding strategy", "ai brand architecture & strategy engine", "ai brand architecture and strategy engine", "ai-powered marketing solutions", "ai powered marketing solutions"],
-            "pharma_os": ["pharma", "pharmaceutical", "pharmaceuticals", "hospital", "hospitals", "medical", "clinic", "clinics", "healthcare os", "healthtech", "health tech"],
+            "martech_360": ["martech 360", "martech-360", "martech 3600", "martech3600", "martech", "martech 360 service", "branding & strategy", "branding strategy", "ai brand architecture & strategy engine", "ai brand architecture and strategy engine", "ai-powered marketing solutions", "ai powered marketing solutions"],
+            # hospital/clinic/medical terms removed 2026-09-29: Pharma OS content is pharma QA/compliance only
+            # (see metadata.content_decisions in knowledge/registry/new/solution_pharma_os.json)
+            "pharma_os": ["pharma", "pharmaceutical", "pharmaceuticals", "healthcare os", "healthcare", "health care", "health care os", "health care sector", "healthcare sector", "health care industry", "healthcare industry"],
             "education_os": ["education", "college", "colleges", "institute", "institutes", "institution", "institutions", "university", "universities", "school", "schools", "academic", "academics", "edtech"],
             "real_estate_os": ["real estate os", "realestate os", "construction", "property", "properties", "realty", "builder", "builders", "broker", "brokers", "housing"],
             "ecommerce_os": ["ecommerce", "e-commerce", "retail", "retailers", "online store", "shopping", "merchant", "merchants"],
@@ -535,6 +528,8 @@ class KnowledgeRegistry:
         self.unified_vocabulary[self._clean_key("ecommerce")] = "ecommerce_os"
         self.unified_vocabulary[self._clean_key("pharma")] = "pharma_os"
         self.unified_vocabulary[self._clean_key("healthcare")] = "pharma_os"
+        self.unified_vocabulary[self._clean_key("health care")] = "pharma_os"
+        self.unified_vocabulary[self._clean_key("health care os")] = "pharma_os"
         self.unified_vocabulary[self._clean_key("smart city")] = "smart_cities_os"
         self.unified_vocabulary[self._clean_key("smart cities")] = "smart_cities_os"
         self.unified_vocabulary[self._clean_key("smart cities services")] = "smart_cities_os"
@@ -736,13 +731,33 @@ class KnowledgeRegistry:
     def get_entity(self, entity_id: str) -> Optional[Dict[str, Any]]:
         if not entity_id:
             return None
-        eid = entity_id.lower().strip()
-        if eid in ["company", "citta", "cittaai", "about"]:
+        eid = str(entity_id).lower().strip().replace(" ", "_")
+        if eid in ["company", "citta", "cittaai", "about", "cittaai_company", "company_v1"]:
             eid = "company_info"
+        elif eid == "healthcare_os":
+            eid = "pharma_os"
+        elif eid == "realty_os":
+            eid = "real_estate_os"
+
+        # 1. Direct canonical entity match
         if eid in self.entities:
             return self.entities[eid]
+
+        # 2. Check entity_lookup
+        clean_key = self._clean_key(entity_id)
+        target_id = self.entity_lookup.get(clean_key) or self.entity_lookup.get(eid)
+        if target_id and target_id in self.entities:
+            return self.entities[target_id]
+
+        # 3. Check aliases map
+        target_id = self.aliases.get(clean_key) or self.aliases.get(eid)
+        if target_id and target_id in self.entities:
+            return self.entities[target_id]
+
+        # 4. Check registry_by_id
         if eid in self.registry_by_id:
             return self._to_legacy_dict(self.registry_by_id[eid])
+
         return None
 
     def get_all_entities(self) -> List[Dict[str, Any]]:

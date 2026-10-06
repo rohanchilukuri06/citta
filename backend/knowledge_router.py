@@ -177,11 +177,10 @@ def route_query(
 
     # 3. Person-Specific Executive Intercepts
     person_role_map = {
-        "ceo": "CEO", "chief executive officer": "CEO", "vinay": "CEO", "vinay velivela": "CEO",
-        "cto": "CTO", "chief technology officer": "CTO", "akhil": "CTO", "akhil reddy": "CTO",
+        "ceo": "CEO", "chief executive officer": "CEO", "akhil": "CEO", "akhil reddy": "CEO",
         "coo": "COO", "chief operating officer": "COO", "saladi": "COO", "saladi chandra balaji": "COO",
         "cmo": "CMO", "chief marketing officer": "CMO", "ganesh": "CMO",
-        "founder": "FOUNDER", "kiran": "FOUNDER", "kiran kumar": "FOUNDER"
+        "founder": "FOUNDER"
     }
     target_role = None
     for r_key, r_val in person_role_map.items():
@@ -205,7 +204,7 @@ def route_query(
         
         # Direct fallback for leadership roles if builder yields None
         if target_role in ["CEO", "FOUNDER"]:
-            resp_text = "The CEO of CittaAI / Fixity Technologies is **Vinay Velivela**."
+            resp_text = "The CEO of CittaAI is **Akhil Reddy**."
         elif target_role == "CTO":
             resp_text = "The Co-Founder & CTO of CittaAI is **Akhil Reddy**."
         elif target_role == "COO":
@@ -213,7 +212,7 @@ def route_query(
         elif target_role == "CMO":
             resp_text = "The CMO of CittaAI is **Ganesh Gandhi Vadalani**."
         else:
-            resp_text = "CittaAI Leadership Team: Vinay Velivela (CEO), Saladi Chandra Balaji (Co-Founder & COO), Akhil Reddy (Co-Founder & CTO)."
+            resp_text = "CittaAI Leadership Team: Akhil Reddy (CEO), Saladi Chandra Balaji (Co-Founder & COO), Ganesh Gandhi Vadalani (CMO)."
 
         return {
             "response": resp_text,

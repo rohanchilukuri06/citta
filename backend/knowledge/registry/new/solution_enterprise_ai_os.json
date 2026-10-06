@@ -5,7 +5,7 @@
   "slug": "enterprise-ai-os",
   "name": "Enterprise AI OS",
   "title": "Enterprise AI OS",
-  "tagline": "Build, Evaluate, Deploy \u2014 Production-Ready AI Systems",
+  "tagline": "Build, Evaluate, Deploy — Production-Ready AI Systems",
   "overview": "The complete platform for RAG, agents, and cognitive workflows.",
   "description": "The complete platform for RAG, agents, and cognitive workflows.",
   "cta": "Talk to Sales",
@@ -15,7 +15,7 @@
       "enterprise ai os"
     ],
     "secondary_keywords": [
-      "build, evaluate, deploy \u2014 production-ready ai systems"
+      "build, evaluate, deploy — production-ready ai systems"
     ],
     "aliases": [
       "enterprise-ai-os",
@@ -581,7 +581,16 @@
       "description": "Monitor token usage, response quality, latency metrics, and audit logs continuously across enterprise deployments."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Fast Deployment",
+    "Enterprise Controls",
+    "Measurable Eval",
+    "PoC to Production",
+    "Integration Ready",
+    "Advanced Agents",
+    "10x Faster Development",
+    "99% Enterprise Uptime"
+  ],
   "use_cases": [
     "Fast Deployment",
     "Enterprise Controls",
@@ -598,6 +607,13 @@
     "last_updated": "2026-07-19",
     "source": "08_product_enterprise_ai_os.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats"
+      },
+      "date": "2026-09-29"
+    }
   }
 }

@@ -74,12 +74,15 @@ const map = new Map([
   ["Fine-Tuning & RL", Cpu],
 ]);
 
-export default function CapabilityIcon({ label, className = "h-9 w-9" }) {
-  const Icon = map.get(label) || Sparkles;
+export function iconFor(label) {
+  return map.get(label) || map.get(`${label} `) || Sparkles;
+}
+
+export default function CapabilityIcon({ label, className = "" }) {
+  const Icon = iconFor(label);
   return (
-    <div className={`rounded-xl grid place-items-center ${className}`}
-      style={{ background: "color-mix(in oklab, var(--accent) 12%, transparent)", border: "1px solid color-mix(in oklab, var(--accent) 25%, transparent)" }}>
-      <Icon className="h-4 w-4" style={{ color: "var(--accent)" }} />
+    <div className={`icon-tile ${className}`}>
+      <Icon className="h-[18px] w-[18px]" />
     </div>
   );
 }

@@ -1,0 +1,127 @@
+[
+  {
+    "id": "HOLDOUT_001",
+    "question": "I run a college with 5000 students. What can CittaAI do for us?",
+    "category": "solutions_education"
+  },
+  {
+    "id": "HOLDOUT_002",
+    "question": "We are a regional hospital network looking for patient management AI solutions. How do you help?",
+    "category": "solutions_healthcare"
+  },
+  {
+    "id": "HOLDOUT_003",
+    "question": "I operate a real estate brokerage firm. What automation tools do you offer?",
+    "category": "solutions_realty"
+  },
+  {
+    "id": "HOLDOUT_004",
+    "question": "How can WhatsApp help my business run bulk notification and customer support campaigns?",
+    "category": "product_whatsapp"
+  },
+  {
+    "id": "HOLDOUT_005",
+    "question": "Who founded CittaAI and who leads the company today?",
+    "category": "company_leadership"
+  },
+  {
+    "id": "HOLDOUT_006",
+    "question": "What industry recognition, press, or awards has CittaAI received recently?",
+    "category": "company_awards"
+  },
+  {
+    "id": "HOLDOUT_007",
+    "question": "we are an educational institution looking for AI solutions for student attendance and grading",
+    "category": "solutions_education"
+  },
+  {
+    "id": "HOLDOUT_008",
+    "question": "what do u offer for medical institutes and clinics?",
+    "category": "solutions_healthcare"
+  },
+  {
+    "id": "HOLDOUT_009",
+    "question": "Can your platform manage property listings, lead capture, and client follow-ups for realtors?",
+    "category": "solutions_realty"
+  },
+  {
+    "id": "HOLDOUT_010",
+    "question": "How do I get in touch with your sales team or request a demo?",
+    "category": "company_contact"
+  },
+  {
+    "id": "HOLDOUT_011",
+    "question": "Tell me about Education OS capabilities for universities and polytechnics.",
+    "category": "product_education"
+  },
+  {
+    "id": "HOLDOUT_012",
+    "question": "What core features does Healthcare OS provide for outpatient departments?",
+    "category": "product_healthcare"
+  },
+  {
+    "id": "HOLDOUT_013",
+    "question": "Does Realty OS support multi-agent commissions and site-visit tracking?",
+    "category": "product_realty"
+  },
+  {
+    "id": "HOLDOUT_014",
+    "question": "Can WhatsApp Marketing platform integrate with our existing CRM?",
+    "category": "product_whatsapp"
+  },
+  {
+    "id": "HOLDOUT_015",
+    "question": "What AI strategy consulting services does CittaAI provide for enterprises?",
+    "category": "services_advisory"
+  },
+  {
+    "id": "HOLDOUT_016",
+    "question": "Can you write a Python script to scrape stock market data from Yahoo Finance?",
+    "category": "out_of_domain"
+  },
+  {
+    "id": "HOLDOUT_017",
+    "question": "What is the best recipe for baking sourdough bread at home?",
+    "category": "out_of_domain"
+  },
+  {
+    "id": "HOLDOUT_018",
+    "question": "What products does CittaAI offer across different industries?",
+    "category": "catalog_overview"
+  },
+  {
+    "id": "HOLDOUT_019",
+    "question": "Give me a summary of your flagship enterprise OS solutions.",
+    "category": "catalog_overview"
+  },
+  {
+    "id": "HOLDOUT_020",
+    "question": "How does Education OS handle examination scheduling and result generation?",
+    "category": "product_education"
+  },
+  {
+    "id": "HOLDOUT_021",
+    "question": "Does CittaAI have ISO certification or data security compliance standard support?",
+    "category": "company_security"
+  },
+  {
+    "id": "HOLDOUT_022",
+    "question": "What companies or institutions have implemented CittaAI solutions?",
+    "category": "company_clients"
+  },
+  {
+    "id": "HOLDOUT_023",
+    "question": "Can I broadcast automated WhatsApp messages to 10,000 customers at once?",
+    "category": "product_whatsapp"
+  },
+  {
+    "id": "HOLDOUT_024",
+    "question": "How does Healthcare OS ensure HIPAA compliance or patient data privacy?",
+    "category": "product_healthcare"
+  },
+  {
+    "id": "HOLDOUT_025",
+    "question": "What is the main value proposition of CittaAI compared to generic AI tools?",
+    "category": "company_overview"
+  }
+]

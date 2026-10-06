@@ -19,14 +19,14 @@ logger = logging.getLogger(__name__)
 
 # General Catalog Query Patterns
 GENERAL_CATALOG_PATTERNS = [
-    "what products do you offer", "what products", "list products", "show products", "our products", "products offered",
+    "what products do you offer", "what products", "list products", "list all products", "show products", "show all products", "our products", "products offered", "what products do you have", "what products are available", "what are the products",
     "marketing products", "marketing product", "any marketing products", "do they have any marketing products", "do you have any marketing products", "do you have marketing products", "what marketing products",
     "marketing services", "marketing service", "any marketing services", "do they have any marketing services", "do you have any marketing services", "do you have marketing services", "what marketing services",
-    "what services do you offer", "what services", "list services", "show services", "our services", "services offered",
+    "what services do you offer", "what services", "list services", "list all services", "show services", "show all services", "our services", "services offered", "what services do you have", "what services are available",
     "what are the services provided", "services provided", "srevices provided", "what are the srevices provided",
     "what services are provided", "srevices", "serivces", "services",
-    "what solutions do you offer", "what solutions", "list solutions", "show solutions", "our solutions", "solutions offered",
-    "what do you offer", "list all offerings", "show all solutions", "what platforms"
+    "what solutions do you offer", "what solutions", "list solutions", "list all solutions", "show solutions", "show all solutions", "our solutions", "solutions offered", "what solutions do you have", "what solutions are available",
+    "what do you offer", "list all offerings", "show all solutions", "what platforms", "list all products and services", "list all solutions"
 ]
 
 GENERIC_ENTITIES = {"company_info", "faq_general", "contact", "location"}
@@ -34,10 +34,23 @@ GENERIC_ENTITIES = {"company_info", "faq_general", "contact", "location"}
 def check_general_catalog_query(query: str) -> bool:
     q_lower = query.lower().strip()
     
+    # Normalize common typos for catalog detection
+    norm_q = q_lower
+    for typo, fix in [
+        ("prodcuts", "products"), ("prodcut", "product"), ("prducts", "products"), ("prduct", "product"),
+        ("porducts", "products"), ("porduct", "product"), ("srevices", "services"), ("serivces", "services"),
+        ("servises", "services"), ("solutins", "solutions"), ("soltuions", "solutions")
+    ]:
+        norm_q = norm_q.replace(typo, fix)
+
+    cat_count = sum(1 for kw in ["product", "solution", "service", "team", "leadership", "case", "contact", "achievement", "award"] if kw in norm_q)
+    if cat_count >= 2 or "products and services" in norm_q or "everything you offer" in norm_q or "list out all" in norm_q:
+        return True
+
     # Exclude queries referencing specific enterprise offerings or domain topics
     specific_keywords = [
         "real estate", "realestate", "construction", "property", "realty", "builder", "broker", "housing",
-        "pharma", "pharmaceutical", "hospital", "medical", "clinic", "healthcare", "healthtech",
+        "pharma", "pharmaceutical", "hospital", "medical", "clinic", "healthcare", "health care", "healthtech",
         "education", "college", "institute", "university", "school", "academic", "edtech",
         "ecommerce", "e-commerce", "retail", "online store", "shopping", "merchant",
         "smart cities", "urban", "municipality", "city management",
@@ -107,17 +120,31 @@ class Phase2Orchestrator:
         )
         ctx.add_trace("Initialization", "SUCCESS", f"Context created for query: '{original_query}'")
 
-        # 2. Entity Resolution & Confidence Check
+        # 2. Entity Resolution & Confidence Check (Target inquiry clauses first, e.g. "what about X")
         all_matched_entities = self._extract_all_entities(normalized_query)
+        target_query = normalized_query
+        about_match = re.search(r"(?:what|how|then what|tell me)\s+about\s+(.+)", normalized_query, re.IGNORECASE)
+        if about_match:
+            target_query = about_match.group(1).strip()
+
         detected_entity_id, conf, matched_alias, _ = resolve_entity_dynamic(
-            query=normalized_query,
+            query=target_query,
             registry_entities=self.reg.entities,
             entity_lookup=self.reg.entity_lookup,
             alias_index=self.reg.aliases,
             unified_vocabulary=self.reg.unified_vocabulary
         )
+        if not detected_entity_id:
+            detected_entity_id, conf, matched_alias, _ = resolve_entity_dynamic(
+                query=normalized_query,
+                registry_entities=self.reg.entities,
+                entity_lookup=self.reg.entity_lookup,
+                alias_index=self.reg.aliases,
+                unified_vocabulary=self.reg.unified_vocabulary
+            )
 
         # Phase 5: Query Intelligence Engine Intercept for Semantic Category Mismatch & Intent Understanding
+        semantic_decision = None
         try:
             from query_intelligence_engine import get_query_intelligence_engine
             qi_engine = get_query_intelligence_engine()
@@ -140,8 +167,15 @@ class Phase2Orchestrator:
             ctx.metrics["category_mismatch"] = qi.category_mismatch
             ctx.metrics["user_category_term"] = qi.category_term_used_by_user
 
-            # If Query Intelligence detects entity with high confidence (or handles category mismatch), override detected entity
-            if qi.primary_entity_id and (conf < 0.90 or qi.category_mismatch):
+            semantic_decision = qi
+            # The semantic decision is authoritative once accepted (benchmarked in evaluation/semantic_benchmark.py);
+            # the legacy alias resolver only stands when the decision asks for clarification.
+            if qi.needs_clarification:
+                ctx.add_trace("QueryIntelligenceEngine", "CLARIFY", f"Ambiguous interpretation; options={[o['entity_id'] for o in qi.clarification_options]}")
+            elif qi.scope.value in ("OUT_OF_DOMAIN", "UNKNOWN_ENTITY", "ALL", "ALL_SOLUTIONS", "ALL_PRODUCTS", "ALL_SERVICES"):
+                detected_entity_id, conf = None, qi.scope.confidence
+                ctx.add_trace("QueryIntelligenceEngine", qi.scope.value, "Non-entity scope from semantic decision")
+            elif qi.primary_entity_id:
                 detected_entity_id = qi.primary_entity_id
                 conf = qi.confidence
                 matched_alias = f"Query Intelligence ({qi.interpretation})"
@@ -150,7 +184,7 @@ class Phase2Orchestrator:
             logger.warning(f"QueryIntelligenceEngine orchestrator integration notice: {e}")
         
         # 2.1 Confidence Threshold Check: If conf < 0.90, invoke QueryUnderstandingAgent for Data-Driven selection
-        if conf < 0.90 and not check_general_catalog_query(normalized_query):
+        if semantic_decision is None and conf < 0.90 and not check_general_catalog_query(normalized_query):
             agent_res = self.query_understanding_agent._data_driven_fallback(normalized_query)
             if agent_res.get("primary_entity") and agent_res.get("confidence", 0.0) >= 0.70:
                 detected_entity_id = agent_res["primary_entity"]
@@ -177,7 +211,10 @@ class Phase2Orchestrator:
             ctx.resolved_category = ent_data.get("category") or ent_data.get("type")
 
         # 4. General Catalog Intent Check
-        ctx.is_general_catalog_query = check_general_catalog_query(normalized_query)
+        if semantic_decision is not None:
+            ctx.is_general_catalog_query = semantic_decision.scope.value in ("ALL", "ALL_SOLUTIONS", "ALL_PRODUCTS", "ALL_SERVICES")
+        else:
+            ctx.is_general_catalog_query = check_general_catalog_query(normalized_query)
         if ctx.is_general_catalog_query:
             ctx.resolved_entity_id = None
             ctx.resolved_entity_name = None
@@ -190,6 +227,9 @@ class Phase2Orchestrator:
         # 5. Out-of-Domain Check (ONLY if no entity AND not general catalog query)
         if not ctx.resolved_entity_id and not ctx.is_general_catalog_query:
             is_ood, ood_msg = self.ood_detector.is_out_of_domain(normalized_query)
+            if not is_ood and semantic_decision is not None and semantic_decision.is_out_of_domain:
+                from out_of_domain_detector import DEFAULT_OOD_RESPONSE
+                is_ood, ood_msg = True, DEFAULT_OOD_RESPONSE
             if is_ood:
                 ctx.is_out_of_domain = True
                 ctx.response_text = ood_msg

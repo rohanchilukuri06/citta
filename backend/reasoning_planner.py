@@ -92,7 +92,11 @@ class ReasoningPlanner:
         elif "trade-off" in q_lower or "pros and cons" in q_lower:
             r_type = ReasoningType.TRADE_OFF
 
-        cfg = PLAN_CONFIGS.get(r_type, PLAN_CONFIGS[ReasoningType.CONSULTATIVE])
+        cfg = PLAN_CONFIGS.get(r_type, PLAN_CONFIGS[ReasoningType.CONSULTATIVE]).copy()
+
+        # Tailor template for collaboration, onboarding, partnership, and next-steps intent
+        if any(w in q_lower for w in ["collaborate", "proceed", "partner", "get started", "how to start", "next steps", "onboard", "work together"]):
+            cfg["expected_output_template"] = "Engagement Overview | How to Collaborate & Onboard | Contact & Next Steps"
 
         target_entities = []
         if ctx.resolved_entity_id:

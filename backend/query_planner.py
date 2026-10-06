@@ -150,7 +150,7 @@ def is_in_domain(q_clean: str) -> bool:
         "clients", "customers", "partners", "brands", "companies", "contact", "email", 
         "phone", "address", "location", "located", "office", "offices", "headquarters", "tower", 
         "vinay", "velivela", "akhil", "reddy", "chandra", "balaji", "ganesh", "gandhi", 
-        "harish", "nerati", "aravind", "mohan", "kiran", "kumar", "technology", 
+        "harish", "nerati", "aravind", "mohan", "technology", 
         "technologies", "challenge", "retention", "rate", "apply", "work", "join", 
         "certification", "certifications", "milestone", "milestones", "hybiz", "apis", 
         "msme", "marketing", "ai", "tech", "enterprise", "agentic", "generative", 
@@ -325,7 +325,7 @@ def classify_query(query: str, model=None, skip_transform: bool = False) -> Dict
     leadership_words = {
         "founder", "ceo", "coo", "cto", "leader", "leadership", "team", "vinay", "velivela", 
         "akhil", "reddy", "chandra", "balaji", "ganesh", "gandhi", "harish", "nerati", 
-        "aravind", "mohan", "kiran", "kumar"
+        "aravind", "mohan"
     }
     has_leadership_phrase = any(phrase in q_clean for phrase in ["who started", "who founded", "who leads", "who lead", "started the company", "founded the company"])
     
@@ -333,7 +333,7 @@ def classify_query(query: str, model=None, skip_transform: bool = False) -> Dict
         domain = "LEADERSHIP"
         if query_type not in ["PURCHASE", "CONSULTATION", "IMPLEMENTATION", "DEMO_REQUEST", "CONTACT_SALES"]:
             query_type = "FACT"
-        if any(w in words for w in ["founder", "ceo", "kiran", "kumar", "leads", "lead"]) or any(phrase in q_clean for phrase in ["who started", "who founded", "started by", "founded by"]):
+        if any(w in words for w in ["founder", "ceo", "leads", "lead"]) or any(phrase in q_clean for phrase in ["who started", "who founded", "started by", "founded by"]):
             matched_entity = "founder"
 
     # 4. Match against entity index (Products, Services, Solutions)

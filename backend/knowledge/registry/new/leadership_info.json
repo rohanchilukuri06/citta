@@ -52,22 +52,42 @@
   ],
   "capabilities": [
     {
+      "id": "akhil_reddy",
+      "title": "Akhil Reddy",
+      "subtitle": "CEO",
+      "description": "CEO of CittaAI, architecting enterprise AI solutions and platforms.",
+      "keywords": [
+        "ceo",
+        "chief executive officer",
+        "akhil reddy",
+        "akhil",
+        "co-founder"
+      ],
+      "aliases": [
+        "akhil reddy",
+        "akhil",
+        "ceo",
+        "chief executive officer",
+        "citta ai ceo"
+      ],
+      "features": [],
+      "benefits": [],
+      "relationships": []
+    },
+    {
       "id": "vinay_velivela",
       "title": "Vinay Velivela",
       "subtitle": "CEO of Fixity Technologies",
       "description": "Visionary leader driving innovation and enterprise growth.",
       "keywords": [
-        "ceo",
-        "chief executive officer",
-        "founder",
         "vinay velivela",
-        "vinay"
+        "vinay",
+        "fixity technologies"
       ],
       "aliases": [
         "vinay velivela",
         "vinay",
-        "ceo",
-        "chief executive officer"
+        "fixity technologies ceo"
       ],
       "features": [],
       "benefits": [],
@@ -92,31 +112,6 @@
         "coo",
         "chief operating officer",
         "operations head"
-      ],
-      "features": [],
-      "benefits": [],
-      "relationships": []
-    },
-    {
-      "id": "akhil_reddy",
-      "title": "Akhil Reddy",
-      "subtitle": "Co-Founder & CTO",
-      "description": "Architecting enterprise AI platforms and advanced technology solutions.",
-      "keywords": [
-        "cto",
-        "chief technology officer",
-        "co-founder",
-        "akhil reddy",
-        "akhil",
-        "technology head"
-      ],
-      "aliases": [
-        "akhil reddy",
-        "akhil",
-        "cto",
-        "chief technology officer",
-        "technology head",
-        "technical founder"
       ],
       "features": [],
       "benefits": [],
@@ -214,10 +209,35 @@
   ],
   "members": [
     {
-      "id": "vinay_velivela",
-      "name": "Vinay Velivela",
+      "id": "akhil_reddy",
+      "name": "Akhil Reddy",
       "designation": "CEO",
       "department": "Executive Leadership",
+      "reports_to": null,
+      "bio": "CEO of CittaAI, architecting enterprise AI solutions and platforms.",
+      "responsibilities": [
+        "Company Leadership",
+        "Technology & AI Strategy",
+        "Enterprise AI Solutions"
+      ],
+      "keywords": [
+        "CEO",
+        "Chief Executive Officer",
+        "Leadership",
+        "AI"
+      ],
+      "aliases": [
+        "CEO",
+        "Chief Executive Officer",
+        "akhil",
+        "akhil reddy"
+      ]
+    },
+    {
+      "id": "vinay_velivela",
+      "name": "Vinay Velivela",
+      "designation": "CEO of Fixity Technologies",
+      "department": "Leadership",
       "reports_to": null,
       "bio": "Visionary leader driving innovation and organizational growth.",
       "responsibilities": [
@@ -227,14 +247,10 @@
         "Enterprise Growth"
       ],
       "keywords": [
-        "CEO",
-        "Chief Executive Officer",
-        "Founder",
+        "Fixity Technologies",
         "Leadership"
       ],
       "aliases": [
-        "Chief Executive Officer",
-        "CEO",
         "vinay",
         "vinay velivela"
       ]
@@ -244,7 +260,7 @@
       "name": "Saladi Chandra Balaji",
       "designation": "Co-Founder & COO",
       "department": "Operations",
-      "reports_to": "vinay_velivela",
+      "reports_to": "akhil_reddy",
       "bio": "Leading operations, execution, and strategic business initiatives.",
       "responsibilities": [
         "Operations",
@@ -266,38 +282,11 @@
       ]
     },
     {
-      "id": "akhil_reddy",
-      "name": "Akhil Reddy",
-      "designation": "Co-Founder & CTO",
-      "department": "Technology",
-      "reports_to": "vinay_velivela",
-      "bio": "Architecting enterprise AI platforms and advanced technology solutions.",
-      "responsibilities": [
-        "Technology Strategy",
-        "AI Architecture",
-        "Engineering",
-        "Research & Development"
-      ],
-      "keywords": [
-        "CTO",
-        "Chief Technology Officer",
-        "Technology",
-        "AI"
-      ],
-      "aliases": [
-        "CTO",
-        "Technology Head",
-        "Technical Founder",
-        "akhil",
-        "akhil reddy"
-      ]
-    },
-    {
       "id": "ganesh_gandhi_vadalani",
       "name": "Ganesh Gandhi Vadalani",
       "designation": "CMO",
       "department": "Marketing",
-      "reports_to": "vinay_velivela",
+      "reports_to": "akhil_reddy",
       "bio": "Driving global marketing strategy, branding, and business positioning.",
       "responsibilities": [
         "Marketing",
@@ -348,7 +337,7 @@
       "name": "Aravind Reddy",
       "designation": "E-Commerce Head",
       "department": "Digital Commerce",
-      "reports_to": "vinay_velivela",
+      "reports_to": "akhil_reddy",
       "bio": "Leading digital commerce strategy and e-commerce platform initiatives.",
       "responsibilities": [
         "E-Commerce",
@@ -373,7 +362,7 @@
       "name": "Parvatha Mohan",
       "designation": "Business Development Head",
       "department": "Business Development",
-      "reports_to": "vinay_velivela",
+      "reports_to": "akhil_reddy",
       "bio": "Building strategic partnerships and expanding business opportunities.",
       "responsibilities": [
         "Business Development",
@@ -400,11 +389,7 @@
   "faq": [
     {
       "question": "Who is the CEO of CittaAI?",
-      "answer": "Vinay Velivela serves as the CEO of CittaAI."
-    },
-    {
-      "question": "Who is the CTO of CittaAI?",
-      "answer": "Akhil Reddy is the Co-Founder and CTO of CittaAI."
+      "answer": "Akhil Reddy is the CEO of CittaAI."
     },
     {
       "question": "Who founded CittaAI?",
@@ -423,9 +408,15 @@
   "metadata": {
     "schema_version": "2.0",
     "content_version": "1.0",
-    "last_updated": "2026-07-19",
+    "last_updated": "2026-09-30",
     "source": "leadership.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "content_decisions": [
+      {
+        "date": "2026-09-30",
+        "decision": "Akhil Reddy is CEO of CittaAI (confirmed by the owner; matches cittaai.com). Vinay Velivela is CEO of Fixity Technologies, not CittaAI. Kiran Kumar is not part of the published team. No CTO is published."
+      }
+    ]
   }
 }

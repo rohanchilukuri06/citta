@@ -46,6 +46,14 @@ class EvidenceBuilder:
             target_ids.extend(ctx.matched_entity_ids)
         if ctx.session_state.recently_compared_entities:
             target_ids.extend(ctx.session_state.recently_compared_entities)
+
+        # Include contact_info & company_info for consultative, onboarding, contact, and collaboration queries
+        q_lower = ctx.original_query.lower()
+        if any(w in q_lower for w in ["collaborate", "proceed", "partner", "contact", "get started", "touch", "talk", "sales", "onboard", "work together"]):
+            if "contact_info" in self.reg.entities:
+                target_ids.append("contact_info")
+            if "company_info" in self.reg.entities:
+                target_ids.append("company_info")
             
         # Deduplicate entity IDs
         target_ids = list(dict.fromkeys(target_ids))

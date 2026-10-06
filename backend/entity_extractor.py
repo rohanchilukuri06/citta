@@ -67,9 +67,6 @@ class EntityExtractor:
         # Role & Person
         if re.search(r"\bceo\b", q_lower):
             result.role = "CEO"
-            result.person = "Vinay Velivela"
-        elif re.search(r"\bcto\b", q_lower) or "technology" in q_lower and "leads" in q_lower:
-            result.role = "CTO"
             result.person = "Akhil Reddy"
         elif re.search(r"\bcoo\b", q_lower) or "operations" in q_lower and "responsible" in q_lower:
             result.role = "COO"
@@ -79,14 +76,14 @@ class EntityExtractor:
             result.person = "Ganesh Gandhi Vadalani"
         elif re.search(r"\bfounder\b", q_lower):
             result.role = "Founder"
-            result.person = "Vinay Velivela"
+            result.person = "Saladi Chandra Balaji / Akhil Reddy"
 
         if "vinay" in q_lower:
             result.person = "Vinay Velivela"
-            result.role = "CEO"
+            result.role = "CEO of Fixity Technologies"
         elif "akhil" in q_lower:
             result.person = "Akhil Reddy"
-            result.role = "CTO"
+            result.role = "CEO"
         elif "balaji" in q_lower or "saladi" in q_lower:
             result.person = "Saladi Chandra Balaji"
             result.role = "COO"

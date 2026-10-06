@@ -65,7 +65,9 @@
   },
   "target_users": [
     "Admin",
-    "User"
+    "HOD",
+    "Educator",
+    "Learner"
   ],
   "capabilities": [
     {
@@ -488,7 +490,14 @@
       "description": "Track career readiness, verify technical certifications, and connect graduating students with industry hiring partners."
     }
   ],
-  "benefits": [],
+  "benefits": [
+    "Unified Platform",
+    "Measurable Outcomes",
+    "College Hierarchy",
+    "Role-Based Access",
+    "Coding Practice",
+    "Contest Management"
+  ],
   "use_cases": [
     "Unified Platform",
     "Measurable Outcomes",
@@ -505,6 +514,14 @@
     "last_updated": "2026-07-19",
     "source": "07_product_education_os.json",
     "confidence": 1.0,
-    "language": "en"
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "benefits": "website outcomes / why-grid / quantitative stats",
+        "target_users": "website bestFor / stakeholders"
+      },
+      "date": "2026-09-29"
+    }
   }
 }

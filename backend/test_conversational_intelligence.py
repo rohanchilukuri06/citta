@@ -97,7 +97,7 @@ def test_issue2_ceo_query_direct_routing():
     resp = engine.generate_response("cittaai", IntentType.ASK, [TopicType.PERSON_LOOKUP], "CEO")
     assert resp is not None
     assert resp["source"] == "Leadership Registry"
-    assert "Vinay Velivela" in resp["response"]
+    assert "Akhil Reddy" in resp["response"]
 
 def test_issue3_case_study_resolver_no_misrouting():
     from deterministic_engine import get_deterministic_engine
@@ -139,11 +139,8 @@ async def test_deterministic_team_and_leadership_queries():
 
     # 2. Role queries
     role_cases = [
-        ("CEO", "Vinay Velivela"),
-        ("Who is the CEO?", "Vinay Velivela"),
-        ("CTO", "Akhil Reddy"),
-        ("Who is the CTO?", "Akhil Reddy"),
-        ("Who leads Technology?", "Akhil Reddy"),
+        ("CEO", "Akhil Reddy"),
+        ("Who is the CEO?", "Akhil Reddy"),
         ("COO", "Saladi Chandra Balaji"),
         ("Who is responsible for Operations?", "Saladi Chandra Balaji"),
         ("CMO", "Ganesh Gandhi Vadalani"),
@@ -161,10 +158,10 @@ async def test_deterministic_team_and_leadership_queries():
 
     # 3. Name queries (Full & First names)
     name_cases = [
-        ("Vinay Velivela", "CEO"),
-        ("Vinay", "CEO"),
-        ("Akhil Reddy", "CTO"),
-        ("Akhil", "CTO"),
+        ("Vinay Velivela", "Fixity Technologies"),
+        ("Vinay", "Fixity Technologies"),
+        ("Akhil Reddy", "CEO"),
+        ("Akhil", "CEO"),
         ("Saladi Chandra Balaji", "COO"),
         ("Balaji", "COO"),
         ("Ganesh Gandhi Vadalani", "CMO"),

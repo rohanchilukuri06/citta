@@ -17,7 +17,9 @@ const getSessionId = () => {
 export default function AIConsultant() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+  // dev-only: ?chat=open starts with the panel open (screenshot reviews)
+  const [isOpen, setIsOpen] = useState(() => process.env.NODE_ENV !== "production"
+    && new URLSearchParams(window.location.search).get("chat") === "open");
   const [isExpanding, setIsExpanding] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -461,21 +463,154 @@ export default function AIConsultant() {
     }
   };
 
-  const formatText = (text) => {
-    // Simple bold markdown styling helper
-    return text.split("\n").map((para, i) => {
-      let parts = para.split(/(\*\*[^*]+\*\*)/g);
-      return (
-        <p key={i} className="mb-2 text-sm leading-relaxed text-slate-300">
-          {parts.map((part, index) => {
-            if (part.startsWith("**") && part.endsWith("**")) {
-              return <strong key={index} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
-            }
-            return part;
-          })}
-        </p>
-      );
+  const renderInline = (str) => {
+    if (!str) return null;
+    let parts = str.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return <strong key={index} className="text-ink font-semibold">{part.slice(2, -2)}</strong>;
+      }
+      if (part.startsWith("`") && part.endsWith("`")) {
+        return <code key={index} className="bg-accent/20 border border-accent/30 px-1.5 py-0.5 rounded text-accent text-xs font-mono">{part.slice(1, -1)}</code>;
+      }
+      return part;
     });
+  };
+
+  const formatText = (text) => {
+    if (!text) return null;
+
+    const lines = text.split("\n");
+    const blocks = [];
+    let currentTable = null;
+    let currentList = null;
+
+    const flushTable = () => {
+      if (currentTable) {
+        blocks.push({ type: "table", ...currentTable });
+        currentTable = null;
+      }
+    };
+
+    const flushList = () => {
+      if (currentList) {
+        blocks.push({ type: "list", items: currentList });
+        currentList = null;
+      }
+    };
+
+    lines.forEach((line) => {
+      const trimmed = line.trim();
+
+      // Table row detection
+      const isTableRow = trimmed.startsWith("|") && (trimmed.endsWith("|") || trimmed.includes("|"));
+      const isTableSeparator = isTableRow && /^\|[\s:\-|\+]+\|$/.test(trimmed);
+
+      if (isTableRow) {
+        flushList();
+        if (isTableSeparator) {
+          return;
+        }
+        const cells = trimmed
+          .split("|")
+          .map((c) => c.trim())
+          .filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+
+        if (cells.length > 0) {
+          if (!currentTable) {
+            currentTable = { headers: cells, rows: [] };
+          } else {
+            currentTable.rows.push(cells);
+          }
+          return;
+        }
+      } else {
+        flushTable();
+      }
+
+      // Bullet list detection
+      const isBullet = /^(?:[\-\*•]|\d+\.)\s+(.+)/.exec(trimmed);
+      if (isBullet) {
+        if (!currentList) currentList = [];
+        currentList.push(isBullet[1]);
+        return;
+      } else {
+        flushList();
+      }
+
+      // Heading detection
+      if (trimmed.startsWith("#") || /^[\*]{2}[^\*]+[\*]{2}$/.test(trimmed)) {
+        const headingText = trimmed.replace(/^#+\s*/, "").replace(/^\*\*/, "").replace(/\*\*$/, "");
+        blocks.push({ type: "heading", text: headingText });
+        return;
+      }
+
+      // Regular paragraph
+      if (trimmed.length > 0) {
+        blocks.push({ type: "paragraph", text: trimmed });
+      }
+    });
+
+    flushTable();
+    flushList();
+
+    return (
+      <div className="space-y-2">
+        {blocks.map((block, i) => {
+          if (block.type === "table") {
+            return (
+              <div key={i} className="my-2.5 overflow-x-auto rounded-xl border border-line/20 bg-surface2 shadow-inner">
+                <table className="w-full border-collapse text-xs text-left">
+                  <thead>
+                    <tr className="bg-accent/20 border-b border-line/20 text-accent font-semibold">
+                      {block.headers.map((h, hIdx) => (
+                        <th key={hIdx} className="py-2 px-3 whitespace-nowrap">{renderInline(h)}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-line/10">
+                    {block.rows.map((row, rIdx) => (
+                      <tr key={rIdx} className="hover:bg-ink/5 transition-colors">
+                        {row.map((cell, cIdx) => (
+                          <td key={cIdx} className="py-2 px-3 text-ink-soft">{renderInline(cell)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          }
+
+          if (block.type === "heading") {
+            return (
+              <h4 key={i} className="text-sm font-bold text-ink mt-3 mb-1 flex items-center gap-1.5 border-b border-line/15 pb-1">
+                {renderInline(block.text)}
+              </h4>
+            );
+          }
+
+          if (block.type === "list") {
+            return (
+              <ul key={i} className="my-1.5 space-y-1 pl-1">
+                {block.items.map((item, itemIdx) => (
+                  <li key={itemIdx} className="flex items-start gap-2 text-xs text-ink-soft leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
+                    <span>{renderInline(item)}</span>
+                  </li>
+                ))}
+              </ul>
+            );
+          }
+
+          return (
+            <p key={i} className="text-sm leading-relaxed text-ink-soft">
+              {renderInline(block.text)}
+            </p>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
@@ -485,7 +620,7 @@ export default function AIConsultant() {
         {!isOpen && !isExpanding && (
           <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999]">
             {/* Ambient Ambient Outer Ring and Glow */}
-            <div className="absolute inset-[-10px] rounded-full bg-blue-600/10 blur-[15px] pointer-events-none" />
+            <div className="absolute inset-[-10px] rounded-full bg-accent/10 blur-[15px] pointer-events-none" />
             
             {/* Orbiting particles */}
             <div className="orbit-particle orbit-particle-1" />
@@ -500,7 +635,7 @@ export default function AIConsultant() {
               whileTap={{ scale: 0.95 }}
             >
               <div className="liquid-orb">
-                <Sparkles className="w-6 h-6 text-blue-400 drop-shadow-[0_0_8px_#2563EB]" />
+                <Sparkles className="w-6 h-6 text-white" />
               </div>
             </motion.div>
           </div>
@@ -515,24 +650,24 @@ export default function AIConsultant() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 100 }}
             transition={{ type: "spring", damping: 25, stiffness: 180 }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] w-[calc(100vw-32px)] sm:w-[420px] h-[calc(100vh-100px)] sm:h-[640px] max-h-[640px] rounded-2xl glass-strong border border-white/10 shadow-2xl flex flex-col overflow-hidden text-white"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] w-[calc(100vw-32px)] sm:w-[420px] h-[calc(100vh-100px)] sm:h-[640px] max-h-[640px] rounded-2xl glass-strong border border-line/15 shadow-2xl flex flex-col overflow-hidden text-ink"
           >
             {/* Panel Ambient Aurora Backgrounds */}
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-slate-950/40 pointer-events-none" />
-            <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-blue-500/10 rounded-full blur-[50px] pointer-events-none" />
-            <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-emerald-500/5 rounded-full blur-[50px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
+            <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-[50px] pointer-events-none" />
+            <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-jade/5 rounded-full blur-[50px] pointer-events-none" />
 
             {/* Header */}
-            <div className="relative z-20 px-6 py-4 flex items-center justify-between border-b border-white/5 bg-white/5 backdrop-blur-md">
+            <div className="relative z-20 px-6 py-4 flex items-center justify-between border-b border-line/10 bg-ink/5 backdrop-blur-md">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-blue-400" />
+                <div className="w-9 h-9 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-accent" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold tracking-wide text-white">CittaAI Consultant</h4>
+                  <h4 className="text-sm font-semibold tracking-wide text-ink">CittaAI Consultant</h4>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">Enterprise Intelligence</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-jade animate-pulse" />
+                    <span className="text-[10px] uppercase font-semibold text-ink-muted tracking-wider">Enterprise Intelligence</span>
                   </div>
                 </div>
               </div>
@@ -541,18 +676,18 @@ export default function AIConsultant() {
                 <button 
                   onClick={handleMinimize}
                   title="Minimize"
-                  className="w-9 h-9 rounded-full border border-white/5 hover:border-white/10 bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all duration-200 cursor-pointer"
+                  className="w-9 h-9 rounded-full border border-line/10 hover:border-line/15 bg-ink/5 hover:bg-ink/10 flex items-center justify-center transition-all duration-200 cursor-pointer"
                 >
-                  <span className="text-[12px] font-bold text-slate-400 hover:text-white tracking-tighter select-none pointer-events-none">
+                  <span className="text-[12px] font-bold text-ink-muted hover:text-ink tracking-tighter select-none pointer-events-none">
                     {"><"}
                   </span>
                 </button>
                 <button 
                   onClick={handleClose}
                   title="Close & Reset Chat"
-                  className="w-9 h-9 rounded-full border border-white/5 hover:border-white/10 bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all duration-200 cursor-pointer"
+                  className="w-9 h-9 rounded-full border border-line/10 hover:border-line/15 bg-ink/5 hover:bg-ink/10 flex items-center justify-center transition-all duration-200 cursor-pointer"
                 >
-                  <X className="w-4.5 h-4.5 text-slate-400 hover:text-white pointer-events-none" />
+                  <X className="w-4.5 h-4.5 text-ink-muted hover:text-ink pointer-events-none" />
                 </button>
               </div>
             </div>
@@ -568,22 +703,22 @@ export default function AIConsultant() {
                   className={`flex gap-3 ${m.sender === "user" ? "justify-end" : "justify-start"}`}
                 >
                   {m.sender === "bot" && (
-                    <div className="w-7 h-7 rounded-full border border-blue-500/20 bg-blue-950/40 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Bot className="w-4.5 h-4.5 text-blue-400" />
+                    <div className="w-7 h-7 rounded-full border border-accent/20 bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Bot className="w-4.5 h-4.5 text-accent" />
                     </div>
                   )}
 
                   <div className="max-w-[82%]">
                     <div className={`p-3.5 rounded-2xl text-sm ${
                       m.sender === "user" 
-                        ? "bg-blue-600/80 border border-blue-500/30 text-white rounded-tr-none shadow-md shadow-blue-900/10" 
-                        : "bg-white/4 border border-white/8 text-slate-200 rounded-tl-none"
+                        ? "bg-accent border border-accent/30 text-accent-ink [&_*]:!text-accent-ink rounded-tr-none shadow-md"
+                        : "bg-ink/4 border border-line/13 text-ink-soft rounded-tl-none"
                     }`}>
                       {m.sender === "bot" && isStreaming && m.id === activeBotMsgId && !hasReceivedFirstToken ? (
                         <div className="flex items-center gap-1.5 py-1 px-0.5">
-                          <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce" />
-                          <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce [animation-delay:0.2s]" />
-                          <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce [animation-delay:0.4s]" />
+                          <span className="w-2 h-2 rounded-full bg-ink-muted animate-bounce" />
+                          <span className="w-2 h-2 rounded-full bg-ink-muted animate-bounce [animation-delay:0.2s]" />
+                          <span className="w-2 h-2 rounded-full bg-ink-muted animate-bounce [animation-delay:0.4s]" />
                         </div>
                       ) : (
                         formatText(m.text)
@@ -591,7 +726,7 @@ export default function AIConsultant() {
                     </div>
                     
                     {/* Timestamp */}
-                    <span className={`text-[10px] text-slate-500 mt-1 block px-1 ${
+                    <span className={`text-[10px] text-ink-muted mt-1 block px-1 ${
                       m.sender === "user" ? "text-right" : "text-left"
                     }`}>
                       {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -602,13 +737,13 @@ export default function AIConsultant() {
 
               {isTyping && messages[messages.length - 1]?.text === "" && messages[messages.length - 1]?.id !== activeBotMsgId && (
                 <div className="flex gap-3 justify-start">
-                  <div className="w-7 h-7 rounded-full border border-blue-500/20 bg-blue-950/40 flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4.5 h-4.5 text-blue-400" />
+                  <div className="w-7 h-7 rounded-full border border-accent/20 bg-accent/20 flex items-center justify-center flex-shrink-0">
+                    <Bot className="w-4.5 h-4.5 text-accent" />
                   </div>
-                  <div className="bg-white/4 border border-white/8 rounded-2xl rounded-tl-none p-3.5 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-slate-500 animate-bounce" />
-                    <span className="w-2 h-2 rounded-full bg-slate-500 animate-bounce [animation-delay:0.2s]" />
-                    <span className="w-2 h-2 rounded-full bg-slate-500 animate-bounce [animation-delay:0.4s]" />
+                  <div className="bg-ink/4 border border-line/13 rounded-2xl rounded-tl-none p-3.5 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-ink-muted animate-bounce" />
+                    <span className="w-2 h-2 rounded-full bg-ink-muted animate-bounce [animation-delay:0.2s]" />
+                    <span className="w-2 h-2 rounded-full bg-ink-muted animate-bounce [animation-delay:0.4s]" />
                   </div>
                 </div>
               )}
@@ -624,13 +759,13 @@ export default function AIConsultant() {
                 >
                   <button 
                     onClick={() => performNavigationAndHighlight(recommendedRedirect)}
-                    className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center justify-between shadow-lg shadow-blue-500/20 border border-blue-400/30 transition-all duration-200 cursor-pointer group"
+                    className="w-full py-2.5 px-4 rounded-xl bg-accent hover:brightness-110 text-accent-ink text-xs font-semibold flex items-center justify-between shadow-lg  border border-accent/30 transition-all duration-200 cursor-pointer group"
                   >
                     <span className="flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-blue-300 group-hover:text-white" />
+                      <Globe className="w-4 h-4 text-accent group-hover:text-ink" />
                       <span>View Webpage ({recommendedRedirect})</span>
                     </span>
-                    <ArrowRight className="w-3.5 h-3.5 text-blue-200 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-accent group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </motion.div>
               )}
@@ -638,13 +773,13 @@ export default function AIConsultant() {
               {/* suggested follow up questions */}
               {!isTyping && suggestions.length > 0 && (
                 <div className="pt-2 space-y-2">
-                  <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Suggested Questions</span>
+                  <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">Suggested Questions</span>
                   <div className="flex flex-col gap-2">
                     {suggestions.map((q, i) => (
                       <button 
                         key={i}
                         onClick={() => sendMessage(q)}
-                        className="text-left text-xs p-2.5 rounded-xl border border-white/5 hover:border-blue-500/30 bg-white/2 hover:bg-blue-500/5 text-slate-300 hover:text-blue-300 transition-all duration-150"
+                        className="text-left text-xs p-2.5 rounded-xl border border-line/10 hover:border-accent/30 bg-ink/3 hover:bg-accent/8 text-ink-soft hover:text-accent transition-all duration-150"
                       >
                         {q}
                       </button>
@@ -658,14 +793,14 @@ export default function AIConsultant() {
 
             {/* Quick Actions Scroll Area */}
             {messages.length === 1 && !isTyping && (
-              <div className="relative z-10 px-6 py-2 border-t border-white/5 bg-slate-950/20">
-                <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block mb-2">Frequently Asked</span>
+              <div className="relative z-10 px-6 py-2 border-t border-line/10 bg-surface2">
+                <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block mb-2">Frequently Asked</span>
                 <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
                   {quickActions.map((item, idx) => (
                     <button
                       key={idx}
                       onClick={() => sendMessage(item.action)}
-                      className="whitespace-nowrap px-3 py-1.5 rounded-full border border-white/8 hover:border-blue-500/30 bg-white/3 hover:bg-blue-500/10 text-xs text-slate-300 hover:text-blue-300 transition-all duration-150"
+                      className="whitespace-nowrap px-3 py-1.5 rounded-full border border-line/13 hover:border-accent/30 bg-ink/3 hover:bg-accent/10 text-xs text-ink-soft hover:text-accent transition-all duration-150"
                     >
                       {item.label}
                     </button>
@@ -675,20 +810,20 @@ export default function AIConsultant() {
             )}
 
             {/* Input Form */}
-            <div className="relative z-10 p-4 border-t border-white/5 bg-slate-950/40 flex gap-2">
+            <div className="relative z-10 p-4 border-t border-line/10 bg-surface2 flex gap-2">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyPress}
                 placeholder="Ask me about CittaAI capabilities..."
-                className="flex-1 px-4 py-2.5 rounded-xl border border-white/10 focus:border-blue-500/50 bg-[#0B0F1E] text-sm placeholder-slate-500 text-white outline-none focus:ring-1 focus:ring-blue-500/20 transition-all"
-                style={{ backgroundColor: "#0B0F1E", color: "#FFFFFF" }}
+                className="flex-1 px-4 py-2.5 rounded-xl border border-line/15 focus:border-accent/50 bg-surface text-sm placeholder:text-ink-muted text-ink outline-none focus:ring-1 focus:ring-accent/20 transition-all"
+               
               />
               <button
                 onClick={() => sendMessage(inputValue)}
                 disabled={!inputValue.trim() || isTyping}
-                className="w-10 h-10 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-600 text-white flex items-center justify-center transition-all shadow-md shadow-blue-900/20 border border-blue-500/20"
+                className="w-10 h-10 rounded-xl bg-accent hover:brightness-110 disabled:bg-ink/10 disabled:text-ink-muted text-accent-ink flex items-center justify-center transition-all shadow-md  border border-accent/20"
               >
                 <Send className="w-4 h-4" />
               </button>

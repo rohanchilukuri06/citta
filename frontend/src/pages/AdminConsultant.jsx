@@ -6,7 +6,16 @@ import {
 import { API_BASE_URL } from "../apiConfig";
 
 
+// Admin API calls carry the operator's token (backend: ADMIN_API_TOKEN). Kept in sessionStorage only.
+const ADMIN_TOKEN_KEY = "cittaai_admin_token";
+const readAdminToken = () => {
+  try { return sessionStorage.getItem(ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
+};
+const adminFetch = (url, options = {}) =>
+  fetch(url, { ...options, headers: { ...(options.headers || {}), "X-Admin-Token": readAdminToken() } });
+
 export default function AdminConsultant() {
+  const [adminToken, setAdminToken] = useState(readAdminToken());
   const [activeTab, setActiveTab] = useState("analytics");
   const [status, setStatus] = useState({});
   const [analytics, setAnalytics] = useState({});
@@ -15,8 +24,8 @@ export default function AdminConsultant() {
   const [message, setMessage] = useState(null);
   
   // Config form inputs
-  const [provider, setProvider] = useState("nvidia");
-  const [model, setModel] = useState("meta/llama-3.1-70b-instruct");
+  const [provider, setProvider] = useState("groq");
+  const [model, setModel] = useState("openai/gpt-oss-20b");
   
   // Document upload form inputs
   const [uploadFile, setUploadFile] = useState(null);
@@ -26,7 +35,7 @@ export default function AdminConsultant() {
 
   const fetchStatus = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/status`);
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/status`);
       const data = await res.json();
       setStatus(data);
       setProvider(data.provider || "nvidia");
@@ -38,7 +47,7 @@ export default function AdminConsultant() {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/analytics`);
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/analytics`);
       const data = await res.json();
       setAnalytics(data);
     } catch (err) {
@@ -48,7 +57,7 @@ export default function AdminConsultant() {
 
   const fetchDocuments = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/documents`);
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/documents`);
       const data = await res.json();
       setDocuments(data);
     } catch (err) {
@@ -70,7 +79,7 @@ export default function AdminConsultant() {
   const handleReindex = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/reindex`, { method: "POST" });
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/reindex`, { method: "POST" });
       if (res.ok) {
         const data = await res.json();
         showNotification(data.message || "Website re-indexed successfully!");
@@ -92,7 +101,7 @@ export default function AdminConsultant() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/config`, {
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/config`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -128,7 +137,7 @@ export default function AdminConsultant() {
     formData.append("title", docTitle || uploadFile.name);
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/upload`, {
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/upload`, {
         method: "POST",
         body: formData
       });
@@ -157,7 +166,7 @@ export default function AdminConsultant() {
     
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/admin/documents/${encodeURIComponent(sourceName)}`, {
+      const res = await adminFetch(`${API_BASE_URL}/api/admin/documents/${encodeURIComponent(sourceName)}`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -183,6 +192,27 @@ export default function AdminConsultant() {
       {/* Main Container */}
       <div className="max-w-6xl mx-auto relative z-10">
         
+        {/* Admin token (required by the backend for every admin action) */}
+        <form
+          className="mb-6 flex flex-wrap items-center gap-2 text-sm"
+          onSubmit={(e) => {
+            e.preventDefault();
+            try { sessionStorage.setItem(ADMIN_TOKEN_KEY, adminToken); } catch { /* storage unavailable */ }
+            fetchStatus();
+          }}
+        >
+          <Key className="w-4 h-4 text-slate-400" />
+          <input
+            type="password"
+            value={adminToken}
+            onChange={(e) => setAdminToken(e.target.value)}
+            placeholder="Admin token"
+            className="bg-slate-900 border border-white/10 rounded px-3 py-1.5 text-slate-200 w-64"
+            aria-label="Admin token"
+          />
+          <button type="submit" className="px-3 py-1.5 rounded bg-blue-600 text-white">Use token</button>
+        </form>
+
         {/* Title Block */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-white/5">
           <div>

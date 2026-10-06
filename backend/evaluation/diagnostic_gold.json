@@ -1,0 +1,206 @@
+{
+  "HOLDOUT_001": {
+    "expected_entity": "education_os",
+    "expected_intent": "solution_inquiry",
+    "expected_aspect": "capabilities",
+    "is_in_domain": true,
+    "expected_chunks": ["education_os", "education_os_overview", "education_solution"],
+    "keywords": ["education", "student", "institution", "academic", "learning"],
+    "counterfactual": {
+      "modified_chunk": "Education OS is designed strictly for automotive engine testing.",
+      "test_prompt": "What engine testing capabilities does Education OS provide?"
+    }
+  },
+  "HOLDOUT_002": {
+    "expected_entity": "healthcare_os",
+    "expected_intent": "solution_inquiry",
+    "expected_aspect": "capabilities",
+    "is_in_domain": true,
+    "expected_chunks": ["healthcare_os", "healthcare_solution", "medical"],
+    "keywords": ["patient", "clinical", "hospital", "healthcare", "medical"]
+  },
+  "HOLDOUT_003": {
+    "expected_entity": "realty_os",
+    "expected_intent": "solution_inquiry",
+    "expected_aspect": "capabilities",
+    "is_in_domain": true,
+    "expected_chunks": ["realty_os", "realty_solution", "real_estate"],
+    "keywords": ["property", "realty", "broker", "estate", "listing"]
+  },
+  "HOLDOUT_004": {
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "capabilities",
+    "is_in_domain": true,
+    "expected_chunks": ["whatsapp_marketing", "whatsapp_automation"],
+    "keywords": ["whatsapp", "broadcast", "campaign", "notification", "messaging"]
+  },
+  "HOLDOUT_005": {
+    "expected_entity": "cittaai_company",
+    "expected_intent": "leadership_inquiry",
+    "expected_aspect": "leadership",
+    "is_in_domain": true,
+    "expected_chunks": ["leadership", "company_overview"],
+    "keywords": ["founder", "ceo", "leadership", "executive"]
+  },
+  "HOLDOUT_006": {
+    "expected_entity": "cittaai_company",
+    "expected_intent": "awards_inquiry",
+    "expected_aspect": "recognition",
+    "is_in_domain": true,
+    "expected_chunks": ["awards", "recognition", "press"],
+    "keywords": ["award", "recognition", "honored", "featured"]
+  },
+  "HOLDOUT_007": {
+    "expected_entity": "education_os",
+    "expected_intent": "solution_inquiry",
+    "expected_aspect": "features",
+    "is_in_domain": true,
+    "expected_chunks": ["education_os"],
+    "keywords": ["attendance", "grading", "education", "student"]
+  },
+  "HOLDOUT_008": {
+    "expected_entity": "healthcare_os",
+    "expected_intent": "solution_inquiry",
+    "expected_aspect": "overview",
+    "is_in_domain": true,
+    "expected_chunks": ["healthcare_os"],
+    "keywords": ["clinic", "medical", "patient", "healthcare"]
+  },
+  "HOLDOUT_009": {
+    "expected_entity": "realty_os",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "features",
+    "is_in_domain": true,
+    "expected_chunks": ["realty_os"],
+    "keywords": ["listing", "lead", "realtor", "property"]
+  },
+  "HOLDOUT_010": {
+    "expected_entity": "cittaai_company",
+    "expected_intent": "contact_inquiry",
+    "expected_aspect": "contact",
+    "is_in_domain": true,
+    "expected_chunks": ["contact", "sales"],
+    "keywords": ["contact", "demo", "sales", "email", "touch"]
+  },
+  "HOLDOUT_011": {
+    "expected_entity": "education_os",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "capabilities",
+    "is_in_domain": true,
+    "expected_chunks": ["education_os"],
+    "keywords": ["university", "education", "institution", "academic"]
+  },
+  "HOLDOUT_012": {
+    "expected_entity": "healthcare_os",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "features",
+    "is_in_domain": true,
+    "expected_chunks": ["healthcare_os"],
+    "keywords": ["outpatient", "clinical", "hospital", "healthcare"]
+  },
+  "HOLDOUT_013": {
+    "expected_entity": "realty_os",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "features",
+    "is_in_domain": true,
+    "expected_chunks": ["realty_os"],
+    "keywords": ["commission", "agent", "realty", "property"]
+  },
+  "HOLDOUT_014": {
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "integrations",
+    "is_in_domain": true,
+    "expected_chunks": ["whatsapp_marketing"],
+    "keywords": ["crm", "integration", "whatsapp", "connect"]
+  },
+  "HOLDOUT_015": {
+    "expected_entity": "ai_advisory_services",
+    "expected_intent": "service_inquiry",
+    "expected_aspect": "services",
+    "is_in_domain": true,
+    "expected_chunks": ["services", "consulting"],
+    "keywords": ["advisory", "consulting", "strategy", "enterprise"]
+  },
+  "HOLDOUT_016": {
+    "expected_entity": null,
+    "expected_intent": "out_of_domain",
+    "expected_aspect": null,
+    "is_in_domain": false,
+    "expected_chunks": [],
+    "keywords": ["out of scope", "cittaai", "cannot"]
+  },
+  "HOLDOUT_017": {
+    "expected_entity": null,
+    "expected_intent": "out_of_domain",
+    "expected_aspect": null,
+    "is_in_domain": false,
+    "expected_chunks": [],
+    "keywords": ["out of scope", "cittaai", "cannot"]
+  },
+  "HOLDOUT_018": {
+    "expected_entity": "catalog_overview",
+    "expected_intent": "catalog_inquiry",
+    "expected_aspect": "products",
+    "is_in_domain": true,
+    "expected_chunks": ["products_list", "catalog"],
+    "keywords": ["education", "healthcare", "realty", "whatsapp"]
+  },
+  "HOLDOUT_019": {
+    "expected_entity": "catalog_overview",
+    "expected_intent": "catalog_inquiry",
+    "expected_aspect": "solutions",
+    "is_in_domain": true,
+    "expected_chunks": ["solutions_list", "catalog"],
+    "keywords": ["enterprise", "os", "platform", "solution"]
+  },
+  "HOLDOUT_020": {
+    "expected_entity": "education_os",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "examination",
+    "is_in_domain": true,
+    "expected_chunks": ["education_os"],
+    "keywords": ["exam", "scheduling", "result", "grade"]
+  },
+  "HOLDOUT_021": {
+    "expected_entity": "cittaai_company",
+    "expected_intent": "security_inquiry",
+    "expected_aspect": "compliance",
+    "is_in_domain": true,
+    "expected_chunks": ["security", "compliance"],
+    "keywords": ["security", "compliance", "iso", "privacy"]
+  },
+  "HOLDOUT_022": {
+    "expected_entity": "cittaai_company",
+    "expected_intent": "clients_inquiry",
+    "expected_aspect": "customers",
+    "is_in_domain": true,
+    "expected_chunks": ["clients", "case_studies"],
+    "keywords": ["institution", "client", "customer", "partner"]
+  },
+  "HOLDOUT_023": {
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "broadcast",
+    "is_in_domain": true,
+    "expected_chunks": ["whatsapp_marketing"],
+    "keywords": ["broadcast", "bulk", "message", "whatsapp"]
+  },
+  "HOLDOUT_024": {
+    "expected_entity": "healthcare_os",
+    "expected_intent": "product_inquiry",
+    "expected_aspect": "hipaa_compliance",
+    "is_in_domain": true,
+    "expected_chunks": ["healthcare_os"],
+    "keywords": ["hipaa", "privacy", "compliance", "security", "patient"]
+  },
+  "HOLDOUT_025": {
+    "expected_entity": "cittaai_company",
+    "expected_intent": "company_inquiry",
+    "expected_aspect": "value_prop",
+    "is_in_domain": true,
+    "expected_chunks": ["company_overview"],
+    "keywords": ["cittaai", "vertical", "operating system", "ai"]
+  }
+}

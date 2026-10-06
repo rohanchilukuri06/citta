@@ -64,6 +64,14 @@
     {
       "question": "Where is your Hyderabad office?",
       "answer": "5th Floor, SVS One Building, Patrika Nagar Rd Number 2, HUDA Techno Enclave, HITEC City, Hyderabad, Telangana 500081"
+    },
+    {
+      "question": "What is CittaAI's phone number?",
+      "answer": "+91 9392655040"
+    },
+    {
+      "question": "What is CittaAI's email address?",
+      "answer": "info@cittaai.com"
     }
   ],
   "relationships": [],
@@ -73,6 +81,16 @@
     "last_updated": "2026-07-19",
     "source": "contact.json, location.json",
     "confidence": 1.0,
-    "language": "en"
-  }
+    "language": "en",
+    "site_sync": {
+      "source": "frontend/src/data/content.js",
+      "fields": {
+        "phone": "CONTACT.phone",
+        "email": "CONTACT.email"
+      },
+      "date": "2026-09-29"
+    }
+  },
+  "phone": "+91 9392655040",
+  "email": "info@cittaai.com"
 }

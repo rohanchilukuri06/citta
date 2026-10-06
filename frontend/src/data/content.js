@@ -28,29 +28,28 @@ export const NAV = {
     {
       label: "Products",
       children: [
-        { label: "WhatsApp Marketing", to: "/products/whatsapp-marketing" },
-        { label: "Influencer Marketing", to: "/products/influencer-marketing" },
+        { label: "WhatsApp Marketing", to: "/products/whatsapp-marketing", note: "Brand Messaging OS", accent: "jade" },
+        { label: "Influencer Marketing", to: "/products/influencer-marketing", note: "Creator Collaboration OS", accent: "coral" },
       ],
     },
     {
       label: "Solutions",
       children: [
-        { label: "E-Commerce OS", to: "/solutions/ecommerce-os" },
-        { label: "Real Estate OS", to: "/solutions/real-estate-os" },
-        { label: "Pharma OS", to: "/solutions/pharma-os" },
-        { label: "Smart Cities OS", to: "/solutions/smart-cities-os" },
-        { label: "Education OS", to: "/solutions/education-os" },
-        { label: "Enterprise AI OS", to: "/solutions/enterprise-ai-os" },
+        { label: "E-Commerce OS", to: "/solutions/ecommerce-os", note: "Storefront to supply chain", accent: "saffron" },
+        { label: "Real Estate OS", to: "/solutions/real-estate-os", note: "Listings to post-sale", accent: "terracotta" },
+        { label: "Pharma OS", to: "/solutions/pharma-os", note: "Quality & compliance", accent: "sky" },
+        { label: "Smart Cities OS", to: "/solutions/smart-cities-os", note: "Urban intelligence", accent: "leaf" },
+        { label: "Education OS", to: "/solutions/education-os", note: "Learning + assessment + coding", accent: "gold" },
+        { label: "Enterprise AI OS", to: "/solutions/enterprise-ai-os", note: "PoC to production", accent: "cobalt" },
       ],
     },
     {
       label: "Services",
       children: [
-        { label: "Data Engineering", to: "/services/data-engineering" },
-        { label: "Enterprise AI", to: "/services/enterprise-ai" },
-        { label: "AI Strategy", to: "/services/ai-strategy" },
-        { label: "MarTech 360", to: "/services/martech-360" },
-        { label: "Consulting", to: "/services/consulting" },
+        { label: "Data Engineering", to: "/services/data-engineering", note: "AI-ready data platforms", accent: "sky" },
+        { label: "Enterprise & Agentic AI", to: "/services/enterprise-ai", note: "Agents, RAG, LLMs", accent: "cobalt" },
+        { label: "AI Strategy & Advisory", to: "/services/ai-strategy", note: "Readiness to governance", accent: "saffron" },
+        { label: "MarTech 360", to: "/services/martech-360", note: "AI-powered marketing", accent: "coral" },
       ],
     },
     { label: "Recognition", to: "/recognition" },
@@ -102,10 +101,12 @@ export const HOMEPAGE = {
     eyebrow: "AGENTIC_AI_STACK",
     title: "Inside CittaAI's Agentic AI Stack",
     outcome: "From manual workflows to autonomous execution.",
+    // The four layers as published on cittaai.com
     steps: [
-      { n: "Step 01", title: "EAI-Based Intelligence", desc: "AI trained on documents, SOPs, policies, databases. Secure, permission-based, factual responses. Enterprise-grade knowledge systems." },
-      { n: "Step 02", title: "AI Chat Agents", desc: "Customer support, internal helpdesks, sales, workflows. Always available, always learning conversational AI." },
-      { n: "Step 03", title: "Video AI Agents", desc: "Training, onboarding, education, sales enablement. Interactive video experiences powered by AI." },
+      { n: "01", title: "RAG-Based Intelligence", desc: "AI trained on documents, SOPs, policies, databases. Secure, permission-based, factual responses. Enterprise-grade knowledge systems." },
+      { n: "02", title: "AI Chat Agents", desc: "Customer support, internal helpdesks, sales, workflows. Always available, always learning conversational AI." },
+      { n: "03", title: "Voice AI Agents", desc: "Inbound & outbound calls, reminders, onboarding. Natural voice interactions that feel human." },
+      { n: "04", title: "Video AI Agents", desc: "Training, onboarding, education, sales enablement. Interactive video experiences powered by AI." },
     ],
   },
   products: {
@@ -183,16 +184,9 @@ export const HOMEPAGE = {
 // PRODUCT & SOLUTION PAGE CONFIGS — one template, driven by data
 // ==============================================================
 
-export const ACCENT = {
-  green:  { hex: "#16A34A", light: "#4ADE80", grad: "linear-gradient(135deg, #16A34A 0%, #4ADE80 100%)" },
-  purple: { hex: "#9333EA", light: "#C084FC", grad: "linear-gradient(135deg, #9333EA 0%, #C084FC 100%)" },
-  blue:   { hex: "#2563EB", light: "#60A5FA", grad: "linear-gradient(135deg, #2563EB 0%, #60A5FA 100%)" },
-  indigo: { hex: "#6366F1", light: "#A5B4FC", grad: "linear-gradient(135deg, #6366F1 0%, #A5B4FC 100%)" },
-  pink:   { hex: "#DB2777", light: "#F472B6", grad: "linear-gradient(135deg, #DB2777 0%, #F472B6 100%)" },
-  teal:   { hex: "#0D9488", light: "#5EEAD4", grad: "linear-gradient(135deg, #0D9488 0%, #5EEAD4 100%)" },
-  violet: { hex: "#7C3AED", light: "#A78BFA", grad: "linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)" },
-  cyan:   { hex: "#0891B2", light: "#67E8F9", grad: "linear-gradient(135deg, #0891B2 0%, #67E8F9 100%)" },
-};
+// Accent names map to theme tokens in index.css (light + dark values): cobalt, jade, saffron, coral, sky,
+// terracotta, leaf, gold. Set with data-accent="…" on a page wrapper.
+export const ACCENTS = ["cobalt", "jade", "saffron", "coral", "sky", "terracotta", "leaf", "gold"];
 
 // ---------- PRODUCTS ----------
 export const WHATSAPP = {
@@ -202,7 +196,8 @@ export const WHATSAPP = {
   name: "WhatsApp Marketing Platform",
   hero: "Direct-to-customer messaging, orchestrated at scale.",
   subtitle: "Reach millions of customers on WhatsApp with segmented broadcasts, two-way support, and compliant lifecycle journeys — all inside one platform.",
-  accent: "green",
+  accent: "jade",
+  scene: "broadcast",
   stats: [
     { v: "98%",   l: "Open Rate" },
     { v: "45–60%", l: "Click Rate" },
@@ -233,7 +228,8 @@ export const INFLUENCER = {
   name: "Influencer Marketing Platform",
   hero: "Creator campaigns, measured like performance marketing.",
   subtitle: "Discover verified creators, orchestrate multi-touch campaigns, and attribute revenue with native affiliate tracking — one workspace for the entire lifecycle.",
-  accent: "purple",
+  accent: "coral",
+  scene: "creators",
   stats: [
     { v: "E2E",  l: "Campaign Mgmt" },
     { v: "ROI",  l: "Measurable Results" },
@@ -258,7 +254,8 @@ export const ECOMMERCE = {
   slug: "ecommerce-os", kind: "solution", eyebrow: "E-Commerce OS", name: "E-Commerce OS",
   hero: "One operating system for the modern storefront.",
   subtitle: "Product, order, CRM, marketing, support and supply chain — unified under one AI-native platform, engineered for D2C and marketplace growth.",
-  accent: "blue",
+  accent: "saffron",
+  scene: "commerce",
   stats: [
     { v: "One", l: "Unified Platform" },
     { v: "E2E", l: "Commerce OS" },
@@ -282,7 +279,8 @@ export const REALESTATE = {
   slug: "real-estate-os", kind: "solution", eyebrow: "Real Estate OS", name: "Real Estate OS",
   hero: "The operating system for property ecosystems.",
   subtitle: "Listings, leads, journeys, brokers, documents, communications and finance — one platform to run the entire real estate lifecycle.",
-  accent: "indigo",
+  accent: "terracotta",
+  scene: "skyline",
   stats: [
     { v: "E2E", l: "Lifecycle Mgmt" },
     { v: "Unified", l: "Sales + Ops + Intel" },
@@ -306,7 +304,8 @@ export const PHARMA = {
   slug: "pharma-os", kind: "solution", eyebrow: "Pharma OS", name: "Pharma & Healthcare OS",
   hero: "Compliance-first operations for regulated life sciences.",
   subtitle: "Batch review, quality dashboards, protocol preparation and APQR reporting — automated, auditable and validated for pharma workflows.",
-  accent: "pink",
+  accent: "sky",
+  scene: "helix",
   stats: [
     { v: "50%",  l: "Faster Reviews" },
     { v: "100%", l: "Audit Readiness" },
@@ -328,7 +327,8 @@ export const SMARTCITIES = {
   slug: "smart-cities-os", kind: "solution", eyebrow: "Smart Cities OS", name: "Smart Cities OS",
   hero: "Cognitive infrastructure for the modern city.",
   subtitle: "Unified urban data, smart mobility intelligence and resource management — one operating layer for municipalities and public agencies.",
-  accent: "teal",
+  accent: "leaf",
+  scene: "city",
   stats: [
     { v: "25%", l: "Traffic Reduction" },
     { v: "30%", l: "Energy Savings" },
@@ -347,7 +347,8 @@ export const EDUCATION = {
   slug: "education-os", kind: "solution", eyebrow: "Education OS", name: "Education OS",
   hero: "The learning operating system for institutions.",
   subtitle: "College LMS, cohort management, coding practice, video learning and assessments — a role-based platform for admins, HODs, educators and learners.",
-  accent: "violet",
+  accent: "gold",
+  scene: "learning",
   stakeholders: ["Admin", "HOD", "Educator", "Learner"],
   stats: [
     { v: "Role-Based", l: "Access Model" },
@@ -370,7 +371,8 @@ export const ENTERPRISEAI = {
   slug: "enterprise-ai-os", kind: "solution", eyebrow: "Enterprise AI OS", name: "Enterprise AI OS",
   hero: "The full-stack platform for enterprise AI.",
   subtitle: "RAG, agentic apps, voice, document AI, knowledge graphs and fine-tuning — a governed platform to take AI from proof-of-concept to production.",
-  accent: "cyan",
+  accent: "cobalt",
+  scene: "modules",
   stats: [
     { v: "10x",       l: "Faster Development" },
     { v: "99%",       l: "Enterprise Uptime" },
@@ -472,9 +474,9 @@ export const ABOUT = {
     title: "Our Team",
     subtitle: "The engineers, operators and strategists behind CittaAI.",
     leaders: [
+      { name: "Akhil Reddy",            title: "CEO",                         photo: "/assets/team/akhil-reddy.jpg",            linkedin: "#" },
       { name: "Vinay Velivela",         title: "CEO of Fixity Technologies",  photo: "/assets/team/vinay-velivela.jpg",         linkedin: null },
       { name: "Saladi Chandra Balaji",  title: "Co-Founder & COO",            photo: "/assets/team/saladi-chandra-balaji.jpg",  linkedin: null },
-      { name: "Akhil Reddy",            title: "Co-Founder & CTO",            photo: "/assets/team/akhil-reddy.jpg",            linkedin: "#" },
     ],
     others: [
       { name: "Ganesh Gandhi Vadalani", title: "CMO",                          photo: "/assets/team/ganesh-gandhi-vadalani.jpg", linkedin: null },
@@ -513,10 +515,9 @@ export const FOOTER = {
     ]},
     { h: "Services", links: [
       { l: "Data Engineering", to: "/services/data-engineering" },
-      { l: "Enterprise AI",    to: "/services/enterprise-ai" },
-      { l: "AI Strategy",      to: "/services/ai-strategy" },
+      { l: "Enterprise & Agentic AI", to: "/services/enterprise-ai" },
+      { l: "AI Strategy & Advisory",  to: "/services/ai-strategy" },
       { l: "MarTech 360",      to: "/services/martech-360" },
-      { l: "Consulting",       to: "/services/consulting" },
     ]},
     { h: "Company", links: [
       { l: "About Us",      to: "/about" },

@@ -1,170 +1,78 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Linkedin, ShieldCheck, Timer, LifeBuoy, Cpu, Sparkles } from "lucide-react";
+import { Linkedin, ShieldCheck, Timer, LifeBuoy, Cpu } from "lucide-react";
 import { ABOUT } from "@/data/content";
-import SectionHeader from "@/components/SectionHeader";
-import StatValue from "@/components/StatValue";
+import SectionHeader, { rise } from "@/components/SectionHeader";
+import Scene from "@/three/Scene";
 
-const whyIcons = [ShieldCheck, Timer, LifeBuoy, Cpu];
+const WHY_ICONS = [ShieldCheck, Timer, LifeBuoy, Cpu];
+const PRINCIPLE_ACCENT = ["cobalt", "jade", "saffron", "coral"];
 
-function TeamCard({ person, size = "lg", i = 0 }) {
-  const isLarge = size === "lg";
+function Person({ p, big }) {
+  const [broken, setBroken] = useState(false);
+  const initials = p.name.split(" ").map((w) => w[0]).slice(0, 2).join("");
   return (
-    <motion.figure
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, delay: i * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
-      className={`group relative rounded-3xl overflow-hidden bg-slate-950 border border-white/8 ${isLarge ? "" : ""}`}
-      data-testid={`team-card-${person.name.toLowerCase().replace(/\s+/g, "-")}`}
-    >
-      {/* Photo */}
-      <div className={`relative overflow-hidden ${isLarge ? "aspect-[4/5]" : "aspect-[3/4]"}`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <img
-          src={person.photo}
-          alt={person.name}
-          loading="lazy"
-          className="w-full h-full object-cover object-top transition-transform duration-[900ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.04]"
-        />
-        {/* Bottom gradient overlay on hover */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        {/* LinkedIn on hover */}
-        {person.linkedin && (
-          <a
-            href={person.linkedin}
-            target="_blank" rel="noreferrer"
-            aria-label={`${person.name} on LinkedIn`}
-            className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-brand-blue text-white grid place-items-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 shadow-lg shadow-brand-blue/40"
-            data-testid={`team-linkedin-${person.name.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            <Linkedin className="h-4 w-4" />
-          </a>
+    <motion.article {...rise()} className="card card-hover overflow-hidden">
+      <div className={`${big ? "h-72" : "h-56"} bg-canvas2 relative`}>
+        {!broken && p.photo
+          ? <img src={p.photo} alt={p.name} loading="lazy" onError={() => setBroken(true)} className="h-full w-full object-cover object-top" />
+          : <div className="h-full w-full grid place-items-center font-display text-5xl font-semibold text-accent bg-accent/10">{initials}</div>}
+      </div>
+      <div className="p-5 flex items-start justify-between gap-3">
+        <div>
+          <h3 className="font-display text-lg font-semibold text-ink">{p.name}</h3>
+          <p className="text-sm text-accent font-medium">{p.title}</p>
+        </div>
+        {p.linkedin && p.linkedin !== "#" && (
+          <a href={p.linkedin} aria-label={`${p.name} on LinkedIn`} className="h-9 w-9 rounded-full border border-line/15 grid place-items-center text-ink-soft hover:text-accent"><Linkedin className="h-4 w-4" /></a>
         )}
       </div>
-
-      {/* Caption */}
-      <figcaption className="p-5 relative">
-        <h4 className={`font-display font-semibold text-white ${isLarge ? "text-xl" : "text-base"}`}>
-          {person.name}
-          <span className="block h-[2px] w-0 mt-1.5 rounded-full bg-gradient-to-r from-brand-blue to-brand-light group-hover:w-16 transition-[width] duration-500" />
-        </h4>
-        <p className={`mt-1.5 text-white/60 ${isLarge ? "text-sm" : "text-xs"}`}>{person.title}</p>
-      </figcaption>
-    </motion.figure>
-  );
-}
-
-// Abstract skyscraper SVG illustration used as About hero visual (in-lieu of stock photograph)
-function SkyscraperArt() {
-  return (
-    <svg viewBox="0 0 400 500" className="w-full h-full">
-      <defs>
-        <linearGradient id="bldg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#2563EB" stopOpacity="0.05" />
-        </linearGradient>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0F172A" />
-          <stop offset="100%" stopColor="#0A0F1E" />
-        </linearGradient>
-      </defs>
-      <rect width="400" height="500" fill="url(#sky)" />
-      {/* Buildings */}
-      {[[60, 200, 60, 300], [140, 120, 80, 380], [240, 60, 90, 440], [345, 180, 40, 320]].map(([x, y, w, h], i) => (
-        <g key={`bldg-${x}-${y}`}>
-          <rect x={x} y={y} width={w} height={h} fill="url(#bldg)" stroke="#334155" strokeWidth="1" />
-          {/* Windows grid */}
-          {Array.from({ length: Math.floor(h / 20) }).map((_, r) => (
-            Array.from({ length: Math.floor(w / 15) }).map((__, c) => {
-              const lit = Math.random() > 0.6;
-              return (
-                <rect key={`${r}-${c}`}
-                  x={x + 4 + c * 15} y={y + 6 + r * 20} width="8" height="10"
-                  fill={lit ? "#60A5FA" : "#1E293B"} opacity={lit ? 0.85 : 0.4}
-                />
-              );
-            })
-          ))}
-        </g>
-      ))}
-    </svg>
+    </motion.article>
   );
 }
 
 export default function About() {
   const A = ABOUT;
   return (
-    <div data-testid="about-page">
-      {/* HERO */}
-      <section className="relative section-dark pt-36 pb-24 overflow-hidden">
-        <div className="aurora opacity-45" />
-        <div className="absolute inset-0 grid-bg-dark opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7">
-              <div className="chip mb-5"><Sparkles className="h-3.5 w-3.5" /> {A.eyebrow}</div>
-              <h1 className="font-display text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[1.02] font-semibold tracking-tight text-white">
-                {A.title} <span className="text-gradient-brand">{A.titleAccent}</span>
-              </h1>
-              <p className="mt-6 text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl">{A.lead}</p>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] glass-strong">
-                <SkyscraperArt />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="chip">Enterprise Scale</span>
-                </div>
-              </div>
-            </div>
+    <div data-testid="about-page" data-accent="cobalt">
+      <section className="relative overflow-hidden pt-28 lg:pt-32 pb-12">
+        <div className="wash" />
+        <div className="absolute inset-0 dotgrid opacity-60 pointer-events-none" />
+        <div className="relative container-x grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center">
+          <div>
+            <motion.div {...rise()} className="eyebrow mb-5">{A.eyebrow}</motion.div>
+            <motion.h1 {...rise(0.05)} className="h-display text-[clamp(2.6rem,6vw,5rem)] text-ink">
+              {A.title} <span className="text-accent-grad">{A.titleAccent}</span>
+            </motion.h1>
+            <motion.p {...rise(0.1)} className="mt-6 lead max-w-xl">{A.lead}</motion.p>
           </div>
-
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3">
-            {A.stats.map((s, i) => (
-              <motion.div
-                key={s.l}
-                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="glass-dark rounded-2xl p-5"
-                data-testid={`about-stat-${i}`}
-              >
-                <div className="font-display text-4xl font-bold text-gradient-brand"><StatValue value={s.v} /></div>
-                <p className="mt-1 text-white/60 text-sm">{s.l}</p>
-              </motion.div>
-            ))}
-          </div>
+          <Scene name="neural" props={{ calm: true }} className="h-[360px] sm:h-[440px] rounded-[2rem]"
+            label="A calm knowledge network: research-grade intelligence at enterprise scale." />
+        </div>
+        <div className="relative container-x mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {A.stats.map((s) => (
+            <div key={s.l} className="card p-6">
+              <div className="font-display text-4xl font-semibold text-accent tabular-nums">{s.v}</div>
+              <div className="mt-1 text-sm text-ink-soft">{s.l}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Story */}
-      <section className="relative section-light py-24 overflow-hidden">
-        <div className="absolute inset-0 grid-bg-light opacity-50" />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center">
-          <SectionHeader eyebrow="Our Story" title={A.storyTitle} theme="light" align="center" />
-          <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">{A.story}</p>
-        </div>
-      </section>
-
-      {/* Why enterprises choose us */}
-      <section className="relative section-dark2 py-24 overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionHeader eyebrow="Trust" title="Why Enterprises Choose Us" />
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="section section-alt">
+        <div className="container-x grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <SectionHeader eyebrow="Our Story" title={A.storyTitle} />
+            <motion.p {...rise(0.1)} className="mt-6 lead">{A.story}</motion.p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
             {A.why.map((w, i) => {
-              const Ico = whyIcons[i];
+              const Icon = WHY_ICONS[i];
               return (
-                <motion.div
-                  key={w.t}
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  transition={{ duration: 0.55, delay: i * 0.08 }}
-                  className="glass-dark rounded-2xl p-6 tilt"
-                  data-testid={`about-why-${i}`}
-                >
-                  <div className="h-10 w-10 rounded-xl bg-brand-blue/15 border border-brand-blue/25 grid place-items-center mb-4">
-                    <Ico className="h-4 w-4 text-brand-light" />
-                  </div>
-                  <h3 className="font-display text-lg font-semibold text-white">{w.t}</h3>
-                  <p className="mt-2 text-sm text-white/60 leading-relaxed">{w.d}</p>
+                <motion.div key={w.t} {...rise(0.06 * i)} className="card p-6">
+                  <div className="icon-tile mb-4"><Icon className="h-5 w-5" /></div>
+                  <h3 className="font-display font-semibold text-ink">{w.t}</h3>
+                  <p className="mt-2 text-sm text-ink-soft leading-relaxed">{w.d}</p>
                 </motion.div>
               );
             })}
@@ -172,51 +80,33 @@ export default function About() {
         </div>
       </section>
 
-      {/* Principles */}
-      <section className="relative section-light py-24 overflow-hidden">
-        <div className="absolute inset-0 grid-bg-light opacity-50" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionHeader eyebrow="Principles" title="What we stand for" theme="light" />
+      <section className="section">
+        <div className="container-x">
+          <SectionHeader eyebrow="Principles" title="The principles that" titleAccent="drive us." align="center"
+            lead="We believe in engineering excellence, radical transparency, and the transformative power of intelligence." />
           <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {A.principles.map((p, i) => (
-              <motion.div
-                key={p.t}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.08 }}
-                className="bg-white rounded-2xl p-6 border border-slate-200/70 card-lift"
-                data-testid={`about-principle-${i}`}
-              >
-                <div className="font-mono text-[11px] text-brand-blue uppercase tracking-widest">P/0{i + 1}</div>
-                <h3 className="mt-2 font-display text-lg font-semibold text-slate-950">{p.t}</h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{p.d}</p>
+              <motion.div key={p.t} {...rise(0.06 * i)} data-accent={PRINCIPLE_ACCENT[i]} className="card card-hover p-6">
+                <span className="h-3 w-3 block rotate-45 rounded-[3px] bg-accent" />
+                <h3 className="mt-5 font-display text-lg font-semibold text-ink">{p.t}</h3>
+                <p className="mt-2 text-sm text-ink-soft leading-relaxed">{p.d}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TEAM — Signature wow moment (Section 3.6) */}
-      <section id="team" className="relative section-dark2 py-28 overflow-hidden" data-testid="about-team-section">
-        <div className="aurora opacity-30" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionHeader eyebrow="The People" title={A.team.title} lead={A.team.subtitle} />
-
-          {/* Leaders row (3 large) */}
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {A.team.leaders.map((p, i) => (
-              <TeamCard key={p.name} person={p} size="lg" i={i} />
-            ))}
+      <section className="section section-alt">
+        <div className="container-x">
+          <SectionHeader eyebrow="The People" title="The minds behind" titleAccent="the intelligence." lead={A.team.subtitle} />
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {A.team.leaders.map((p) => <Person key={p.name} p={p} big />)}
           </div>
-
-          {/* Second row (4 smaller) */}
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-5">
-            {A.team.others.map((p, i) => (
-              <TeamCard key={p.name} person={p} size="sm" i={i} />
-            ))}
+          <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {A.team.others.map((p) => <Person key={p.name} p={p} />)}
           </div>
         </div>
       </section>
     </div>
   );
 }
-

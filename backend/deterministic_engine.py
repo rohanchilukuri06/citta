@@ -44,9 +44,33 @@ class DeterministicEngine:
             q_lower = query.lower().strip()
             from phase2_orchestrator import check_general_catalog_query
 
-            # Allow follow-up queries with context pronouns or single section words to pass through to Active Context Memory
+            # Direct Collaboration / Onboarding / Getting Started Intercept
+            collab_triggers = ["collaborate", "proceed", "ready to work", "work together", "partner with citta", "get started", "how to engage", "how can i proceed", "ready to collaborate"]
+            if any(t in q_lower for t in collab_triggers):
+                resp_md = (
+                    "🤝 **We're excited to collaborate with you!**\n\n"
+                    "To get started, you can reach out to our team directly:\n\n"
+                    "• 📧 **Email**: info@cittaai.com\n"
+                    "• 📞 **Call**: +91 9392655040\n"
+                    "• 📍 **Visit Us**: 5th Floor, SVS One Building, Patrika Nagar Rd 2, HUDA Techno Enclave, HITEC City, Hyderabad, Telangana 500081\n\n"
+                    "Feel free to give us a call, drop an email, or visit our Hyderabad office to discuss your requirements!"
+                )
+                return {
+                    "response": resp_md,
+                    "source": "CittaAI Onboarding Desk",
+                    "verified": True,
+                    "confidence": 1.0,
+                    "navigation": "/contact",
+                    "suggestions": ["Show Products", "Show Services", "Office Location"],
+                    "metrics": {"resolved_entity": "contact_info", "resolved_registry": "CONTACT"}
+                }
+
+            # Allow follow-up queries with context pronouns or single section words to pass through
             from entity_resolver import contains_pronouns
-            if contains_pronouns(query) or q_lower in ["tell me how it works", "how it works", "how does it work", "tell me more", "benefits", "features", "overview", "workflows", "faq"]:
+            consultative_phrases = [
+                "should we choose", "recommend", "best approach", "how should we", "advice", "guidance"
+            ]
+            if contains_pronouns(query) or any(p in q_lower for p in consultative_phrases) or q_lower in ["tell me how it works", "how it works", "how does it work", "tell me more", "benefits", "features", "overview", "workflows", "faq"]:
                 return None
 
             # 0. Run Query Understanding Engine
@@ -86,13 +110,132 @@ class DeterministicEngine:
                             "metrics": {"resolved_entity": "NONE", "resolved_registry": "PRODUCTS"}
                         }
 
+            # Multi-Category Intercept (Dynamically filter requested categories with word boundaries)
+            norm_q = q_lower
+            for typo, fix in [
+                ("prodcuts", "products"), ("prodcut", "product"), ("prducts", "products"), ("prduct", "product"),
+                ("porducts", "products"), ("porduct", "product"), ("srevices", "services"), ("serivces", "services"),
+                ("servises", "services"), ("solutins", "solutions"), ("soltuions", "solutions")
+            ]:
+                norm_q = norm_q.replace(typo, fix)
+
+            import re
+            def match_kw(kw_list):
+                for kw in kw_list:
+                    if re.search(r"\b" + re.escape(kw) + r"\b", norm_q):
+                        return True
+                return False
+
+            has_products = match_kw(["product", "products", "saas", "platform"])
+            has_solutions = match_kw(["solution", "solutions", "operating system", "os"])
+            has_services = match_kw(["service", "services", "consulting", "advisory"])
+            has_team = match_kw(["team", "leadership", "founder", "executive", "ceo", "cto"])
+            has_cases = match_kw(["case study", "case studies", "clients"])
+            has_awards = match_kw(["award", "awards", "achievement", "achievements", "recognition"])
+            has_contact = match_kw(["contact", "location", "address", "phone", "email", "office"])
+
+            # If query targets a specific industry sector (education, pharma, real estate, etc.), skip broad multi-category intercept
+            specific_industry_mentioned = any(ind in norm_q for ind in ["education", "pharma", "real estate", "healthcare", "health care", "smart cities", "ecommerce", "e-commerce", "whatsapp", "influencer"])
+
+            requested_cats = []
+            if has_products: requested_cats.append("Products")
+            if has_solutions: requested_cats.append("Solutions")
+            if has_services: requested_cats.append("Services")
+            if has_team: requested_cats.append("Leadership")
+            if has_cases: requested_cats.append("Case Studies")
+            if has_awards: requested_cats.append("Awards")
+            if has_contact: requested_cats.append("Contact Info")
+
+            is_everything = any(w in norm_q for w in ["everything", "all details", "complete overview", "full catalog"]) or len(requested_cats) >= 5
+
+            if not specific_industry_mentioned and (len(requested_cats) >= 2 or is_everything):
+                sections = []
+                
+                if has_products or is_everything:
+                    sections.append(
+                        "#### 🏆 Products\n"
+                        "• **WhatsApp Marketing Platform**: High-volume messaging, official WhatsApp Business API integration, AI auto-replies, and shared team inbox.\n"
+                        "• **Influencer Marketing Platform**: Creator discovery, campaign workflow management, UGC asset generation, and ROI analytics."
+                    )
+                
+                if has_solutions or is_everything:
+                    sections.append(
+                        "#### 🌐 Solutions (Industry Operating Systems)\n"
+                        "• **Enterprise AI OS**: Flagship platform for RAG, multi-agent swarms, document AI extraction, and voice agents.\n"
+                        "• **E-Commerce OS**: Storefront to supply chain automation, dynamic pricing, inventory sync, and support bots.\n"
+                        "• **Education OS**: Multi-college LMS, student cohort management, coding contest platform, and video libraries.\n"
+                        "• **Pharma OS**: Digitized batch record reviews, deviation/CAPA dashboards, and APQR compliance tools.\n"
+                        "• **Real Estate OS**: Property listings, omnichannel lead tracking, partner management, and document vaults.\n"
+                        "• **Smart Cities OS**: IoT mobility intelligence, utility resource management, and citizen data analytics."
+                    )
+
+                if has_services or is_everything:
+                    sections.append(
+                        "#### ⚡ Services\n"
+                        "• **AI Strategy & Advisory**: AI readiness assessment, strategic roadmaps, use case prioritization, and AI governance.\n"
+                        "• **Enterprise & Agentic AI**: Custom LLM fine-tuning, multi-agent swarms, RAG solutions, and conversational AI.\n"
+                        "• **Data Engineering**: Real-time data pipelines, cloud data warehouses, data lake architecture, and Master Data Management (MDM).\n"
+                        "• **AI-Powered Marketing**: Algorithmic SEO keyword ecosystems, self-optimizing predictive PPC, content generation, and social signal monitoring.\n"
+                        "• **MarTech 360**: Full-funnel intelligence ingesting search intent, audience behavior, and competitor signals."
+                    )
+
+                if has_team or is_everything:
+                    sections.append(
+                        "#### 👥 Executive Leadership Team\n"
+                        "• **Akhil Reddy** — CEO (Enterprise AI Solutions)\n"
+                        "• **Saladi Chandra Balaji** — Co-Founder & COO (Operations & Strategic Execution)\n"
+                        "• **Vinay Velivela** — CEO of Fixity Technologies\n"
+                        "• **Ganesh Gandhi Vadalani** — CMO (Global Brand & Marketing Strategy)\n"
+                        "• **Harish Nerati** — Operations & Sales Head (Sales Growth & Client Success)\n"
+                        "• **Aravind Reddy** — E-Commerce Head (Digital Commerce Strategy)\n"
+                        "• **Parvatha Mohan** — Business Development Head (Strategic Alliances & Partnerships)"
+                    )
+
+                if has_cases or is_everything:
+                    sections.append(
+                        "#### 📈 Client Case Studies\n"
+                        "• **Jewellery Brand**: Generated ₹3.5 Cr+ ROI from a single WhatsApp engagement campaign with a 98% read rate.\n"
+                        "• **FMCG Brand**: Grew Instagram community from 2K to 37K followers and generated 1,000+ UGC assets.\n"
+                        "• **B2B Spices Export**: Generated 50+ tons of export inquiries in 1 month with a 70% lower CPL."
+                    )
+
+                if has_awards or is_everything:
+                    sections.append(
+                        "#### 🎖️ Awards & Recognition\n"
+                        "• **Best AI Startup of the Year (2025)**: HYBIZ TV Business Excellence Awards.\n"
+                        "• **AP MSME Digital Empowerment Challenge (2025)**: Double Winner (AI DPR Preparation & SaaS Export Console)."
+                    )
+
+                if has_contact or is_everything:
+                    sections.append(
+                        "#### 📍 Contact Information\n"
+                        "• **Email**: info@cittaai.com | **Phone**: +91 9392655040\n"
+                        "• **Office**: 5th Floor, SVS One Building, Patrika Nagar Rd 2, HITEC City, Hyderabad, Telangana 500081"
+                    )
+
+                title_cats = " & ".join(requested_cats) if requested_cats and not is_everything else "Complete Knowledge"
+                header = f"### 🌟 CittaAI {title_cats} Overview\n\n"
+                footer = "\n\nWhich offering would you like to explore in detail?"
+                comp_resp = header + "\n\n".join(sections) + footer
+
+                sug_list = [f"Explain {c}" for c in requested_cats[:3]] if requested_cats else ["Explain Enterprise AI OS", "Explain WhatsApp Marketing Platform"]
+
+                return {
+                    "response": comp_resp,
+                    "source": "CittaAI Knowledge Registry",
+                    "verified": True,
+                    "confidence": 1.0,
+                    "suggestions": sug_list,
+                    "metrics": {"resolved_entity": "NONE", "resolved_registry": "MULTI"}
+                }
+
             # Category Listing Intercepts (SERVICES, PRODUCTS, SOLUTIONS)
             svc_triggers = {
                 "services", "what are the services", "what services do you offer", "what services", 
-                "list services", "show services", "our services", "services offered", 
+                "list services", "list all services", "show services", "show all services", "our services", "services offered", 
                 "what services does cittaai provide", "what services are available",
                 "what are the services provided", "services provided", "what are the srevices provided",
-                "srevices", "srevices provided", "srevice", "serivces"
+                "srevices", "srevices provided", "srevice", "serivces", "what services do you have"
             }
             if q_lower in svc_triggers or (check_general_catalog_query(query) and ("service" in q_lower or "services" in q_lower or "srevice" in q_lower or "srevices" in q_lower) and any(w in q_lower for w in ["what", "list", "show", "our", "all", "available", "provide", "offer", "tell me about"])):
                 services_resp = (
@@ -139,7 +282,7 @@ class DeterministicEngine:
                     "metrics": {"resolved_entity": "NONE", "resolved_registry": "SERVICES"}
                 }
 
-            prod_triggers = {"products", "what are the products", "what products do you offer", "what products", "list products", "show products", "our products", "products offered", "what products does cittaai provide", "what products are available"}
+            prod_triggers = {"products", "what are the products", "what products do you offer", "what products", "list products", "list all products", "show products", "show all products", "our products", "products offered", "what products does cittaai provide", "what products are available", "what products do you have"}
             if q_lower in prod_triggers or (check_general_catalog_query(query) and ("product" in q_lower or "products" in q_lower) and any(w in q_lower for w in ["what", "list", "show", "our", "all", "available", "provide", "offer", "tell me about"])):
                 products = self.ks.list_entities(tenant_id, "PRODUCTS")
                 if products:
@@ -165,7 +308,7 @@ class DeterministicEngine:
                     "metrics": {"resolved_entity": "NONE", "resolved_registry": "PRODUCTS"}
                 }
 
-            sol_triggers = {"solutions", "what are the solutions", "what solutions do you offer", "what solutions", "list solutions", "show solutions", "our solutions", "solutions offered", "industry os", "operating systems", "what solutions does cittaai provide"}
+            sol_triggers = {"solutions", "what are the solutions", "what solutions do you offer", "what solutions", "list solutions", "list all solutions", "show solutions", "show all solutions", "our solutions", "solutions offered", "industry os", "operating systems", "what solutions does cittaai provide", "what solutions do you have"}
             if q_lower in sol_triggers or (check_general_catalog_query(query) and ("solution" in q_lower or "solutions" in q_lower or "operating system" in q_lower) and any(w in q_lower for w in ["what", "list", "show", "our", "all", "available", "provide", "offer", "tell me about"])):
                 solutions = self.ks.list_entities(tenant_id, "SOLUTIONS")
                 if solutions:
@@ -649,7 +792,7 @@ class DeterministicEngine:
                             }
                     else:
                         obj = search_res["match"]
-                        if not (obj.id == "company_info" and any(w in q_lower for w in ["certific", "award", "recognit", "contact", "ceo", "cto", "coo", "leader"])):
+                        if not (obj.id == "company_info" and any(re.search(rf"\b{re.escape(w)}\b", q_lower) for w in ["certific", "award", "recognit", "contact", "ceo", "cto", "coo", "leader"])):
                             sec = "best_for" if any(w in q_lower for w in ["who is it for", "who is it designed for", "target audience", "intended users", "designed for"]) else ("how_it_works" if any(w in q_lower for w in ["how", "work", "workflow"]) else ("benefits" if any(w in q_lower for w in ["benefit", "advantage"]) else "overview"))
                             rendered_md = structured_renderers.render_section(obj, sec)
                             res_reg = obj.type.value.upper()

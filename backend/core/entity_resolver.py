@@ -118,7 +118,8 @@ class EntityResolver:
             "engineering", "ai", "team", "leaders", "leadership", "about", "contact", 
             "info", "overview", "offer", "offers", "offering", "offerings", "managed", 
             "management", "analytics", "reporting", "automation", "integration", "integrations", 
-            "data", "suite", "suites"
+            "data", "suite", "suites", "company", "our", "my", "help", "trying", "what", "need", "want", "communication",
+            "with", "for", "and", "the", "in", "of", "on", "from", "by", "as", "at", "to", "this", "that"
         }
 
         q_raw = query.strip().lower()
@@ -385,23 +386,29 @@ class EntityResolver:
             match = process.extractOne(q_clean, candidates, scorer=fuzz.WRatio)
             if match and match[1] >= 90.0:
                 best_str = match[0]
-                ent_id = self.registry.entity_lookup.get(best_str) or self.registry.alias_lookup.get(best_str) or self.registry.slug_lookup.get(best_str)
-                if ent_id:
-                    belongs_to = self.registry.knowledge_graph.get(ent_id, {}).get("belongs_to", "UNKNOWN")
-                    trace.append(f"fuzzy_match='{best_str}' (score={match[1]:.1f}) -> {ent_id}")
-                    timings["fuzzy_ms"] = (time.perf_counter() - t_fuzzy_start) * 1000.0
-                    return {
-                        "entity_id": ent_id,
-                        "registry": belongs_to,
-                        "entity_confidence": float(match[1] / 100.0),
-                        "routing_confidence": float(match[1] / 100.0 * 0.90),
-                        "confidence_level": "FUZZY",
-                        "matched_alias": best_str,
-                        "normalized_query": q_clean,
-                        "source": "alias",
-                        "trace": trace,
-                        "timings": timings
-                    }
+                q_words = set(re.findall(r"\w+", q_clean))
+                # Guard against false sub-word matches (e.g., 'housing' inside 'warehousing')
+                if best_str not in q_words and not re.search(r"\b" + re.escape(best_str) + r"\b", q_clean):
+                    match = None
+
+                if match:
+                    ent_id = self.registry.entity_lookup.get(best_str) or self.registry.alias_lookup.get(best_str) or self.registry.slug_lookup.get(best_str)
+                    if ent_id:
+                        belongs_to = self.registry.knowledge_graph.get(ent_id, {}).get("belongs_to", "UNKNOWN")
+                        trace.append(f"fuzzy_match='{best_str}' (score={match[1]:.1f}) -> {ent_id}")
+                        timings["fuzzy_ms"] = (time.perf_counter() - t_fuzzy_start) * 1000.0
+                        return {
+                            "entity_id": ent_id,
+                            "registry": belongs_to,
+                            "entity_confidence": float(match[1] / 100.0),
+                            "routing_confidence": float(match[1] / 100.0 * 0.90),
+                            "confidence_level": "FUZZY",
+                            "matched_alias": best_str,
+                            "normalized_query": q_clean,
+                            "source": "alias",
+                            "trace": trace,
+                            "timings": timings
+                        }
         except Exception as e:
             logger.warning(f"Fuzzy matching failed in core/entity_resolver: {e}")
 

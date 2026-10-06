@@ -17,6 +17,9 @@ from agent_planner import get_agent_planner
 from collaboration_planner import get_collaboration_planner
 from consensus_builder import get_consensus_builder
 
+from knowledge_tool_router import KnowledgeToolRouter
+from sufficiency_gate import get_sufficiency_gate, MAX_KNOWLEDGE_OPERATIONS
+
 logger = logging.getLogger(__name__)
 
 class AgentOrchestrator:
@@ -24,6 +27,8 @@ class AgentOrchestrator:
         self.planner = get_agent_planner()
         self.collaboration_planner = get_collaboration_planner()
         self.consensus_builder = get_consensus_builder()
+        self.tool_router = KnowledgeToolRouter()
+        self.sufficiency_gate = get_sufficiency_gate()
         
         self.agents = {
             AgentID.BUSINESS_SOLUTIONS.value: BusinessSolutionsAgent(),
@@ -32,6 +37,74 @@ class AgentOrchestrator:
             AgentID.MEMORY.value: MemoryAgent(),
             AgentID.RESEARCH.value: ResearchAgent(),
             AgentID.REVIEWER.value: ReviewerAgent()
+        }
+
+    async def execute_bounded_knowledge_query(
+        self,
+        query_intel: Dict[str, Any],
+        query_text: str
+    ) -> Dict[str, Any]:
+        """
+        Executes a bounded, schema-driven knowledge query using KnowledgeToolRouter
+        and enforcing a hard limit of MAX_KNOWLEDGE_OPERATIONS = 3 via SufficiencyGate.
+        """
+        ops_count = 0
+        collected_evidence = []
+        op_history = []
+
+        # 1. Resolve initial route plan
+        route_plans = self.tool_router.route_query(query_intel)
+
+        for plan in route_plans:
+            if ops_count >= MAX_KNOWLEDGE_OPERATIONS:
+                break
+
+            ops_count += 1
+            op_history.append(plan.operation_name)
+
+            if plan.authoritative_source == "KnowledgeRegistry":
+                from knowledge_registry import get_registry
+                reg = get_registry()
+                ent_id = plan.inputs.get("entity_id")
+                sec = plan.inputs.get("section")
+                
+                if ent_id and hasattr(reg, "get_entity"):
+                    ent = reg.get_entity(ent_id)
+                    if ent:
+                        collected_evidence.append({
+                            "source": "KnowledgeRegistry",
+                            "entity_id": ent_id,
+                            "section": sec,
+                            "text": str(ent)
+                        })
+            else:
+                # VectorStore semantic search
+                from vector_store import get_vector_store
+                vstore = get_vector_store()
+                if hasattr(vstore, "query_hybrid"):
+                    chunks = vstore.query_hybrid(query_text=query_text, top_k=5)
+                    for c in chunks:
+                        collected_evidence.append({
+                            "source": "VectorStore",
+                            "text": c.get("text", "")
+                        })
+
+            # Check sufficiency after operation
+            is_sufficient, reason, next_ops = self.sufficiency_gate.evaluate_sufficiency(
+                query_intel=query_intel,
+                collected_evidence=collected_evidence,
+                ops_executed_count=ops_count
+            )
+
+            if is_sufficient:
+                logger.info(f"[BoundedAgent] Evidence sufficient after {ops_count} ops. Reason: {reason}")
+                break
+
+        return {
+            "evidence": collected_evidence,
+            "ops_executed": ops_count,
+            "op_history": op_history,
+            "sufficiency_status": is_sufficient
         }
 
     async def orchestrate_collaboration(

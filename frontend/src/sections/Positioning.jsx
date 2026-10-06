@@ -1,36 +1,29 @@
 import { motion } from "framer-motion";
 import { HOMEPAGE } from "@/data/content";
-import SectionHeader from "@/components/SectionHeader";
+import { rise } from "@/components/SectionHeader";
 
 export default function Positioning() {
   const P = HOMEPAGE.positioning;
+  const [first, second] = P.title.split(/\s{2,}/);
   return (
-    <section className="relative section-light py-28 overflow-hidden" data-testid="positioning-section">
-      <div className="absolute inset-0 grid-bg-light opacity-60" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid lg:grid-cols-12 gap-14 items-start">
-          <div className="lg:col-span-5">
-            <SectionHeader eyebrow={P.eyebrow} title={P.title} theme="light" />
-            <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-lg">{P.lead}</p>
-          </div>
-          <div className="lg:col-span-7 grid gap-4">
-            {P.pillars.map((p, i) => (
-              <motion.div
-                key={p.n}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group relative bg-white border border-slate-200/70 rounded-3xl p-8 tilt"
-                data-testid={`pillar-${i}`}
-              >
-                <div className="absolute top-6 right-8 font-display text-7xl font-bold text-slate-100 group-hover:text-brand-blue/15 transition-colors">{p.n}</div>
-                <div className="relative">
-                  <h3 className="font-display text-2xl font-semibold text-slate-950 leading-tight">{p.title}</h3>
-                  <p className="mt-3 text-slate-600 leading-relaxed max-w-2xl">{p.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+    <section className="section" data-accent="cobalt" data-testid="positioning-section">
+      <div className="container-x">
+        <motion.div {...rise()} className="eyebrow mb-6">{P.eyebrow}</motion.div>
+        <motion.h2 {...rise(0.05)} className="h-display text-[clamp(2.4rem,6vw,5rem)] text-ink max-w-5xl">
+          {first} <span className="text-accent-grad">{second}</span>
+        </motion.h2>
+        <motion.p {...rise(0.1)} className="mt-6 lead max-w-3xl">{P.lead}</motion.p>
+        <div className="mt-14 grid md:grid-cols-3 gap-5">
+          {P.pillars.map((pl, i) => (
+            <motion.article key={pl.n} {...rise(0.08 * i)} className="card card-hover p-7 relative overflow-hidden">
+              <span className="absolute -right-2 -top-6 font-display text-[7rem] font-bold text-accent/10 leading-none select-none">{pl.n}</span>
+              <div className="relative">
+                <div className="font-mono text-xs text-accent mb-3">{pl.n}</div>
+                <h3 className="font-display text-xl font-semibold text-ink">{pl.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{pl.desc}</p>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

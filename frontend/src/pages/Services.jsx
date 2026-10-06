@@ -1,51 +1,45 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Database, Bot, Compass, Megaphone, Wrench } from "lucide-react";
-import { NAV } from "@/data/content";
-import SectionHeader from "@/components/SectionHeader";
-
-const icons = { "data-engineering": Database, "enterprise-ai": Bot, "ai-strategy": Compass, "martech-360": Megaphone, "consulting": Wrench };
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import { SERVICES } from "@/data/services";
+import { rise } from "@/components/SectionHeader";
+import Scene from "@/three/Scene";
 
 export default function Services() {
-  const items = NAV.primary.find((x) => x.label === "Services").children;
   return (
-    <div data-testid="services-index-page" className="relative section-dark min-h-screen pt-36 pb-24 overflow-hidden">
-      <div className="aurora opacity-40" />
-      <div className="absolute inset-0 grid-bg-dark opacity-30" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="chip mb-5">Services</div>
-        <h1 className="font-display text-[clamp(2.4rem,5.5vw,4.8rem)] leading-[1.02] font-semibold tracking-tight text-white">
-          End-to-end AI <span className="text-gradient-brand">transformation capabilities.</span>
-        </h1>
-        <p className="mt-6 text-lg text-white/70 max-w-2xl leading-relaxed">
-          Strategy, data, engineering, marketing — everything you need to move enterprise AI from proof-of-concept to production.
-        </p>
-
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {items.map((s, i) => {
-            const slug = s.to.replace("/services/", "");
-            const Icon = icons[slug] || Wrench;
-            return (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.06 }}
-                className="glass-dark rounded-2xl p-6 tilt"
-                data-testid={`service-index-${slug}`}
-              >
-                <div className="h-11 w-11 rounded-xl bg-brand-blue/15 border border-brand-blue/25 grid place-items-center mb-4">
-                  <Icon className="h-4 w-4 text-brand-light" />
-                </div>
-                <h3 className="font-display text-xl font-semibold text-white">{s.label}</h3>
-                <p className="mt-2 text-sm text-white/50">Content coming soon — <code className="font-mono text-brand-light">{"{{PENDING_CONTENT}}"}</code></p>
-                <Link to={s.to} className="mt-4 inline-flex items-center gap-1.5 text-brand-light text-sm group/l">
-                  Learn more <ArrowUpRight className="h-3.5 w-3.5 group-hover/l:translate-x-0.5 group-hover/l:-translate-y-0.5 transition-transform" />
-                </Link>
-              </motion.div>
-            );
-          })}
+    <div data-testid="services-index-page" data-accent="cobalt">
+      <section className="relative overflow-hidden pt-28 lg:pt-32 pb-10">
+        <div className="wash" />
+        <div className="absolute inset-0 dotgrid opacity-60 pointer-events-none" />
+        <div className="relative container-x">
+          <motion.div {...rise()} className="eyebrow mb-5">Our Services</motion.div>
+          <motion.h1 {...rise(0.05)} className="h-display text-[clamp(2.4rem,5.6vw,4.8rem)] text-ink max-w-4xl">
+            What we build: <span className="text-accent-grad">end-to-end AI transformation.</span>
+          </motion.h1>
+          <motion.p {...rise(0.1)} className="mt-6 lead max-w-2xl">
+            Strategy, data, engineering and marketing — everything needed to move enterprise AI from proof-of-concept to production.
+          </motion.p>
         </div>
-      </div>
+      </section>
+      <section className="pb-24">
+        <div className="container-x grid md:grid-cols-2 gap-6">
+          {SERVICES.map((s, i) => (
+            <motion.article key={s.slug} {...rise(0.06 * i)} data-accent={s.accent} className="card card-hover overflow-hidden flex flex-col" data-testid={`service-index-${s.slug}`}>
+              <Scene name={s.scene} className="h-[260px] bg-accent/5" />
+              <div className="p-7 flex flex-col flex-1">
+                <span className="pill pill-accent self-start">{s.items.length} specialisations</span>
+                <h2 className="mt-4 h-display text-3xl text-ink">{s.title}</h2>
+                <p className="mt-2 font-medium text-accent">{s.subtitle}</p>
+                <p className="mt-3 text-ink-soft leading-relaxed">{s.description}</p>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {s.items.map((x) => <li key={x.id} className="pill">{x.title}</li>)}
+                </ul>
+                <Link to={`/services/${s.slug}`} className="mt-6 link-arrow">Explore {s.title} <ArrowUpRight className="h-4 w-4" /></Link>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

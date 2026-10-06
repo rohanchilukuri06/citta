@@ -1,52 +1,59 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import { HOMEPAGE } from "@/data/content";
-import { Database, Bot, Compass, Megaphone, ArrowRight } from "lucide-react";
-import SectionHeader from "@/components/SectionHeader";
+import { SERVICE_BY_SLUG } from "@/data/services";
+import SectionHeader, { rise } from "@/components/SectionHeader";
+import Scene from "@/three/Scene";
 
-const icons = [Database, Bot, Compass, Megaphone];
-
+/** Services: one 3D canvas whose model follows the service being explored (pipeline, agents, roadmap, funnel). */
 export default function ServicesRow() {
   const S = HOMEPAGE.services;
+  const items = S.items.map((it) => ({ ...it, svc: SERVICE_BY_SLUG[it.to.replace("/services/", "")] }));
+  const [active, setActive] = useState(0);
+  const cur = items[active].svc;
   return (
-    <section id="services" className="relative section-dark py-28 overflow-hidden" data-testid="services-section">
-      <div className="absolute inset-0 grid-bg-dark opacity-30" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader eyebrow={S.eyebrow} title={S.title} lead={S.lead} />
-        <div className="mt-14 grid md:grid-cols-2 gap-5">
-          {S.items.map((s, i) => {
-            const Icon = icons[i];
-            return (
-              <motion.article
-                key={s.title}
-                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="group glass-dark rounded-3xl p-8 md:p-10 tilt relative overflow-hidden"
-                data-testid={`service-card-${i}`}
-              >
-                <div className="absolute top-0 right-0 h-40 w-40 bg-gradient-to-br from-brand-light/15 to-transparent blur-3xl opacity-70" />
-                <div className="relative">
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="h-12 w-12 rounded-2xl bg-white/5 border border-white/10 grid place-items-center">
-                      <Icon className="h-5 w-5 text-brand-light" />
-                    </div>
-                    <span className="font-mono text-[11px] uppercase tracking-widest text-white/40">S/0{i + 1}</span>
-                  </div>
-                  <h3 className="font-display text-2xl md:text-3xl font-semibold text-white">{s.title}</h3>
-                  <p className="mt-2 text-brand-light/90 text-sm">{s.sub}</p>
-                  <p className="mt-4 text-white/60 leading-relaxed">{s.desc}</p>
-                  <Link to={s.to} className="mt-6 inline-flex items-center gap-1.5 text-brand-light text-sm group/l">
-                    Learn more <ArrowRight className="h-3.5 w-3.5 group-hover/l:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </motion.article>
-            );
-          })}
+    <section className="section section-alt" data-accent={cur.accent} data-testid="services-section">
+      <div className="container-x">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeader eyebrow={S.eyebrow} title={S.title} lead={S.lead} />
+          <Link to={S.cta.to} className="btn btn-outline">{S.cta.label} <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
-        <div className="mt-12 flex justify-start">
-          <Link to={S.cta.to} className="btn-ghost group" data-testid="services-view-all">
-            {S.cta.label} <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+        <div className="mt-12 grid lg:grid-cols-[1fr_1.1fr] gap-8 items-stretch">
+          <ul className="space-y-3" role="tablist" aria-label="Services">
+            {items.map((it, i) => (
+              <motion.li key={it.to} {...rise(0.05 * i)}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={active === i}
+                  data-accent={it.svc.accent}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className={`w-full text-left card p-5 transition-all ${active === i ? "!border-accent/60 shadow-[var(--shadow-lift)]" : "opacity-80 hover:opacity-100"}`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="font-display text-xl font-semibold text-ink">{it.title}</span>
+                    <span className={`h-2.5 w-2.5 rotate-45 rounded-[3px] ${active === i ? "bg-accent" : "bg-line/20"}`} />
+                  </div>
+                  <span className="block mt-1 text-sm font-medium text-accent">{it.sub}</span>
+                  {active === i && <span className="block mt-2 text-sm leading-relaxed text-ink-soft">{it.desc}</span>}
+                </button>
+              </motion.li>
+            ))}
+          </ul>
+          <div className="card overflow-hidden flex flex-col">
+            <Scene name={cur.scene} accent={cur.accent} className="h-[340px] sm:h-[400px] flex-1 bg-accent/5" />
+            <div className="p-6 border-t border-line/10">
+              <div className="flex flex-wrap gap-2">
+                {cur.items.slice(0, 4).map((x) => <span key={x.id} className="pill">{x.title}</span>)}
+                {cur.items.length > 4 && <span className="pill">+{cur.items.length - 4} more</span>}
+              </div>
+              <Link to={items[active].to} className="mt-5 link-arrow">Explore {items[active].title} <ArrowUpRight className="h-4 w-4" /></Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

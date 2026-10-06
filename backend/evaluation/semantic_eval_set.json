@@ -1,0 +1,4119 @@
+{
+ "version": "1.4.0",
+ "frozen_at": "2026-09-27",
+ "notes": "Frozen semantic interpretation benchmark. 'dev' may be inspected while developing; 'test' is held-out and must only be run to report results, never used to add rules or exemplars. Keys: q=query, ctx=active conversation entity, ent=acceptable primary entities ([] = no entity), multi=entities required for MULTI_ENTITY, scope=acceptable scopes, aspect=acceptable aspects (null = not graded), clarify='ok' (clarification is an acceptable outcome) or 'must' (clarification is the only correct outcome). v1.1.0 adds 'test2': a second held-out split written after the first test run, used to validate post-test fixes. v1.2.0 adds dev aspect items (entity named inside an aspect question) for calibration. Clients/case-study questions also accept scope CLIENTS_SCOPE (canonical name for company-wide client listings). v1.3.0 (2026-09-29): dev items for v3 failure categories; hospital/clinic items relabelled to clarification/out-of-domain per the Pharma OS content decision: PARA_HC_02, PARA_HC_03, PARA_HC_05, PARA_HC_06, PARA_HC_07, PARA_HC_08, T_PH_07. (D_ASP_01 names Pharma OS explicitly and keeps its label.) v1.4.0 (2026-09-30): cittaai.com lists 'WhatsApp Marketing Automation' as a service under AI-Powered Marketing, so generic messaging-need dev items also accept ai_powered_marketing: D_DOC_04, PARA_WA_03, PARA_WA_06 (items naming the WhatsApp platform itself keep the product-only label).",
+ "items": [
+  {
+   "id": "D_DOC_01",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "I run a university. What could you guys do for us?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_DOC_02",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "Our property business needs AI automation.",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_DOC_03",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "What can you do for universities?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "D_DOC_04",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "We need something to keep customers updated through messaging.",
+   "ent": [
+    "whatsapp_marketing",
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_DOC_05",
+   "split": "dev",
+   "style": "CategoryMismatch",
+   "q": "What services do you have for WhatsApp?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_DOC_06",
+   "split": "dev",
+   "style": "CategoryMismatch",
+   "q": "What features does your Education service have?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_DOC_07",
+   "split": "dev",
+   "style": "Context",
+   "ctx": "education_os",
+   "q": "Who is this meant for?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "D_DOC_08",
+   "split": "dev",
+   "style": "Context",
+   "ctx": "education_os",
+   "q": "What can it actually do?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_DOC_09",
+   "split": "dev",
+   "style": "Context",
+   "ctx": "real_estate_os",
+   "q": "Why would a business use it?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_DOC_10",
+   "split": "dev",
+   "style": "Context",
+   "ctx": "whatsapp_marketing",
+   "q": "How does it work?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "D_DOC_11",
+   "split": "dev",
+   "style": "Company",
+   "q": "How do I reach you?",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "D_DOC_12",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "What solutions do you offer?",
+   "ent": [],
+   "scope": [
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_DOC_13",
+   "split": "dev",
+   "style": "Direct",
+   "q": "What does your Education solution do?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "D_DOC_14",
+   "split": "dev",
+   "style": "Multi",
+   "q": "Compare your Education and Pharma solutions.",
+   "ent": [
+    "education_os",
+    "pharma_os"
+   ],
+   "multi": [
+    "education_os",
+    "pharma_os"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_DOC_15",
+   "split": "dev",
+   "style": "Company",
+   "q": "What companies have you worked with?",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "SINGLE_ENTITY",
+    "CLIENTS_SCOPE"
+   ],
+   "aspect": [
+    "CLIENTS_CASE_STUDIES"
+   ]
+  },
+  {
+   "id": "D_DOC_16",
+   "split": "dev",
+   "style": "Company",
+   "q": "How can I work with your team?",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "D_DOC_17",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "What can you do for colleges?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_ED_01",
+   "split": "dev",
+   "style": "Direct",
+   "q": "What solutions do you offer for education?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_ED_02",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "What can you guys do for colleges?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_ED_03",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "I run a university. How could CittaAI help us?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_ED_04",
+   "split": "dev",
+   "style": "Business",
+   "q": "We operate an educational institution. What can you provide?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_ED_05",
+   "split": "dev",
+   "style": "Informal",
+   "q": "what u offer for college",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_ED_06",
+   "split": "dev",
+   "style": "Synonym",
+   "q": "How can you help schools and academic centers?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_ED_07",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "We need to improve how our institution operates with AI.",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "OVERVIEW",
+    "CAPABILITIES"
+   ],
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_ED_08",
+   "split": "dev",
+   "style": "Minimal",
+   "q": "Anything for universities?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_HC_01",
+   "split": "dev",
+   "style": "Direct",
+   "q": "What solutions do you offer for healthcare?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ],
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_HC_02",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "How do you help regional hospital networks manage patients?",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_HC_03",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "I manage a medical clinic. What AI systems are suitable for us?",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_HC_04",
+   "split": "dev",
+   "style": "Business",
+   "q": "We operate a pharmaceutical distribution chain. What platform do you have?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_HC_05",
+   "split": "dev",
+   "style": "Informal",
+   "q": "what do u have for hospitals",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_HC_06",
+   "split": "dev",
+   "style": "Synonym",
+   "q": "Any AI tech for health care facilities and doctors?",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_HC_07",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "We are struggling with patient scheduling and clinical workflow automation.",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_HC_08",
+   "split": "dev",
+   "style": "Minimal",
+   "q": "Anything for clinics?",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_RE_01",
+   "split": "dev",
+   "style": "Direct",
+   "q": "What solutions do you offer for real estate?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_RE_02",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "I operate a real estate brokerage firm. What automation tools do you offer?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_RE_03",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "Our property management group needs to track site visits and agent commissions.",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "PARA_RE_04",
+   "split": "dev",
+   "style": "Business",
+   "q": "We are residential builders looking for digital inventory and lead booking tools.",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_RE_05",
+   "split": "dev",
+   "style": "Informal",
+   "q": "what u got for realtors",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_RE_06",
+   "split": "dev",
+   "style": "Synonym",
+   "q": "Do you have software for housing projects and property brokers?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_RE_07",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "Our real estate team is losing leads because follow-ups take too long.",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_RE_08",
+   "split": "dev",
+   "style": "Minimal",
+   "q": "Anything for brokers?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ],
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_WA_01",
+   "split": "dev",
+   "style": "Direct",
+   "q": "How can WhatsApp help my business run bulk notification campaigns?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "BENEFITS",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_WA_02",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "Can I broadcast automated WhatsApp messages to 10000 customers at once?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_WA_03",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "We want to connect our CRM with chat messaging for instant support alerts.",
+   "ent": [
+    "whatsapp_marketing",
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "PARA_WA_04",
+   "split": "dev",
+   "style": "Business",
+   "q": "What is the official WhatsApp automation platform capability set?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_WA_05",
+   "split": "dev",
+   "style": "Informal",
+   "q": "can i send mass whatsapp msgs",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_WA_06",
+   "split": "dev",
+   "style": "Synonym",
+   "q": "How does text messaging automation integrate with Shopify or Salesforce?",
+   "ent": [
+    "whatsapp_marketing",
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "PARA_WA_07",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "Our open rates on email are horrible and we need direct mobile channel reach.",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "OVERVIEW",
+    "CAPABILITIES"
+   ],
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_WA_08",
+   "split": "dev",
+   "style": "Minimal",
+   "q": "WhatsApp bulk sender info?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_SC_01",
+   "split": "dev",
+   "style": "Direct",
+   "q": "What solutions do you offer for smart cities and urban municipalities?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_SC_02",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "How can city planning councils monitor traffic and municipal infrastructure?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW",
+    "WORKFLOW",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "PARA_SC_03",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "Our local government authority needs IoT and central command dashboard software.",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_SC_04",
+   "split": "dev",
+   "style": "Business",
+   "q": "What is Smart Cities OS core architecture and sensor telemetry capability?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "WORKFLOW",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_SC_05",
+   "split": "dev",
+   "style": "Informal",
+   "q": "tech for city management",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_SC_06",
+   "split": "dev",
+   "style": "Synonym",
+   "q": "Do you serve civic bodies and public sector municipal corporations?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_SC_07",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "We need unified monitoring for emergency response and waste management in our town.",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_SC_08",
+   "split": "dev",
+   "style": "Minimal",
+   "q": "Smart city tech?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_AI_01",
+   "split": "dev",
+   "style": "Direct",
+   "q": "What is Enterprise AI OS and how does agentic AI middleware function?",
+   "ent": [
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "WORKFLOW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_AI_02",
+   "split": "dev",
+   "style": "Conversational",
+   "q": "How do your autonomous AI agents coordinate complex multi-step workflows?",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_AI_03",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "We are a Fortune 500 company looking to deploy secure on-prem LLM agents.",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "PARA_AI_04",
+   "split": "dev",
+   "style": "Business",
+   "q": "What security, governance, and audit trails exist in Enterprise AI OS?",
+   "ent": [
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_AI_05",
+   "split": "dev",
+   "style": "Informal",
+   "q": "tell me about agentic ai platform",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "PARA_AI_06",
+   "split": "dev",
+   "style": "Synonym",
+   "q": "Any cognitive operating systems for large business enterprises?",
+   "ent": [
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_AI_07",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "Our existing AI tools lack enterprise data privacy and role-based access controls.",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "PARA_AI_08",
+   "split": "dev",
+   "style": "Minimal",
+   "q": "Enterprise AI OS details?",
+   "ent": [
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "PARA_CAT_01",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "What products does CittaAI offer across different industries?",
+   "ent": [],
+   "scope": [
+    "ALL_PRODUCTS",
+    "ALL"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "PARA_CAT_02",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "Give me a summary of all your flagship enterprise OS solutions.",
+   "ent": [],
+   "scope": [
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "PARA_COMP_01",
+   "split": "dev",
+   "style": "Company",
+   "q": "Who founded CittaAI and who leads the executive team?",
+   "ent": [
+    "leadership_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "LEADERSHIP"
+   ]
+  },
+  {
+   "id": "PARA_COMP_02",
+   "split": "dev",
+   "style": "Company",
+   "q": "How do I get in touch with sales or request a product demo?",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "PARA_COMP_03",
+   "split": "dev",
+   "style": "Company",
+   "q": "What awards, press, or industry recognitions has CittaAI received?",
+   "ent": [
+    "awards_recognition",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "RECOGNITION"
+   ]
+  },
+  {
+   "id": "PARA_OOD_01",
+   "split": "dev",
+   "style": "OOD",
+   "q": "Can you write a Python script to scrape stock market data from Yahoo Finance?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "PARA_OOD_02",
+   "split": "dev",
+   "style": "OOD",
+   "q": "What is the best recipe for baking sourdough bread at home?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_ED_01",
+   "split": "test",
+   "style": "Indirect",
+   "q": "Is there something for managing coding contests and aptitude tests for students?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_ED_02",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "our campus has 5 colleges and we struggle tracking which dept is performing",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_ED_03",
+   "split": "test",
+   "style": "Informal",
+   "q": "do u have lms",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_ED_04",
+   "split": "test",
+   "style": "Indirect",
+   "q": "Which product helps placement cells prepare students for recruitment?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_ED_05",
+   "split": "test",
+   "style": "Typos",
+   "q": "we r a engineering colege, want platform for exams",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_ED_06",
+   "split": "test",
+   "style": "NonNative",
+   "q": "Kindly tell what is solution for coaching institute",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_ED_07",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Who is Education OS meant for?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T_ED_08",
+   "split": "test",
+   "style": "Aspect",
+   "q": "How does onboarding of students into cohorts work in your education platform?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T_ED_09",
+   "split": "test",
+   "style": "CategoryMismatch",
+   "q": "What services do you have for schools?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_ED_10",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Why would a university choose your learning platform over Moodle?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_ED_11",
+   "split": "test",
+   "style": "NonNative",
+   "q": "sir we are school management, what u provide",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_PH_01",
+   "split": "test",
+   "style": "Direct",
+   "q": "Do you have anything for pharmaceutical quality assurance teams?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T_PH_02",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "We manufacture generic drugs and batch record review takes weeks",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_PH_03",
+   "split": "test",
+   "style": "Minimal",
+   "q": "tool for APQR reports?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_PH_04",
+   "split": "test",
+   "style": "Business",
+   "q": "How can AI help with GMP compliance and batch release decisions?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_PH_05",
+   "split": "test",
+   "style": "Informal",
+   "q": "pharma qa software",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_PH_06",
+   "split": "test",
+   "style": "Aspect",
+   "q": "What are the benefits of Pharma OS?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_PH_07",
+   "split": "test",
+   "style": "Indirect",
+   "q": "Our hospital needs AI for patient appointment booking",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T_PH_08",
+   "split": "test",
+   "style": "NonNative",
+   "q": "pls tell about product for pharma company",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_PH_09",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Walk me through how Pharma OS works step by step",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T_RE_01",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "We sell apartments and lose track of site visits",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS",
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_RE_02",
+   "split": "test",
+   "style": "Indirect",
+   "q": "Something to manage property listings and channel partner commissions?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_RE_03",
+   "split": "test",
+   "style": "Conversational",
+   "q": "I'm a builder, can your platform help with booking and agreements?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "BENEFITS",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_RE_04",
+   "split": "test",
+   "style": "Informal",
+   "q": "realestate crm pls",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_RE_05",
+   "split": "test",
+   "style": "Aspect",
+   "q": "How does the Real Estate OS handle the post-sale process?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_RE_06",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Who uses the real estate platform?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T_RE_07",
+   "split": "test",
+   "style": "Typos",
+   "q": "real estat softwere",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_RE_08",
+   "split": "test",
+   "style": "Aspect",
+   "q": "What is the ROI of using Real Estate OS?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_SC_01",
+   "split": "test",
+   "style": "Conversational",
+   "q": "Can you help a municipal corporation analyse traffic congestion?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "BENEFITS",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_SC_02",
+   "split": "test",
+   "style": "Indirect",
+   "q": "We manage water and electricity utilities for a city",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_SC_03",
+   "split": "test",
+   "style": "Minimal",
+   "q": "urban planning analytics from IoT sensors",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_SC_04",
+   "split": "test",
+   "style": "Business",
+   "q": "Government body looking for citizen data platform",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_SC_05",
+   "split": "test",
+   "style": "Aspect",
+   "q": "what are the capabilities of the urban intelligence platform",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_SC_06",
+   "split": "test",
+   "style": "Aspect",
+   "q": "What problems does Smart Cities OS solve for a city?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_SC_07",
+   "split": "test",
+   "style": "NonNative",
+   "q": "smart city ka solution batao",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_EC_01",
+   "split": "test",
+   "style": "Indirect",
+   "q": "I run an online store, need help with inventory and orders",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_EC_02",
+   "split": "test",
+   "style": "Business",
+   "q": "Do you have a platform for D2C brands to manage storefront and support?",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_EC_03",
+   "split": "test",
+   "style": "Informal",
+   "q": "ecom os features",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_EC_04",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "Our online shop's customer retention is poor",
+   "ent": [
+    "ecommerce_os",
+    "ai_powered_marketing",
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T_EC_05",
+   "split": "test",
+   "style": "Aspect",
+   "q": "How does order lifecycle management work in your commerce platform?",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_EC_06",
+   "split": "test",
+   "style": "NonNative",
+   "q": "which one is good for my kirana shop online selling",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_EC_07",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Is E-commerce OS suitable for small shops?",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T_AI_01",
+   "split": "test",
+   "style": "Business",
+   "q": "We want to build and deploy RAG applications in production",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_AI_02",
+   "split": "test",
+   "style": "Minimal",
+   "q": "Platform for evaluating and deploying AI agents?",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_AI_03",
+   "split": "test",
+   "style": "Indirect",
+   "q": "Do you have document AI for extracting data from invoices?",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_AI_04",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "voice agents for our call center",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai",
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T_AI_05",
+   "split": "test",
+   "style": "Business",
+   "q": "Can your team fine-tune an LLM on our internal data?",
+   "ent": [
+    "enterprise_agentic_ai",
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_AI_06",
+   "split": "test",
+   "style": "Conversational",
+   "q": "We need consultants to build a multi-agent system for us",
+   "ent": [
+    "enterprise_agentic_ai",
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_WA_01",
+   "split": "test",
+   "style": "Conversational",
+   "q": "Can we send order updates to customers on whatsapp automatically?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_WA_02",
+   "split": "test",
+   "style": "Informal",
+   "q": "bulk msg to lakhs of customers possible?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_WA_03",
+   "split": "test",
+   "style": "Indirect",
+   "q": "Is there a shared inbox where my agents can reply to customer chats?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_WA_04",
+   "split": "test",
+   "style": "Aspect",
+   "q": "How does brand onboarding work for WhatsApp broadcasting?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T_WA_05",
+   "split": "test",
+   "style": "Typos",
+   "q": "whatsap marketing pricing",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "PRICING"
+   ]
+  },
+  {
+   "id": "T_WA_06",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Any FAQs about the WhatsApp platform?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "FAQ"
+   ]
+  },
+  {
+   "id": "T_IN_01",
+   "split": "test",
+   "style": "Indirect",
+   "q": "We want to find Instagram creators for our brand campaigns",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_IN_02",
+   "split": "test",
+   "style": "Conversational",
+   "q": "how do we track affiliate sales from influencers",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T_IN_03",
+   "split": "test",
+   "style": "Business",
+   "q": "Our agency manages 200 creators, need a campaign tool",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_IN_04",
+   "split": "test",
+   "style": "Typos",
+   "q": "influncer platform?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_IN_05",
+   "split": "test",
+   "style": "Aspect",
+   "q": "Who is the creator marketplace ideal for?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T_IN_06",
+   "split": "test",
+   "style": "Aspect",
+   "q": "What features does the influencer platform have?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_DE_01",
+   "split": "test",
+   "style": "Direct",
+   "q": "We need help building real-time data pipelines",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_DE_02",
+   "split": "test",
+   "style": "Conversational",
+   "q": "Can you migrate our data warehouse to the cloud?",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_DE_03",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "our data is scattered across 12 systems and reports never match",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T_DE_04",
+   "split": "test",
+   "style": "Minimal",
+   "q": "master data management consulting?",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_ST_01",
+   "split": "test",
+   "style": "Problem-oriented",
+   "q": "We don't know where to start with AI, can you assess our readiness?",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_ST_02",
+   "split": "test",
+   "style": "Business",
+   "q": "Help us prioritize AI use cases for next year",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_ST_03",
+   "split": "test",
+   "style": "Direct",
+   "q": "Do you offer AI governance advisory?",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_ST_04",
+   "split": "test",
+   "style": "Informal",
+   "q": "board wants an AI roadmap",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MK_01",
+   "split": "test",
+   "style": "Conversational",
+   "q": "Can you run our Google ads and SEO?",
+   "ent": [
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MK_02",
+   "split": "test",
+   "style": "Business",
+   "q": "We need social media management and content creation",
+   "ent": [
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MK_03",
+   "split": "test",
+   "style": "Informal",
+   "q": "digital marketing agency services?",
+   "ent": [
+    "ai_powered_marketing",
+    "martech_360"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MK_04",
+   "split": "test",
+   "style": "Business",
+   "q": "We need brand positioning based on competitor messaging analysis",
+   "ent": [
+    "martech_360",
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MK_05",
+   "split": "test",
+   "style": "Direct",
+   "q": "What is MarTech 360?",
+   "ent": [
+    "martech_360"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_AMB_01",
+   "split": "test",
+   "style": "Ambiguous",
+   "q": "Do you do marketing?",
+   "ent": [
+    "ai_powered_marketing",
+    "martech_360",
+    "whatsapp_marketing",
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY",
+    "ALL_SERVICES"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T_AMB_02",
+   "split": "test",
+   "style": "Ambiguous",
+   "q": "Tell me about your AI platform",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ],
+   "clarify": "ok"
+  },
+  {
+   "id": "T_AMB_03",
+   "split": "test",
+   "style": "Ambiguous",
+   "q": "What can it do?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null,
+   "clarify": "must"
+  },
+  {
+   "id": "T_AMB_04",
+   "split": "test",
+   "style": "Ambiguous",
+   "q": "I need help.",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null,
+   "clarify": "must"
+  },
+  {
+   "id": "T_CAT_01",
+   "split": "test",
+   "style": "Catalog",
+   "q": "What do you offer?",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CAT_02",
+   "split": "test",
+   "style": "Catalog",
+   "q": "Which products do you sell?",
+   "ent": [],
+   "scope": [
+    "ALL_PRODUCTS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CAT_03",
+   "split": "test",
+   "style": "Catalog",
+   "q": "list your services",
+   "ent": [],
+   "scope": [
+    "ALL_SERVICES"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CAT_04",
+   "split": "test",
+   "style": "Catalog",
+   "q": "what solutions r available",
+   "ent": [],
+   "scope": [
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CAT_05",
+   "split": "test",
+   "style": "Catalog",
+   "q": "Which industries do you work with?",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CAT_06",
+   "split": "test",
+   "style": "Catalog",
+   "q": "How many products do you have?",
+   "ent": [],
+   "scope": [
+    "ALL_PRODUCTS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CAT_07",
+   "split": "test",
+   "style": "Catalog",
+   "q": "Give me an overview of everything CittaAI builds",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_SOLUTIONS",
+    "ALL_PRODUCTS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MUL_01",
+   "split": "test",
+   "style": "Multi",
+   "q": "What's the difference between WhatsApp marketing and influencer marketing platforms?",
+   "ent": [
+    "whatsapp_marketing",
+    "influencer_marketing"
+   ],
+   "multi": [
+    "whatsapp_marketing",
+    "influencer_marketing"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MUL_02",
+   "split": "test",
+   "style": "Multi",
+   "q": "real estate os vs ecommerce os",
+   "ent": [
+    "real_estate_os",
+    "ecommerce_os"
+   ],
+   "multi": [
+    "real_estate_os",
+    "ecommerce_os"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MUL_03",
+   "split": "test",
+   "style": "Multi",
+   "q": "Do both Smart Cities OS and Enterprise AI OS support IoT data?",
+   "ent": [
+    "smart_cities_os",
+    "enterprise_ai_os"
+   ],
+   "multi": [
+    "smart_cities_os",
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_MUL_04",
+   "split": "test",
+   "style": "Multi",
+   "q": "Which is better for a retailer: E-Commerce OS or WhatsApp Marketing?",
+   "ent": [
+    "ecommerce_os",
+    "whatsapp_marketing"
+   ],
+   "multi": [
+    "ecommerce_os",
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_CTX_01",
+   "split": "test",
+   "style": "Context",
+   "ctx": "education_os",
+   "q": "What can it do?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_CTX_02",
+   "split": "test",
+   "style": "Context",
+   "ctx": "real_estate_os",
+   "q": "Who is it for?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T_CTX_03",
+   "split": "test",
+   "style": "Context",
+   "ctx": "whatsapp_marketing",
+   "q": "How does that work?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T_CTX_04",
+   "split": "test",
+   "style": "Elliptical",
+   "ctx": "pharma_os",
+   "q": "and the benefits?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T_CTX_05",
+   "split": "test",
+   "style": "Elliptical",
+   "ctx": "smart_cities_os",
+   "q": "pricing?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "PRICING"
+   ]
+  },
+  {
+   "id": "T_CTX_06",
+   "split": "test",
+   "style": "Context",
+   "ctx": "education_os",
+   "q": "What about pharma?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_CTX_07",
+   "split": "test",
+   "style": "Context",
+   "ctx": "influencer_marketing",
+   "q": "does it have analytics?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T_CO_01",
+   "split": "test",
+   "style": "Company",
+   "q": "Who is the CEO of CittaAI?",
+   "ent": [
+    "akhil_reddy",
+    "leadership_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "LEADERSHIP"
+   ]
+  },
+  {
+   "id": "T_CO_02",
+   "split": "test",
+   "style": "Company",
+   "q": "Where is your office?",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "T_CO_03",
+   "split": "test",
+   "style": "Company",
+   "q": "Have you won any awards?",
+   "ent": [
+    "awards_recognition",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "RECOGNITION"
+   ]
+  },
+  {
+   "id": "T_CO_04",
+   "split": "test",
+   "style": "Company",
+   "q": "Tell me about CittaAI",
+   "ent": [
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T_CO_05",
+   "split": "test",
+   "style": "Company",
+   "q": "Who is the CTO?",
+   "ent": [
+    "leadership_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "LEADERSHIP"
+   ]
+  },
+  {
+   "id": "T_CO_06",
+   "split": "test",
+   "style": "Company",
+   "q": "Show me a client success story",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "SINGLE_ENTITY",
+    "CLIENTS_SCOPE"
+   ],
+   "aspect": [
+    "CLIENTS_CASE_STUDIES"
+   ]
+  },
+  {
+   "id": "T_CO_07",
+   "split": "test",
+   "style": "Company",
+   "q": "What is your phone number",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "T_CO_08",
+   "split": "test",
+   "style": "Company",
+   "q": "who runs this company",
+   "ent": [
+    "akhil_reddy",
+    "leadership_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "LEADERSHIP"
+   ]
+  },
+  {
+   "id": "T_OOD_01",
+   "split": "test",
+   "style": "OOD",
+   "q": "What's the weather in Hyderabad today?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_OOD_02",
+   "split": "test",
+   "style": "OOD",
+   "q": "Write me a poem about the sea",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_OOD_03",
+   "split": "test",
+   "style": "OOD",
+   "q": "Who won the IPL last year?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_OOD_04",
+   "split": "test",
+   "style": "OOD",
+   "q": "How do I fix my car's brakes?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T_OOD_05",
+   "split": "test",
+   "style": "OOD",
+   "q": "Explain quantum entanglement to me",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_ED_01",
+   "split": "test2",
+   "style": "Indirect",
+   "q": "My polytechnic wants to run online assessments and track student progress",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_ED_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "What kind of institutions is Education OS built for?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T2_ED_03",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "Explain the steps to get a college started on your learning platform",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T2_ED_04",
+   "split": "test2",
+   "style": "Typos",
+   "q": "educaton platfrom for univeristy",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_ED_05",
+   "split": "test2",
+   "style": "NonNative",
+   "q": "we are having many colleges under one trust, any software for this",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_PH_01",
+   "split": "test2",
+   "style": "Business",
+   "q": "Our QA department reviews batch manufacturing records manually",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_PH_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "What features does Pharma OS offer for annual product quality reviews?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_PH_03",
+   "split": "test2",
+   "style": "Minimal",
+   "q": "CPV tool?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_RE_01",
+   "split": "test2",
+   "style": "Indirect",
+   "q": "We are a property developer with three ongoing projects and a big sales team",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_RE_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "Who should use the Real Estate OS?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "T2_RE_03",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "How do listings flow into leads and site visits in Real Estate OS?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_SC_01",
+   "split": "test2",
+   "style": "Indirect",
+   "q": "Our city wants to reduce traffic jams using sensor data",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_SC_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "Why should a municipality invest in Smart Cities OS?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_EC_01",
+   "split": "test2",
+   "style": "Conversational",
+   "q": "I sell clothes online and need to handle returns and inventory better",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_EC_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "What does E-Commerce OS include for order management?",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T2_AI_01",
+   "split": "test2",
+   "style": "Business",
+   "q": "We want to build a retrieval augmented chatbot over our company documents",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_AI_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "How does Enterprise AI OS take a model from evaluation to deployment?",
+   "ent": [
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T2_WA_01",
+   "split": "test2",
+   "style": "Indirect",
+   "q": "We'd like to message our customers about offers on their phones in bulk",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_WA_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "What are the benefits of WhatsApp marketing for a retail brand?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_WA_03",
+   "split": "test2",
+   "style": "Minimal",
+   "q": "whatsapp broadcast limits?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "FAQ"
+   ]
+  },
+  {
+   "id": "T2_IN_01",
+   "split": "test2",
+   "style": "Indirect",
+   "q": "We're a skincare brand and want micro-influencers to promote us",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES",
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "T2_IN_02",
+   "split": "test2",
+   "style": "Aspect",
+   "q": "How does a brand run a campaign end to end on the influencer platform?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "T2_DE_01",
+   "split": "test2",
+   "style": "Business",
+   "q": "We need a data lake and ETL pipelines on Azure",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_DE_02",
+   "split": "test2",
+   "style": "Conversational",
+   "q": "can you help clean up and unify our customer master data",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_ST_01",
+   "split": "test2",
+   "style": "Business",
+   "q": "Our leadership wants an assessment of where AI can create value for us",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T2_ST_02",
+   "split": "test2",
+   "style": "Direct",
+   "q": "Do you provide AI consulting for building a roadmap?",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_MK_01",
+   "split": "test2",
+   "style": "Conversational",
+   "q": "Can you manage our Instagram and Facebook ad campaigns?",
+   "ent": [
+    "ai_powered_marketing",
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T2_MK_02",
+   "split": "test2",
+   "style": "Direct",
+   "q": "Do you do search engine optimization?",
+   "ent": [
+    "ai_powered_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_CAT_01",
+   "split": "test2",
+   "style": "Catalog",
+   "q": "Show me everything you sell",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_PRODUCTS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_CAT_02",
+   "split": "test2",
+   "style": "Catalog",
+   "q": "What kinds of services does CittaAI provide?",
+   "ent": [],
+   "scope": [
+    "ALL_SERVICES"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_CAT_03",
+   "split": "test2",
+   "style": "Catalog",
+   "q": "list of your platforms",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_PRODUCTS",
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_CAT_04",
+   "split": "test2",
+   "style": "CategoryMismatch",
+   "q": "What products do you have for real estate?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_CAT_05",
+   "split": "test2",
+   "style": "CategoryMismatch",
+   "q": "Which service handles influencer campaigns?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "T2_MUL_01",
+   "split": "test2",
+   "style": "Multi",
+   "q": "Pharma OS versus Smart Cities OS",
+   "ent": [
+    "pharma_os",
+    "smart_cities_os"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null,
+   "multi": [
+    "pharma_os",
+    "smart_cities_os"
+   ]
+  },
+  {
+   "id": "T2_MUL_02",
+   "split": "test2",
+   "style": "Multi",
+   "q": "Should I pick Data Engineering or AI Strategy first?",
+   "ent": [
+    "data_engineering",
+    "ai_strategy"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null,
+   "multi": [
+    "data_engineering",
+    "ai_strategy"
+   ]
+  },
+  {
+   "id": "T2_MUL_03",
+   "split": "test2",
+   "style": "Multi",
+   "q": "How is the influencer platform different from the WhatsApp one?",
+   "ent": [
+    "influencer_marketing",
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null,
+   "multi": [
+    "influencer_marketing",
+    "whatsapp_marketing"
+   ]
+  },
+  {
+   "id": "T2_CTX_01",
+   "split": "test2",
+   "style": "Context",
+   "q": "Who is the target audience?",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ],
+   "ctx": "ecommerce_os"
+  },
+  {
+   "id": "T2_CTX_02",
+   "split": "test2",
+   "style": "Context",
+   "q": "how much does it cost",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "PRICING"
+   ],
+   "ctx": "education_os"
+  },
+  {
+   "id": "T2_CTX_03",
+   "split": "test2",
+   "style": "Elliptical",
+   "q": "features?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ],
+   "ctx": "smart_cities_os"
+  },
+  {
+   "id": "T2_CTX_04",
+   "split": "test2",
+   "style": "Context",
+   "q": "And what about real estate?",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ],
+   "ctx": "pharma_os"
+  },
+  {
+   "id": "T2_CTX_05",
+   "split": "test2",
+   "style": "Context",
+   "q": "Can it integrate with our existing tools?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "FAQ",
+    "OVERVIEW"
+   ],
+   "ctx": "whatsapp_marketing"
+  },
+  {
+   "id": "T2_CTX_06",
+   "split": "test2",
+   "style": "Context",
+   "q": "why is it better than doing it manually?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ],
+   "ctx": "pharma_os"
+  },
+  {
+   "id": "T2_CO_01",
+   "split": "test2",
+   "style": "Company",
+   "q": "Who are the founders of CittaAI?",
+   "ent": [
+    "leadership_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "LEADERSHIP"
+   ]
+  },
+  {
+   "id": "T2_CO_02",
+   "split": "test2",
+   "style": "Company",
+   "q": "What is CittaAI's email address?",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "T2_CO_03",
+   "split": "test2",
+   "style": "Company",
+   "q": "What achievements has your company earned?",
+   "ent": [
+    "awards_recognition",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "RECOGNITION"
+   ]
+  },
+  {
+   "id": "T2_CO_04",
+   "split": "test2",
+   "style": "Company",
+   "q": "Which brands have you helped so far?",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "SINGLE_ENTITY",
+    "CLIENTS_SCOPE"
+   ],
+   "aspect": [
+    "CLIENTS_CASE_STUDIES"
+   ]
+  },
+  {
+   "id": "T2_CO_05",
+   "split": "test2",
+   "style": "Company",
+   "q": "What is CittaAI's mission?",
+   "ent": [
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "T2_CO_06",
+   "split": "test2",
+   "style": "Company",
+   "q": "I want to schedule a call with your sales team",
+   "ent": [
+    "contact_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CONTACT"
+   ]
+  },
+  {
+   "id": "T2_AMB_01",
+   "split": "test2",
+   "style": "Ambiguous",
+   "q": "Tell me more",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null,
+   "clarify": "must"
+  },
+  {
+   "id": "T2_AMB_02",
+   "split": "test2",
+   "style": "Ambiguous",
+   "q": "Do you have an OS for my industry?",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "ALL",
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T2_AMB_03",
+   "split": "test2",
+   "style": "Ambiguous",
+   "q": "Which of your AI services is best for us?",
+   "ent": [
+    "enterprise_agentic_ai",
+    "ai_strategy",
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY",
+    "ALL_SERVICES"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "T2_OOD_01",
+   "split": "test2",
+   "style": "OOD",
+   "q": "What's the stock price of Tesla?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_OOD_02",
+   "split": "test2",
+   "style": "OOD",
+   "q": "Recommend a good movie for tonight",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_OOD_03",
+   "split": "test2",
+   "style": "OOD",
+   "q": "How many calories are in a banana?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_OOD_04",
+   "split": "test2",
+   "style": "OOD",
+   "q": "Translate hello into French",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "T2_OOD_05",
+   "split": "test2",
+   "style": "OOD",
+   "q": "What is the capital of Australia?",
+   "ent": [],
+   "scope": [
+    "NONE"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_ASP_01",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Which teams inside a hospital would use Pharma OS day to day?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "D_ASP_02",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Is Influencer Marketing a fit for local franchise businesses?",
+   "ent": [
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "D_ASP_03",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "What sort of companies buy Data Engineering from you?",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "TARGET_USERS"
+   ]
+  },
+  {
+   "id": "D_ASP_04",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Describe the stages a lead goes through inside Real Estate OS",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "D_ASP_05",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "What happens after we sign up for WhatsApp Marketing?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "D_ASP_06",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "How is an AI Strategy engagement structured?",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "D_ASP_07",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "What will Smart Cities OS actually improve for our citizens?",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_ASP_08",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "What results can a brand expect from MarTech 360?",
+   "ent": [
+    "martech_360"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_ASP_09",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Why is Education OS worth it for a small college?",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "BENEFITS"
+   ]
+  },
+  {
+   "id": "D_ASP_10",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Which modules come with Pharma OS?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_ASP_11",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Can E-Commerce OS handle abandoned carts and loyalty points?",
+   "ent": [
+    "ecommerce_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_ASP_12",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Does Enterprise AI OS support voice bots?",
+   "ent": [
+    "enterprise_ai_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_ASP_13",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "What does Data Engineering cost?",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "PRICING"
+   ]
+  },
+  {
+   "id": "D_ASP_14",
+   "split": "dev",
+   "style": "Aspect",
+   "q": "Common questions people ask about Real Estate OS",
+   "ent": [
+    "real_estate_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "FAQ"
+   ]
+  },
+  {
+   "id": "D_DET_01",
+   "split": "dev",
+   "style": "Detail",
+   "q": "Does Data Engineering work with Databricks or BigQuery?",
+   "ent": [
+    "data_engineering"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "FAQ",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_DET_02",
+   "split": "dev",
+   "style": "Detail",
+   "q": "How many weeks does a typical AI Strategy engagement last?",
+   "ent": [
+    "ai_strategy"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "FAQ",
+    "WORKFLOW"
+   ]
+  },
+  {
+   "id": "D_DET_03",
+   "split": "dev",
+   "style": "Detail",
+   "q": "Can the WhatsApp platform send carousel and catalog messages?",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "FAQ"
+   ]
+  },
+  {
+   "id": "D_DET_04",
+   "split": "dev",
+   "style": "Detail",
+   "q": "what programming languages does education os coding lms support",
+   "ent": [
+    "education_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "FAQ"
+   ]
+  },
+  {
+   "id": "D_DET_05",
+   "split": "dev",
+   "style": "Detail",
+   "q": "Is Enterprise & Agentic AI able to run models on our own servers?",
+   "ent": [
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "FAQ",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_DET_06",
+   "split": "dev",
+   "style": "Detail",
+   "q": "Which KPIs does Pharma OS track on its quality dashboards?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CAPABILITIES",
+    "FAQ"
+   ]
+  },
+  {
+   "id": "D_CAT_10",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "wht products u have",
+   "ent": [],
+   "scope": [
+    "ALL_PRODUCTS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_CAT_11",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "Can you show me all the stuff you've built?",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_PRODUCTS",
+    "ALL_SOLUTIONS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_CAT_12",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "which platforms do you sell?",
+   "ent": [],
+   "scope": [
+    "ALL",
+    "ALL_PRODUCTS"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_CAT_13",
+   "split": "dev",
+   "style": "Catalog",
+   "q": "What types of services does your team offer?",
+   "ent": [],
+   "scope": [
+    "ALL_SERVICES"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_ROLE_01",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "I'm the CTO of a bank and we want to put LLM agents into production",
+   "ent": [
+    "enterprise_ai_os",
+    "enterprise_agentic_ai"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "D_ROLE_02",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "As a CEO of a retail chain I need better customer retention on WhatsApp",
+   "ent": [
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null
+  },
+  {
+   "id": "D_MUL_10",
+   "split": "dev",
+   "style": "Multi",
+   "q": "How is Real Estate OS different from E-Commerce OS?",
+   "ent": [
+    "real_estate_os",
+    "ecommerce_os"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null,
+   "multi": [
+    "real_estate_os",
+    "ecommerce_os"
+   ]
+  },
+  {
+   "id": "D_MUL_11",
+   "split": "dev",
+   "style": "Multi",
+   "q": "what distinguishes influencer marketing from whatsapp marketing",
+   "ent": [
+    "influencer_marketing",
+    "whatsapp_marketing"
+   ],
+   "scope": [
+    "MULTI_ENTITY"
+   ],
+   "aspect": null,
+   "multi": [
+    "influencer_marketing",
+    "whatsapp_marketing"
+   ]
+  },
+  {
+   "id": "D_CTX_20",
+   "split": "dev",
+   "style": "Context",
+   "q": "and the other one?",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ],
+   "ctx": "education_os",
+   "ctx_entities": [
+    "education_os",
+    "pharma_os"
+   ]
+  },
+  {
+   "id": "D_CTX_21",
+   "split": "dev",
+   "style": "Context",
+   "q": "tell me about the other option",
+   "ent": [
+    "smart_cities_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW"
+   ],
+   "ctx": "real_estate_os",
+   "ctx_entities": [
+    "real_estate_os",
+    "smart_cities_os"
+   ]
+  },
+  {
+   "id": "D_COST_01",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "Our cost per lead on Facebook ads keeps rising and we need better campaigns",
+   "ent": [
+    "ai_powered_marketing",
+    "influencer_marketing"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  },
+  {
+   "id": "D_COST_02",
+   "split": "dev",
+   "style": "Problem-oriented",
+   "q": "Manual batch record checks cost us two weeks every release",
+   "ent": [
+    "pharma_os"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "OVERVIEW",
+    "BENEFITS",
+    "CAPABILITIES"
+   ]
+  },
+  {
+   "id": "D_CASE_01",
+   "split": "dev",
+   "style": "Company",
+   "q": "What results did the FMCG brand get?",
+   "ent": [
+    "fmcg_social_growth"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "CLIENTS_CASE_STUDIES",
+    "OVERVIEW"
+   ]
+  },
+  {
+   "id": "D_CTX_22",
+   "split": "dev",
+   "style": "Context",
+   "q": "who is the founder?",
+   "ent": [
+    "leadership_info",
+    "company_info"
+   ],
+   "scope": [
+    "SINGLE_ENTITY"
+   ],
+   "aspect": [
+    "LEADERSHIP"
+   ],
+   "ctx": "education_os"
+  },
+  {
+   "id": "D_HOSP_01",
+   "split": "dev",
+   "style": "Indirect",
+   "q": "We run three hospitals and want online appointment booking",
+   "ent": [],
+   "scope": [
+    "NONE",
+    "OUT_OF_DOMAIN"
+   ],
+   "aspect": null,
+   "clarify": "ok"
+  }
+ ]
+}

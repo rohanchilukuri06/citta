@@ -1038,7 +1038,7 @@ def compile_registries():
         "leaders": [
             {"name": "Vinay Velivela", "title": "CEO of Fixity Technologies"},
             {"name": "Saladi Chandra Balaji", "title": "Co-Founder & COO"},
-            {"name": "Akhil Reddy", "title": "Co-Founder & CTO"}
+            {"name": "Akhil Reddy", "title": "CEO"}
         ],
         "others": [
             {"name": "Ganesh Gandhi Vadalani", "title": "CMO"},
@@ -1266,7 +1266,7 @@ def compile_registries():
         "products_list": "🏆 **CittaAI Flagship Products**\n\nCittaAI offers the following state-of-the-art enterprise platforms:\n\n{items}\n\nWould you like to explore details or schedule a demonstration?",
         "services_list": "🛠️ **CittaAI Professional Services**\n\nCittaAI provides specialized, research-grade advisory and engineering capabilities:\n\n{items}\n\nWould you like to review specific capabilities or schedule a strategy advisory call?",
         "solutions_list": "🌐 **CittaAI Industry Operating Systems (OS)**\n\nWe deploy secure middleware orchestrating data, automation, and compliance:\n\n{items}\n\nEach industry OS is designed from the ground up for compliance and vertical outcomes.",
-        "company_fact": "### About CittaAI\n**Tagline**: {tagline}\n**Founded**: {founded}\n**Founder & CEO**: Kiran Kumar\n\n{description}\n\n**Vision**: {vision}\n**Mission**: {mission}",
+        "company_fact": "### About CittaAI\n**Tagline**: {tagline}\n**Founded**: {founded}\n**CEO**: Akhil Reddy\n\n{description}\n\n**Vision**: {vision}\n**Mission**: {mission}",
         "contact_fact": "📞 **Contact CittaAI**\n\nReach our solutions architecture desk directly through the following channels:\n- **Phone**: {phone}\n- **Email**: {email}\n- **Business Hours**: {business_hours}\n\nFeel free to explore our location map: [Google Maps]({maps_link})",
         "disambiguation": "I want to make sure I give you the correct information. Did you mean:\n\n1. **Products** (e.g. WhatsApp Marketing, Influencer Marketing Platform)\n2. **Services** (e.g. Data Engineering, Enterprise AI Consulting)\n3. **Solutions** (e.g. E-Commerce OS, Pharma OS, Enterprise AI OS)\n\nPlease clarify so I can direct you correctly.",
         "fallback": "I'm sorry, I couldn't find a direct record for that query in our verified Business Registry. Would you like to ask about our Products, Services, or Solutions instead?",
@@ -1419,9 +1419,9 @@ def compile_registries():
             }
         },
         "who_founded": {
-            "aliases": ["who founded", "who is the CEO", "who started", "ceo", "founder", "started the company", "founded the company", "kiran kumar", "who leads", "who lead"],
+            "aliases": ["who founded", "who is the CEO", "who started", "ceo", "founder", "started the company", "founded the company", "who leads", "who lead"],
             "answer": {
-                "response": "👤 **CittaAI Leadership**\n\nCittaAI was founded in **2022** by a team of researchers and engineers. The company is led by **Kiran Kumar** (Founder & CEO), Vinay Velivela (CEO of Fixity Technologies), Saladi Chandra Balaji (Co-Founder & COO), and Akhil Reddy (Co-Founder & CTO). We engineer research-grade intelligence at enterprise scale.",
+                "response": "👤 **CittaAI Leadership**\n\nCittaAI was founded in **2022** by a team of researchers and engineers. The company is led by **Akhil Reddy** (CEO), with Saladi Chandra Balaji (Co-Founder & COO) and Ganesh Gandhi Vadalani (CMO). We engineer research-grade intelligence at enterprise scale.",
                 "source": "Golden Answers",
                 "verified": True,
                 "navigation": "/about"

@@ -1,0 +1,552 @@
+[
+  {
+    "id": "PARA_ED_01",
+    "question": "What solutions do you offer for education?",
+    "style": "Direct",
+    "expected_entity": "education_os",
+    "expected_intent": "SOLUTIONS",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["education", "student", "college", "academic", "lms"]
+  },
+  {
+    "id": "PARA_ED_02",
+    "question": "What can you guys do for colleges?",
+    "style": "Conversational",
+    "expected_entity": "education_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["college", "student", "learning", "academic"]
+  },
+  {
+    "id": "PARA_ED_03",
+    "question": "I run a university. How could CittaAI help us?",
+    "style": "Indirect",
+    "expected_entity": "education_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["university", "institution", "academic", "student"]
+  },
+  {
+    "id": "PARA_ED_04",
+    "question": "We operate an educational institution. What can you provide?",
+    "style": "Business",
+    "expected_entity": "education_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["institution", "education", "student", "academic"]
+  },
+  {
+    "id": "PARA_ED_05",
+    "question": "what u offer for college",
+    "style": "Informal",
+    "expected_entity": "education_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["college", "student", "learning"]
+  },
+  {
+    "id": "PARA_ED_06",
+    "question": "How can you help schools and academic centers?",
+    "style": "Synonym",
+    "expected_entity": "education_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["academic", "school", "education", "student"]
+  },
+  {
+    "id": "PARA_ED_07",
+    "question": "We need to improve how our institution operates with AI.",
+    "style": "Problem-oriented",
+    "expected_entity": "education_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["institution", "education", "student", "academic"]
+  },
+  {
+    "id": "PARA_ED_08",
+    "question": "Anything for universities?",
+    "style": "Minimal",
+    "expected_entity": "education_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["university", "education", "student"]
+  },
+  {
+    "id": "PARA_HC_01",
+    "question": "What solutions do you offer for healthcare?",
+    "style": "Direct",
+    "expected_entity": "pharma_os",
+    "expected_intent": "SOLUTIONS",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["healthcare", "patient", "clinical", "hospital", "medical"]
+  },
+  {
+    "id": "PARA_HC_02",
+    "question": "How do you help regional hospital networks manage patients?",
+    "style": "Conversational",
+    "expected_entity": "pharma_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["hospital", "patient", "clinical", "medical"]
+  },
+  {
+    "id": "PARA_HC_03",
+    "question": "I manage a medical clinic. What AI systems are suitable for us?",
+    "style": "Indirect",
+    "expected_entity": "pharma_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "TARGET_USERS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["clinic", "medical", "patient", "healthcare"]
+  },
+  {
+    "id": "PARA_HC_04",
+    "question": "We operate a pharmaceutical distribution chain. What platform do you have?",
+    "style": "Business",
+    "expected_entity": "pharma_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["pharma", "pharmaceutical", "clinical", "healthcare"]
+  },
+  {
+    "id": "PARA_HC_05",
+    "question": "what do u have for hospitals",
+    "style": "Informal",
+    "expected_entity": "pharma_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["hospital", "patient", "clinical"]
+  },
+  {
+    "id": "PARA_HC_06",
+    "question": "Any AI tech for health care facilities and doctors?",
+    "style": "Synonym",
+    "expected_entity": "pharma_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["health", "care", "clinical", "doctor"]
+  },
+  {
+    "id": "PARA_HC_07",
+    "question": "We are struggling with patient scheduling and clinical workflow automation.",
+    "style": "Problem-oriented",
+    "expected_entity": "pharma_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "WORKFLOW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["patient", "clinical", "workflow", "hospital"]
+  },
+  {
+    "id": "PARA_HC_08",
+    "question": "Anything for clinics?",
+    "style": "Minimal",
+    "expected_entity": "pharma_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["clinic", "medical", "patient"]
+  },
+  {
+    "id": "PARA_RE_01",
+    "question": "What solutions do you offer for real estate?",
+    "style": "Direct",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "SOLUTIONS",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["realty", "estate", "property", "broker", "listing"]
+  },
+  {
+    "id": "PARA_RE_02",
+    "question": "I operate a real estate brokerage firm. What automation tools do you offer?",
+    "style": "Conversational",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["estate", "brokerage", "property", "realty"]
+  },
+  {
+    "id": "PARA_RE_03",
+    "question": "Our property management group needs to track site visits and agent commissions.",
+    "style": "Indirect",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "FEATURES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["property", "realty", "commission", "agent"]
+  },
+  {
+    "id": "PARA_RE_04",
+    "question": "We are residential builders looking for digital inventory and lead booking tools.",
+    "style": "Business",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["builder", "inventory", "property", "realty"]
+  },
+  {
+    "id": "PARA_RE_05",
+    "question": "what u got for realtors",
+    "style": "Informal",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["realtor", "property", "realty"]
+  },
+  {
+    "id": "PARA_RE_06",
+    "question": "Do you have software for housing projects and property brokers?",
+    "style": "Synonym",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["housing", "property", "broker", "realty"]
+  },
+  {
+    "id": "PARA_RE_07",
+    "question": "Our real estate team is losing leads because follow-ups take too long.",
+    "style": "Problem-oriented",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["real", "estate", "property", "lead"]
+  },
+  {
+    "id": "PARA_RE_08",
+    "question": "Anything for brokers?",
+    "style": "Minimal",
+    "expected_entity": "real_estate_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["broker", "realty", "property"]
+  },
+  {
+    "id": "PARA_WA_01",
+    "question": "How can WhatsApp help my business run bulk notification campaigns?",
+    "style": "Direct",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["whatsapp", "broadcast", "notification", "campaign"]
+  },
+  {
+    "id": "PARA_WA_02",
+    "question": "Can I broadcast automated WhatsApp messages to 10000 customers at once?",
+    "style": "Conversational",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "FEATURES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["whatsapp", "broadcast", "message", "bulk"]
+  },
+  {
+    "id": "PARA_WA_03",
+    "question": "We want to connect our CRM with chat messaging for instant support alerts.",
+    "style": "Indirect",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "INTEGRATIONS",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["crm", "chat", "whatsapp", "messaging"]
+  },
+  {
+    "id": "PARA_WA_04",
+    "question": "What is the official WhatsApp automation platform capability set?",
+    "style": "Business",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["whatsapp", "platform", "automation", "campaign"]
+  },
+  {
+    "id": "PARA_WA_05",
+    "question": "can i send mass whatsapp msgs",
+    "style": "Informal",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "FEATURES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["whatsapp", "mass", "broadcast", "message"]
+  },
+  {
+    "id": "PARA_WA_06",
+    "question": "How does text messaging automation integrate with Shopify or Salesforce?",
+    "style": "Synonym",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "INTEGRATIONS",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["messaging", "whatsapp", "crm", "integration"]
+  },
+  {
+    "id": "PARA_WA_07",
+    "question": "Our open rates on email are horrible and we need direct mobile channel reach.",
+    "style": "Problem-oriented",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["whatsapp", "mobile", "campaign", "broadcast"]
+  },
+  {
+    "id": "PARA_WA_08",
+    "question": "WhatsApp bulk sender info?",
+    "style": "Minimal",
+    "expected_entity": "whatsapp_marketing",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["whatsapp", "bulk", "broadcast"]
+  },
+  {
+    "id": "PARA_SC_01",
+    "question": "What solutions do you offer for smart cities and urban municipalities?",
+    "style": "Direct",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "SOLUTIONS",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["city", "urban", "municipality", "smart"]
+  },
+  {
+    "id": "PARA_SC_02",
+    "question": "How can city planning councils monitor traffic and municipal infrastructure?",
+    "style": "Conversational",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["city", "municipal", "traffic", "infrastructure"]
+  },
+  {
+    "id": "PARA_SC_03",
+    "question": "Our local government authority needs IoT and central command dashboard software.",
+    "style": "Indirect",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "FEATURES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["government", "city", "command", "urban"]
+  },
+  {
+    "id": "PARA_SC_04",
+    "question": "What is Smart Cities OS core architecture and sensor telemetry capability?",
+    "style": "Business",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["smart", "cities", "telemetry", "urban"]
+  },
+  {
+    "id": "PARA_SC_05",
+    "question": "tech for city management",
+    "style": "Informal",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["city", "management", "urban"]
+  },
+  {
+    "id": "PARA_SC_06",
+    "question": "Do you serve civic bodies and public sector municipal corporations?",
+    "style": "Synonym",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "TARGET_USERS",
+    "expected_aspect": "TARGET_USERS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["municipal", "public", "civic", "city"]
+  },
+  {
+    "id": "PARA_SC_07",
+    "question": "We need unified monitoring for emergency response and waste management in our town.",
+    "style": "Problem-oriented",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["monitoring", "city", "urban", "municipal"]
+  },
+  {
+    "id": "PARA_SC_08",
+    "question": "Smart city tech?",
+    "style": "Minimal",
+    "expected_entity": "smart_cities_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["smart", "city", "urban"]
+  },
+  {
+    "id": "PARA_AI_01",
+    "question": "What is Enterprise AI OS and how does agentic AI middleware function?",
+    "style": "Direct",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["enterprise", "ai", "agentic", "middleware"]
+  },
+  {
+    "id": "PARA_AI_02",
+    "question": "How do your autonomous AI agents coordinate complex multi-step workflows?",
+    "style": "Conversational",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "HOW_IT_WORKS",
+    "expected_aspect": "WORKFLOW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["agent", "autonomous", "workflow", "coordination"]
+  },
+  {
+    "id": "PARA_AI_03",
+    "question": "We are a Fortune 500 company looking to deploy secure on-prem LLM agents.",
+    "style": "Indirect",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["enterprise", "llm", "agent", "security"]
+  },
+  {
+    "id": "PARA_AI_04",
+    "question": "What security, governance, and audit trails exist in Enterprise AI OS?",
+    "style": "Business",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "FEATURES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["governance", "security", "audit", "enterprise"]
+  },
+  {
+    "id": "PARA_AI_05",
+    "question": "tell me about agentic ai platform",
+    "style": "Informal",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "OVERVIEW",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["agentic", "ai", "platform", "enterprise"]
+  },
+  {
+    "id": "PARA_AI_06",
+    "question": "Any cognitive operating systems for large business enterprises?",
+    "style": "Synonym",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "CAPABILITIES",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["cognitive", "operating", "system", "enterprise"]
+  },
+  {
+    "id": "PARA_AI_07",
+    "question": "Our existing AI tools lack enterprise data privacy and role-based access controls.",
+    "style": "Problem-oriented",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "RECOMMENDATION",
+    "expected_aspect": "BENEFITS",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["privacy", "security", "access", "enterprise"]
+  },
+  {
+    "id": "PARA_AI_08",
+    "question": "Enterprise AI OS details?",
+    "style": "Minimal",
+    "expected_entity": "enterprise_ai_os",
+    "expected_intent": "CAPABILITIES",
+    "expected_aspect": "OVERVIEW",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["enterprise", "ai", "os"]
+  },
+  {
+    "id": "PARA_CAT_01",
+    "question": "What products does CittaAI offer across different industries?",
+    "style": "Direct",
+    "expected_entity": null,
+    "expected_intent": "PRODUCTS",
+    "expected_aspect": "CATALOG_LIST",
+    "expected_scope": "ALL_PRODUCTS",
+    "keywords": ["products", "catalog", "education", "pharma"]
+  },
+  {
+    "id": "PARA_CAT_02",
+    "question": "Give me a summary of all your flagship enterprise OS solutions.",
+    "style": "Direct",
+    "expected_entity": null,
+    "expected_intent": "SOLUTIONS",
+    "expected_aspect": "CATALOG_LIST",
+    "expected_scope": "ALL_SOLUTIONS",
+    "keywords": ["solutions", "catalog", "flagship", "os"]
+  },
+  {
+    "id": "PARA_COMP_01",
+    "question": "Who founded CittaAI and who leads the executive team?",
+    "style": "Direct",
+    "expected_entity": "company_info",
+    "expected_intent": "LEADERSHIP",
+    "expected_aspect": "LEADERSHIP",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["founder", "kiran", "ceo", "leadership"]
+  },
+  {
+    "id": "PARA_COMP_02",
+    "question": "How do I get in touch with sales or request a product demo?",
+    "style": "Direct",
+    "expected_entity": "contact_info",
+    "expected_intent": "CONTACT",
+    "expected_aspect": "CONTACT",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["contact", "sales", "demo", "email", "phone"]
+  },
+  {
+    "id": "PARA_COMP_03",
+    "question": "What awards, press, or industry recognitions has CittaAI received?",
+    "style": "Direct",
+    "expected_entity": "awards_recognition",
+    "expected_intent": "AWARDS",
+    "expected_aspect": "RECOGNITION",
+    "expected_scope": "SINGLE_ENTITY",
+    "keywords": ["award", "recognition", "honored", "featured"]
+  },
+  {
+    "id": "PARA_OOD_01",
+    "question": "Can you write a Python script to scrape stock market data from Yahoo Finance?",
+    "style": "OOD",
+    "expected_entity": null,
+    "expected_intent": "UNKNOWN",
+    "expected_aspect": "UNKNOWN",
+    "expected_scope": "GENERAL",
+    "keywords": ["out of scope", "cannot"]
+  },
+  {
+    "id": "PARA_OOD_02",
+    "question": "What is the best recipe for baking sourdough bread at home?",
+    "style": "OOD",
+    "expected_entity": null,
+    "expected_intent": "UNKNOWN",
+    "expected_aspect": "UNKNOWN",
+    "expected_scope": "GENERAL",
+    "keywords": ["out of scope", "cannot"]
+  }
+]

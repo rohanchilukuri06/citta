@@ -1,0 +1,2695 @@
+{
+ "version": "3.0.0",
+ "created": "2026-09-27",
+ "source": "independent agent, catalog-content only",
+ "validation": {
+  "errors": [],
+  "corrections": [],
+  "offerings_with_fewer_than_5": {}
+ },
+ "items": [
+  {
+   "id": "V3_001",
+   "category": "conversational",
+   "query": "Hi! We're a mid-size retailer and I was wondering if you guys actually run marketing campaigns for clients?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Campaign execution (social, PPC, SEO) is the AI-Powered Marketing service."
+   }
+  },
+  {
+   "id": "V3_002",
+   "category": "problem",
+   "query": "we spend like 8 lakh a month on google and meta ads and our cost per acquisition just keeps going up, nothing we try works",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "PPC advertising with lower CPA / higher ROAS is an AI-Powered Marketing benefit."
+   }
+  },
+  {
+   "id": "V3_003",
+   "category": "informal",
+   "query": "yo can u guys do seo + social media for my brand",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "SEO and Social Media Marketing are AI-Powered Marketing capabilities."
+   }
+  },
+  {
+   "id": "V3_004",
+   "category": "minimal",
+   "query": "PPC?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "PPC Advertising is only listed under AI-Powered Marketing."
+   }
+  },
+  {
+   "id": "V3_005",
+   "category": "grammar",
+   "query": "Is your company doing the SEO and ads for ecommerce store also?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "SEO, PPC and E-commerce Growth are AI-Powered Marketing capabilities."
+   }
+  },
+  {
+   "id": "V3_006",
+   "category": "direct",
+   "query": "What is MarTech 360?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "martech_360"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_007",
+   "category": "problem",
+   "query": "Our brand messaging feels random - every channel says something different and we've never had a positioning strategy that's actually backed by data.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "martech_360",
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "allowed",
+    "knowledge_available": true,
+    "rationale": "Data-driven brand positioning is MarTech 360's core; AI-Powered Marketing also lists Branding & Strategy."
+   }
+  },
+  {
+   "id": "V3_008",
+   "category": "non_native",
+   "query": "I am CMO of company. Please explain me your brand architecture engine, how it is working?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "martech_360"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW",
+     "WORKFLOW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "'AI Brand Architecture & Strategy Engine' is MarTech 360's tagline; asks overview + how it works."
+   }
+  },
+  {
+   "id": "V3_009",
+   "category": "spelling",
+   "query": "martec 360 detials",
+   "context": null,
+   "expected": {
+    "entities": [
+     "martech_360"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled MarTech 360."
+   }
+  },
+  {
+   "id": "V3_010",
+   "category": "direct",
+   "query": "Do you offer AI readiness assessments?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "AI readiness assessment is an AI Strategy & Advisory capability."
+   }
+  },
+  {
+   "id": "V3_011",
+   "category": "problem",
+   "query": "Our board keeps asking what our AI plan is and honestly we don't have one. Where do we even begin?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Strategic roadmap / readiness audit is AI Strategy & Advisory."
+   }
+  },
+  {
+   "id": "V3_012",
+   "category": "indirect",
+   "query": "We have a long list of possible AI projects and no idea which ones are worth doing first.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Use case prioritization (impact vs effort) is AI Strategy & Advisory."
+   }
+  },
+  {
+   "id": "V3_013",
+   "category": "grammar",
+   "query": "we need someone for make AI governance and EU AI act compliance in our company",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "AI governance and EU AI Act compliance are AI Strategy & Advisory."
+   }
+  },
+  {
+   "id": "V3_014",
+   "category": "direct",
+   "query": "Tell me about your Data Engineering services.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "data_engineering"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_015",
+   "category": "problem",
+   "query": "Customer data lives in our CRM, ERP and three spreadsheets, with loads of duplicates. Nobody trusts the numbers anymore.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "data_engineering"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Master data management / golden record is a Data Engineering capability."
+   }
+  },
+  {
+   "id": "V3_016",
+   "category": "informal",
+   "query": "can u guys set up kafka streaming pipelines for us?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "data_engineering"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Real-time Kafka/Flink pipelines are in Data Engineering's workflow."
+   }
+  },
+  {
+   "id": "V3_017",
+   "category": "minimal",
+   "query": "data lake?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "data_engineering"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Data lake architecture is a Data Engineering capability."
+   }
+  },
+  {
+   "id": "V3_018",
+   "category": "direct",
+   "query": "What is Enterprise & Agentic AI?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_019",
+   "category": "problem",
+   "query": "Our internal support bot keeps making up answers that aren't in our docs. Can you fix that?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai",
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "allowed",
+    "knowledge_available": true,
+    "rationale": "Hallucination elimination via RAG is an Enterprise & Agentic AI benefit; Enterprise AI OS also has anti-hallucination guardrails."
+   }
+  },
+  {
+   "id": "V3_020",
+   "category": "indirect",
+   "query": "We want AI agents to automate some messy multi-step back office work, but all our data has to stay inside our own VPC.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Multi-agent automation with private-VPC data privacy is Enterprise & Agentic AI."
+   }
+  },
+  {
+   "id": "V3_021",
+   "category": "informal",
+   "query": "do u guys fine tune llms on company data",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai",
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "allowed",
+    "knowledge_available": true,
+    "rationale": "Custom LLM fine-tuning is Enterprise & Agentic AI; Enterprise AI OS lists Fine-Tuning & RL."
+   }
+  },
+  {
+   "id": "V3_022",
+   "category": "category_mismatch",
+   "query": "Is Enterprise and Agentic AI a platform I can subscribe to?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Enterprise & Agentic AI is a service, user calls it a platform."
+   }
+  },
+  {
+   "id": "V3_023",
+   "category": "direct",
+   "query": "What is Enterprise AI OS?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_024",
+   "category": "indirect",
+   "query": "Looking for a platform where our devs can ship RAG apps and agents to production with guardrails and monitoring built in.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Production RAG/agents platform with guardrails and telemetry is Enterprise AI OS."
+   }
+  },
+  {
+   "id": "V3_025",
+   "category": "problem",
+   "query": "Our team is juggling OpenAI and open-source models by hand. We want something that routes prompts by cost and latency and logs token usage.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Hybrid LLM routing and telemetry are Enterprise AI OS workflow steps."
+   }
+  },
+  {
+   "id": "V3_026",
+   "category": "spelling",
+   "query": "enterprize ai os",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled Enterprise AI OS."
+   }
+  },
+  {
+   "id": "V3_027",
+   "category": "non_native",
+   "query": "we are wanting knowledge graph and database agent in one platform, you have?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Agentic Knowledge Graph and Database Agents are Enterprise AI OS capabilities."
+   }
+  },
+  {
+   "id": "V3_028",
+   "category": "direct",
+   "query": "Tell me about E-Commerce OS",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_029",
+   "category": "problem",
+   "query": "I run a D2C store. Orders, returns and stock are tracked in four different tools and we keep overselling items.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Inventory sync and order lifecycle are E-Commerce OS."
+   }
+  },
+  {
+   "id": "V3_030",
+   "category": "indirect",
+   "query": "need a voice bot that handles order tracking calls and collects customer feedback for my online shop",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Voice AI operations for order tracking/feedback is an E-Commerce OS workflow step."
+   }
+  },
+  {
+   "id": "V3_031",
+   "category": "minimal",
+   "query": "ecommerce?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os",
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "allowed",
+    "knowledge_available": true,
+    "rationale": "E-Commerce OS is the main match; AI-Powered Marketing lists E-commerce Growth."
+   }
+  },
+  {
+   "id": "V3_032",
+   "category": "category_mismatch",
+   "query": "Is E-Commerce OS a consulting service or what?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "E-Commerce OS is a solution, user calls it a service."
+   }
+  },
+  {
+   "id": "V3_033",
+   "category": "minimal",
+   "query": "Education?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Education OS is the only education offering."
+   }
+  },
+  {
+   "id": "V3_034",
+   "category": "direct",
+   "query": "What is Education OS?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_035",
+   "category": "problem",
+   "query": "I'm the dean at an engineering college. Students practice coding on one site, take mock tests on another and watch lectures on YouTube. We want all of it in one place.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Coding LMS, Test Series and Video LMS are Education OS capabilities."
+   }
+  },
+  {
+   "id": "V3_036",
+   "category": "spelling",
+   "query": "educaton os for univercity",
+   "context": null,
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled Education OS."
+   }
+  },
+  {
+   "id": "V3_037",
+   "category": "non_native",
+   "query": "Sir we have 4 colleges under one trust, need one LMS for all with separate admin, it is possible?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Multi-college LMS with role-based hierarchy is Education OS."
+   }
+  },
+  {
+   "id": "V3_038",
+   "category": "direct",
+   "query": "Tell me about Pharma OS",
+   "context": null,
+   "expected": {
+    "entities": [
+     "pharma_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_039",
+   "category": "problem",
+   "query": "Our QA team manually reviews batch records before every release and it's slowing down our batch decisions a lot.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "pharma_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Batch Records Review Tool / faster batch decisions is Pharma OS."
+   }
+  },
+  {
+   "id": "V3_040",
+   "category": "spelling",
+   "query": "pharama os",
+   "context": null,
+   "expected": {
+    "entities": [
+     "pharma_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled Pharma OS."
+   }
+  },
+  {
+   "id": "V3_041",
+   "category": "non_native",
+   "query": "We are pharma manufacturer, need help for FDA audit trail and adverse event monitoring, which thing you have?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "pharma_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Audit trails and pharmacovigilance are Pharma OS workflow steps."
+   }
+  },
+  {
+   "id": "V3_042",
+   "category": "direct",
+   "query": "What's Real Estate OS?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_043",
+   "category": "problem",
+   "query": "I'm a builder. Leads come from property portals and Facebook, half of them get lost, and nobody tracks who visited the site or what the brokers are owed.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Lead management, journey tracking and partner commissions are Real Estate OS."
+   }
+  },
+  {
+   "id": "V3_044",
+   "category": "informal",
+   "query": "realestate crm w/ broker commission tracking??",
+   "context": null,
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Broker & partner commission tracking is Real Estate OS."
+   }
+  },
+  {
+   "id": "V3_045",
+   "category": "grammar",
+   "query": "Does you have software for property listing and document verification with digital signature?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Listings and document verification with e-signatures are Real Estate OS."
+   }
+  },
+  {
+   "id": "V3_046",
+   "category": "category_mismatch",
+   "query": "Tell me about your real estate service",
+   "context": null,
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Real Estate OS is a solution, user calls it a service."
+   }
+  },
+  {
+   "id": "V3_047",
+   "category": "direct",
+   "query": "Tell me about Smart Cities OS",
+   "context": null,
+   "expected": {
+    "entities": [
+     "smart_cities_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_048",
+   "category": "problem",
+   "query": "I work with a municipal corporation. We want traffic signals, water leak detection and citizen complaints all monitored from one command dashboard.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "smart_cities_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Traffic, utilities, grievance portal and central command are Smart Cities OS."
+   }
+  },
+  {
+   "id": "V3_049",
+   "category": "spelling",
+   "query": "smrt citys os",
+   "context": null,
+   "expected": {
+    "entities": [
+     "smart_cities_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled Smart Cities OS."
+   }
+  },
+  {
+   "id": "V3_050",
+   "category": "indirect",
+   "query": "Is there any solution for optimizing garbage truck routes based on how full the bins are?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "smart_cities_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Automated waste collection routing is a Smart Cities OS workflow step."
+   }
+  },
+  {
+   "id": "V3_051",
+   "category": "direct",
+   "query": "What is your WhatsApp Marketing Platform?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_052",
+   "category": "informal",
+   "query": "need to blast 5 lakh whatsapp msgs for diwali sale, can u handle??",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "High-volume WhatsApp broadcasting (lakhs of messages) is the WhatsApp Marketing Platform."
+   }
+  },
+  {
+   "id": "V3_053",
+   "category": "indirect",
+   "query": "We need a shared inbox where several agents can reply to customer WhatsApp chats, plus automated drip sequences.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Two-way shared inbox and drip journeys are WhatsApp Marketing Platform capabilities."
+   }
+  },
+  {
+   "id": "V3_054",
+   "category": "spelling",
+   "query": "whatsap markting platfrom",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled WhatsApp Marketing Platform."
+   }
+  },
+  {
+   "id": "V3_055",
+   "category": "category_mismatch",
+   "query": "Do you provide WhatsApp marketing services?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing",
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "allowed",
+    "knowledge_available": true,
+    "rationale": "The WhatsApp Marketing Platform (product, with managed services) is the main match; AI-Powered Marketing also lists WhatsApp Marketing Automation."
+   }
+  },
+  {
+   "id": "V3_056",
+   "category": "direct",
+   "query": "Tell me about your influencer marketing platform",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Named offering."
+   }
+  },
+  {
+   "id": "V3_057",
+   "category": "problem",
+   "query": "I own a skincare brand and want to find Instagram creators with real followers, approve their posts before they go live, and pay them only after they deliver.",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Creator vetting, content approval and milestone payouts are Influencer Marketing Platform."
+   }
+  },
+  {
+   "id": "V3_058",
+   "category": "indirect",
+   "query": "how do I track affiliate sales and UTM conversions coming from creator posts?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Affiliate marketing and UTM live tracking are Influencer Marketing Platform capabilities."
+   }
+  },
+  {
+   "id": "V3_059",
+   "category": "spelling",
+   "query": "influencr marketting tool",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Misspelled influencer marketing."
+   }
+  },
+  {
+   "id": "V3_060",
+   "category": "grammar",
+   "query": "we are agency managing many influencers for brands, your platform is support agencies also?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW",
+     "TARGET_USERS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "The platform connects Brands, Agencies and Influencers per its description."
+   }
+  },
+  {
+   "id": "V3_061",
+   "category": "aspect",
+   "query": "what kind of results can I expect from your AI-powered marketing? any numbers?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_powered_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_benefits",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Benefits list concrete metrics."
+   }
+  },
+  {
+   "id": "V3_062",
+   "category": "aspect",
+   "query": "Who is MarTech 360 designed for?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "martech_360"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "TARGET_USERS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_target_users",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Intended users are listed."
+   }
+  },
+  {
+   "id": "V3_063",
+   "category": "aspect",
+   "query": "Why should we pay for AI strategy consulting instead of just starting a pilot ourselves?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_benefits",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Benefits include avoiding costly pilot failures."
+   }
+  },
+  {
+   "id": "V3_064",
+   "category": "aspect",
+   "query": "how many weeks does the AI readiness audit usually take?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "FAQ",
+     "WORKFLOW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_faq",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Matches an AI Strategy FAQ."
+   }
+  },
+  {
+   "id": "V3_065",
+   "category": "aspect",
+   "query": "Which cloud data warehouses do you work with for data engineering? Snowflake? BigQuery?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "data_engineering"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "FAQ"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_faq",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Matches a Data Engineering FAQ."
+   }
+  },
+  {
+   "id": "V3_066",
+   "category": "aspect",
+   "query": "What are the benefits of Enterprise & Agentic AI?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_benefits",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Benefits are listed."
+   }
+  },
+  {
+   "id": "V3_067",
+   "category": "aspect",
+   "query": "which frameworks do u use for the multi agent stuff, crewai or autogen?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "FAQ",
+     "WORKFLOW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_faq",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Matches an Enterprise & Agentic AI FAQ; workflow mentions AutoGen/CrewAI."
+   }
+  },
+  {
+   "id": "V3_068",
+   "category": "aspect",
+   "query": "Who is Enterprise AI OS meant for?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "TARGET_USERS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_target_users",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Target users not published for Enterprise AI OS."
+   }
+  },
+  {
+   "id": "V3_069",
+   "category": "aspect",
+   "query": "E-Commerce OS pricing plans?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "PRICING"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_pricing",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Pricing is never published."
+   }
+  },
+  {
+   "id": "V3_070",
+   "category": "aspect",
+   "query": "What are the main benefits of using Education OS for a college?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_benefits",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Education OS benefits are not published."
+   }
+  },
+  {
+   "id": "V3_071",
+   "category": "aspect",
+   "query": "How does Pharma OS work, step by step?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "pharma_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "WORKFLOW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_workflow",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Workflow steps are listed."
+   }
+  },
+  {
+   "id": "V3_072",
+   "category": "aspect",
+   "query": "How much does Real Estate OS cost per month?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "PRICING"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_pricing",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Pricing is never published."
+   }
+  },
+  {
+   "id": "V3_073",
+   "category": "aspect",
+   "query": "What features does Smart Cities OS have?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "smart_cities_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "CAPABILITIES"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_capabilities",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Capabilities are listed."
+   }
+  },
+  {
+   "id": "V3_074",
+   "category": "aspect",
+   "query": "Who is the WhatsApp marketing platform meant for - small shops or big brands?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "TARGET_USERS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_target_users",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Target users not published for WhatsApp platform."
+   }
+  },
+  {
+   "id": "V3_075",
+   "category": "aspect",
+   "query": "What exactly can the Influencer Marketing Platform do?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "CAPABILITIES"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_capabilities",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Capabilities are listed."
+   }
+  },
+  {
+   "id": "V3_076",
+   "category": "aspect",
+   "query": "Do you have FAQs for the influencer platform?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "FAQ"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_faq",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "No FAQs published for Influencer Marketing Platform."
+   }
+  },
+  {
+   "id": "V3_077",
+   "category": "context",
+   "query": "who is it for",
+   "context": {
+    "active_entity": "education_os",
+    "active_entities": [
+     "education_os"
+    ],
+    "previous_turns": [
+     "What is Education OS?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "education_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "TARGET_USERS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_target_users",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Follows Education OS context; target users not published."
+   }
+  },
+  {
+   "id": "V3_078",
+   "category": "context",
+   "query": "What can it do?",
+   "context": {
+    "active_entity": "whatsapp_marketing",
+    "active_entities": [
+     "whatsapp_marketing"
+    ],
+    "previous_turns": [
+     "tell me about the whatsapp platform"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "whatsapp_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "CAPABILITIES"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_capabilities",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follows WhatsApp platform context."
+   }
+  },
+  {
+   "id": "V3_079",
+   "category": "context",
+   "query": "and pricing?",
+   "context": {
+    "active_entity": "pharma_os",
+    "active_entities": [
+     "pharma_os"
+    ],
+    "previous_turns": [
+     "Tell me about Pharma OS",
+     "what tools does it include?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "pharma_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "PRICING"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_pricing",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Follows Pharma OS context; pricing not published."
+   }
+  },
+  {
+   "id": "V3_080",
+   "category": "context",
+   "query": "ok how does it actually work",
+   "context": {
+    "active_entity": "real_estate_os",
+    "active_entities": [
+     "real_estate_os"
+    ],
+    "previous_turns": [
+     "What's Real Estate OS?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "WORKFLOW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_workflow",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follows Real Estate OS context."
+   }
+  },
+  {
+   "id": "V3_081",
+   "category": "context",
+   "query": "how long does it take?",
+   "context": {
+    "active_entity": "martech_360",
+    "active_entities": [
+     "martech_360"
+    ],
+    "previous_turns": [
+     "What is MarTech 360?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "martech_360"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "FAQ",
+     "WORKFLOW",
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_faq",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follows MarTech 360; FAQ on process duration and benefit notes 2-3 week sprint."
+   }
+  },
+  {
+   "id": "V3_082",
+   "category": "context",
+   "query": "why should we even bother tho",
+   "context": {
+    "active_entity": "ai_strategy",
+    "active_entities": [
+     "ai_strategy"
+    ],
+    "previous_turns": [
+     "do you do AI roadmaps?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "ai_strategy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_benefits",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follows AI Strategy context."
+   }
+  },
+  {
+   "id": "V3_083",
+   "category": "context",
+   "query": "what about real estate os?",
+   "context": {
+    "active_entity": "smart_cities_os",
+    "active_entities": [
+     "smart_cities_os"
+    ],
+    "previous_turns": [
+     "Tell me about Smart Cities OS"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "real_estate_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follow-up explicitly names a different offering, so it switches."
+   }
+  },
+  {
+   "id": "V3_084",
+   "category": "context",
+   "query": "what about the other one?",
+   "context": {
+    "active_entity": "whatsapp_marketing",
+    "active_entities": [
+     "ecommerce_os",
+     "whatsapp_marketing"
+    ],
+    "previous_turns": [
+     "Tell me about E-Commerce OS",
+     "And the WhatsApp marketing platform?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "ecommerce_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "'The other one' refers to E-Commerce OS, the non-active entity in context."
+   }
+  },
+  {
+   "id": "V3_085",
+   "category": "context",
+   "query": "is it any good for education brands?",
+   "context": {
+    "active_entity": "influencer_marketing",
+    "active_entities": [
+     "influencer_marketing"
+    ],
+    "previous_turns": [
+     "tell me about your influencer platform"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "influencer_marketing"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "TARGET_USERS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_target_users",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follows influencer context; Education Brands is a listed intended user."
+   }
+  },
+  {
+   "id": "V3_086",
+   "category": "context",
+   "query": "benefits?",
+   "context": {
+    "active_entity": "enterprise_ai_os",
+    "active_entities": [
+     "enterprise_ai_os"
+    ],
+    "previous_turns": [
+     "What is Enterprise AI OS?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "enterprise_ai_os"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_benefits",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Follows Enterprise AI OS; benefits not published."
+   }
+  },
+  {
+   "id": "V3_087",
+   "category": "context",
+   "query": "how do u stop it from hallucinating",
+   "context": {
+    "active_entity": "enterprise_agentic_ai",
+    "active_entities": [
+     "enterprise_agentic_ai"
+    ],
+    "previous_turns": [
+     "Tell me about Enterprise & Agentic AI"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "FAQ",
+     "BENEFITS"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_faq",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follows Enterprise & Agentic AI; matches FAQ on hallucinations."
+   }
+  },
+  {
+   "id": "V3_088",
+   "category": "context",
+   "query": "who founded it?",
+   "context": {
+    "active_entity": "company_info",
+    "active_entities": [
+     "company_info"
+    ],
+    "previous_turns": [
+     "What is CittaAI?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "leadership_info"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "LEADERSHIP"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_leadership",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Follow-up about the company's founders."
+   }
+  },
+  {
+   "id": "V3_089",
+   "category": "both",
+   "query": "what's the difference between the two?",
+   "context": {
+    "active_entity": "enterprise_ai_os",
+    "active_entities": [
+     "pharma_os",
+     "enterprise_ai_os"
+    ],
+    "previous_turns": [
+     "Tell me about Pharma OS",
+     "and Enterprise AI OS?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "pharma_os",
+     "enterprise_ai_os"
+    ],
+    "multi_entities": [
+     "pharma_os",
+     "enterprise_ai_os"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Two offerings in context."
+   }
+  },
+  {
+   "id": "V3_090",
+   "category": "both",
+   "query": "can i use both together for a product launch?",
+   "context": {
+    "active_entity": "influencer_marketing",
+    "active_entities": [
+     "whatsapp_marketing",
+     "influencer_marketing"
+    ],
+    "previous_turns": [
+     "what is the whatsapp marketing platform",
+     "and the influencer one?"
+    ]
+   },
+   "expected": {
+    "entities": [
+     "whatsapp_marketing",
+     "influencer_marketing"
+    ],
+    "multi_entities": [
+     "whatsapp_marketing",
+     "influencer_marketing"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Two offerings in context."
+   }
+  },
+  {
+   "id": "V3_091",
+   "category": "both",
+   "query": "tell me about both of them",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": true,
+    "rationale": "No context: 'both' cannot be resolved."
+   }
+  },
+  {
+   "id": "V3_092",
+   "category": "multi",
+   "query": "Enterprise AI OS vs Enterprise & Agentic AI - what's the actual difference?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "enterprise_ai_os",
+     "enterprise_agentic_ai"
+    ],
+    "multi_entities": [
+     "enterprise_ai_os",
+     "enterprise_agentic_ai"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Explicit comparison."
+   }
+  },
+  {
+   "id": "V3_093",
+   "category": "multi",
+   "query": "difference between MarTech 360 and AI-Powered Marketing?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "martech_360",
+     "ai_powered_marketing"
+    ],
+    "multi_entities": [
+     "martech_360",
+     "ai_powered_marketing"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Explicit comparison."
+   }
+  },
+  {
+   "id": "V3_094",
+   "category": "multi",
+   "query": "WhatsApp platform or influencer platform - which is better for launching my new D2C brand?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "whatsapp_marketing",
+     "influencer_marketing"
+    ],
+    "multi_entities": [
+     "whatsapp_marketing",
+     "influencer_marketing"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_product",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Which-is-better between two named offerings."
+   }
+  },
+  {
+   "id": "V3_095",
+   "category": "multi",
+   "query": "ecommerce os vs real estate os",
+   "context": null,
+   "expected": {
+    "entities": [
+     "ecommerce_os",
+     "real_estate_os"
+    ],
+    "multi_entities": [
+     "ecommerce_os",
+     "real_estate_os"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Explicit comparison."
+   }
+  },
+  {
+   "id": "V3_096",
+   "category": "multi",
+   "query": "Should we start with Data Engineering or AI Strategy? Which one comes first?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "data_engineering",
+     "ai_strategy"
+    ],
+    "multi_entities": [
+     "data_engineering",
+     "ai_strategy"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_service",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Choice between two named services."
+   }
+  },
+  {
+   "id": "V3_097",
+   "category": "multi",
+   "query": "how is pharma os different from smart cities os",
+   "context": null,
+   "expected": {
+    "entities": [
+     "pharma_os",
+     "smart_cities_os"
+    ],
+    "multi_entities": [
+     "pharma_os",
+     "smart_cities_os"
+    ],
+    "aspects": [
+     "OVERVIEW",
+     "CAPABILITIES"
+    ],
+    "scope": "MULTI_ENTITY",
+    "operation": "get_solution",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Explicit comparison."
+   }
+  },
+  {
+   "id": "V3_098",
+   "category": "catalog",
+   "query": "What products do you have?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL_PRODUCTS",
+    "operation": "list_products",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Product listing."
+   }
+  },
+  {
+   "id": "V3_099",
+   "category": "catalog",
+   "query": "list all your solutions pls",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL_SOLUTIONS",
+    "operation": "list_solutions",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Solution listing."
+   }
+  },
+  {
+   "id": "V3_100",
+   "category": "catalog",
+   "query": "wat services u offer",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL_SERVICES",
+    "operation": "list_services",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Service listing."
+   }
+  },
+  {
+   "id": "V3_101",
+   "category": "catalog",
+   "query": "What does CittaAI offer?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL",
+    "operation": "list_catalog",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Whole catalog."
+   }
+  },
+  {
+   "id": "V3_102",
+   "category": "catalog",
+   "query": "Which industries do you build solutions for?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL",
+    "operation": "list_catalog",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Industry coverage = whole catalog listing."
+   }
+  },
+  {
+   "id": "V3_103",
+   "category": "catalog",
+   "query": "show me everything you've got",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL",
+    "operation": "list_catalog",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Whole catalog."
+   }
+  },
+  {
+   "id": "V3_104",
+   "category": "catalog",
+   "query": "do you have any of those OS platforms? which ones?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL_SOLUTIONS",
+    "operation": "list_solutions",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "All OS offerings are solutions."
+   }
+  },
+  {
+   "id": "V3_105",
+   "category": "catalog",
+   "query": "What kinds of AI consulting do you provide?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CATALOG_LIST"
+    ],
+    "scope": "ALL_SERVICES",
+    "operation": "list_services",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Consulting = services listing."
+   }
+  },
+  {
+   "id": "V3_106",
+   "category": "company",
+   "query": "What is CittaAI?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "company_info"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "OVERVIEW"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_company_info",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "About the company."
+   }
+  },
+  {
+   "id": "V3_107",
+   "category": "company",
+   "query": "Who is the CEO of CittaAI?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "leadership_info", "akhil_reddy"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "LEADERSHIP"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_leadership",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Leadership lists the CEO (Akhil Reddy, owner-confirmed 2026-09-30)."
+   }
+  },
+  {
+   "id": "V3_108",
+   "category": "company",
+   "query": "who r the co-founders",
+   "context": null,
+   "expected": {
+    "entities": [
+     "leadership_info"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "LEADERSHIP"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_leadership",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Leadership lists co-founders."
+   }
+  },
+  {
+   "id": "V3_109",
+   "category": "company",
+   "query": "Where is your office located?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "contact_info"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "CONTACT"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_contact",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Address is published."
+   }
+  },
+  {
+   "id": "V3_110",
+   "category": "company",
+   "query": "Can I get your phone number or email id?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "contact_info"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "CONTACT"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_contact",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "No phone or email is published."
+   }
+  },
+  {
+   "id": "V3_111",
+   "category": "company",
+   "query": "Have you won any awards?",
+   "context": null,
+   "expected": {
+    "entities": [
+     "awards_recognition"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "RECOGNITION"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_recognition",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Awards are listed."
+   }
+  },
+  {
+   "id": "V3_112",
+   "category": "company",
+   "query": "Who have you worked with? Any client case studies?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": [
+     "CLIENTS_CASE_STUDIES"
+    ],
+    "scope": "CLIENTS_SCOPE",
+    "operation": "list_case_studies",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Company-wide clients/case studies."
+   }
+  },
+  {
+   "id": "V3_113",
+   "category": "company",
+   "query": "Tell me more about the jewellery brand campaign you did",
+   "context": null,
+   "expected": {
+    "entities": [
+     "jewellery_brand_roi"
+    ],
+    "multi_entities": null,
+    "aspects": [
+     "CLIENTS_CASE_STUDIES"
+    ],
+    "scope": "SINGLE_ENTITY",
+    "operation": "get_case_study",
+    "clarification": "no",
+    "knowledge_available": true,
+    "rationale": "Specific case study."
+   }
+  },
+  {
+   "id": "V3_114",
+   "category": "ood",
+   "query": "what's the weather in hyderabad today",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "OUT_OF_DOMAIN",
+    "operation": "decline_out_of_domain",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Unrelated to CittaAI."
+   }
+  },
+  {
+   "id": "V3_115",
+   "category": "ood",
+   "query": "book me a flight to goa next friday",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "OUT_OF_DOMAIN",
+    "operation": "decline_out_of_domain",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Unrelated to CittaAI."
+   }
+  },
+  {
+   "id": "V3_116",
+   "category": "ood",
+   "query": "why does my python script throw KeyError: id?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "OUT_OF_DOMAIN",
+    "operation": "decline_out_of_domain",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Unrelated to CittaAI."
+   }
+  },
+  {
+   "id": "V3_117",
+   "category": "ood",
+   "query": "who won the IPL final in 2025",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "OUT_OF_DOMAIN",
+    "operation": "decline_out_of_domain",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Unrelated to CittaAI."
+   }
+  },
+  {
+   "id": "V3_118",
+   "category": "ood",
+   "query": "give me a good chicken biryani recipe",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "OUT_OF_DOMAIN",
+    "operation": "decline_out_of_domain",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Unrelated to CittaAI."
+   }
+  },
+  {
+   "id": "V3_119",
+   "category": "ood",
+   "query": "What is the capital of Australia?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "OUT_OF_DOMAIN",
+    "operation": "decline_out_of_domain",
+    "clarification": "no",
+    "knowledge_available": false,
+    "rationale": "Unrelated to CittaAI."
+   }
+  },
+  {
+   "id": "V3_120",
+   "category": "unknown_product",
+   "query": "Tell me about Healthcare OS",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "UNKNOWN_ENTITY",
+    "operation": "request_clarification",
+    "clarification": "allowed",
+    "knowledge_available": false,
+    "rationale": "Named product does not exist in the catalog."
+   }
+  },
+  {
+   "id": "V3_121",
+   "category": "unknown_product",
+   "query": "Does CittaAI have a Logistics OS?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "UNKNOWN_ENTITY",
+    "operation": "request_clarification",
+    "clarification": "allowed",
+    "knowledge_available": false,
+    "rationale": "Named product does not exist in the catalog."
+   }
+  },
+  {
+   "id": "V3_122",
+   "category": "unknown_product",
+   "query": "what is Citta HR Suite",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "UNKNOWN_ENTITY",
+    "operation": "request_clarification",
+    "clarification": "allowed",
+    "knowledge_available": false,
+    "rationale": "Named product does not exist in the catalog."
+   }
+  },
+  {
+   "id": "V3_123",
+   "category": "unknown_product",
+   "query": "info on your Banking OS pls",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "UNKNOWN_ENTITY",
+    "operation": "request_clarification",
+    "clarification": "allowed",
+    "knowledge_available": false,
+    "rationale": "Named product does not exist in the catalog."
+   }
+  },
+  {
+   "id": "V3_124",
+   "category": "ambiguous",
+   "query": "Tell me about your OS",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": true,
+    "rationale": "Six different OS solutions; cannot tell which."
+   }
+  },
+  {
+   "id": "V3_125",
+   "category": "ambiguous",
+   "query": "I want to know about the marketing one",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": true,
+    "rationale": "Four marketing offerings (AI-Powered Marketing, MarTech 360, WhatsApp, Influencer)."
+   }
+  },
+  {
+   "id": "V3_126",
+   "category": "ambiguous",
+   "query": "tell me about the enterprise one",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": true,
+    "rationale": "Enterprise AI OS vs Enterprise & Agentic AI."
+   }
+  },
+  {
+   "id": "V3_127",
+   "category": "ambiguous",
+   "query": "how does the platform work?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": true,
+    "rationale": "Several platforms; no context."
+   }
+  },
+  {
+   "id": "V3_128",
+   "category": "ambiguous",
+   "query": "can you help my business grow?",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": true,
+    "rationale": "Too vague to pick an offering."
+   }
+  },
+  {
+   "id": "V3_129",
+   "category": "problem",
+   "query": "We run a chain of hospitals and need a system for patient appointment booking and electronic health records.",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": false,
+    "rationale": "No offering covers hospital EHR/appointments (Pharma OS is manufacturing/compliance)."
+   }
+  },
+  {
+   "id": "V3_130",
+   "category": "problem",
+   "query": "I have a trucking company, need live GPS fleet tracking and driver management.",
+   "context": null,
+   "expected": {
+    "entities": [],
+    "multi_entities": null,
+    "aspects": null,
+    "scope": "NONE",
+    "operation": "request_clarification",
+    "clarification": "required",
+    "knowledge_available": false,
+    "rationale": "No offering covers fleet/driver management."
+   }
+  }
+ ]
+}

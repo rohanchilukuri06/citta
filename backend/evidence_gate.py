@@ -121,6 +121,62 @@ class EvidenceGate:
             grounding_mandate=grounding_mandate
         )
 
+    def validate_retrieved_evidence_scope(
+        self,
+        chunks: List[Dict[str, Any]],
+        target_entity_id: Any,
+        answer_scope: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Phase 6 Step 3 Triple-Validation (Scope & Entity Compliance):
+        Ensures retrieved evidence chunks adhere strictly to the target entity and answer scope,
+        preventing non-target entity evidence leakage in single-entity queries.
+        """
+        if not chunks:
+            return []
+
+        # Handle QueryInterpretation object passed directly
+        if hasattr(target_entity_id, "primary_entity_id"):
+            answer_scope = getattr(target_entity_id, "answer_scope", answer_scope)
+            target_entity_id = getattr(target_entity_id, "primary_entity_id", None)
+
+        if answer_scope == "CLIENTS_SCOPE":
+            filtered = []
+            for chunk in chunks:
+                meta = chunk.get("metadata", {})
+                chunk_eid = str(chunk.get("entity_id") or meta.get("entity_id", "")).lower().strip()
+                reg_type = str(meta.get("entity_type") or meta.get("category") or "").upper().strip()
+                if reg_type in ["CASE_STUDIES", "CASE_STUDY"] or "case" in chunk_eid or chunk_eid in ["company_info", "contact_info"]:
+                    filtered.append(chunk)
+            return filtered if filtered else chunks
+
+        if answer_scope == "RECOGNITION_SCOPE":
+            filtered = []
+            for chunk in chunks:
+                meta = chunk.get("metadata", {})
+                chunk_eid = str(chunk.get("entity_id") or meta.get("entity_id", "")).lower().strip()
+                reg_type = str(meta.get("entity_type") or meta.get("category") or "").upper().strip()
+                if reg_type in ["RECOGNITION", "AWARDS"] or "award" in chunk_eid or chunk_eid in ["company_info", "contact_info"]:
+                    filtered.append(chunk)
+            return filtered if filtered else chunks
+
+        if answer_scope in ["SINGLE_ENTITY", "GENERAL"] and target_entity_id:
+            filtered = []
+            target_clean = str(target_entity_id).lower().strip()
+            for chunk in chunks:
+                meta = chunk.get("metadata", {})
+                chunk_eid = str(chunk.get("entity_id") or meta.get("entity_id", "")).lower().strip()
+
+                # Allow target entity chunks, generic company/contact/faq chunks, or content.js general copy
+                if not chunk_eid or chunk_eid in ["company_info", "contact_info", "faq_general", "location_info"] or target_clean in chunk_eid or chunk_eid in target_clean:
+                    filtered.append(chunk)
+                else:
+                    logger.info(f"[EvidenceGate] Filtered non-target entity chunk '{chunk_eid}' for single-entity target '{target_clean}'.")
+
+            return filtered if filtered else chunks
+
+        return chunks
+
     def evaluate_multi_entity_evidence(
         self,
         entity_ids: List[str],
@@ -237,6 +293,83 @@ class EvidenceGate:
             mandate += f"3. For missing sections ({', '.join(missing_sections)}), explicitly state: '{missing_disclaimer}'\n"
         
         return "\n".join(lines), mandate
+
+    def evaluate_and_rerank(
+        self,
+        chunks: List[Dict[str, Any]],
+        requested_sections: Optional[List[str]] = None,
+        primary_entity_id: Optional[str] = None,
+        min_confidence_threshold: float = 0.35
+    ) -> List[Dict[str, Any]]:
+        """
+        Aspect-Aware Evidence Gate Reranking:
+        Reranks retrieved candidate chunks using multi-factor formula:
+          FinalScore = (0.50 * SemanticScore) + (0.25 * DomainMatch) + (0.15 * SectionMatch) + (0.10 * KeywordScore)
+        Filters out low-confidence evidence chunks (< min_confidence_threshold).
+        """
+        if not chunks:
+            return []
+
+        SECTION_ALIASES = {
+            "workflows": ["workflows", "how_it_works", "process", "implementation", "hero"],
+            "how_it_works": ["workflows", "how_it_works", "process", "implementation"],
+            "capabilities": ["capabilities", "features", "specs", "hero"],
+            "benefits": ["benefits", "why_us"],
+            "overview": ["overview", "hero", "about_lead", "about_story", "brand"],
+            "target_users": ["target_users", "audience"],
+            "pricing": ["pricing", "cost"],
+            "contact": ["contact", "contact_info", "location"],
+            "faq": ["faq"],
+            "case_study": ["cases", "case_study", "case_studies"],
+            "recognition": ["awards", "recognition"]
+        }
+
+        reranked = []
+        for chunk in chunks:
+            meta = chunk.get("metadata", {})
+            sem_score = float(chunk.get("semantic_score", chunk.get("score", 0.0)))
+            kw_score = float(chunk.get("keyword_score", 0.0))
+
+            # Domain Match check
+            domain_match = 0.0
+            if primary_entity_id:
+                p_id = primary_entity_id.strip().lower()
+                c_eid = str(meta.get("entity_id", "")).strip().lower()
+                c_cat = str(meta.get("category", "")).strip().lower()
+                c_dom = str(chunk.get("derived_domain", meta.get("domain", ""))).strip().lower()
+
+                if (p_id in c_eid or c_eid in p_id) or (p_id in c_cat or c_cat in p_id) or (p_id in c_dom or c_dom in p_id):
+                    domain_match = 1.0
+
+            # Section Match check
+            section_match = 0.0
+            c_sec = str(meta.get("section", "")).strip().lower()
+            if requested_sections and c_sec:
+                for req_s in requested_sections:
+                    s_clean = str(req_s).strip().lower()
+                    if not s_clean:
+                        continue
+                    if s_clean in c_sec or c_sec in s_clean:
+                        section_match = 1.0
+                        break
+                    aliases = SECTION_ALIASES.get(s_clean, [])
+                    if any(a in c_sec or c_sec in a for a in aliases):
+                        section_match = 1.0
+                        break
+
+            final_score = (0.50 * sem_score) + (0.25 * domain_match) + (0.15 * section_match) + (0.10 * kw_score)
+            final_score = round(min(1.0, max(0.0, final_score)), 4)
+
+            if final_score >= min_confidence_threshold:
+                chunk_copy = dict(chunk)
+                chunk_copy["reranked_score"] = final_score
+                chunk_copy["score"] = final_score
+                chunk_copy["domain_match_boost"] = domain_match
+                chunk_copy["section_match_boost"] = section_match
+                reranked.append(chunk_copy)
+
+        reranked.sort(key=lambda x: (-x["reranked_score"], -x.get("semantic_score", 0.0)))
+        return reranked
 
 _evidence_gate_instance = None
 

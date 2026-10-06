@@ -1,38 +1,28 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { HOMEPAGE } from "@/data/content";
-import { ArrowUpRight } from "lucide-react";
+import { rise } from "@/components/SectionHeader";
 
-export default function ClosingCTA() {
-  const C = HOMEPAGE.closing;
+export default function ClosingCTA({ data = HOMEPAGE.closing }) {
   return (
-    <section className="relative section-dark2 py-28 overflow-hidden" data-testid="closing-cta">
-      <div className="aurora opacity-40" />
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="font-display text-4xl md:text-6xl font-semibold tracking-tight text-white leading-[1.02]"
-        >
-          {C.title}
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-6 text-lg text-white/70 max-w-2xl mx-auto leading-relaxed"
-        >
-          {C.desc}
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 flex flex-wrap gap-3 justify-center"
-        >
-          {C.ctas.map((c) => (
-            <Link key={c.label} to={c.to} className={c.primary ? "btn-primary" : "btn-ghost"}>
-              {c.label} <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          ))}
+    <section className="section" data-accent="cobalt" data-testid="closing-cta">
+      <div className="container-x">
+        <motion.div {...rise()} className="relative overflow-hidden rounded-[2.5rem] card p-10 sm:p-16 text-center">
+          <div className="wash" />
+          <div className="absolute inset-0 dotgrid opacity-60 pointer-events-none" />
+          <div className="relative">
+            <span className="eyebrow">Next step</span>
+            <h2 className="mt-5 h-display text-[clamp(2.2rem,5vw,4rem)] text-ink">{data.title}</h2>
+            <p className="mt-5 lead max-w-2xl mx-auto">{data.desc}</p>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              {data.ctas.map((c) => (
+                <Link key={c.label} to={c.to} className={`btn ${c.primary ? "btn-solid" : "btn-outline"}`}>
+                  {c.label} {c.primary ? <ArrowRight className="h-4 w-4" /> : <ArrowUpRight className="h-4 w-4" />}
+                </Link>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

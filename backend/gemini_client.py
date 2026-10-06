@@ -7,17 +7,15 @@ import config
 
 logger = logging.getLogger(__name__)
 
-FALLBACK_MODELS = [
-    "gemini-2.0-flash",
-    "gemini-2.0-flash-lite",
-    "gemini-2.5-flash-lite"
-]
+# Additional models to try when the configured one is unavailable. The previous list named retired
+# models (gemini-2.0-flash, gemini-1.5-*), so it is now empty unless configured explicitly.
+FALLBACK_MODELS = [m.strip() for m in os.environ.get("GEMINI_FALLBACK_MODELS", "").split(",") if m.strip()]
 
 
 class GeminiClient:
     def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None):
         self.api_key = api_key or config.GEMINI_API_KEY or os.environ.get("GEMINI_API_KEY", "")
-        self.model = model or config.GEMINI_MODEL or "gemini-2.5-flash-lite"
+        self.model = model or config.GEMINI_MODEL or "gemini-2.5-flash"
         self.timeout = getattr(config, "TIMEOUT", 60)
         self.max_output_tokens = getattr(config, "MAX_OUTPUT_TOKENS", 500)
 
@@ -219,7 +217,7 @@ class GeminiClient:
                     # Only try fallback if model unavailable / 404
                     logger.warning(f"Gemini model '{current_model}' unavailable ({err_text}). Checking fallback...")
                     for fb_model in FALLBACK_MODELS:
-                        if fb_model != current_model:
+                        if fb_model not in candidate_models:  # was unbounded: re-appended the same models forever
                             candidate_models.append(fb_model)
                             break
                     continue

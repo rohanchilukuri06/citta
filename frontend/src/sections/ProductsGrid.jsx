@@ -1,69 +1,44 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { HOMEPAGE } from "@/data/content";
-import { ArrowUpRight, Rocket, Bot, GraduationCap, FlaskConical, Building2 } from "lucide-react";
-import SectionHeader from "@/components/SectionHeader";
+import { ArrowUpRight } from "lucide-react";
+import { HOMEPAGE, WHATSAPP, INFLUENCER } from "@/data/content";
+import SectionHeader, { rise } from "@/components/SectionHeader";
+import Scene from "@/three/Scene";
 
-const icons = [Rocket, Bot, GraduationCap, FlaskConical, Building2];
+const CONFIG = { "/products/whatsapp-marketing": WHATSAPP, "/products/influencer-marketing": INFLUENCER };
 
 export default function ProductsGrid() {
   const P = HOMEPAGE.products;
   return (
-    <section id="products" className="relative section-light py-28 overflow-hidden" data-testid="products-section">
-      <div className="absolute inset-0 grid-bg-light opacity-60" />
-      {/* Continuing glowing energy conduit line from Stack section */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-brand-blue to-transparent opacity-50 pointer-events-none hidden lg:block" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <SectionHeader eyebrow={P.eyebrow} title={P.title} theme="light" />
-          <p className="text-slate-600 max-w-md">{P.lead}</p>
-        </div>
-
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {P.items.map((p, i) => {
-            const Ico = icons[i];
-            const isFeature = i === 0;
+    <section id="products" className="section" data-testid="products-section">
+      <div className="container-x">
+        <SectionHeader eyebrow={P.eyebrow} title={P.title} lead={P.lead} />
+        <div className="mt-14 grid lg:grid-cols-2 gap-6">
+          {P.items.map((it, i) => {
+            const cfg = CONFIG[it.to];
             return (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className={`relative rounded-3xl overflow-hidden border tilt ${
-                  isFeature
-                    ? "lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-[#0A0F1E] to-[#0F172A] text-white border-white/10 p-10 min-h-[420px]"
-                    : "bg-white border-slate-200/70 p-8"
-                }`}
-                data-testid={`product-card-${i}`}
-              >
-                {isFeature && (
-                  <>
-                    <div className="absolute inset-0 grid-bg-dark opacity-30" />
-                    <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-brand-blue/25 blur-3xl" />
-                    <div className="absolute bottom-0 left-0 h-40 w-40 rounded-full bg-brand-light/20 blur-3xl" />
-                  </>
-                )}
-                <div className="relative flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className={`font-mono text-xs uppercase tracking-widest ${isFeature ? "text-brand-light" : "text-brand-blue"}`}>{p.n}</span>
-                    <div className={`h-11 w-11 rounded-xl grid place-items-center border ${
-                      isFeature ? "bg-white/5 border-white/10" : "bg-brand-blue/5 border-brand-blue/20"
-                    }`}>
-                      <Ico className={`h-5 w-5 ${isFeature ? "text-brand-light" : "text-brand-blue"}`} />
-                    </div>
+              <motion.article key={it.to} {...rise(0.08 * i)} data-accent={cfg.accent} className="card card-hover overflow-hidden flex flex-col">
+                <Scene name={cfg.scene} className="h-[300px] sm:h-[340px] bg-accent/5" />
+                <div className="p-7 flex flex-col flex-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="pill pill-accent">{cfg.eyebrow}</span>
+                    <span className="font-mono text-xs text-ink-muted">{it.n}</span>
                   </div>
-                  <h3 className={`font-display font-semibold leading-tight ${isFeature ? "text-4xl md:text-5xl" : "text-2xl"}`}>{p.title}</h3>
-                  <p className={`mt-4 leading-relaxed ${isFeature ? "text-white/70 text-lg max-w-lg" : "text-slate-600"}`}>{p.desc}</p>
-                  <Link
-                    to={p.to}
-                    className={`mt-auto pt-6 inline-flex items-center gap-1.5 group font-medium ${
-                      isFeature ? "text-brand-light" : "text-brand-blue"
-                    }`}
-                    data-testid={`product-link-${i}`}
-                  >
-                    Learn more <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <h3 className="mt-4 h-display text-3xl text-ink">{cfg.name}</h3>
+                  <p className="mt-3 text-ink-soft leading-relaxed">{it.desc}</p>
+                  <dl className="mt-6 grid grid-cols-4 gap-3 border-t border-line/10 pt-5">
+                    {cfg.stats.map((s) => (
+                      <div key={s.l}>
+                        <dt className="text-[11px] text-ink-muted leading-tight">{s.l}</dt>
+                        <dd className="font-display text-lg font-semibold text-accent mt-1">{s.v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <Link to={it.to} className="mt-6 link-arrow" data-testid={`product-link-${cfg.slug}`}>
+                    Explore {cfg.name} <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>

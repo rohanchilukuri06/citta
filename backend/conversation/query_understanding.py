@@ -39,9 +39,9 @@ DETAILED_TRIGGERS = [
 ]
 
 LEADERSHIP_TITLES = {
-    "ceo": "Vinay Velivela",
-    "chief executive officer": "Vinay Velivela",
-    "chief exec": "Vinay Velivela",
+    "ceo": "Akhil Reddy",
+    "chief executive officer": "Akhil Reddy",
+    "chief exec": "Akhil Reddy",
     "founder": "Saladi Chandra Balaji / Akhil Reddy",
     "co-founder": "Saladi Chandra Balaji / Akhil Reddy",
     "cto": "Akhil Reddy",
@@ -156,7 +156,7 @@ class QueryUnderstandingEngine:
                 requires_clarification=False
             )
 
-        # Fix Issue 2: "CEO" maps directly to Vinay Velivela (CittaAI CEO)
+        # "CEO" maps to Akhil Reddy (CittaAI CEO; Vinay Velivela is CEO of Fixity Technologies)
         for role_key, person_name in LEADERSHIP_TITLES.items():
             if re.search(rf"\b{re.escape(role_key)}\b", q_lower):
                 return QueryUnderstandingResult(
@@ -173,7 +173,7 @@ class QueryUnderstandingEngine:
                     requires_clarification=False
                 )
                 
-        if any(name in q_lower for name in ["akhil", "vinay", "saladi", "ganesh", "harish", "aravind", "parvatha"]) or any(role in q_lower for role in ["ceo", "cto", "coo", "cmo", "chief executive", "chief technology", "chief operating", "chief marketing"]):
+        if any(re.search(rf"\b{re.escape(name)}\b", q_lower) for name in ["akhil", "vinay", "saladi", "ganesh", "harish", "aravind", "parvatha"]) or any(re.search(rf"\b{re.escape(role)}\b", q_lower) for role in ["ceo", "cto", "coo", "cmo", "chief executive", "chief technology", "chief operating", "chief marketing"]):
             return QueryUnderstandingResult(
                 query=query,
                 normalized_query=norm_q,

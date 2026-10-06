@@ -1,0 +1,2012 @@
+[
+ {
+  "offset": 496995,
+  "items": [
+   {
+    "id": "data-engineering",
+    "title": "Data Engineering",
+    "icon": null,
+    "color": "text-blue-600",
+    "gradient": "from-blue-500 to-cyan-500",
+    "items": [
+     {
+      "id": "real-time-data-pipelines",
+      "title": "Real-time data pipelines",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Stream processing with minimal latency",
+      "fullDescription": "Build resilient, low-latency data pipelines that power real-time analytics and AI applications. We handle the complexity of streaming data at scale.",
+      "features": [
+       "Apache Kafka & Flink implementation",
+       "Real-time ETL/ELT",
+       "Stream processing architectures",
+       "Data quality monitoring"
+      ],
+      "benefits": [
+       {
+        "title": "Real-Time Insights",
+        "description": "Make decisions on second-old data",
+        "icon": null
+       },
+       {
+        "title": "Reliability",
+        "description": "99.99% uptime SLAs",
+        "icon": null
+       },
+       {
+        "title": "Scalability",
+        "description": "Handle petabytes of throughput",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "cloud-data-warehouse",
+      "title": "Cloud data warehouse",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Snowflake/BigQuery architecture",
+      "fullDescription": "Design and implement modern cloud data warehouses that serve as the single source of truth for your enterprise. We optimize for performance, cost, and usability.",
+      "features": [
+       "Snowflake / BigQuery / Redshift",
+       "Data modeling (Star/Snowflake schema)",
+       "Cost optimization strategies",
+       "RBAC & innovative security"
+      ],
+      "benefits": [
+       {
+        "title": "Single Source of Truth",
+        "description": "Unified data for all departments",
+        "icon": null
+       },
+       {
+        "title": "Cost Efficency",
+        "description": "Pay only for what you query",
+        "icon": null
+       },
+       {
+        "title": "Performance",
+        "description": "Sub-second query responses",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "data-lake-architecture",
+      "title": "Data lake architecture",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Scalable storage for unstructured data",
+      "fullDescription": "Unlock the value of unstructured data. Our data lake solutions provide a secure, scalable repository for all your raw data, ready for machine learning and advanced analytics.",
+      "features": [
+       "S3 / ADLS implementation",
+       "Delta Lake / Iceberg formats",
+       "Data cataloging & discovery",
+       "Automated lifecycle policies"
+      ],
+      "benefits": [
+       {
+        "title": "Flexibility",
+        "description": "Store any data format",
+        "icon": null
+       },
+       {
+        "title": "ML Ready",
+        "description": "Direct access for data scientists",
+        "icon": null
+       },
+       {
+        "title": "Low Cost",
+        "description": "Economical long-term storage",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "master-data-management",
+      "title": "Master data management",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Golden record creation & governance",
+      "fullDescription": "Ensure data consistency across your organization. We build Master Data Management (MDM) systems that create a trustworthy 'golden record' for your critical business entities.",
+      "features": [
+       "Entity resolution & matching",
+       "Data stewardship workflows",
+       "Reference data management",
+       "Data quality firewalls"
+      ],
+      "benefits": [
+       {
+        "title": "Trusted Data",
+        "description": "Eliminate duplicates and errors",
+        "icon": null
+       },
+       {
+        "title": "Compliance",
+        "description": "Meet regulatory requirements",
+        "icon": null
+       },
+       {
+        "title": "360 View",
+        "description": "Complete view of customers/products",
+        "icon": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "enterprise-and-agentic-ai",
+    "title": "Enterprise & Agentic AI",
+    "icon": null,
+    "color": "text-purple-600",
+    "gradient": "from-purple-500 to-pink-500",
+    "items": [
+     {
+      "id": "custom-llm-fine-tuning",
+      "title": "Custom LLM fine-tuning",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Tailored models for your domain",
+      "fullDescription": "Adapt state-of-the-art Large Language Models to your specific industry language and use cases. We handle dataset preparation, fine-tuning, and evaluation.",
+      "features": [
+       "Llama 3 / Mistral fine-tuning",
+       "Domain-specific dataset creation",
+       "Parameter-efficient tuning (LoRA)",
+       "Model evaluation benchmarks"
+      ],
+      "benefits": [
+       {
+        "title": "Accuracy",
+        "description": "Models that speak your language",
+        "icon": null
+       },
+       {
+        "title": "Privacy",
+        "description": "Keep data within your VPC",
+        "icon": null
+       },
+       {
+        "title": "Control",
+        "description": "Own your model weights",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "multi-agent-systems",
+      "title": "Multi-agent systems",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Autonomous swarms for complex tasks",
+      "fullDescription": "Deploy collaborative swarms of AI agents that can break down complex objectives, assign tasks, and execute workflows autonomously, mimicking human teamwork.",
+      "features": [
+       "Autogen / CrewAI frameworks",
+       "Role-based agent design",
+       "Inter-agent communication protocols",
+       "Human-in-the-loop workflows"
+      ],
+      "benefits": [
+       {
+        "title": "Productivity",
+        "description": "Automate entire departments",
+        "icon": null
+       },
+       {
+        "title": "Complexity",
+        "description": "Solve non-linear problems",
+        "icon": null
+       },
+       {
+        "title": "Scalability",
+        "description": "Spin up agents on demand",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "rag-solutions",
+      "title": "RAG solutions",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Chat with your enterprise data",
+      "fullDescription": "Ground your AI in reality with Retrieval Augmented Generation (RAG). We build systems that let users query your proprietary documents with high accuracy and source attribution.",
+      "features": [
+       "Vector database integration",
+       "Hybrid search algorithms",
+       "Citation & source tracking",
+       "Document parsing pipelines"
+      ],
+      "benefits": [
+       {
+        "title": "Truthfulness",
+        "description": "Eliminate hallucinations",
+        "icon": null
+       },
+       {
+        "title": "Access",
+        "description": "Unlock siloed knowledge",
+        "icon": null
+       },
+       {
+        "title": "Security",
+        "description": "Rbac-aware retrieval",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "conversational-ai",
+      "title": "Conversational AI",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Voice & text agents",
+      "fullDescription": "Create natural, human-like voice and text interfaces for your applications. Our conversational agents handle complex intent and maintain context over long interactions.",
+      "features": [
+       "NLU / NLP pipeline design",
+       "Voice synthesis & recognition",
+       "Dialog state management",
+       "Omnichannel deployment"
+      ],
+      "benefits": [
+       {
+        "title": "Experience",
+        "description": "Natural, fluid interactions",
+        "icon": null
+       },
+       {
+        "title": "Efficiency",
+        "description": "Deflect routine calls",
+        "icon": null
+       },
+       {
+        "title": "24/7",
+        "description": "Always-on service",
+        "icon": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ai-strategy-and-advisory",
+    "title": "AI Strategy & Advisory",
+    "icon": null,
+    "color": "text-amber-600",
+    "gradient": "from-amber-500 to-orange-500",
+    "items": [
+     {
+      "id": "ai-readiness-assessment",
+      "title": "AI readiness assessment",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Technical & cultural audit",
+      "fullDescription": "Before you build, know where you stand. We evaluate your data infrastructure, talent, and processes to determine your readiness for AI adoption.",
+      "features": [
+       "Data maturity scoring",
+       "Infrastructure audit",
+       "Skills gap analysis",
+       "ROI projection modeling"
+      ],
+      "benefits": [
+       {
+        "title": "Clarity",
+        "description": "Know exactly where to start",
+        "icon": null
+       },
+       {
+        "title": "Risk Reduction",
+        "description": "Avoid costly failed pilots",
+        "icon": null
+       },
+       {
+        "title": "Roadmap",
+        "description": "Clear path to value",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "strategic-roadmap",
+      "title": "Strategic roadmap",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Phased implementation plans",
+      "fullDescription": "We build comprehensive, multi-year AI roadmaps that align with your business goals, ensuring every initiative drives tangible value.",
+      "features": [
+       "Milestone planning",
+       "Resource allocation",
+       "Technology selection",
+       "KPI definition"
+      ],
+      "benefits": [
+       {
+        "title": "Alignment",
+        "description": "Business & Tech in sync",
+        "icon": null
+       },
+       {
+        "title": "Momentum",
+        "description": "Quick wins to build trust",
+        "icon": null
+       },
+       {
+        "title": "Vision",
+        "description": "Long-term competitive advantage",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "use-case-prioritization",
+      "title": "Use case prioritization",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Impact vs effort matrix",
+      "fullDescription": "Not all AI ideas are equal. We help you identify and prioritize high-impact, low-effort use cases that demonstrate value quickly.",
+      "features": [
+       "Feasibility workshops",
+       "Value estimation",
+       "Risk assessment",
+       "Pilot definitions"
+      ],
+      "benefits": [
+       {
+        "title": "Focus",
+        "description": "Work on what matters",
+        "icon": null
+       },
+       {
+        "title": "Success Rate",
+        "description": "Higher probability of success",
+        "icon": null
+       },
+       {
+        "title": "Budget",
+        "description": "Efficient capital allocation",
+        "icon": null
+       }
+      ]
+     },
+     {
+      "id": "ai-governance",
+      "title": "AI governance",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Ethics, safety & compliance",
+      "fullDescription": "Scale AI responsibly. We establish governance frameworks that ensure your AI systems are ethical, compliant, and secure.",
+      "features": [
+       "Ethical guidelines",
+       "Model monitoring frameworks",
+       "Compliance auditing (EU AI Act)",
+       "Bias detection"
+      ],
+      "benefits": [
+       {
+        "title": "Trust",
+        "description": "Build automated trust",
+        "icon": null
+       },
+       {
+        "title": "Safety",
+        "description": "Prevent reputational damage",
+        "icon": null
+       },
+       {
+        "title": "Compliance",
+        "description": "Stay ahead of regulations",
+        "icon": null
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ai-powered-martech",
+    "title": "AI-Powered Marketing",
+    "icon": null,
+    "color": "text-emerald-600",
+    "gradient": "from-green-500 to-emerald-500",
+    "items": [
+     {
+      "id": "branding-and-strategy",
+      "title": "Branding & Strategy",
+      "icon": null,
+      "image": null,
+      "shortDescription": "AI Brand Architecture & Strategy Engine",
+      "fullDescription": "This is not “branding”—it’s an intelligence layer that engineers market dominance. We ingest multi-source signals (search intent, competitor messaging, audience behaviour, conversion patterns, and sentiment) and transform them into a living strategy system. Our AI models map category white-spaces, predict demand curves, and simulate positioning scenarios before a single asset is produced. We deploy automated audience segmentation, narrative testing workflows, and message scoring systems that learn from engagement and revenue outcomes. Instead of static brand decks, you receive a continuously optimized brand operating system: value proposition logic, offer architecture, pricing perception modelling, and a measurable communication framework. Traditional strategy relies on opinions and workshops; our approach runs on behavioural evidence, predictive intelligence, and iterative validation. The result is a brand that adapts to market shifts in real time, aligns every channel to a single growth thesis, and accelerates revenue velocity with fewer wasted cycles.",
+      "features": [
+       "Predictive positioning analysis using competitor and intent intelligence",
+       "AI-driven customer persona clusters based on behaviour + conversion data",
+       "Narrative and messaging scorecards with automated iteration loops",
+       "Offer architecture design using elasticity and conversion likelihood modelling",
+       "Brand tone system generation with consistency enforcement workflows",
+       "Funnel-aligned brand guidelines for multi-channel execution",
+       "Quarterly strategy recalibration powered by performance signals"
+      ],
+      "caseStudies": [
+       {
+        "title": "Luxury Real Estate – Brand Acceleration Engine",
+        "points": [
+         "AI-led positioning map",
+         "Demand forecasting and audience segmentation",
+         "Narrative scoring framework"
+        ],
+        "result": "62%+ increase in qualified enquiries in 45 days"
+       },
+       {
+        "title": "Healthcare Services – Trust Conversion Engine",
+        "points": [
+         "Authority-led messaging architecture",
+         "Sentiment intelligence and objections modelling",
+         "Conversion probability scoring"
+        ],
+        "result": "2.4x consultation bookings in 60 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Discovery & Signal Ingest",
+        "description": "We ingest data from search, competitors, and audience behavior to map the market landscape."
+       },
+       {
+        "title": "Predictive Modeling",
+        "description": "AI simulates positioning scenarios and demand curves to identify high-value opportunities."
+       },
+       {
+        "title": "Strategy Formulation",
+        "description": "We build the core brand operating system: value proposition, offer architecture, and messaging."
+       },
+       {
+        "title": "Iterative Validation",
+        "description": "Continuous testing and refinement based on real-world engagement and revenue signals."
+       }
+      ],
+      "faq": [
+       {
+        "question": "How is this different from traditional branding?",
+        "answer": "We don't just guess; we use data. Our strategies are built on behavioral evidence and predictive intelligence, not just creative opinions."
+       },
+       {
+        "question": "What data sources do you use?",
+        "answer": "We analyze search intent, competitor messaging, audience behavior, conversion patterns, and sentiment analysis."
+       },
+       {
+        "question": "How long does the strategy process take?",
+        "answer": "Unlike traditional agencies that take months, our initial strategy sprint is typically completed in 2-3 weeks."
+       }
+      ]
+     },
+     {
+      "id": "social-media-marketing",
+      "title": "Social Media Marketing",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Autonomous Social Growth Engine",
+      "fullDescription": "Social media is treated as a real-time signal laboratory, not a posting calendar. Our system monitors audience micro-behaviours—watch time, saves, taps, replies, profile actions—and trains prediction models to identify what will scale before it trends. We deploy generative content pipelines that produce multiple creative angles per theme, then automatically test hooks, pacing, and CTA variants through controlled release cycles. Behaviour tracking feeds a continuous optimization loop: formats evolve weekly, messaging adapts daily, and distribution decisions are guided by performance probability—not guesswork. Traditional SMM depends on “best practices”; our SMM runs on experimentation engines, audience modelling, and automated creative iteration. We build growth loops through community triggers, UGC capture systems, and retention sequences that turn attention into repeat exposure. The outcome is measurable: higher reach quality, faster creative learning, and compounding engagement that translates into leads and revenue.",
+      "features": [
+       "Predictive content planning based on trend + audience intent signals",
+       "Automated hook and caption generation with performance scoring",
+       "Multi-variant creative testing system (formats, CTAs, pacing)",
+       "Behavioural analytics dashboard (saves, shares, watch-time, clicks)",
+       "Community growth loops and UGC harvesting automations",
+       "Retargeting audiences built from engagement micro-events",
+       "Weekly creative intelligence reports and next-action automation"
+      ],
+      "caseStudies": [
+       {
+        "title": "Premium Skincare – Social Demand Engine",
+        "points": [
+         "AI creative variant generator",
+         "Engagement-based audience modelling",
+         "Automated experimentation framework"
+        ],
+        "result": "310%+ reach growth | 4.1x website clicks in 30 days"
+       },
+       {
+        "title": "B2B SaaS – Pipeline Attention Engine",
+        "points": [
+         "Founder-led narrative system",
+         "Predictive post scoring and distribution optimization",
+         "Behaviour-triggered retargeting loop"
+        ],
+        "result": "78%+ increase in inbound demos in 60 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Signal Analysis",
+        "description": "We monitor watch time, shares, and engagement to identify trending topics and formats."
+       },
+       {
+        "title": "Generative Production",
+        "description": "Our AI pipelines create multiple creative variants (hooks, visuals, captions) per theme."
+       },
+       {
+        "title": "A/B Testing",
+        "description": "We automatically test variants to find the highest-performing content before scaling."
+       },
+       {
+        "title": "Growth Loop",
+        "description": "Winning content is amplified, and insights are fed back into the model for the next cycle."
+       }
+      ],
+      "faq": [
+       {
+        "question": "Do you post manually or is it automated?",
+        "answer": "We use a hybrid approach. Strategy and creativity are human-led, while scheduling, posting, and initial engagement are often automated for efficiency."
+       },
+       {
+        "question": "How do you capture our brand voice?",
+        "answer": "We build a custom 'Brand Tone System' that learns your voice and enforces consistency across all generated content."
+       },
+       {
+        "question": "What metrics define success?",
+        "answer": "We focus on 'Reach Quality' and 'Conversion Actions'—not just vanity metrics like likes. We track saves, shares, and clicks."
+       }
+      ]
+     },
+     {
+      "id": "content-and-design",
+      "title": "Content & Design",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Generative Content & Design Intelligence Studio",
+      "fullDescription": "Content becomes a production system—designed to learn and compound. We generate assets through an AI-guided pipeline that aligns brand voice, audience intent, and conversion psychology. Our models map content gaps, predict high-impact topics, and create multi-format outputs (static, short-form, long-form, landing content) with consistency enforcement. Design is engineered using attention heatmap logic and emotion-response modelling—layouts are built to control scroll behaviour, comprehension, and click probability. Every asset is tagged, tracked, and scored by performance metrics, then fed back into the system to improve future outputs. Traditional content teams create “what looks good”; we generate what is statistically likely to win. The result is a scalable content engine that produces high-volume, premium-quality assets with faster iteration, stronger narrative coherence, and measurable business outcomes—without creative fatigue or inconsistency.",
+      "features": [
+       "Topic intelligence and content gap prediction system",
+       "Brand voice model and consistency enforcement workflows",
+       "Multi-format generative content production (reels, carousels, blogs, ads)",
+       "Design system optimized for attention flow and conversion triggers",
+       "Automated A/B creative iteration and winner amplification",
+       "Asset tagging + performance scoring for continuous learning",
+       "Conversion-aligned content calendars built from predictive signals"
+      ],
+      "caseStudies": [
+       {
+        "title": "D2C Nutrition – Conversion Content Engine",
+        "points": [
+         "Intent-based topic mining",
+         "Generative creative pipeline",
+         "Attention-optimized design framework"
+        ],
+        "result": "2.9x add-to-cart rate from content-led landing flows in 45 days"
+       },
+       {
+        "title": "Education Services – Authority Content Engine",
+        "points": [
+         "Narrative sequencing system",
+         "Automated script + carousel generation",
+         "Performance-based creative scoring"
+        ],
+        "result": "180%+ increase in lead submissions in 30 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Topic Intelligence",
+        "description": "We identify high-impact topics based on search intent and content gap analysis."
+       },
+       {
+        "title": "Asset Generation",
+        "description": "Our system produces multi-format assets (images, copy, layouts) tailored to your brand."
+       },
+       {
+        "title": "Performance Scoring",
+        "description": "Every asset is scored based on predicted performance before it goes live."
+       },
+       {
+        "title": "Feedback Loop",
+        "description": "Real-time performance data refines future content generation for continuous improvement."
+       }
+      ],
+      "faq": [
+       {
+        "question": "Is the content generic AI output?",
+        "answer": "No. We use AI as a tool for scale, but every piece is engineered with brand-specific training and human creative oversight."
+       },
+       {
+        "question": "Can we edit the content before publishing?",
+        "answer": "Absolutely. You have full approval rights. Our system learns from your edits to minimize future corrections."
+       },
+       {
+        "question": "How do you ensure visual consistency?",
+        "answer": "We implement strict design systems and style guides within our generation models to ensure pixel-perfect brand alignment."
+       }
+      ]
+     },
+     {
+      "id": "seo",
+      "title": "SEO",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Predictive SEO Compounding Engine",
+      "fullDescription": "SEO is executed as an algorithmic advantage—not a checklist. We build predictive keyword ecosystems by analysing intent clusters, competitor authority patterns, and conversion pathways. Our system auto-generates topic maps, internal linking architectures, and content briefs that target ranking probability, not just volume. Machine learning models forecast which pages will win based on SERP volatility, content depth requirements, and authority gaps—then prioritize execution for maximum compounding impact. Technical SEO is monitored continuously through automated crawls, anomaly detection, and performance regression alerts. Traditional SEO reacts monthly; our SEO adapts weekly through predictive insights and automated optimization loops. We combine behavioural tracking (dwell time, scroll depth, CTR) with content refinement workflows to increase relevance signals over time. The result is durable visibility, rising authority, and consistent inbound lead generation driven by an intelligence system that learns from search behaviour and business outcomes.",
+      "features": [
+       "Predictive keyword + intent clustering and opportunity forecasting",
+       "Automated topic maps, content briefs, and semantic coverage models",
+       "Internal linking architecture generation for authority flow",
+       "Continuous technical SEO monitoring with anomaly detection",
+       "Behaviour-driven content optimization (CTR, dwell time, scroll depth)",
+       "SERP volatility tracking and rapid response update workflows",
+       "Monthly compounding growth report with next-best actions"
+      ],
+      "caseStudies": [
+       {
+        "title": "Legal Services – Organic Acquisition Engine",
+        "points": [
+         "Intent cluster mapping",
+         "Predictive content prioritization",
+         "Automated technical monitoring"
+        ],
+        "result": "3.6x organic leads in 90 days"
+       },
+       {
+        "title": "Home Interiors – Local Discovery Engine",
+        "points": [
+         "Location-intent content grid",
+         "Behaviour-led content refinement loop",
+         "Authority flow internal linking system"
+        ],
+        "result": "240%+ growth in non-branded organic traffic in 75 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Intent Clustering",
+        "description": "We group keywords by user intent to target entire topic clusters, not just single terms."
+       },
+       {
+        "title": "Topic Mapping",
+        "description": "We generate comprehensive content briefs and site architectures to maximize authority."
+       },
+       {
+        "title": "Content Optimization",
+        "description": "Existing and new content is optimized for relevance, readability, and conversion."
+       },
+       {
+        "title": "Technical Monitoring",
+        "description": "Continuous crawls detect and fix technical issues that could hinder performance."
+       }
+      ],
+      "faq": [
+       {
+        "question": "How fast will I see rankings improve?",
+        "answer": "While SEO is a long-term game, our predictive approach often yields quicker 'quick wins' in 3-4 months, with compounding growth thereafter."
+       },
+       {
+        "question": "Do you do link building?",
+        "answer": "Yes, but we focus on 'Authority Flow'—earning high-quality, relevant links rather than spammy, low-value citations."
+       },
+       {
+        "question": "Is this 'Black Hat' SEO?",
+        "answer": "Never. We strictly adhere to search engine guidelines. Our advantage comes from data density and execution speed, not tricks."
+       }
+      ]
+     },
+     {
+      "id": "ppc-advertising",
+      "title": "PPC Advertising",
+      "icon": null,
+      "image": null,
+      "shortDescription": "AI Performance Advertising Optimization Engine",
+      "fullDescription": "Paid media becomes a self-optimizing revenue machine when AI governs decisions. We build predictive bidding and budget allocation models that prioritize conversion probability and marginal ROI, not vanity metrics. Our system generates ad variations at scale—headlines, visuals, angles, and CTAs—then runs automated testing cycles to identify winners faster than manual optimization. Behaviour tracking connects ad engagement to on-site actions, enabling micro-segment retargeting and funnel-stage personalization. We deploy anomaly detection to prevent budget leakage, automated negative targeting refinement, and creative fatigue prediction to maintain performance stability. Traditional PPC teams adjust campaigns; our engine continuously recalibrates based on real-time signals. The result is lower acquisition costs, stronger conversion rates, and performance consistency even in volatile markets—powered by automation, machine learning optimization, and rapid creative iteration.",
+      "features": [
+       "Predictive budget allocation and bid optimization workflows",
+       "Multi-variant ad creative generation and automated testing",
+       "Funnel-stage audience modelling and micro-segment retargeting",
+       "Conversion path analytics and drop-off prevention experiments",
+       "Creative fatigue prediction and rotation automation",
+       "Anomaly detection for spend waste and performance regression",
+       "Weekly performance intelligence report with next-best actions"
+      ],
+      "caseStudies": [
+       {
+        "title": "Luxury Jewellery – Profit Efficiency Engine",
+        "points": [
+         "High-intent audience modelling",
+         "Automated creative testing framework",
+         "Conversion probability bidding"
+        ],
+        "result": "34% lower CPA | 2.2x ROAS in 30 days"
+       },
+       {
+        "title": "B2B Consulting – Pipeline Acquisition Engine",
+        "points": [
+         "Lead-quality scoring loop",
+         "Behaviour-triggered retargeting",
+         "Anomaly-based budget reallocation"
+        ],
+        "result": "41% increase in qualified leads in 45 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Audience Modeling",
+        "description": "We build high-intent audience segments based on first-party data and behavioral signals."
+       },
+       {
+        "title": "Creative Generation",
+        "description": "We produce hundreds of ad variants to test different angles, hooks, and visuals."
+       },
+       {
+        "title": "Automated Bidding",
+        "description": "Our algorithms adjust bids in real-time to maximize conversion probability at the lowest cost."
+       },
+       {
+        "title": "Performance Scaling",
+        "description": "Budget is automatically reallocated to the top-performing campaigns and creatives."
+       }
+      ],
+      "faq": [
+       {
+        "question": "What platforms do you support?",
+        "answer": "We manage campaigns across Google, Meta (Facebook/Instagram), LinkedIn, and emerging platforms like TikTok."
+       },
+       {
+        "question": "How does AI improve ROI?",
+        "answer": "AI analyzes thousands of data points per second to make smarter bidding decisions than any human could, reducing wasted spend."
+       },
+       {
+        "question": "What is the recommended minimum budget?",
+        "answer": "We generally recommend a starting media budget of $2k/month to generate sufficient data for our AI models to optimize effectively."
+       }
+      ]
+     },
+     {
+      "id": "ecommerce-growth",
+      "title": "E-commerce Growth",
+      "icon": null,
+      "image": null,
+      "shortDescription": "E-commerce Revenue Intelligence & Growth Loops",
+      "fullDescription": "E-commerce growth is engineered through predictive conversion science and automated retention systems. We track behaviour at every micro-step—product views, scroll depth, cart actions, checkout drop-offs—and use machine learning to identify friction points and high-value customer patterns. Our system predicts purchase likelihood and deploys personalized interventions: product recommendations, offer sequencing, and dynamic messaging across channels. We implement growth loops that convert buyers into repeat purchasers through automated post-purchase journeys, replenishment triggers, and loyalty activation workflows. Traditional e-commerce marketing runs campaigns; our approach builds an always-on revenue system that learns from every transaction. Generative AI accelerates creative production for product storytelling, bundles, and seasonal drops, while analytics models measure revenue impact per action. The outcome is higher conversion rates, stronger average order value, and compounding customer lifetime value driven by intelligence, not manual effort.",
+      "features": [
+       "Behaviour tracking across product → cart → checkout journeys",
+       "Conversion friction detection and automated experimentation",
+       "Predictive purchase intent modelling and personalization rules",
+       "Dynamic offer and bundle architecture for AOV optimization",
+       "Post-purchase automation loops for retention and repeat sales",
+       "Customer segmentation by LTV and churn probability",
+       "Weekly revenue intelligence dashboard and optimization roadmap"
+      ],
+      "caseStudies": [
+       {
+        "title": "D2C Apparel – Checkout Conversion Engine",
+        "points": [
+         "Funnel friction modelling",
+         "Predictive offer sequencing",
+         "Automated creative iteration loop"
+        ],
+        "result": "27%+ uplift in conversion rate in 40 days"
+       },
+       {
+        "title": "Beauty Commerce – LTV Expansion Engine",
+        "points": [
+         "Churn prediction segmentation",
+         "Post-purchase automation journeys",
+         "Personalized recommendation framework"
+        ],
+        "result": "1.8x repeat purchase rate in 90 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Behavioral Tracking",
+        "description": "We track every user interaction to understand where users drop off and why."
+       },
+       {
+        "title": "Friction Analysis",
+        "description": "AI identifies usability issues and conversion blockers in the customer journey."
+       },
+       {
+        "title": "Intervention",
+        "description": "We deploy personalized offers, pop-ups, or emails to recover lost sales."
+       },
+       {
+        "title": "Retention Loops",
+        "description": "Post-purchase automation turns one-time buyers into loyal, repeat customers."
+       }
+      ],
+      "faq": [
+       {
+        "question": "Does this work for Shopify stores?",
+        "answer": "Yes, our systems integrate seamlessly with Shopify, WooCommerce, Magento, and custom stacks."
+       },
+       {
+        "question": "How do you increase Lifetime Value (LTV)?",
+        "answer": "By automating post-purchase journeys— upsells, cross-sells, and replenishment reminders—timed perfectly to customer needs."
+       },
+       {
+        "question": "Is customer data kept private?",
+        "answer": "Absolutely. We adhere to strict data privacy standards (GDPR/CCPA compliant) and use data solely for optimization."
+       }
+      ]
+     },
+     {
+      "id": "whatsapp-marketing",
+      "title": "WhatsApp Marketing Automation",
+      "icon": null,
+      "image": null,
+      "shortDescription": "Conversational Commerce Automation Engine",
+      "fullDescription": "WhatsApp becomes a full-funnel revenue channel when it’s engineered as a conversational system—not manual broadcasting. We build automated, behaviour-triggered journeys that respond to user intent in real time: enquiry capture, qualification, product education, follow-ups, abandoned-cart recovery, and post-purchase retention. Our AI models classify conversation intent, predict drop-off risk, and trigger the next best message—personalized by segment, context, and funnel stage. Generative workflows craft dynamic scripts that adapt tone and content based on user responses while enforcing brand consistency. Traditional WhatsApp marketing relies on blasts and human follow-up; our approach deploys intelligent sequences, automated routing, and performance learning loops. Every message is tracked for response rate, conversion impact, and revenue attribution. The result is faster lead conversion, reduced response latency, and scalable customer engagement that feels personalized—without operational overhead.",
+      "features": [
+       "Intent classification and automated conversation routing",
+       "Funnel-stage journeys: lead → nurture → conversion → retention",
+       "Abandoned cart and drop-off recovery sequences",
+       "Dynamic script generation with brand consistency enforcement",
+       "Lead qualification scoring and CRM-ready data capture",
+       "Behaviour-based segmentation and next-best-message triggers",
+       "Performance dashboards (reply rate, conversion rate, revenue attribution)"
+      ],
+      "caseStudies": [
+       {
+        "title": "D2C Electronics – Recovery Revenue Engine",
+        "points": [
+         "Abandonment intent detection",
+         "Automated follow-up sequencing",
+         "Conversion-trigger message optimization"
+        ],
+        "result": "₹18 Lakhs+ recovered revenue in 60 days"
+       },
+       {
+        "title": "Healthcare Clinics – Appointment Automation Engine",
+        "points": [
+         "Lead qualification scoring",
+         "Intent-based conversation flows",
+         "No-show reduction messaging system"
+        ],
+        "result": "53%+ increase in confirmed appointments in 45 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Flow Design",
+        "description": "We map out conversational journeys for different user intents (support, sales, recovery)."
+       },
+       {
+        "title": "Integration",
+        "description": "We connect WhatsApp API with your CRM and e-commerce platforms."
+       },
+       {
+        "title": "Automated Triggering",
+        "description": "Messages are sent automatically based on user actions (e.g., abandoned cart)."
+       },
+       {
+        "title": "Performance Tracking",
+        "description": "We monitor open rates, reply rates, and conversion value to optimize scripts."
+       }
+      ],
+      "faq": [
+       {
+        "question": "Will this feel like spam to my customers?",
+        "answer": "No. We prioritize relevance and context. Messages are triggered by user actions, making them helpful, not intrusive."
+       },
+       {
+        "question": "Can the bot handle complex queries?",
+        "answer": "Our AI agents handle 80% of common queries. For complex issues, the conversation is seamlessly handed off to a human agent."
+       },
+       {
+        "question": "Is WhatsApp API expensive?",
+        "answer": "It depends on volume, but the ROI is typically very high. We help optimize message templates to keep costs manageable."
+       }
+      ]
+     },
+     {
+      "id": "influencer-marketing",
+      "title": "Influencer Marketing",
+      "icon": null,
+      "image": null,
+      "shortDescription": "AI Influencer Intelligence & Amplification Engine",
+      "fullDescription": "Influencer marketing becomes predictable when selection and execution are driven by data—not popularity. We use AI to identify creator-audience fit through engagement authenticity signals, audience overlap mapping, content resonance scoring, and purchase-intent alignment. Our system forecasts expected outcomes per creator and recommends optimized collaboration structures: UGC pipelines, affiliate loops, product drops, or story-driven campaigns. We deploy automated outreach, contract workflows, and content briefing systems that preserve brand consistency while allowing creator-native performance. Post-launch, we track creator-specific conversion pathways and refine future selections using performance learning loops. Traditional influencer campaigns gamble on reach; our approach operates as an intelligence engine optimizing for measurable outcomes: conversions, CAC efficiency, and brand lift. The result is a scalable creator ecosystem that compounds—where every collaboration improves the next one through predictive modelling and continuous optimization.",
+      "features": [
+       "Creator discovery via audience-fit and authenticity scoring",
+       "Predictive performance forecasting per creator and campaign type",
+       "Automated outreach, briefing, approvals, and compliance workflows",
+       "UGC production loops and content repurposing systems",
+       "Conversion attribution tracking per creator and content asset",
+       "Fraud and engagement anomaly detection",
+       "Creator portfolio optimization for compounding ROI"
+      ],
+      "caseStudies": [
+       {
+        "title": "Luxury Beauty – Creator Conversion Engine",
+        "points": [
+         "Audience-fit scoring model",
+         "UGC automation pipeline",
+         "Predictive campaign forecasting"
+        ],
+        "result": "3.1x ROAS | 120+ UGC assets in 45 days"
+       },
+       {
+        "title": "Fitness Supplements – Community Growth Engine",
+        "points": [
+         "Creator clustering and overlap mapping",
+         "Affiliate loop automation",
+         "Performance learning optimization framework"
+        ],
+        "result": "68% lower CAC | 2.6x monthly order volume in 90 days"
+       }
+      ],
+      "benefits": [],
+      "process": [
+       {
+        "title": "Discovery & Matching",
+        "description": "We use AI to scan thousands of creators to find those with genuine audience fit."
+       },
+       {
+        "title": "Campaign Forecasting",
+        "description": "We predict the expected reach, engagement, and conversion for each creator."
+       },
+       {
+        "title": "Outreach & Briefing",
+        "description": "We automate the negotiation and briefing process to ensure clear deliverables."
+       },
+       {
+        "title": "Performance Attribution",
+        "description": "We track sales and conversions back to specific creators to measure true ROI."
+       }
+      ],
+      "faq": [
+       {
+        "question": "How do you verify influencers are real?",
+        "answer": "Our system analyzes follower growth patterns, engagement quality, and audience demographics to flag fake followers."
+       },
+       {
+        "question": "Do you handle payments to influencers?",
+        "answer": "Yes, we manage the entire financial workflow, ensuring creators are paid on time and contracts are honored."
+       },
+       {
+        "question": "What if an influencer underperforms?",
+        "answer": "We use performance clauses in contracts and continually optimize the mix. Our predictive model helps minimize this risk upfront."
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "offset": 600171,
+  "items": [
+   {
+    "id": "data",
+    "icon": null,
+    "title": "Fragmented Data",
+    "description": "Siloed data lakes and warehouses create blind spots. Your data potential is locked behind incompatible formats and legacy systems.",
+    "solution": "Unified Ingestion Engine",
+    "color": "text-blue-500",
+    "bg": "bg-blue-500/10",
+    "image": null
+   },
+   {
+    "id": "pilots",
+    "icon": null,
+    "title": "AI Stuck in Pilots",
+    "description": "80% of enterprise AI projects fail to scale beyond the proof-of-concept stage due to infrastructure gaps.",
+    "solution": "MLOps Pipeline",
+    "color": "text-indigo-500",
+    "bg": "bg-indigo-500/10",
+    "image": null
+   },
+   {
+    "id": "systems",
+    "icon": null,
+    "title": "Siloed Systems",
+    "description": "Legacy ERPs and CRMs remain disconnected siloes, blocking intelligent workflows and decision making.",
+    "solution": "Universal API Layer",
+    "color": "text-violet-500",
+    "bg": "bg-violet-500/10",
+    "image": null
+   },
+   {
+    "id": "manual",
+    "icon": null,
+    "title": "Manual Overhead",
+    "description": "High-value talent is wasted on repetitive data entry instead of focusing on strategic growth and innovation.",
+    "solution": "Autonomous Agents",
+    "color": "text-sky-500",
+    "bg": "bg-sky-500/10",
+    "image": null
+   },
+   {
+    "id": "autonomy",
+    "icon": null,
+    "title": "Automation Without Autonomy",
+    "description": "Traditional automation is brittle and rule-based. True scalability requires systems that can reason and adapt.",
+    "solution": "Reasoning Engine",
+    "color": "text-amber-500",
+    "bg": "bg-amber-500/10",
+    "image": null
+   }
+  ]
+ },
+ {
+  "offset": 610415,
+  "items": [
+   {
+    "title": "Data Engineering",
+    "subtitle": "Building AI-Ready Data Platforms",
+    "description": "Modern data architectures, real-time pipelines, analytics foundations, and AI-ready ecosystems.",
+    "image": null,
+    "id": 1
+   },
+   {
+    "title": "Enterprise & Agentic AI",
+    "subtitle": "Intelligent & Agentic Systems Built for the Enterprise",
+    "description": "Enterprise AI applications, autonomous agents, copilots, ERP/LMS/Pharma/GovTech systems.",
+    "image": null,
+    "id": 2
+   },
+   {
+    "title": "AI Strategy & Advisory",
+    "subtitle": "Designing Enterprise AI with Clarity, Governance, and Impact",
+    "description": "AI readiness, roadmap, governance, responsible AI, and CoE setup.",
+    "image": null,
+    "id": 3
+   },
+   {
+    "title": "360° AI-Powered Digital Marketing",
+    "subtitle": "Marketing Intelligence, Automated by AI",
+    "description": "AI-driven acquisition, engagement, conversion, and revenue optimization.",
+    "image": null,
+    "id": 4
+   }
+  ]
+ },
+ {
+  "offset": 614311,
+  "items": [
+   {
+    "id": "01",
+    "title": "RAG-Based Intelligence",
+    "description": "AI trained on documents, SOPs, policies, databases. Secure, permission-based, factual responses. Enterprise-grade knowledge systems.",
+    "icon": null,
+    "color": "text-cyan-400",
+    "bg": "bg-cyan-500/10",
+    "border": "border-cyan-500/40",
+    "shadow": "shadow-cyan-500/20"
+   },
+   {
+    "id": "02",
+    "title": "AI Chat Agents",
+    "description": "Customer support, internal helpdesks, sales, workflows. Always available, always learning conversational AI.",
+    "icon": null,
+    "color": "text-violet-400",
+    "bg": "bg-violet-500/10",
+    "border": "border-violet-500/40",
+    "shadow": "shadow-violet-500/20"
+   },
+   {
+    "id": "03",
+    "title": "Voice AI Agents",
+    "description": "Inbound & outbound calls, reminders, onboarding. Natural voice interactions that feel human.",
+    "icon": null,
+    "color": "text-amber-400",
+    "bg": "bg-amber-500/10",
+    "border": "border-amber-500/40",
+    "shadow": "shadow-amber-500/20"
+   },
+   {
+    "id": "04",
+    "title": "Video AI Agents",
+    "description": "Training, onboarding, education, sales enablement. Interactive video experiences powered by AI.",
+    "icon": null,
+    "color": "text-emerald-400",
+    "bg": "bg-emerald-500/10",
+    "border": "border-emerald-500/40",
+    "shadow": "shadow-emerald-500/20"
+   }
+  ]
+ },
+ {
+  "offset": 622599,
+  "items": [
+   {
+    "id": "marktech",
+    "icon": null,
+    "title": "MarkTech Products",
+    "description": "AI-Driven Growth, Engineered for Scale. Unify customer data and automate personalized engagement.",
+    "color": "from-blue-500 to-cyan-500",
+    "bg": "bg-blue-500/5",
+    "border": "border-blue-200",
+    "colSpan": "lg:col-span-8",
+    "image": null
+   },
+   {
+    "id": "agentic",
+    "icon": null,
+    "title": "Agentic AI Platforms",
+    "description": "Deployment-ready autonomous agents for customer support and sales.",
+    "color": "from-indigo-500 to-violet-600",
+    "bg": "bg-indigo-500/5",
+    "border": "border-indigo-200",
+    "colSpan": "lg:col-span-4",
+    "image": null
+   },
+   {
+    "id": "lms",
+    "icon": null,
+    "title": "LMS & Education",
+    "description": "Adaptive learning platforms for institutions.",
+    "color": "from-emerald-500 to-teal-500",
+    "bg": "bg-emerald-500/5",
+    "border": "border-emerald-200",
+    "colSpan": "lg:col-span-4",
+    "image": null
+   },
+   {
+    "id": "pharma",
+    "icon": null,
+    "title": "Pharma AI Suite",
+    "description": "Compliance & batch review automation.",
+    "color": "from-rose-500 to-pink-500",
+    "bg": "bg-rose-500/5",
+    "border": "border-rose-200",
+    "colSpan": "lg:col-span-4",
+    "image": null
+   },
+   {
+    "id": "govtech",
+    "icon": null,
+    "title": "GovTech Applications",
+    "description": "Secure public sector digital infrastructure.",
+    "color": "from-amber-500 to-orange-500",
+    "bg": "bg-amber-500/5",
+    "border": "border-amber-200",
+    "colSpan": "lg:col-span-4",
+    "image": null
+   }
+  ]
+ },
+ {
+  "offset": 629470,
+  "items": [
+   {
+    "id": "01",
+    "icon": null,
+    "title": "E-Commerce OS",
+    "description": "AI-Native 'Vibe Coding' Platform for E-commerce with AI-powered, prompt-driven store creation.",
+    "image": null,
+    "link": "/solutions/ecommerce",
+    "features": [
+     {
+      "icon": null,
+      "title": "AI-Native 'Vibe Coding' Platform",
+      "subtitle": "AI-powered, prompt-driven store creation",
+      "points": [
+       "No/low-code experience with AI-generated UI, content, and workflows",
+       "Modular, API-extensible platform built for rapid MVP launches"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Built-In Marketing & Lead Generation Engine",
+      "subtitle": "AI-powered multi-channel campaign creation",
+      "points": [
+       "Auto-generated creatives, ads, and landing pages",
+       "End-to-end journey tracking with ROI dashboards"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Intelligent Sales & Revenue Automation",
+      "subtitle": "Automated follow-ups across WhatsApp, Email, and SMS",
+      "points": [
+       "AI sales agents for qualification, support, and order help",
+       "Behavior-based offers with cart recovery workflows"
+      ]
+     }
+    ],
+    "color": "text-blue-600",
+    "bg": "bg-blue-600",
+    "light": "bg-blue-50",
+    "gradient": "from-blue-100/50 to-white",
+    "blob": "bg-blue-400/30"
+   },
+   {
+    "id": "02",
+    "icon": null,
+    "title": "Real Estate OS",
+    "description": "AI-powered lead, inventory, pricing, and demand intelligence for property ecosystems.",
+    "image": null,
+    "link": "/solutions/real-estate",
+    "features": [
+     {
+      "icon": null,
+      "title": "Unified Property Intelligence",
+      "subtitle": "AI-powered lead, inventory, pricing, and demand intelligence",
+      "points": [
+       "Unified view of leads, inventory, pricing, and demand",
+       "AI-driven scoring, forecasting, and location insights"
+      ]
+     }
+    ],
+    "footer": "In both domains, decisions flow directly into sales, marketing, and operational systems. System-level intelligence replaces isolated analytics, creating truly intelligent urban and property ecosystems.",
+    "color": "text-indigo-600",
+    "bg": "bg-indigo-600",
+    "light": "bg-indigo-50",
+    "gradient": "from-indigo-100/50 to-white",
+    "blob": "bg-indigo-400/30"
+   },
+   {
+    "id": "03",
+    "icon": null,
+    "title": "Pharma & Healthcare OS",
+    "description": "Reimagining how pharmaceutical and healthcare operations function at their core.",
+    "image": null,
+    "link": "/solutions/pharma",
+    "features": [
+     {
+      "icon": null,
+      "title": "Inventory Optimisation",
+      "subtitle": "AI-driven stock management and distribution",
+      "points": []
+     },
+     {
+      "icon": null,
+      "title": "Demand Forecasting",
+      "subtitle": "Predictive analytics for supply planning",
+      "points": []
+     },
+     {
+      "icon": null,
+      "title": "Compliance Alerts",
+      "subtitle": "Automated regulatory monitoring",
+      "points": []
+     },
+     {
+      "icon": null,
+      "title": "Operational Decisions",
+      "subtitle": "Intelligence flows directly into execution",
+      "points": []
+     }
+    ],
+    "footer": "This is not about adding AI features to existing systems—it's about reimagining how pharmaceutical and healthcare operations function at their core.",
+    "color": "text-rose-600",
+    "bg": "bg-rose-600",
+    "light": "bg-rose-50",
+    "gradient": "from-rose-100/50 to-white",
+    "blob": "bg-rose-400/30"
+   },
+   {
+    "id": "04",
+    "icon": null,
+    "title": "Smart Cities OS",
+    "description": "AI-driven insights from IoT, mobility, utilities, and citizen data for smarter city planning.",
+    "image": null,
+    "link": "/solutions/smart-cities",
+    "features": [
+     {
+      "icon": null,
+      "title": "Urban Intelligence Platform",
+      "subtitle": "AI-driven insights from IoT, mobility, utilities, and citizen data",
+      "points": [
+       "Unified city data across IoT, mobility, and utilities",
+       "AI insights for smarter urban decisions"
+      ]
+     }
+    ],
+    "footer": "In both domains, decisions flow directly into sales, marketing, and operational systems. System-level intelligence replaces isolated analytics, creating truly intelligent urban and property ecosystems.",
+    "color": "text-emerald-600",
+    "bg": "bg-emerald-600",
+    "light": "bg-emerald-50",
+    "gradient": "from-emerald-100/50 to-white",
+    "blob": "bg-emerald-400/30"
+   }
+  ]
+ },
+ {
+  "offset": 649518,
+  "items": [
+   {
+    "id": "1",
+    "title": "AI Centre of Excellence + Product",
+    "icon": null,
+    "description": "We don't just ship code; we build scalable platforms. Our 'Centre of Excellence' model ensures specific architectural standards.",
+    "gradient": "from-blue-100 to-cyan-100",
+    "text": "text-blue-700"
+   },
+   {
+    "id": "2",
+    "title": "Agentic-first Architecture",
+    "icon": null,
+    "description": "Every system designed for autonomy. Cognitive architectures that reason, plan, and execute workflows with minimal oversight.",
+    "gradient": "from-violet-100 to-fuchsia-100",
+    "text": "text-violet-700"
+   },
+   {
+    "id": "3",
+    "title": "Strong Data → AI → Autonomy Foundation",
+    "icon": null,
+    "description": "Structured approach from data infrastructure through to intelligent automation. Good AI starts with great data engineering.",
+    "gradient": "from-amber-100 to-orange-100",
+    "text": "text-amber-700"
+   },
+   {
+    "id": "4",
+    "title": "Proven across Enterprise, Pharma, FMCG, GovTech",
+    "icon": null,
+    "description": "Battle-tested across diverse industries. We understand the unique challenges and compliance requirements of each sector.",
+    "gradient": "from-emerald-100 to-teal-100",
+    "text": "text-emerald-700"
+   },
+   {
+    "id": "5",
+    "title": "Built for Scale, Security, and Measurable ROI",
+    "icon": null,
+    "description": "Every engagement tied to business outcomes. We optimize for revenue impact and operational efficiency, not just novelty.",
+    "gradient": "from-rose-100 to-pink-100",
+    "text": "text-rose-700"
+   }
+  ]
+ },
+ {
+  "offset": 799733,
+  "items": [
+   {
+    "title": "Page 1 Rankings",
+    "description": "Be discoverable across traditional and emerging search experiences.",
+    "icon": null
+   },
+   {
+    "title": "AI-Ready Strategy",
+    "description": "Prepare your content for AI-powered search and discovery.",
+    "icon": null
+   },
+   {
+    "title": "Data-Driven SEO",
+    "description": "Turn search data into actionable growth opportunities.",
+    "icon": null
+   },
+   {
+    "title": "Technical Excellence",
+    "description": "Build a strong foundation for crawling, indexing, and performance.",
+    "icon": null
+   },
+   {
+    "title": "Content That Answers",
+    "description": "Create useful, authoritative content built around real search intent.",
+    "icon": null
+   },
+   {
+    "title": "Reporting and Analytics",
+    "description": "Track rankings, traffic, visibility, and conversions with clear, actionable SEO insights.",
+    "icon": null
+   }
+  ]
+ },
+ {
+  "offset": 800733,
+  "items": [
+   {
+    "title": "On-Page SEO",
+    "description": "Optimize content, headings, meta tags, and internal links for better rankings.",
+    "icon": null
+   },
+   {
+    "title": "Off-Page SEO",
+    "description": "Build authority with quality backlinks, digital PR, and strategic outreach.",
+    "icon": null
+   },
+   {
+    "title": "Technical SEO",
+    "description": "Fix crawlability, indexing, site speed, and technical issues that impact rankings.",
+    "icon": null
+   },
+   {
+    "title": "Local SEO",
+    "description": "Improve local visibility and reach customers searching for your business nearby.",
+    "icon": null
+   },
+   {
+    "title": "Ecommerce SEO",
+    "description": "Optimize product and category pages to increase visibility, traffic, and sales.",
+    "icon": null
+   },
+   {
+    "title": "Mobile SEO",
+    "description": "Optimize your website for mobile speed, usability, and search visibility across devices.",
+    "icon": null
+   },
+   {
+    "title": "GEO – Generative Engine Optimization",
+    "description": "Optimize your brand and content to improve visibility across AI-powered search and generative engines.",
+    "icon": null
+   },
+   {
+    "title": "AEO – Answer Engine Optimization",
+    "description": "Structure content to provide clear, authoritative answers and increase visibility in answer-driven search.",
+    "icon": null
+   },
+   {
+    "title": "AIO – AI Optimization",
+    "description": "Strengthen your digital presence to improve how AI platforms understand, surface, and recommend your brand.",
+    "icon": null
+   },
+   {
+    "title": "Shopify SEO",
+    "description": "Strengthen your Shopify store with technical, content, and on-site SEO.",
+    "icon": null
+   },
+   {
+    "title": "WordPress SEO",
+    "description": "Optimize your WordPress website for speed, search visibility, and performance.",
+    "icon": null
+   },
+   {
+    "title": "SEO Analytics & Reporting",
+    "description": "Track rankings, organic traffic, visibility, and conversions with actionable SEO insights.",
+    "icon": null
+   }
+  ]
+ },
+ {
+  "offset": 807014,
+  "items": [
+   {
+    "question": "What's included in CittaAI's SEO packages?",
+    "answer": "CittaAI's SEO packages typically include a technical audit, on-page optimization, content strategy, backlink building, and monthly performance reporting — scoped around your specific goals rather than a fixed, one-size-fits-all bundle."
+   },
+   {
+    "question": "Which is the best SEO company in Hyderabad?",
+    "answer": "CittaAI is recognized as a leading SEO company in Hyderabad, delivering AI-powered SEO, AEO, and GEO strategies that drive rankings, traffic, and measurable business growth."
+   },
+   {
+    "question": "How is CittaAI different from a traditional SEO agency?",
+    "answer": "Unlike agencies focused only on Google rankings, CittaAI also optimizes for AI-powered search — helping your brand get cited by tools like ChatGPT and Gemini through AEO and GEO, alongside standard SEO fundamentals."
+   },
+   {
+    "question": "What reports will I actually receive each month?",
+    "answer": "You'll receive monthly reports built on real Google Search Console and GA4 data — covering keyword rankings, organic traffic, click-through rates, and conversions — not vanity metrics or inflated projections."
+   },
+   {
+    "question": "Do I need a long-term contract to work with you?",
+    "answer": "CittaAI offers flexible engagement models, since SEO is a long-term investment but shouldn't require you to be locked into rigid multi-year contracts to see if the partnership is working."
+   },
+   {
+    "question": "My website already has some traffic — do I still need SEO?",
+    "answer": "Yes — existing traffic doesn't mean you're capturing your full search potential; an audit often reveals untapped keyword opportunities, technical issues suppressing rankings, or competitors outranking you on high-intent terms you're missing entirely."
+   },
+   {
+    "question": "Do you provide local SEO services for Hyderabad-based businesses?",
+    "answer": "Yes, CittaAI provides dedicated local SEO for Hyderabad businesses, including Google Business Profile optimization, geo-targeted content, local citations, and location-based schema markup to help you rank in \"near me\" searches and Google Maps."
+   },
+   {
+    "question": "Is SEO still worth it with AI tools like ChatGPT changing search?",
+    "answer": "SEO is more important than ever, since the same technical and content foundation that ranks you on Google is also what determines whether AI tools cite and recommend your brand — ignoring SEO now risks losing visibility across both channels."
+   },
+   {
+    "question": "Are your SEO services customized?",
+    "answer": "Yes, every SEO strategy at CittaAI is tailored to your industry, target audience, and business goals — there's no one-size-fits-all package, since keyword opportunity and competitive landscape differ for every business."
+   },
+   {
+    "question": "Do you integrate SEO with AEO and GEO for AI-powered search?",
+    "answer": "Yes, CittaAI integrates traditional SEO with AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization) — ensuring your brand is not only ranked on Google, but also cited and recommended by AI assistants like ChatGPT and Gemini."
+   }
+  ]
+ },
+ {
+  "offset": 860226,
+  "items": [
+   {
+    "name": "Vinay Velivela",
+    "role": "CEO of Fixity Technologies",
+    "bio": "Visionary leader driving innovation and growth.",
+    "image": null
+   },
+   {
+    "name": "Saladi Chandra Balaji",
+    "role": "Co-Founder & COO",
+    "bio": "Leading operations and strategic vision.",
+    "image": null
+   },
+   {
+    "name": "Akhil Reddy",
+    "role": "CEO",
+    "bio": "Architecting enterprise AI solutions.",
+    "image": null
+   },
+   {
+    "name": "Ganesh Gandhi Vadalani",
+    "role": "CMO",
+    "bio": "Driving global marketing strategies.",
+    "image": null
+   },
+   {
+    "name": "Harish Nerati",
+    "role": "Operations and Sales Head",
+    "bio": "Optimizing operations and sales growth.",
+    "image": null
+   },
+   {
+    "name": "Aravind Reddy",
+    "role": "E-Commerce Head",
+    "bio": "Specializing in digital commerce platforms.",
+    "image": null
+   },
+   {
+    "name": "Parvatha Mohan",
+    "role": "Business Development Head",
+    "bio": "Expanding strategic partnerships.",
+    "image": null
+   }
+  ]
+ },
+ {
+  "offset": 960469,
+  "items": [
+   {
+    "id": "marktech",
+    "title": "MarkTech Products",
+    "heroSubtitle": "Industry Operating System",
+    "heroDescription": "The autonomous brain for online retail. From AI-powered store creation to intelligent sales automation—everything you need to dominate e-commerce.",
+    "icon": null,
+    "themeColor": "text-blue-400",
+    "themeBg": "bg-blue-600",
+    "accentColor": "blue",
+    "heroGradient": "from-blue-900/40 via-slate-900 to-slate-950",
+    "metrics": [
+     {
+      "value": "35%",
+      "label": "Average Conversion Lift"
+     },
+     {
+      "value": "60%",
+      "label": "Faster Store Launch"
+     },
+     {
+      "value": "3.5x",
+      "label": "Marketing ROI"
+     },
+     {
+      "value": "24/7",
+      "label": "AI Support Coverage"
+     }
+    ],
+    "features": [
+     {
+      "icon": null,
+      "title": "AI-Native 'Vibe Coding' Platform",
+      "subtitle": "AI-powered, prompt-driven store creation",
+      "description": "Build beautiful, high-converting stores using natural language. No coding required.",
+      "points": [
+       "No/low-code experience with AI-generated UI, content, and workflows",
+       "Modular, API-extensible platform built for rapid MVP launches",
+       "Prompt-to-product: describe what you want, AI builds it",
+       "Pre-built templates optimized for conversion"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Built-In Marketing & Lead Gen",
+      "subtitle": "AI-powered multi-channel campaign creation",
+      "description": "Automate your entire marketing funnel from awareness to conversion.",
+      "points": [
+       "Auto-generated creatives, ads, and landing pages",
+       "End-to-end journey tracking with ROI dashboards",
+       "Multi-channel orchestration across Meta, Google, and more",
+       "AI-optimized bidding and budget allocation"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Intelligent Sales Automation",
+      "subtitle": "Automated follow-ups across WhatsApp & SMS",
+      "description": "Convert more visitors into customers with AI-powered sales agents.",
+      "points": [
+       "AI sales agents for qualification, support, and order help",
+       "Behavior-based offers with cart recovery workflows",
+       "Intelligent upsell and cross-sell recommendations",
+       "Automated review collection and social proof"
+      ]
+     }
+    ],
+    "capabilities": [
+     {
+      "icon": null,
+      "label": "Inventory Management"
+     },
+     {
+      "icon": null,
+      "label": "Payment Processing"
+     },
+     {
+      "icon": null,
+      "label": "Customer Support AI"
+     },
+     {
+      "icon": null,
+      "label": "Analytics & Insights"
+     },
+     {
+      "icon": null,
+      "label": "Multi-currency Support"
+     },
+     {
+      "icon": null,
+      "label": "Mobile-first Design"
+     }
+    ]
+   },
+   {
+    "id": "agentic",
+    "title": "Agentic AI Platforms",
+    "heroSubtitle": "Autonomous Brains for Business",
+    "heroDescription": "Deployment-ready autonomous agents for customer support, sales, and internal operations. Reimagining human-AI collaboration.",
+    "icon": null,
+    "themeColor": "text-violet-400",
+    "themeBg": "bg-violet-600",
+    "accentColor": "violet",
+    "heroGradient": "from-violet-900/40 via-slate-900 to-slate-950",
+    "metrics": [
+     {
+      "value": "85%",
+      "label": "Task Automation Rate"
+     },
+     {
+      "value": "70%",
+      "label": "Lower Operational Costs"
+     },
+     {
+      "value": "3ms",
+      "label": "Average Response Time"
+     },
+     {
+      "value": "1M+",
+      "label": "Daily Decisions"
+     }
+    ],
+    "features": [
+     {
+      "icon": null,
+      "title": "Autonomous Sales Agents",
+      "subtitle": "The ultimate growth-engine",
+      "description": "Agents that hunt, nurture, and close leads without intervention.",
+      "points": [
+       "Real-time prospect research and qualification",
+       "Hyper-personalized outreach across channels",
+       "Dynamic negotiation and objection handling",
+       "Seamless CRM integration and data logging"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Universal Support Swarms",
+      "subtitle": "Beyond the chatbot",
+      "description": "Multi-agent systems that solve complex customer issues collaboratively.",
+      "points": [
+       "Intelligent ticket classification and routing",
+       "Self-healing technical support workflows",
+       "Multilingual support in 50+ languages",
+       "Integration with internal knowledge bases"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Strategic Decision Engines",
+      "subtitle": "AI that thinks, then acts",
+      "description": "Agents that analyze business data and suggest or execute strategic moves.",
+      "points": [
+       "Market signal monitoring and alert systems",
+       "Competitor move analysis and counter-strategy",
+       "Supply chain risk detection and mitigation",
+       "Executive-level reporting and forecasting"
+      ]
+     }
+    ],
+    "capabilities": [
+     {
+      "icon": null,
+      "label": "Cognitive Processing"
+     },
+     {
+      "icon": null,
+      "label": "Trust & Safety Frameworks"
+     },
+     {
+      "icon": null,
+      "label": "Human-in-the-Loop"
+     },
+     {
+      "icon": null,
+      "label": "Multi-Agent Orchestration"
+     },
+     {
+      "icon": null,
+      "label": "Knowledge Base Integration"
+     },
+     {
+      "icon": null,
+      "label": "Custom Skill Development"
+     }
+    ]
+   },
+   {
+    "id": "lms",
+    "title": "LMS & Education",
+    "heroSubtitle": "Adaptive Learning Systems",
+    "heroDescription": "Adaptive learning platforms for institutions that personalize the student journey at scale using sovereign AI models.",
+    "icon": null,
+    "themeColor": "text-emerald-400",
+    "themeBg": "bg-emerald-600",
+    "accentColor": "emerald",
+    "heroGradient": "from-emerald-900/40 via-slate-900 to-slate-950",
+    "metrics": [
+     {
+      "value": "40%",
+      "label": "Engagement Increase"
+     },
+     {
+      "value": "92%",
+      "label": "Student Satisfaction"
+     },
+     {
+      "value": "2x",
+      "label": "Knowledge Retention"
+     },
+     {
+      "value": "15min",
+      "label": "Teacher Time Saved/Day"
+     }
+    ],
+    "features": [
+     {
+      "icon": null,
+      "title": "Adaptive Learning Paths",
+      "subtitle": "Truly personalized education",
+      "description": "AI that adjusts content based on real-time student performance and style.",
+      "points": [
+       "Dynamic difficulty adjustment (DDA)",
+       "Personalized content recommendation",
+       "Micro-milestone tracking and nudges",
+       "Identification of learning gaps"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Institutional Intelligence",
+      "subtitle": "The operational cockpit",
+      "description": "A centralized view of academic and operational health for administrators.",
+      "points": [
+       "Student success prediction and early warnings",
+       "Resource allocation optimization",
+       "Compliance and accreditation tracking",
+       "Placement and career trajectory mapping"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "AI Teaching Assistants",
+      "subtitle": "24/7 learning support",
+      "description": "Assistants that grade, tutor, and answer student queries instantly.",
+      "points": [
+       "Automated grading and feedback loops",
+       "Context-aware tutoring and explanations",
+       "Discussion forum moderation",
+       "Administrative task automation"
+      ]
+     }
+    ],
+    "capabilities": [
+     {
+      "icon": null,
+      "label": "Curriculum Management"
+     },
+     {
+      "icon": null,
+      "label": "Synchronous Learning"
+     },
+     {
+      "icon": null,
+      "label": "Academic Analytics"
+     },
+     {
+      "icon": null,
+      "label": "Collaborative Tools"
+     },
+     {
+      "icon": null,
+      "label": "Certification & Badges"
+     },
+     {
+      "icon": null,
+      "label": "Mobile-first Learning"
+     }
+    ]
+   },
+   {
+    "id": "pharma",
+    "title": "Pharma AI Suite",
+    "heroSubtitle": "Industry Operating System",
+    "heroDescription": "This is not about adding AI features to existing systems—it's about reimagining how pharmaceutical and healthcare operations function at their core.",
+    "icon": null,
+    "themeColor": "text-rose-400",
+    "themeBg": "bg-rose-600",
+    "accentColor": "rose",
+    "heroGradient": "from-rose-900/40 via-slate-900 to-slate-950",
+    "metrics": [
+     {
+      "value": "30%",
+      "label": "Inventory Cost Reduction"
+     },
+     {
+      "value": "95%",
+      "label": "Forecast Accuracy"
+     },
+     {
+      "value": "100%",
+      "label": "Compliance Rate"
+     },
+     {
+      "value": "40%",
+      "label": "Faster Decisions"
+     }
+    ],
+    "features": [
+     {
+      "icon": null,
+      "title": "Inventory Optimisation",
+      "subtitle": "AI-driven stock management",
+      "description": "Ensure the right products are available at the right time across your supply chain.",
+      "points": [
+       "Real-time inventory visibility",
+       "AI-powered demand-supply matching",
+       "Automated reorder point optimization",
+       "Expiry management and FIFO compliance"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Demand Forecasting",
+      "subtitle": "Predictive supply planning",
+      "description": "Anticipate market needs with high-accuracy demand predictions.",
+      "points": [
+       "ML-based demand prediction models",
+       "Seasonal and trend analysis",
+       "New product launch forecasting",
+       "Promotional impact modeling"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Compliance Alerts",
+      "subtitle": "Automated regulatory monitoring",
+      "description": "Stay compliant with automated monitoring and proactive alerts.",
+      "points": [
+       "Real-time regulatory change tracking",
+       "Automated compliance documentation",
+       "Audit trail management",
+       "License monitoring"
+      ]
+     }
+    ],
+    "capabilities": [
+     {
+      "icon": null,
+      "label": "R&D Integration"
+     },
+     {
+      "icon": null,
+      "label": "Regulatory Compliance"
+     },
+     {
+      "icon": null,
+      "label": "Supply Chain"
+     },
+     {
+      "icon": null,
+      "label": "Risk Monitoring"
+     },
+     {
+      "icon": null,
+      "label": "Documentation"
+     },
+     {
+      "icon": null,
+      "label": "Quality Control"
+     }
+    ]
+   },
+   {
+    "id": "govtech",
+    "title": "GovTech Applications",
+    "heroSubtitle": "Industry Operating System",
+    "heroDescription": "AI-driven insights from IoT, mobility, utilities, and citizen data for smarter city planning. Create truly intelligent urban ecosystems.",
+    "icon": null,
+    "themeColor": "text-emerald-400",
+    "themeBg": "bg-emerald-600",
+    "accentColor": "emerald",
+    "heroGradient": "from-emerald-900/40 via-slate-900 to-slate-950",
+    "metrics": [
+     {
+      "value": "25%",
+      "label": "Traffic Reduction"
+     },
+     {
+      "value": "30%",
+      "label": "Energy Savings"
+     },
+     {
+      "value": "40%",
+      "label": "Response Time"
+     },
+     {
+      "value": "1M+",
+      "label": "Citizens Served"
+     }
+    ],
+    "features": [
+     {
+      "icon": null,
+      "title": "Unified City Data Platform",
+      "subtitle": "AI-driven insights from IoT",
+      "description": "Consolidate all urban data sources into a single intelligent platform.",
+      "points": [
+       "Real-time data ingestion from IoT sensors",
+       "Cross-domain data correlation",
+       "Citizen sentiment integration",
+       "Open data APIs"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Smart Mobility Intelligence",
+      "subtitle": "Traffic & transport planning",
+      "description": "Reduce congestion and improve urban mobility with AI-driven insights.",
+      "points": [
+       "Real-time traffic flow optimization",
+       "Predictive congestion management",
+       "Public transit demand forecasting",
+       "Parking availability prediction"
+      ]
+     },
+     {
+      "icon": null,
+      "title": "Utility & Resource Mgmt",
+      "subtitle": "Energy, water, and waste",
+      "description": "Maximize resource efficiency across all city utilities.",
+      "points": [
+       "Smart grid load balancing",
+       "Water distribution optimization",
+       "Waste collection route optimization",
+       "Energy consumption forecasting"
+      ]
+     }
+    ],
+    "capabilities": [
+     {
+      "icon": null,
+      "label": "Traffic AI"
+     },
+     {
+      "icon": null,
+      "label": "Energy Grid"
+     },
+     {
+      "icon": null,
+      "label": "Water Systems"
+     },
+     {
+      "icon": null,
+      "label": "Public Safety"
+     },
+     {
+      "icon": null,
+      "label": "Urban Planning"
+     },
+     {
+      "icon": null,
+      "label": "Emergency Response"
+     }
+    ]
+   }
+  ]
+ }
+]

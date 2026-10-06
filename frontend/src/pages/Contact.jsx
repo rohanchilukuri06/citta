@@ -1,136 +1,121 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Phone, Mail, MapPin, ShieldCheck } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { CONTACT_PAGE, CONTACT } from "@/data/content";
-import SectionHeader from "@/components/SectionHeader";
+import { rise } from "@/components/SectionHeader";
+import Scene from "@/three/Scene";
+import { API_BASE_URL } from "@/apiConfig";
+
+const ICONS = [Phone, Mail, MapPin];
+const field = "mt-1.5 w-full rounded-xl border border-line/15 bg-surface px-3.5 py-2.5 text-ink placeholder:text-ink-muted/70 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition";
+const label = "font-mono text-[11px] uppercase tracking-widest text-ink-muted";
 
 export default function Contact() {
   const C = CONTACT_PAGE;
-  const [inquiry, setInquiry] = useState(C.inquiryTypes[0]);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState({ state: "idle" });
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setStatus("sent");
-    setTimeout(() => setStatus(null), 3500);
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    setStatus({ state: "sending" });
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (res.status === 422) {
+        const bad = body?.detail?.invalid;
+        setStatus({ state: "error", msg: Array.isArray(bad) ? `Please check your ${bad.join(", ")}.` : "Please check the form fields." });
+        return;
+      }
+      if (!res.ok) throw new Error(String(res.status));
+      if (body.company_email === "sent") {
+        e.target.reset();
+        setStatus({ state: "sent", msg: body.visitor_email === "sent"
+          ? `Thank you! Our team will be in touch shortly — a confirmation is on its way to ${data.email}.`
+          : "Thank you! Our team has your message and will be in touch shortly." });
+      } else {
+        setStatus({ state: "error", msg: `We saved your message (ref ${body.reference}) but couldn't email the team right now. Please also reach us at ${CONTACT.email}.` });
+      }
+    } catch (err) {
+      setStatus({ state: "error", msg: `Couldn't send right now. Please email ${CONTACT.email} or call ${CONTACT.phone}.` });
+    }
   };
 
-  const cardIcons = [Phone, Mail, MapPin];
-
   return (
-    <div data-testid="contact-page" className="relative section-dark min-h-screen pt-36 pb-24 overflow-hidden">
-      <div className="aurora opacity-40" />
-      <div className="absolute inset-0 grid-bg-dark opacity-30" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="max-w-3xl">
-          <div className="chip mb-5">{C.eyebrow}</div>
-          <h1 className="font-display text-[clamp(2.2rem,5vw,4.4rem)] font-semibold tracking-tight text-white leading-[1.02]">
-            {C.title} <span className="text-gradient-brand">{C.titleAccent}</span>
-          </h1>
-          <p className="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">{C.lead}</p>
-        </div>
-
-        {/* Contact cards */}
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
-          {C.cards.map((c, i) => {
-            const Ico = cardIcons[i];
-            const Wrap = ({ children }) => c.href ? <a href={c.href} className="block">{children}</a> : <div>{children}</div>;
-            return (
-              <motion.div
-                key={c.t}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="glass-dark rounded-3xl p-6 tilt"
-                data-testid={`contact-card-${i}`}
-              >
-                <Wrap>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 grid place-items-center">
-                      <Ico className="h-4 w-4 text-brand-light" />
-                    </div>
-                    <span className="font-mono text-xs uppercase tracking-widest text-white/50">{c.t}</span>
-                  </div>
-                  <div className="mt-4 font-display text-white text-lg font-medium leading-snug">{c.v}</div>
-                  <p className="mt-2 text-sm text-white/60 leading-relaxed">{c.sub}</p>
-                </Wrap>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Form */}
-        <div className="mt-14 grid lg:grid-cols-12 gap-8">
-          <motion.form
-            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            onSubmit={submit}
-            className="lg:col-span-8 glass-strong rounded-3xl p-8"
-            data-testid="contact-form"
-          >
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <label className="font-mono text-[10px] uppercase tracking-widest text-white/50">Inquiry Type</label>
-                <select
-                  value={inquiry} onChange={(e) => setInquiry(e.target.value)}
-                  data-testid="contact-inquiry"
-                  className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-light"
-                >
-                  {C.inquiryTypes.map((i) => <option key={i} className="bg-slate-950">{i}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="font-mono text-[10px] uppercase tracking-widest text-white/50">Name</label>
-                <input required data-testid="contact-name" className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-light" />
-              </div>
-              <div>
-                <label className="font-mono text-[10px] uppercase tracking-widest text-white/50">Phone</label>
-                <input data-testid="contact-phone" className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-light" />
-              </div>
-              <div>
-                <label className="font-mono text-[10px] uppercase tracking-widest text-white/50">Business Email</label>
-                <input required type="email" data-testid="contact-email" className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-light" />
-              </div>
-              <div>
-                <label className="font-mono text-[10px] uppercase tracking-widest text-white/50">Company</label>
-                <input data-testid="contact-company" className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-light" />
-              </div>
-              <div className="md:col-span-2">
-                <label className="font-mono text-[10px] uppercase tracking-widest text-white/50">Message</label>
-                <textarea rows={5} data-testid="contact-message" className="mt-1 w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-brand-light resize-none" />
-              </div>
-            </div>
-            {/* reCAPTCHA placeholder */}
-            <div className="mt-5 flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3" data-testid="contact-recaptcha">
-              <div className="h-6 w-6 rounded-md border border-white/20 grid place-items-center">
-                <ShieldCheck className="h-3.5 w-3.5 text-brand-light" />
-              </div>
-              <span className="text-sm text-white/70">I'm not a robot</span>
-              <span className="ml-auto text-[10px] font-mono text-white/40">reCAPTCHA</span>
-            </div>
-            <button type="submit" data-testid="contact-submit" className="btn-primary mt-6 w-full justify-center">
-              Send Message <ArrowUpRight className="h-4 w-4" />
-            </button>
-            {status === "sent" && (
-              <p className="mt-4 text-sm text-emerald-400 font-mono text-center">Message sent — we'll respond within 24 hours.</p>
-            )}
-            <p className="text-[11px] text-white/40 text-center mt-4 font-mono">{CONTACT.response}</p>
-          </motion.form>
-
-          {/* Side info */}
-          <div className="lg:col-span-4 space-y-4">
-            <div className="glass-dark rounded-3xl p-6">
-              <h4 className="font-display text-lg text-white font-semibold">Speak to sales</h4>
-              <p className="mt-2 text-sm text-white/60">Enterprise-grade deployments. Named engineers. Measurable outcomes.</p>
-              <a href={`tel:${CONTACT.phoneRaw}`} className="mt-4 block text-brand-light hover:underline font-mono">{CONTACT.phone}</a>
-            </div>
-            <div className="glass-dark rounded-3xl p-6">
-              <h4 className="font-display text-lg text-white font-semibold">Careers & press</h4>
-              <p className="mt-2 text-sm text-white/60">For careers, partnerships, and press — use the form with the appropriate inquiry type.</p>
-              <a href={`mailto:${CONTACT.email}`} className="mt-4 block text-brand-light hover:underline font-mono">{CONTACT.email}</a>
-            </div>
+    <div data-testid="contact-page" data-accent="coral">
+      <section className="relative overflow-hidden pt-28 lg:pt-32 pb-12">
+        <div className="wash" />
+        <div className="absolute inset-0 dotgrid opacity-60 pointer-events-none" />
+        <div className="relative container-x grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center">
+          <div>
+            <motion.div {...rise()} className="eyebrow mb-5">{C.eyebrow}</motion.div>
+            <motion.h1 {...rise(0.05)} className="h-display text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
+              {C.title} <span className="text-accent-grad">{C.titleAccent}</span>
+            </motion.h1>
+            <motion.p {...rise(0.1)} className="mt-6 lead max-w-xl">{C.lead}</motion.p>
+            <motion.p {...rise(0.15)} className="mt-6 pill"><Clock className="h-3.5 w-3.5 text-accent" /> {CONTACT.hours} · {CONTACT.response}</motion.p>
           </div>
+          <Scene
+            name="globe"
+            className="h-[360px] sm:h-[460px] rounded-[2rem]"
+            overlay={<span className="scene-label left-4 bottom-4">HQ · HITEC City, Hyderabad</span>}
+          />
         </div>
-      </div>
+      </section>
+
+      <section className="pb-24">
+        <div className="container-x grid lg:grid-cols-[1fr_1.35fr] gap-6 items-start">
+          <div className="space-y-4">
+            {C.cards.map((c, i) => {
+              const Icon = ICONS[i];
+              const inner = (
+                <>
+                  <div className="flex items-center gap-3">
+                    <div className="icon-tile"><Icon className="h-5 w-5" /></div>
+                    <span className={label}>{c.t}</span>
+                  </div>
+                  <div className="mt-4 font-display text-lg font-semibold text-ink">{c.v}</div>
+                  <p className="mt-1.5 text-sm text-ink-soft leading-relaxed">{c.sub}</p>
+                </>
+              );
+              return (
+                <motion.div key={c.t} {...rise(0.06 * i)} data-testid={`contact-card-${i}`}>
+                  {c.href ? <a href={c.href} className="block card card-hover p-6">{inner}</a> : <div className="card p-6">{inner}</div>}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.form {...rise(0.1)} onSubmit={submit} className="card p-7 sm:p-9" data-testid="contact-form">
+            <h2 className="font-display text-2xl font-semibold text-ink">Send us a message</h2>
+            <p className="mt-1 text-sm text-ink-soft">Fill out the form and we'll get back to you shortly.</p>
+            <div className="mt-6 grid sm:grid-cols-2 gap-4">
+              <label className="sm:col-span-2 block">
+                <span className={label}>Inquiry type</span>
+                <select name="inquiry" className={field} defaultValue={C.inquiryTypes[0]} data-testid="contact-inquiry">
+                  {C.inquiryTypes.map((t) => <option key={t}>{t}</option>)}
+                </select>
+              </label>
+              <label className="block"><span className={label}>Name</span><input required name="name" autoComplete="name" className={field} data-testid="contact-name" /></label>
+              <label className="block"><span className={label}>Phone</span><input required name="phone" type="tel" autoComplete="tel" className={field} data-testid="contact-phone" /></label>
+              <label className="block"><span className={label}>Business email</span><input required name="email" type="email" autoComplete="email" className={field} data-testid="contact-email" /></label>
+              <label className="block"><span className={label}>Company</span><input name="company" autoComplete="organization" className={field} data-testid="contact-company" /></label>
+              <label className="sm:col-span-2 block"><span className={label}>Convenient time (optional)</span><input name="timing" placeholder="e.g. Weekdays after 3pm" className={field} /></label>
+              <label className="sm:col-span-2 block"><span className={label}>Message</span><textarea required name="message" rows={5} className={field} data-testid="contact-message" /></label>
+            </div>
+            <button type="submit" disabled={status.state === "sending"} className="btn btn-solid w-full mt-6 disabled:opacity-60" data-testid="contact-submit">
+              {status.state === "sending" ? "Sending…" : <>Send message <ArrowRight className="h-4 w-4" /></>}
+            </button>
+            {status.msg && (
+              <p role="status" className={`mt-4 flex items-start gap-2 text-sm ${status.state === "sent" ? "text-jade" : "text-coral"}`}>
+                {status.state === "sent" ? <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" /> : <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />}
+                {status.msg}
+              </p>
+            )}
+          </motion.form>
+        </div>
+      </section>
     </div>
   );
 }

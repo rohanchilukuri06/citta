@@ -2,6 +2,28 @@ import re
 import logging
 from typing import Dict, Any, Tuple, Optional, List, Union
 
+_PUBLISHED_TEXT: Dict[int, str] = {}
+
+
+def _in_published_content(reg: Any, phrase: str) -> bool:
+    """A product phrase that appears anywhere in CittaAI's registry or crawled website text (e.g. the tagline
+    "One-Stop Platform for Real Estate Operations") is published wording, not an invented product."""
+    key = id(reg)
+    if key not in _PUBLISHED_TEXT:
+        import json
+        from pathlib import Path
+        parts = [json.dumps(getattr(reg, "entities", {}), default=str)]
+        for obj in (getattr(reg, "registry_by_id", {}) or {}).values():
+            try:
+                parts.append(obj.model_dump_json())
+            except Exception:
+                pass
+        site = Path(__file__).resolve().parent / "knowledge" / "site" / "cittaai_live.json"
+        if site.exists():
+            parts.append(site.read_text(encoding="utf-8"))
+        _PUBLISHED_TEXT[key] = " ".join(" ".join(parts).lower().replace("‑", "-").replace("–", "-").split())
+    return " ".join(phrase.lower().split()) in _PUBLISHED_TEXT[key]
+
 logger = logging.getLogger(__name__)
 
 # Valid CittaAI static page routes
@@ -18,7 +40,8 @@ def validate_response(
     requested_entities: Optional[List[str]] = None,
     registry: Optional[Any] = None,
     retry_count: int = 0,
-    return_metrics: bool = False
+    return_metrics: bool = False,
+    evidence_text: Optional[str] = None
 ) -> Union[Tuple[bool, str], Tuple[bool, str, Dict[str, Any]]]:
     """
     Production Response Validator:
@@ -34,6 +57,13 @@ def validate_response(
     """
     from knowledge_registry import get_registry
     reg = registry or get_registry()
+
+    # Phrases that appear verbatim in the evidence the answer was generated from are grounded,
+    # whatever the registry-name heuristics below would otherwise conclude.
+    evidence_norm = " ".join((evidence_text or "").lower().replace("‑", "-").replace("–", "-").split())
+
+    def in_evidence(phrase: str) -> bool:
+        return bool(evidence_norm) and " ".join(phrase.lower().split()) in evidence_norm
     
     metrics: Dict[str, Any] = {
         "valid": True,
@@ -57,6 +87,8 @@ def validate_response(
             return False, final_text, metrics
         return False, final_text
 
+    # Normalize unicode non-breaking spaces
+    text = re.sub(r"[\u202f\xa0\u200b]", " ", text)
     text_lower = text.lower()
 
     # 1. Resolved Entity Validation
@@ -122,9 +154,16 @@ def validate_response(
         "integrated", "enterprise", "scalable", "secure", "modern", "core", "smart",
         "ai", "custom", "advanced", "multi", "flexible", "intuitive", "powerful",
         "data", "intelligent", "analytics", "business", "technical", "corporate", "operational", "the",
-        "this", "that", "role-based", "review", "cpv", "reporting", "assessment", "monitoring", "healthcare", "clinical"
+        "this", "that", "role-based", "review", "cpv", "reporting", "assessment", "monitoring", "healthcare", "clinical",
+        "mobile", "compliant", "web", "desktop", "native", "cloud-native", "end-to-end", "purpose-built", "built-in",
+        "of", "a", "an", "and", "or", "in", "on", "at", "for", "to", "with", "by", "from", "is", "are", "our", "your",
+        "each", "every", "all", "any", "some", "other", "such", "new", "next", "first", "key", "main", "top",
+        "gen", "messaging", "s", "modular", "integration", "agent", "cittaai", "caas", "free", "flagship", "discovery",
+        "consumer", "information", "analysis", "health", "health-information", "health-info", "open-source", "open"
     }
-    product_phrases = re.findall(r"\b([a-z0-9_-]+\s+(?:os|platform|tool|app))\b", text_lower)
+    # A product claim is a *named* product ("Finance OS", "HealthX Platform"): capitalised name + product noun.
+    # Lowercase descriptions ("an operations platform", "either OS") are ordinary language, not product claims.
+    product_phrases = [m.lower() for m in re.findall(r"\b([A-Z][A-Za-z0-9_-]*\s+(?:OS|Os|Platform|Tool|App))\b", text)]
     valid_products = set()
     if hasattr(reg, "entities"):
         for ent_id, ent in reg.entities.items():
@@ -139,7 +178,8 @@ def validate_response(
         first_word = prod_p.split()[0].lower()
         if first_word in ALLOWED_GENERIC_DESCRIPTORS:
             continue
-        if prod_p not in valid_products and "operating system" not in prod_p:
+        if (prod_p not in valid_products and "operating system" not in prod_p and not in_evidence(prod_p)
+                and not _in_published_content(reg, prod_p)):
             if not any(prod_p in vp for vp in valid_products):
                 metrics["unsupported_products"].append(prod_p)
                 metrics["valid"] = False
@@ -154,7 +194,7 @@ def validate_response(
 
     tech_mentions = re.findall(r"\b([a-z0-9]+\.(?:js|py|ai|io))\b", text_lower)
     for tech in tech_mentions:
-        if tech not in known_techs:
+        if tech not in known_techs and not in_evidence(tech):
             metrics["unsupported_technologies"].append(tech)
             metrics["valid"] = False
             metrics["reasons"].append(f"Unsupported technology detected: '{tech}'")
@@ -169,7 +209,7 @@ def validate_response(
             if ent:
                 valid_prices.append(str(ent.get("pricing") or "").lower())
         for p_match in price_matches:
-            if not any(p_match in vp for vp in valid_prices if vp):
+            if not any(p_match in vp for vp in valid_prices if vp) and not in_evidence(p_match):
                 metrics["unsupported_pricing"].append(p_match)
                 metrics["valid"] = False
                 metrics["reasons"].append(f"Fake/unverified pricing detected: '{p_match}'")
@@ -187,7 +227,7 @@ def validate_response(
     cs_mentions = re.findall(r"\b([a-z0-9\s]+\s+case\s+study)\b", text_lower)
     for cs_m in cs_mentions:
         cs_clean = cs_m.replace("case study", "").strip()
-        if cs_clean and not any(cs_clean in vcs for vcs in valid_cs):
+        if cs_clean and not any(cs_clean in vcs for vcs in valid_cs) and not in_evidence(cs_m):
             metrics["unsupported_case_studies"].append(cs_m)
             metrics["valid"] = False
             metrics["reasons"].append(f"Unsupported case study detected: '{cs_m}'")
@@ -203,7 +243,7 @@ def validate_response(
                     valid_stats.add(sm)
 
     for stat in stat_matches:
-        if stat not in valid_stats:
+        if stat not in valid_stats and not in_evidence(stat):
             metrics["unsupported_statistics"].append(stat)
             metrics["valid"] = False
             metrics["reasons"].append(f"Unsupported statistic detected: '{stat}'")

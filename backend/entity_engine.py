@@ -8,7 +8,7 @@ from knowledge_service import get_knowledge_service
 logger = logging.getLogger(__name__)
 
 CONTEXT_PRONOUNS = {"it", "its", "this", "that", "the product", "the service", "the solution", "the platform", "this platform"}
-ROLE_TRIGGERS = {"ceo", "cto", "coo", "cmo", "founder", "vinay", "akhil", "saladi", "ganesh", "kiran"}
+ROLE_TRIGGERS = {"ceo", "cto", "coo", "cmo", "founder", "vinay", "akhil", "saladi", "ganesh"}
 
 class EntityEngine:
     def __init__(self):

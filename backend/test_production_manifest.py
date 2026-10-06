@@ -222,8 +222,8 @@ async def test_person_specific_ceo_query():
     async for chunk in rag.chat_stream("test_ceo", "CEO", "test_model"):
         chunks.append(chunk)
     text = chunks[0]["text"]
-    assert "Vinay Velivela" in text
-    assert "Co-Founder & CTO" not in text
+    assert "Akhil Reddy" in text
+    assert "Vinay Velivela" not in text
 
 @pytest.mark.anyio
 async def test_case_studies_catalog_consistency():
@@ -324,7 +324,7 @@ def test_knowledge_service_generic_api():
     # find_people
     ceo = ks.find_people("cittaai", "CEO")
     assert ceo is not None
-    assert "Vinay" in ceo["name"]
+    assert "Akhil" in ceo["name"]
 
 def test_entity_engine_layered_resolution():
     from entity_engine import get_entity_engine
@@ -334,7 +334,7 @@ def test_entity_engine_layered_resolution():
     assert res_id == "real_estate_os"
     
     ceo_id, score, clar = ee.resolve_entity("CEO", "cittaai")
-    assert ceo_id == "vinay_velivela"
+    assert ceo_id == "akhil_reddy"
 
 def test_deterministic_engine_zero_llm():
     from deterministic_engine import get_deterministic_engine
@@ -347,7 +347,7 @@ def test_deterministic_engine_zero_llm():
     
     person_res = de.generate_response("cittaai", IntentType.ASK, [TopicType.PERSON_LOOKUP], "CEO", role="CEO")
     assert person_res is not None
-    assert "Vinay Velivela" in person_res["response"]
+    assert "Akhil Reddy" in person_res["response"]
 
 def test_knowledge_source_manager_crawling():
     from knowledge_source_manager import get_ingestion_engine

@@ -5,22 +5,39 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Geist Sans"', 'Inter', "system-ui", "sans-serif"],
+        display: ['Geist', 'Inter', "system-ui", "sans-serif"],
         sans: ['Inter', "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
       colors: {
-        // Base / Neutral (Living Intelligence tokens from Section 3.1)
+        // Theme tokens (light/dark values in index.css). Usage: bg-canvas, text-ink, border-line, text-accent/70 …
+        canvas:  "rgb(var(--c-canvas) / <alpha-value>)",
+        canvas2: "rgb(var(--c-canvas-2) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        surface2:"rgb(var(--c-surface-2) / <alpha-value>)",
+        ink:     {
+          DEFAULT: "rgb(var(--c-ink) / <alpha-value>)",
+          soft:    "rgb(var(--c-ink-soft) / <alpha-value>)",
+          muted:   "rgb(var(--c-ink-muted) / <alpha-value>)",
+          950: "#0A0F1E", 900: "#0F172A", 800: "#1E293B", // legacy (admin console)
+        },
+        line:    "rgb(var(--c-line) / <alpha-value>)",
+        accent:  {
+          DEFAULT: "rgb(var(--c-accent) / <alpha-value>)",
+          soft:    "rgb(var(--c-accent-soft) / <alpha-value>)",
+          ink:     "rgb(var(--c-accent-ink) / <alpha-value>)",
+        },
+        cobalt:  "rgb(var(--c-cobalt) / <alpha-value>)",
+        jade:    "rgb(var(--c-jade) / <alpha-value>)",
+        saffron: "rgb(var(--c-saffron) / <alpha-value>)",
+        coral:   "rgb(var(--c-coral) / <alpha-value>)",
+        sky:     "rgb(var(--c-sky) / <alpha-value>)",
+        // Legacy tokens (kept so untouched admin markup still compiles)
         bg: {
           dark:   "#0A0F1E",
           dark2:  "#0F172A",
           light:  "#F8FAFC",
           cardLight: "#FFFFFF",
-        },
-        ink: { // legacy alias
-          950: "#0A0F1E",
-          900: "#0F172A",
-          800: "#1E293B",
         },
         text: {
           primaryDark: "#0F172A",

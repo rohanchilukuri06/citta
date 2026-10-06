@@ -83,6 +83,12 @@ COMMON_TYPO_MAP = {
     "whastapp": "whatsapp",
     "pharmaa": "pharma",
     "influncer": "influencer",
+    "prodcuts": "products",
+    "prodcut": "product",
+    "prducts": "products",
+    "prduct": "product",
+    "porducts": "products",
+    "porduct": "product",
     "servises": "services",
     "srevices": "services",
     "srevice": "service",
@@ -90,6 +96,9 @@ COMMON_TYPO_MAP = {
     "servies": "services",
     "servise": "service",
     "soultions": "solutions",
+    "solutins": "solutions",
+    "soltuions": "solutions",
+    "soluton": "solution",
     "compny": "company",
     "wroks": "works",
     "influence": "influencer",
@@ -123,7 +132,11 @@ STANDARD_BUSINESS_VOCABULARY = {
     "universities", "college", "colleges", "school", "schools", "hospital",
     "hospitals", "property", "properties", "management", "strategy", "support",
     "contact", "location", "solutions", "services", "products", "platform", "platforms",
-    "weather", "cricket", "biryani", "recipe", "bitcoin"
+    "weather", "cricket", "biryani", "recipe", "bitcoin",
+    "all", "list", "show", "tell", "give", "get", "what", "how", "who", "where", "when", "why",
+    "about", "with", "for", "from", "your", "have", "does", "can", "will", "are", "were", "some",
+    "many", "more", "this", "that", "these", "those", "their", "them", "then", "than", "each",
+    "every", "both", "other", "into", "over", "such", "only", "same", "also"
 }
 
 def safe_spell_correction(
