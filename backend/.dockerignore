@@ -32,3 +32,15 @@ frontend/src/*
 !frontend/src/data
 frontend/src/data/*
 !frontend/src/data/content.js
+
+# Runtime data with visitor conversations/contact details, and dev-only folders
+*.db-wal
+*.db-shm
+*.db-journal
+logs/
+scratch/
+evaluation/scratch/
+data/semantic_index_cache/
+knowledge/runtime/*.bak*
+.venv/
+venv/

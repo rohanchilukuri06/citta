@@ -20,7 +20,7 @@ async def main():
             if ch.get("done"): done = ch
             else: text += ch.get("text", "")
         m = done.get("metrics", {}); d = m.get("decision", {})
-        print(f"\n>>> {q}\n    [{m.get('pipeline')}] op={m.get('operation')} {m.get('operation_inputs')} ent={d.get('entity')} ents={d.get('entities')} aspect={d.get('aspect')} scope={d.get('scope')} verified={done.get("verified")} reasons={m.get("validator_reasons")} fallback={m.get('semantic_fallback')} total_ms={m.get('total_ms')}")
+        print(f"\n>>> {q}\n    [{m.get('pipeline')}] op={m.get('operation')} {m.get('operation_inputs')} ent={d.get('entity')} ents={d.get('entities')} aspect={d.get('aspect')} scope={d.get('scope')} verified={done.get('verified')} reasons={m.get('validator_reasons')} fallback={m.get('semantic_fallback')} total_ms={m.get('total_ms')}")
         print("    " + text.replace("\n", " ")[:300])
 
 asyncio.run(main())

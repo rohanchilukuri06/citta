@@ -26,6 +26,23 @@ def compute_file_sha256(file_path: str) -> str:
             hasher.update(chunk)
     return hasher.hexdigest()
 
+def resolve_content_js_path() -> str:
+    """Where the website's content.js lives: the frontend in a full checkout, backend/data/ inside the Docker image.
+    The index builder and the startup integrity check must both use this, or their content hashes disagree."""
+    candidates = [
+        os.path.join(ROOT_DIR, "..", "frontend", "src", "data", "content.js"),
+        os.path.join(ROOT_DIR, "data", "content.js"),
+        os.path.join(ROOT_DIR, "content.js"),
+        "/app/frontend/src/data/content.js",
+        "/app/data/content.js",
+        "/app/content.js",
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return os.path.abspath(c)
+    return os.path.abspath(candidates[0])
+
+
 def compute_combined_knowledge_hash(content_js_path: str, registry_dir: Path) -> str:
     """
     Computes a combined SHA-256 fingerprint across:
@@ -326,22 +343,7 @@ async def build_vector_database(
     Idempotently builds unified vector_store.db containing BOTH Knowledge Registry entities and content.js copy.
     Uses atomic temporary database replacement and SHA-256 staleness tracking.
     """
-    if not content_js_path:
-        candidates = [
-            os.path.join(ROOT_DIR, "..", "frontend", "src", "data", "content.js"),
-            os.path.join(ROOT_DIR, "data", "content.js"),
-            os.path.join(ROOT_DIR, "content.js"),
-            "/app/frontend/src/data/content.js",
-            "/app/data/content.js",
-            "/app/content.js",
-        ]
-        for c in candidates:
-            if os.path.exists(c):
-                content_js_path = c
-                break
-        else:
-            content_js_path = os.path.join(ROOT_DIR, "..", "frontend", "src", "data", "content.js")
-    content_js_path = os.path.abspath(content_js_path)
+    content_js_path = os.path.abspath(content_js_path or resolve_content_js_path())
 
     if not db_path:
         db_path = config.VECTOR_DB_PATH

@@ -27,10 +27,9 @@ _STATUS: Optional[Dict[str, Any]] = None
 
 
 def default_content_js_path() -> str:
-    for c in (ROOT_DIR.parent / "frontend" / "src" / "data" / "content.js", ROOT_DIR / "content.js"):
-        if c.exists():
-            return str(c)
-    return str(ROOT_DIR.parent / "frontend" / "src" / "data" / "content.js")
+    # Same lookup as the index builder — a different path means a different content hash and a false "stale index"
+    from vector_indexer import resolve_content_js_path
+    return resolve_content_js_path()
 
 
 def compute_registry_hash(registry_dir: Path) -> str:
