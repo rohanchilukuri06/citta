@@ -1,0 +1,29 @@
+# Build context for the root Dockerfile (backend only)
+.git/
+frontend/
+clients/
+memory/
+tests/
+test_reports/
+**/node_modules/
+**/.venv/
+**/venv/
+**/__pycache__/
+**/*.pyc
+
+# Secrets and runtime data (visitor conversations / contact details)
+**/.env
+**/.env.*
+!**/.env.example
+backend/*.db
+backend/**/*.db
+backend/**/*.db-wal
+backend/**/*.db-shm
+backend/**/*.db-journal
+backend/logs/
+backend/scratch/
+backend/tests/
+backend/evaluation/scratch/
+backend/data/semantic_index_cache/
+backend/knowledge/runtime/*.bak*
+**/*.log
