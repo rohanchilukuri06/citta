@@ -107,3 +107,19 @@ def test_decision_exposes_legacy_attributes(engine):
     assert isinstance(d.category_mismatch, bool)
     assert d.interpretation
     assert d.category_term_used_by_user == "SERVICE"
+
+
+@pytest.mark.parametrize("query,scope", [
+    # live miss: the short typo "ofer" was left unknown and the question was routed to case studies
+    ("wat servics do u ofer", "ALL_SERVICES"),
+    ("what produts do u ofer", "ALL_PRODUCTS"),
+    ("which solutons u offr", "ALL_SOLUTIONS"),
+    ("wat do u provde", "ALL"),
+])
+def test_typos_and_chat_shorthand_reach_catalog(engine, query, scope):
+    assert engine.analyze_query(query).scope.value == scope
+
+
+@pytest.mark.parametrize("text", ["it proved useful over time", "who is your cloud provider", "after the order"])
+def test_typo_correction_leaves_real_words_alone(engine, text):
+    assert engine._correct_catalog_typos(text) == text

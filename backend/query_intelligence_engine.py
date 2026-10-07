@@ -206,9 +206,9 @@ _CATALOG_FILLER = {
     "cater", "caters", "serve", "serves", "offered", "provided", "built", "made", "team", "all",
 }
 _CATALOG_TRIGGERS = re.compile(
-    r"\b(list|how many|number of|what (?:all )?(?:do|does|can) (?:you|cittaai|citta)\b.*\b(?:offer|provide|sell|build)|"
+    r"\b(list|how many|number of|(?:what|wat|wht|wut) (?:all )?(?:do|does|can) (?:you|u|cittaai|citta)\b.*\b(?:offer|provide|sell|build)|"
     r"(?:which|what) (?:products|services|solutions|industries|offerings)|all (?:your|the)?\s*(?:products|services|solutions|offerings)|"
-    r"everything|offerings|catalog|portfolio|what do you offer|what (?:do|can) you (?:offer|provide|sell)|"
+    r"everything|offerings|catalog|portfolio|what do you offer|(?:what|wat|wht|wut) (?:do|can) (?:you|u) (?:offer|provide|sell)|"
     r"show (?:me )?(?:all|everything)|all (?:the )?(?:stuff|things)|"
     r"what (?:kind|kinds|type|types|sort) of (?:work|things|stuff|projects) (?:do|does|can) (?:you|cittaai|citta))\b"
 )
@@ -545,9 +545,12 @@ class QueryIntelligenceEngine:
     }
 
     _TYPO_TARGETS = ("services", "service", "products", "product", "solutions", "solution", "offerings", "industries")
+    # Request verbs are short, so they get their own list checked from 4 letters ("ofer", "offr", "provde")
+    _VERB_TYPO_TARGETS = ("offer", "offers", "provide", "provides")
     # Real words that sit close to a catalog word ("who it serves") and must never be "corrected"
     _NOT_TYPOS = {"serves", "served", "server", "servers", "serving", "servings", "servicing", "production", "productive",
-                  "producer", "producers", "produces", "produced", "solving", "solvent", "offering", "industry"}
+                  "producer", "producers", "produces", "produced", "solving", "solvent", "offering", "industry",
+                  "prove", "proved", "proves", "proven", "provider", "providers", "providing", "officer", "offset"}
 
     def _correct_catalog_typos(self, query: str) -> str:
         """'what servicds do you provide' -> 'services'. Only unknown words that are near-misses of a catalog word
@@ -555,14 +558,15 @@ class QueryIntelligenceEngine:
         def fix(m: "re.Match") -> str:
             word = m.group(0)
             low = word.lower()
-            if (len(low) < 6 or low in _CATALOG_WORDS or low in _STOPWORDS or low in self._registry_vocab
-                    or low in self._NOT_TYPOS):
+            if (len(low) < 4 or low in _CATALOG_WORDS or low in _STOPWORDS or low in self._registry_vocab
+                    or low in self._NOT_TYPOS or low in _CATALOG_FILLER):
                 return word
             try:
                 from rapidfuzz import fuzz
             except ImportError:
                 return word
-            best = max(self._TYPO_TARGETS, key=lambda t: fuzz.ratio(low, t))
+            targets = self._TYPO_TARGETS + self._VERB_TYPO_TARGETS if len(low) >= 6 else self._VERB_TYPO_TARGETS
+            best = max(targets, key=lambda t: fuzz.ratio(low, t))
             return best if fuzz.ratio(low, best) >= 85 else word
         return re.sub(r"[A-Za-z]+", fix, query)
 
