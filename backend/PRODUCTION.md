@@ -75,7 +75,7 @@ prompt-injection attempts, or as an emergency fallback, logged as `{"event": "se
 - **Starts when** a visitor wants to contact CittaAI or meet ("I want a meeting", "book a demo", "can someone call me",
   "we'd like to collaborate"), or says yes to the offer shown after contact details. Plain questions ("what's your
   email?") are answered normally, followed by that offer.
-- **Collects** name, email, phone, purpose and preferred time — one at a time or all in one message — validating
+- **Collects** name, company / organisation ("individual" if none), email, phone, purpose and preferred time — one at a time or all in one message — validating
   email and phone. It shows a summary; the visitor can edit ("change the time to Friday 11am"), cancel, or ask
   product questions midway (answered, then a reminder). Nothing is sent until they reply **yes**.
 - **Sends** two emails: a thank-you confirmation to the visitor (Reply-To: the company), and a new-request

@@ -683,14 +683,15 @@ class ContactFormInput(BaseModel):
 async def contact_endpoint(form: ContactFormInput, request: Request):
     """Website contact form: same storage and two emails (visitor + company) as the chat's meeting agent."""
     from api_security import chat_rate_limiter
-    from meeting_agent import get_meeting_agent, find_email, find_phone, valid_name, _clean
+    from meeting_agent import get_meeting_agent, find_email, find_phone, valid_name, _clean, NO_COMPANY
     chat_rate_limiter.check(request, f"contact-form:{request.client.host if request.client else 'unknown'}")
     email, phone, name = find_email(form.email), find_phone(form.phone), valid_name(form.name)
     if not (email and phone and name):
         bad = [k for k, v in (("name", name), ("email", email), ("phone", phone)) if not v]
         raise HTTPException(status_code=422, detail={"invalid": bad})
-    purpose = f"{form.inquiry}: {form.message}" + (f" (Company: {form.company})" if form.company else "")
-    details = {"name": name, "email": email, "phone": phone, "purpose": _clean(purpose, "purpose"),
+    company = _clean(form.company or "", "company") or NO_COMPANY
+    details = {"name": name, "company": company, "email": email, "phone": phone,
+               "purpose": _clean(f"{form.inquiry}: {form.message}", "purpose"),
                "timing": _clean(form.timing or "Not specified — please suggest a time", "timing")}
     agent = get_meeting_agent()
     rid, statuses = await agent.deliver(f"contact-form-{uuid.uuid4().hex[:8]}", details, {"source": "website contact form"},

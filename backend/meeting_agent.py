@@ -1,8 +1,8 @@
 """
 Meeting / contact-request agent.
 
-One job: when a visitor wants to contact CittaAI or meet the team, collect their name, email, phone, purpose and
-preferred time inside the chat, confirm the details, then email (1) the visitor a thank-you confirmation and
+One job: when a visitor wants to contact CittaAI or meet the team, collect their name, company /
+organisation, email, phone, purpose and preferred time inside the chat, confirm the details, then email (1) the visitor a thank-you confirmation and
 (2) the company a new-request notification. Every request is stored in the meeting_requests table whether or not
 email delivery succeeds.
 
@@ -26,9 +26,11 @@ import config
 
 logger = logging.getLogger(__name__)
 
-FIELDS = ("name", "email", "phone", "purpose", "timing")
-LABELS = {"name": "Name", "email": "Email", "phone": "Phone", "purpose": "Purpose", "timing": "Preferred time"}
-MAX_LEN = {"name": 80, "email": 120, "phone": 20, "purpose": 500, "timing": 200}
+FIELDS = ("name", "company", "email", "phone", "purpose", "timing")
+LABELS = {"name": "Name", "company": "Company / organisation", "email": "Email", "phone": "Phone", "purpose": "Purpose",
+          "timing": "Preferred time"}
+MAX_LEN = {"name": 80, "company": 120, "email": 120, "phone": 20, "purpose": 500, "timing": 200}
+NO_COMPANY = "Individual (no organisation)"
 
 # ---------------------------------------------------------------------------------------------- intent detection
 _TYPOS = {"meting": "meeting", "metting": "meeting", "meetng": "meeting", "meating": "meeting", "conact": "contact",
@@ -78,10 +80,17 @@ _NAME_PREFIX = re.compile(r"^\s*(hi|hello|hey)?[\s,]*(my name is|my name's|name 
 _NAME_IN_TEXT = re.compile(r"\b(?:my name is|my name's|name is|name:|this is)\s+([A-Za-z][A-Za-z.'-]*(?:\s+[A-Za-z][A-Za-z.'-]*){0,3})", re.I)
 _NOT_A_NAME = {"hi", "hello", "hey", "yes", "no", "ok", "okay", "sure", "thanks", "thank", "you", "a", "an", "the", "not",
                "interested", "looking", "from", "with", "here", "fine", "good", "meeting", "call", "demo", "cittaai", "citta"}
+# "I'm Priya from Acme Labs", "we are Bright Minds School": the name must start with a capital or digit
+_COMPANY_IN_TEXT = re.compile(r"(?i:\b(?:i work (?:at|for|with)|i'?m from|i am from|we are|we're|from|representing|"
+                              r"on behalf of|(?:company|organi[sz]ation|org)(?: name)? is))\s+"
+                              r"((?:the\s+)?[A-Z0-9][\w&.'-]*(?:\s+(?:[A-Z0-9&][\w&.'-]*|of|and|for|de))*)")
+_NO_COMPANY = re.compile(r"^\s*(none|no|nil|n/?a|na|-+|individual|myself|personal|self|self[- ]employed|freelancer?|"
+                         r"just me|not applicable|no company|no organi[sz]ation|i'?m an individual|independent)\s*[.!]*\s*$", re.I)
 _PURPOSE_IN_TEXT = re.compile(r"\b(?:about|regarding|re:|to discuss|discuss|for|on|related to|because)\s+(.{4,})", re.I)
-_EDIT = re.compile(r"\b(name|purpose|reason|topic|agenda|time|timing|timings|slot|schedule|email|e-mail|mail|phone|number|mobile)\b"
+_EDIT = re.compile(r"\b((?:company|organi[sz]ation|org)(?: name)?|name|purpose|reason|topic|agenda|time|timing|timings|slot|schedule|email|e-mail|mail|phone|number|mobile)\b"
                    r"\s*(?:is|to|:|=|should be|as)\s*(.+)$", re.I)
-_EDIT_FIELD = {"name": "name", "purpose": "purpose", "reason": "purpose", "topic": "purpose", "agenda": "purpose",
+_EDIT_FIELD = {"company": "company", "organisation": "company", "organization": "company", "org": "company",
+               "name": "name", "purpose": "purpose", "reason": "purpose", "topic": "purpose", "agenda": "purpose",
                "time": "timing", "timing": "timing", "timings": "timing", "slot": "timing", "schedule": "timing",
                "email": "email", "e-mail": "email", "mail": "email", "phone": "phone", "number": "phone", "mobile": "phone"}
 
@@ -123,6 +132,16 @@ def valid_name(text: str) -> Optional[str]:
     return _clean(" ".join(w if w[:1].isupper() else w.capitalize() for w in words), "name")
 
 
+def find_company(text: str) -> Optional[str]:
+    m = _COMPANY_IN_TEXT.search(text)
+    if not m:
+        return None
+    value = re.sub(r"\s+(of|and|for|de)$", "", m.group(1).strip(" .,'-"))
+    if not value or value.lower().startswith("citta") or value.lower() in ("you", "your team"):
+        return None
+    return _clean(value, "company")
+
+
 def _strip_found(text: str) -> str:
     text = _EMAIL.sub(" ", text)
     text = _PHONE.sub(" ", text)
@@ -139,7 +158,10 @@ class MeetingRequestStore:
         with self._conn() as c:
             c.execute("""CREATE TABLE IF NOT EXISTS meeting_requests (
                 id TEXT PRIMARY KEY, session_id TEXT, created_at REAL, name TEXT, email TEXT, phone TEXT,
-                purpose TEXT, timing TEXT, context TEXT, user_email_status TEXT, company_email_status TEXT)""")
+                purpose TEXT, timing TEXT, context TEXT, user_email_status TEXT, company_email_status TEXT,
+                company TEXT)""")
+            if "company" not in {r[1] for r in c.execute("PRAGMA table_info(meeting_requests)")}:
+                c.execute("ALTER TABLE meeting_requests ADD COLUMN company TEXT")  # databases from before the field
 
     def _conn(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self.path, timeout=10)
@@ -149,9 +171,11 @@ class MeetingRequestStore:
     def add(self, session_id: str, details: Dict[str, str], context: Dict[str, Any]) -> str:
         rid = uuid.uuid4().hex[:10]
         with self._lock, self._conn() as c:
-            c.execute("INSERT INTO meeting_requests VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-                      (rid, session_id, time.time(), details["name"], details["email"], details["phone"], details["purpose"],
-                       details["timing"], json.dumps(context, ensure_ascii=False), "pending", "pending"))
+            c.execute("INSERT INTO meeting_requests (id, session_id, created_at, name, company, email, phone, purpose, "
+                      "timing, context, user_email_status, company_email_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                      (rid, session_id, time.time(), details["name"], details.get("company") or NO_COMPANY, details["email"],
+                       details["phone"], details["purpose"], details["timing"], json.dumps(context, ensure_ascii=False),
+                       "pending", "pending"))
         return rid
 
     def set_status(self, rid: str, user_status: str, company_status: str) -> None:
@@ -175,7 +199,7 @@ def _brand_html(title: str, body: str) -> str:
 
 def _details_table(d: Dict[str, str]) -> str:
     rows = "".join(f"<tr><td style=\"padding:6px 12px 6px 0;color:#6b7280\">{LABELS[k]}</td>"
-                   f"<td style=\"padding:6px 0\"><b>{html.escape(d[k])}</b></td></tr>" for k in FIELDS)
+                   f"<td style=\"padding:6px 0\"><b>{html.escape(d.get(k) or NO_COMPANY)}</b></td></tr>" for k in FIELDS)
     return f"<table style=\"border-collapse:collapse\">{rows}</table>"
 
 
@@ -183,7 +207,7 @@ def user_email(d: Dict[str, str], company_contact: str) -> Dict[str, str]:
     first = d["name"].split()[0]
     text = (f"Hi {first},\n\nThank you for reaching out to CittaAI! We've received your request and our team will "
             f"contact you soon, around your preferred time ({d['timing']}).\n\n"
-            + "\n".join(f"{LABELS[k]}: {d[k]}" for k in FIELDS) +
+            + "\n".join(f"{LABELS[k]}: {d.get(k) or NO_COMPANY}" for k in FIELDS) +
             f"\n\nIf anything changes, just reply to this email{(' or contact us at ' + company_contact) if company_contact else ''}."
             "\n\nWarm regards,\nTeam CittaAI")
     body = (f"<p>Hi {html.escape(first)},</p><p>Thank you for reaching out to <b>CittaAI</b>! We've received your request "
@@ -199,18 +223,22 @@ def user_email(d: Dict[str, str], company_contact: str) -> Dict[str, str]:
 def company_email(d: Dict[str, str], context: Dict[str, Any], rid: str) -> Dict[str, str]:
     topics = ", ".join(context.get("discussed") or []) or "—"
     facts = context.get("visitor_facts") or []
-    text = (f"{d['name']} would like to meet CittaAI.\n\nPurpose: {d['purpose']}\nPreferred time: {d['timing']}\n\n"
-            f"Name: {d['name']}\nEmail: {d['email']}\nPhone: {d['phone']}\n\n"
+    company = d.get("company") or NO_COMPANY
+    org = "" if company == NO_COMPANY else company
+    who = f"{d['name']} from {org}" if org else d["name"]
+    text = (f"{who} would like to meet CittaAI.\n\nPurpose: {d['purpose']}\nPreferred time: {d['timing']}\n\n"
+            f"Name: {d['name']}\nCompany / organisation: {company}\nEmail: {d['email']}\nPhone: {d['phone']}\n\n"
             f"Offerings discussed in the chat: {topics}\n"
             + (("What they told the assistant:\n" + "\n".join(f"- {f}" for f in facts) + "\n") if facts else "")
             + f"\nRequest ID: {rid}\nReply to this email to respond to {d['name']} directly.")
-    body = (f"<p><b>{html.escape(d['name'])}</b> would like to meet CittaAI regarding:</p>"
+    body = (f"<p><b>{html.escape(d['name'])}</b>{(' from <b>' + html.escape(org) + '</b>') if org else ''} "
+            "would like to meet CittaAI regarding:</p>"
             f"<blockquote style=\"border-left:3px solid #4f46e5;margin:0;padding:4px 12px\">{html.escape(d['purpose'])}</blockquote>"
             f"<p></p>{_details_table(d)}"
             f"<p><b>Offerings discussed in the chat:</b> {html.escape(topics)}</p>"
             + ("<p><b>What they told the assistant:</b></p><ul>" + "".join(f"<li>{html.escape(f)}</li>" for f in facts) + "</ul>" if facts else "")
             + f"<p style=\"color:#6b7280\">Request ID {rid} · Reply to this email to respond to {html.escape(d['name'])} directly.</p>")
-    subject = f"New meeting request: {d['name']} — {d['purpose'][:60]}{'…' if len(d['purpose']) > 60 else ''}"
+    subject = f"New meeting request: {d['name']}{f' ({org})' if org else ''} — {d['purpose'][:60]}{'…' if len(d['purpose']) > 60 else ''}"
     return {"subject": subject, "text": text, "html": _brand_html("New meeting request from the website chat", body)}
 
 
@@ -309,6 +337,7 @@ class MeetingAgent:
         state.meeting["stage"] = "collecting"
         ask = {
             "name": "May I have your **name**?",
+            "company": "Which **company or organisation** are you with? (If you're reaching out personally, just say *individual*.)",
             "email": "What's your **email address**? I'll send the confirmation there.",
             "phone": "What's the best **phone number** to reach you on?",
             "purpose": "What would you like to discuss? (e.g. a demo of a product, a project, a partnership)",
@@ -346,6 +375,11 @@ class MeetingAgent:
             details["timing"] = timing
             rest = rest.replace(timing, " ").strip(" ,;.-") if timing in rest else rest
 
+        if trigger or awaiting == "name":
+            company = find_company(rest)
+            if company:
+                details["company"] = company
+
         if trigger:
             named = _NAME_IN_TEXT.search(rest)
             if named and valid_name(named.group(1)):
@@ -365,6 +399,11 @@ class MeetingAgent:
                 details["name"] = name
             elif not email and not phone and not timing:
                 error = "Sorry, I didn't catch your name — could you type just your name? (e.g. *Priya Sharma*)"
+        elif awaiting == "company" and rest:
+            if _NO_COMPANY.match(rest):
+                details["company"] = NO_COMPANY
+            elif not _QUESTION.search(rest):
+                details["company"] = find_company(rest) or _clean(rest, "company")
         elif awaiting == "purpose" and rest and len(rest) >= 2:
             details["purpose"] = _clean(rest, "purpose")
         return error
@@ -373,13 +412,15 @@ class MeetingAgent:
         before = dict(details)
         m = _EDIT.search(message)
         if m:
-            target, value = _EDIT_FIELD[m.group(1).lower()], m.group(2)
+            target, value = _EDIT_FIELD[m.group(1).lower().split()[0]], m.group(2)
             if target == "email":
                 value = find_email(value) or ""
             elif target == "phone":
                 value = find_phone(value) or ""
             elif target == "name":
                 value = valid_name(value) or ""
+            elif target == "company" and _NO_COMPANY.match(value):
+                value = NO_COMPANY
             if value:
                 details[target] = _clean(value, target)
         else:
