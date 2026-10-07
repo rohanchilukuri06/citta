@@ -14,4 +14,7 @@ if (!configured && process.env.NODE_ENV === "production") {
   console.error("CittaAI: REACT_APP_BACKEND_URL is not set for this build — the chat and contact form cannot reach the backend.");
 }
 
-export const API_BASE_URL = (configured || "http://localhost:8000").replace(/\/$/, "");
+// "citta-production.up.railway.app" without https:// would be fetched as a path on this site (→ 405 from Vercel)
+const withScheme = (url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`);
+
+export const API_BASE_URL = withScheme((configured || "http://localhost:8000").trim()).replace(/\/+$/, "");

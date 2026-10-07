@@ -11,7 +11,12 @@ ENV PYTHONUNBUFFERED=1 \
     ENVIRONMENT=production \
     DEBUG=false \
     VECTOR_DB_PATH=/app/vector_store.db \
-    PYTHONPATH=/app
+    PYTHONPATH=/app \
+    MALLOC_ARENA_MAX=2 \
+    OMP_NUM_THREADS=2 \
+    MKL_NUM_THREADS=2 \
+    TOKENIZERS_PARALLELISM=false
+# (the last four keep memory within small 1 GB containers: fewer allocator arenas, thread pools sized to the vCPUs)
 
 WORKDIR /app
 

@@ -143,8 +143,10 @@ class RAGService:
             async with self._model_lock:
                 if self._embedding_model is None:
                     logger.info(f"Loading local embedding model lazily: {config.EMBEDDING_MODEL}")
-                    from sentence_transformers import SentenceTransformer
-                    self._embedding_model = SentenceTransformer(config.EMBEDDING_MODEL)
+                    # One shared instance with the semantic pipeline: a second copy costs ~440 MB of RAM
+                    import asyncio
+                    from query_intelligence_engine import get_shared_embedding_model
+                    self._embedding_model = await asyncio.to_thread(get_shared_embedding_model)
                     try:
                         init_anchor_embeddings(self._embedding_model)
                     except Exception as e:
