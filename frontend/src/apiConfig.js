@@ -17,4 +17,7 @@ if (!configured && process.env.NODE_ENV === "production") {
 // "citta-production.up.railway.app" without https:// would be fetched as a path on this site (→ 405 from Vercel)
 const withScheme = (url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`);
 
-export const API_BASE_URL = withScheme((configured || "http://localhost:8000").trim()).replace(/\/+$/, "");
+// Trailing slashes, and a /docs (Swagger page) or /api suffix copied along with the address, are removed
+export const API_BASE_URL = withScheme((configured || "http://localhost:8000").trim())
+  .replace(/\/+$/, "")
+  .replace(/\/(docs|api)$/i, "");

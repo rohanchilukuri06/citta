@@ -100,6 +100,7 @@ cors_env = os.environ.get('CORS_ORIGINS', '').strip()
 default_origins = [
     "https://cittaai.com",
     "https://www.cittaai.com",
+    "https://citta-2lyi.vercel.app",
     "https://citta-omega.vercel.app",
     "https://citta-ten-sable.vercel.app",
     "https://citta-jbi1az638-rohanchilukuri06-8472s-projects.vercel.app",
@@ -118,7 +119,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     # Only this project's Vercel preview deployments (previously any *.vercel.app site, with credentials)
-    allow_origin_regex=r"https://citta-[a-z0-9]+-rohanchilukuri06-8472s-projects\.vercel\.app",
+    # e.g. citta-2lyi-15ev8rv5a-rohanchilukuri06-8472s-projects.vercel.app (preview IDs contain hyphens)
+    allow_origin_regex=r"https://citta-[a-z0-9-]+-rohanchilukuri06-8472s-projects\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
