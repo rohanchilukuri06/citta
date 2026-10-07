@@ -81,6 +81,7 @@ prompt-injection attempts, or as an emergency fallback, logged as `{"event": "se
 - **Sends** two emails: a thank-you confirmation to the visitor (Reply-To: the company), and a new-request
   notification to `COMPANY_LEAD_EMAIL` with the details and offerings discussed in the chat (Reply-To: the
   visitor). It's deterministic (no LLM), so contact details can't be altered by the model.
+- **Email transport:** with `BREVO_API_KEY` (+ `MAIL_FROM` = a sender verified in Brevo) mail goes over Brevo's HTTPS API, which works on hosts that block SMTP (Railway trial/hobby). Otherwise SMTP is used.
 - **Configure:** `COMPANY_LEAD_EMAIL`, `SMTP_USERNAME` (the sending Gmail address) and `SMTP_PASSWORD` (a Google
   App Password, which needs 2-Step Verification on). `SMTP_HOST`/`SMTP_PORT` default to Gmail (587, STARTTLS).
   Without them, requests are still saved and the visitor is told the confirmation email couldn't be sent.

@@ -109,6 +109,7 @@ SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
 SMTP_USE_TLS = os.environ.get("SMTP_USE_TLS", "true").lower() in ("true", "1", "yes")
 SMTP_TIMEOUT_S = float(os.environ.get("SMTP_TIMEOUT_S", "15"))
 MAIL_FROM = os.environ.get("MAIL_FROM", "")            # defaults to SMTP_USERNAME
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")    # HTTPS email API — use where SMTP is blocked (e.g. Railway)
 MAIL_FROM_NAME = os.environ.get("MAIL_FROM_NAME", "CittaAI")
 COMPANY_LEAD_EMAIL = os.environ.get("COMPANY_LEAD_EMAIL", "")   # where new meeting requests are sent
 MEETING_REQUESTS_PER_SESSION = int(os.environ.get("MEETING_REQUESTS_PER_SESSION", "3"))
