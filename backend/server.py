@@ -445,9 +445,15 @@ async def lifespan(app: FastAPI):
     # 3. Warm the embedding model + semantic pipeline in the background (health checks stay responsive)
     warm_task = asyncio.create_task(prewarm_rag_embedding_model())
 
+    # 4. Check the deployment's variables and keys in the background; problems are logged as "config_problem"
+    #    and shown on /api/health, so a wrong key is found at deploy time instead of by a visitor
+    import config_check
+    config_task = asyncio.create_task(config_check.run())
+
     yield
 
     warm_task.cancel()
+    config_task.cancel()
     
     # Shutdown tasks
     if watcher_task:
@@ -802,10 +808,26 @@ async def health_check():
     except Exception as e:
         index_status = {"fresh": False, "error": str(e)}
 
+    # 5. Deployment configuration (keys verified against the real services at startup; no secrets are returned)
+    import config_check
+    import email_sender
+    conf = config_check.report()
+    conf_errors = config_check.errors(conf)
+    if any(i["area"] == "llm" and i["level"] == "error" for i in conf["issues"]) and api_status == "Configured":
+        api_status = "Key rejected"
+    email_bad = any(i["area"] == "email" and i["level"] == "error" for i in conf["issues"])
+    email_kind = email_sender.transport()
+    # Only Brevo can be verified ahead of time (key and sender are checked against its API at startup)
+    email_status = {"transport": email_kind or "none",
+                    "status": "Not working" if email_bad or not email_kind
+                    else ("Verified" if email_kind == "brevo" and conf.get("live_checked") else "Configured")}
+
     healthy = ("Unhealthy" not in db_status and "Unhealthy" not in emb_status and index_status.get("fresh")
-               and api_status == "Configured")
+               and api_status == "Configured" and not conf_errors)
     return {
         "status": "Healthy" if healthy else "Degraded",
+        "config_issues": [f"{i['level'].upper()}: {i['message']}" for i in conf["issues"]],
+        "email": email_status,
         "vector_index": index_status,
         "llm_fallback": {"provider": fallback, "model": config.GEMINI_MODEL if fallback == "gemini" else None, "status": fallback_status},
         "database": db_status,

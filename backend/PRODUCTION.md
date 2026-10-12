@@ -52,9 +52,15 @@ prompt-injection attempts, or as an emergency fallback, logged as `{"event": "se
    - `python scripts/sync_live_site.py` — crawls cittaai.com into `knowledge/site/cittaai_live.json` (needs Node).
    - `python scripts/sync_registry_from_site.py` — copies published fields the registry lacks (records `metadata.site_sync`).
    - `python build_index.py` — embeds all 21 registry files + the site pages into the vector DB.
-3. `python -m pytest tests/ -n 0` — must be all green.
+3. `python -m pytest tests/` — must be all green. GitHub runs the same suite on every push that touches `backend/`
+   (`.github/workflows/backend-tests.yml`; no keys needed). Turn on **Wait for CI** in the Railway service's settings
+   so a failing commit is never deployed.
 4. Start: `uvicorn server:app --host 0.0.0.0 --port 8000` (one worker per process; see rate-limit and memory notes).
-5. `GET /api/health` must return `"status": "Healthy"` with `vector_index.fresh: true` and the providers `Configured`.
+5. `GET /api/health` must return `"status": "Healthy"` with `vector_index.fresh: true`, the providers `Configured`
+   and an empty `config_issues` list.
+5a. **After every deploy:** `python scripts/post_deploy_check.py https://<backend-host> https://<website-host>` — health,
+   configuration, CORS, that the website build points at this backend, and real questions (misspelled ones, the
+   complete team list, contact, pricing, out-of-scope, the meeting agent's first steps). Exit code 1 = something is wrong.
 6. `python scripts/use_case_tests.py https://<your-host>` — 20 scripted conversation checks (memory, follow-ups, rewrite,
    multi-part, hallucination probes, out-of-scope); transcripts land in `evaluation/reports/use_case_transcripts.md`.
 7. Optional: `python scripts/load_test.py https://<your-host> 24` — concurrent visitors, latency percentiles and a
@@ -65,6 +71,16 @@ prompt-injection attempts, or as an emergency fallback, logged as `{"event": "se
 - **Logs to alert on:** `semantic_fallback` (should be ~0), `provider_unavailable` (Nemotron down or timing out),
   `NVIDIA API 429/503 … retry` (NVIDIA busy or rate-limiting), `validator_rejected`, `[IndexIntegrity] STALE`,
   `Chat rate limit hit`.
+- **Configuration check (`config_check.py`):** at startup the variables are checked and the keys are tried against the
+  real services (NVIDIA key and model; Brevo key and that `MAIL_FROM` is a verified sender). Each problem is logged as
+  `config_problem` with the fix in plain words, listed under `config_issues` on `/api/health`, and turns the status
+  `Degraded`. Keys and addresses are stripped of stray spaces and quote marks when read. With no second provider to
+  fall back on, the first-token timeout defaults to 15 s (8 s when a fallback exists).
+- **Spelling (`query_spelling.py`):** chat shorthand ("u", "hv", "wats") is expanded and unknown words one slip from a
+  domain keyword ("prodcts", "ofice", "prise") are corrected before query understanding. A new miss goes in
+  `tests/test_query_spelling.py` first; add a keyword to `KEYWORDS`, or a real word that must not be touched to `PROTECTED`.
+- **Lists are never cut silently:** team, awards and contact answers are always complete; other bullet lists are
+  capped at 5 with "…and N more — ask for the full list", and that follow-up repeats the question in full.
 - **Decision telemetry:** every decision is appended to `logs/semantic_decisions.jsonl` — use it to find new failure
   patterns, then add them to the **dev** split, never to a holdout.
 - **Measuring:** `python evaluation/semantic_benchmark.py --split dev --llm on` for development; release numbers need a

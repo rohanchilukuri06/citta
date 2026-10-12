@@ -139,3 +139,82 @@ def test_faq_items_keep_their_answer_when_shortened():
     from semantic_chat_pipeline import _short
     assert "info@cittaai.com" in _short("What is CittaAI's email address? — info@cittaai.com")
     assert "Mon-Fri" in _short("What are your business hours? — Mon-Fri 9am-6pm")
+
+
+class ListAllProvider(EchoProvider):
+    """Answers with every knowledge line as a bullet, like the real model does for a roster question."""
+    async def generate_stream(self, messages, model, temperature=0.7, max_tokens=None):
+        knowledge = messages[0]["content"].split("KNOWLEDGE:", 1)[-1]
+        yield "\n".join(l for l in knowledge.splitlines() if l.strip().startswith("- "))
+
+
+def test_team_list_is_not_cut_to_five(tmp_path):
+    # live miss: the 5-bullet cap silently dropped the sixth team member from "who are the team members"
+    from chat_memory import ChatMemoryStore
+    from query_intelligence_engine import QueryIntelligenceEngine
+    from semantic_chat_pipeline import MAX_ANSWER_BULLETS
+    p = SemanticChatPipeline(provider=ListAllProvider(), engine=QueryIntelligenceEngine(enable_llm=False),
+                             memory=ChatMemoryStore(tmp_path / "memory.db"))
+    text, _ = chat(p, "team", "who are the citta team members")
+    assert "Akhil Reddy" in text and "Parvatha Mohan" in text
+    assert sum(l.strip().startswith("- ") for l in text.splitlines()) > MAX_ANSWER_BULLETS
+
+
+class DownProvider(EchoProvider):
+    """The answer model is unreachable: the pipeline falls back to the published text."""
+    async def generate_stream(self, messages, model, temperature=0.7, max_tokens=None):
+        return
+        yield  # pragma: no cover
+
+
+def test_team_list_is_complete_when_the_model_is_down(tmp_path):
+    # live miss: the fallback text was cut to 6 lines, so three team members vanished
+    from chat_memory import ChatMemoryStore
+    from query_intelligence_engine import QueryIntelligenceEngine
+    p = SemanticChatPipeline(provider=DownProvider(), engine=QueryIntelligenceEngine(enable_llm=False),
+                             memory=ChatMemoryStore(tmp_path / "memory.db"))
+    text, _ = chat(p, "down", "who is the ceo")
+    for name in ["Akhil Reddy", "Saladi Chandra Balaji", "Ganesh Gandhi Vadalani", "Harish Nerati", "Aravind Reddy",
+                 "Parvatha Mohan"]:
+        assert name in text
+
+
+def test_capped_lists_say_that_items_were_left_out():
+    from semantic_chat_pipeline import _cap_bullets
+    capped = _cap_bullets("Features:\n\n" + "\n".join(f"- point {i}" for i in range(8)) + "\n\nWant a demo?")
+    assert "…and 3 more" in capped and capped.endswith("Want a demo?")
+    assert "more" not in _cap_bullets("Features:\n- a\n- b")
+
+
+def test_full_list_followup_repeats_the_capped_question_in_full(tmp_path):
+    # the capped answer says "ask for the full list"; that follow-up used to return the whole product catalog
+    from chat_memory import ChatMemoryStore
+    from query_intelligence_engine import QueryIntelligenceEngine
+    p = SemanticChatPipeline(provider=ListAllProvider(), engine=QueryIntelligenceEngine(enable_llm=False),
+                             memory=ChatMemoryStore(tmp_path / "memory.db"))
+    first, done1 = chat(p, "full", "what are the features of education os")
+    assert "ask for the full list" in first
+    full, done2 = chat(p, "full", "show me the full list")
+    assert done2["metrics"]["operation"] == done1["metrics"]["operation"] == "get_capabilities"
+    assert "ask for the full list" not in full and full.count("\n- ") > first.count("\n- ")
+    # the invitation is spent: the same words later are an ordinary question again
+    _, done3 = chat(p, "full", "show me the full list")
+    assert done3["metrics"]["operation"] != "get_capabilities"
+
+
+def test_full_list_followup_repeats_the_capped_question(tmp_path):
+    # the shortened answer invites "ask for the full list"; that follow-up used to return the whole catalog
+    from chat_memory import ChatMemoryStore
+    from query_intelligence_engine import QueryIntelligenceEngine
+    from semantic_chat_pipeline import MAX_ANSWER_BULLETS
+    p = SemanticChatPipeline(provider=ListAllProvider(), engine=QueryIntelligenceEngine(enable_llm=False),
+                             memory=ChatMemoryStore(tmp_path / "memory.db"))
+    first, _ = chat(p, "full", "what are the features of education os")
+    assert "ask for the full list" in first
+    full, done = chat(p, "full", "show me the full list")
+    assert done["metrics"]["operation"] == "get_capabilities"
+    assert "ask for the full list" not in full
+    assert sum(l.strip().startswith("- ") for l in full.splitlines()) > MAX_ANSWER_BULLETS
+    # an unrelated question afterwards is not hijacked by the follow-up rule
+    _, other = chat(p, "full", "show me all your services")
+    assert other["metrics"]["operation"] == "list_services"

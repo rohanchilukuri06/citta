@@ -219,6 +219,11 @@ _OTHER_ONE = re.compile(r"\b(?:the\s+)?other\s+(?:one|option|platform|product|so
 # Role titles describing the visitor ("I'm the CTO of a bank") are not questions about CittaAI's leaders
 _SELF_ROLE = re.compile(r"\b(?:i am|i'm|im|as|being)\s+(?:a|an|the)?\s*(?:\w+\s+)?(?:ceo|cto|coo|cmo|cfo|founder|co-founder|head|director|manager)\b")
 _PAIR_REFERENCE = re.compile(r"\b(both|the two|each of them|both of them|either of them)\b")
+# "your company", "you guys": the visitor means CittaAI ("the company" is left alone: it may be their own)
+_SELF_REFERENCE = re.compile(r"\b(?:your (?:company|organi[sz]ation|firm|startup|agency)|you (?:guys|people|folks))\b", re.I)
+_WHAT_DO_YOU_DO = re.compile(r"\bwhat (?:all )?(?:do|does) you (?:all )?do\b(?! for| with| about)", re.I)
+_THE_COMPANY = re.compile(r"\b(?:the|this) company\b", re.I)
+_VISITOR_SIDE = re.compile(r"\b(?:my|our|we|i|i'm|we're)\b", re.I)
 _PRONOUN = re.compile(r"\b(it|its|this|that|they|them|these|those|the (?:tool|platform|service|solution|product|app|system|one))\b")
 # Single-word registry aliases that are ordinary English and too weak to name an entity on their own
 _WEAK_ALIASES = {
@@ -314,6 +319,9 @@ class QueryIntelligenceEngine:
         self._alias_patterns = sorted(self.alias_to_entity.items(), key=lambda kv: len(kv[0]), reverse=True)
         # Every word used anywhere in registry content (used to tell described needs from unknown product names)
         self._registry_vocab = set(re.findall(r"[a-z][a-z0-9\-]+", json.dumps(list(self.registry.entities.values()), default=str).lower()))
+        from query_spelling import SpellingNormaliser
+        self._spelling = SpellingNormaliser(
+            self._registry_vocab | _STOPWORDS | set(_CATALOG_WORDS) | _CATALOG_FILLER | self._ASPECT_WORDS)
 
     def _detect_category_term(self, query: str) -> Tuple[Optional[str], Optional[str]]:
         """Identifies category terms used in the user's raw query (e.g. 'services', 'products')."""
@@ -383,7 +391,9 @@ class QueryIntelligenceEngine:
         # 9. LEADERSHIP / TEAM
         # "who founded" is about people; "when was it founded" is a company fact, not leadership
         if hit(["leadership", "ceo", "cto", "coo", "cmo", "founder", "founders", "who leads", "executive team", "leadership team", "executives"]) \
-                or re.search(r"\bwho\b.{0,30}\bfounded\b", q_lower):
+                or re.search(r"\bwho\b.{0,30}\bfounded\b", q_lower) \
+                or re.search(r"\bwho\b.{0,12}\b(runs?|owns?|heads?|started|manages?|is behind|in charge)\b.{0,25}"
+                             r"\b(cittaai|citta|company|firm|business|organi[sz]ation|startup|you|this|it)\b", q_lower):
             aspects.append("LEADERSHIP")
 
         # 10. FAQ
@@ -544,31 +554,10 @@ class QueryIntelligenceEngine:
         "demo", "contact", "reach", "explain", "describe", "overview", "use", "used", "uses", "using", "do", "does",
     }
 
-    _TYPO_TARGETS = ("services", "service", "products", "product", "solutions", "solution", "offerings", "industries")
-    # Request verbs are short, so they get their own list checked from 4 letters ("ofer", "offr", "provde")
-    _VERB_TYPO_TARGETS = ("offer", "offers", "provide", "provides")
-    # Real words that sit close to a catalog word ("who it serves") and must never be "corrected"
-    _NOT_TYPOS = {"serves", "served", "server", "servers", "serving", "servings", "servicing", "production", "productive",
-                  "producer", "producers", "produces", "produced", "solving", "solvent", "offering", "industry",
-                  "prove", "proved", "proves", "proven", "provider", "providers", "providing", "officer", "offset"}
-
     def _correct_catalog_typos(self, query: str) -> str:
-        """'what servicds do you provide' -> 'services'. Only unknown words that are near-misses of a catalog word
-        are changed, so real vocabulary (registry terms, stopwords) is never rewritten."""
-        def fix(m: "re.Match") -> str:
-            word = m.group(0)
-            low = word.lower()
-            if (len(low) < 4 or low in _CATALOG_WORDS or low in _STOPWORDS or low in self._registry_vocab
-                    or low in self._NOT_TYPOS or low in _CATALOG_FILLER):
-                return word
-            try:
-                from rapidfuzz import fuzz
-            except ImportError:
-                return word
-            targets = self._TYPO_TARGETS + self._VERB_TYPO_TARGETS if len(low) >= 6 else self._VERB_TYPO_TARGETS
-            best = max(targets, key=lambda t: fuzz.ratio(low, t))
-            return best if fuzz.ratio(low, best) >= 85 else word
-        return re.sub(r"[A-Za-z]+", fix, query)
+        """'wat servicds do u provde' -> 'what services do you provide'. Chat shorthand is expanded and unknown words
+        one slip away from a domain keyword are corrected; real vocabulary is never rewritten (query_spelling.py)."""
+        return self._spelling.normalise(query)
 
     def _tokens(self, ql: str) -> List[str]:
         ql = re.sub(r"(?<=[a-z])['’](ve|re|ll|d|m|s|t)\b", "", ql)  # you've -> you, what's -> what
@@ -927,6 +916,10 @@ class QueryIntelligenceEngine:
 
         t0 = time.perf_counter()
         q = self._correct_catalog_typos((normalized_query or query).strip())
+        q = _SELF_REFERENCE.sub("CittaAI", q)
+        q = _WHAT_DO_YOU_DO.sub("what does CittaAI do", q)
+        if not _VISITOR_SIDE.search(q):
+            q = _THE_COMPANY.sub("CittaAI", q)
         ql = q.lower()
         ctx_entity = active_entity or getattr(context, "active_entity", None)
         if ctx_entity and ctx_entity not in self.registry.entities:

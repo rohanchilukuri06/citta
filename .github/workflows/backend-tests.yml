@@ -1,0 +1,47 @@
+name: Backend tests
+
+# Runs the chatbot's test suite on every push that touches the backend. The suite needs no API keys:
+# the answer model, email and vector index are replaced by offline stand-ins.
+# To stop a failing commit from going live, turn on "Wait for CI" in the Railway service's settings.
+
+on:
+  push:
+    branches: [main]
+    paths: ["backend/**", ".github/workflows/backend-tests.yml"]
+  pull_request:
+    paths: ["backend/**", ".github/workflows/backend-tests.yml"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      # Same order as the Dockerfile: CPU-only torch first, so the large CUDA build is never downloaded
+      - name: Install dependencies
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Cache the embedding model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-bge-base-en-v1.5
+
+      - name: Run tests
+        env:
+          ENVIRONMENT: development
+          TOKENIZERS_PARALLELISM: "false"
+        run: python -m pytest tests/ -q

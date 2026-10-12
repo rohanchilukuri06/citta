@@ -7,8 +7,18 @@ ROOT_DIR = Path(__file__).resolve().parent
 load_dotenv(ROOT_DIR / '.env')
 
 # Centralized settings
-LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "nvidia")
-NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
+
+
+def _clean(name: str, default: str = "") -> str:
+    """A key or address exactly as intended: pasted values often carry spaces, line breaks or quote marks."""
+    value = os.environ.get(name, default).strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        value = value[1:-1].strip()
+    return value
+
+
+LLM_PROVIDER = _clean("LLM_PROVIDER", "nvidia")
+NVIDIA_API_KEY = _clean("NVIDIA_API_KEY")
 NVIDIA_BASE_URL = os.environ.get("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1")
 NVIDIA_MODEL = os.environ.get("NVIDIA_MODEL", "nvidia/nemotron-3-super-120b-a12b")  # llama-3.3-70b-instruct is EOL (410)
 
@@ -18,7 +28,7 @@ API_KEY = NVIDIA_API_KEY
 BASE_URL = NVIDIA_BASE_URL
 
 # Gemini parameters
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_API_KEY = _clean("GEMINI_API_KEY")
 # gemini-2.0-flash and gemini-2.5-flash are retired / closed to new users (HTTP 404 as of 2026-09-27);
 # gemini-3.8-flash was confirmed via ListModels and a live generation call.
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
@@ -31,14 +41,21 @@ LLM_FALLBACK_PROVIDER = os.environ.get("LLM_FALLBACK_PROVIDER", "nvidia,gemini")
 NVIDIA_ENABLE_THINKING = os.environ.get("NVIDIA_ENABLE_THINKING", "false")
 NVIDIA_READ_TIMEOUT_S = float(os.environ.get("NVIDIA_READ_TIMEOUT_S", "60"))
 # A provider that hasn't started answering within this many seconds is abandoned for the fallback
-LLM_FIRST_TOKEN_TIMEOUT_S = float(os.environ.get("LLM_FIRST_TOKEN_TIMEOUT_S", "8"))
+# (8 s suits a chain with a second provider to fall back on; alone, the model gets 15 s before the answer is given up)
+LLM_FIRST_TOKEN_TIMEOUT_S = float(os.environ.get("LLM_FIRST_TOKEN_TIMEOUT_S", "0") or 0)
 LLM_REQUEST_TIMEOUT_S = float(os.environ.get("LLM_REQUEST_TIMEOUT_S", "15"))
 GROQ_RATE_LIMIT_COOLDOWN_S = float(os.environ.get("GROQ_RATE_LIMIT_COOLDOWN_S", "20"))
 # Hard ceiling for answer generation; past it the verified evidence is served instead
 GENERATION_DEADLINE_S = float(os.environ.get("GENERATION_DEADLINE_S", "25"))
 # Groq parameters
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_API_KEY = _clean("GROQ_API_KEY")
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
+
+if LLM_FIRST_TOKEN_TIMEOUT_S <= 0:
+    _keys = {"nvidia": NVIDIA_API_KEY, "groq": GROQ_API_KEY, "gemini": GEMINI_API_KEY}
+    _has_fallback = any(_keys.get(p.strip().lower()) and p.strip().lower() != LLM_PROVIDER.lower()
+                        for p in LLM_FALLBACK_PROVIDER.split(","))
+    LLM_FIRST_TOKEN_TIMEOUT_S = 8.0 if _has_fallback else 15.0
 
 # MODEL_NAME must follow the active provider; previously it was always the NVIDIA model,
 # so Groq/Gemini calls passing config.MODEL_NAME requested a model the provider doesn't serve.
@@ -86,7 +103,7 @@ ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
 # Security / abuse limits
 # Admin, debug and tenant-onboarding APIs require this token in the X-Admin-Token header.
 # In production they are disabled entirely until it is set.
-ADMIN_API_TOKEN = os.environ.get("ADMIN_API_TOKEN", "")
+ADMIN_API_TOKEN = _clean("ADMIN_API_TOKEN")
 CHAT_RATE_LIMIT_PER_SESSION_PER_MIN = int(os.environ.get("CHAT_RATE_LIMIT_PER_SESSION_PER_MIN", "20"))
 CHAT_RATE_LIMIT_PER_IP_PER_MIN = int(os.environ.get("CHAT_RATE_LIMIT_PER_IP_PER_MIN", "60"))
 CHAT_MAX_MESSAGE_CHARS = int(os.environ.get("CHAT_MAX_MESSAGE_CHARS", "2000"))
@@ -104,12 +121,12 @@ USE_NEW_ENTITY_RESOLVER = os.environ.get("USE_NEW_ENTITY_RESOLVER", "true").lowe
 # account password). Without SMTP credentials requests are still saved (meeting_requests table) but no email is sent.
 SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
-SMTP_USERNAME = os.environ.get("SMTP_USERNAME", "")
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
+SMTP_USERNAME = _clean("SMTP_USERNAME")
+SMTP_PASSWORD = _clean("SMTP_PASSWORD")
 SMTP_USE_TLS = os.environ.get("SMTP_USE_TLS", "true").lower() in ("true", "1", "yes")
 SMTP_TIMEOUT_S = float(os.environ.get("SMTP_TIMEOUT_S", "15"))
-MAIL_FROM = os.environ.get("MAIL_FROM", "")            # defaults to SMTP_USERNAME
-BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")    # HTTPS email API — use where SMTP is blocked (e.g. Railway)
+MAIL_FROM = _clean("MAIL_FROM")            # defaults to SMTP_USERNAME
+BREVO_API_KEY = _clean("BREVO_API_KEY")    # HTTPS email API — use where SMTP is blocked (e.g. Railway)
 MAIL_FROM_NAME = os.environ.get("MAIL_FROM_NAME", "CittaAI")
-COMPANY_LEAD_EMAIL = os.environ.get("COMPANY_LEAD_EMAIL", "")   # where new meeting requests are sent
+COMPANY_LEAD_EMAIL = _clean("COMPANY_LEAD_EMAIL")   # where new meeting requests are sent
 MEETING_REQUESTS_PER_SESSION = int(os.environ.get("MEETING_REQUESTS_PER_SESSION", "3"))

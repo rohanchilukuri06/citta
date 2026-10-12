@@ -34,6 +34,8 @@ DETERMINISTIC_OPS = {
     "list_products", "list_solutions", "list_services", "list_catalog", "get_contact",
     "get_leadership", "get_recognition", "list_case_studies", "get_case_study",
 }
+# Short, closed lists where a dropped line is a wrong answer (a team member left out), so the bullet cap is skipped
+UNCAPPED_OPS = {"get_leadership", "get_recognition", "get_contact"}
 ENTITY_SECTION_OPS = {
     "get_product", "get_solution", "get_service", "get_company_info", "get_capabilities", "get_benefits",
     "get_target_users", "get_workflow", "get_faq", "get_pricing",
@@ -109,6 +111,7 @@ class ConversationState:
     last_evidence: List[Dict[str, Any]] = field(default_factory=list)
     last_question: str = ""
     meeting: Dict[str, Any] = field(default_factory=dict)       # meeting-request agent progress
+    capped_question: str = ""                                   # last question whose bullet list was shortened
 
     @property
     def active_entity_confidence(self) -> float:  # context protocol read by QueryIntelligenceEngine
@@ -144,11 +147,27 @@ MAX_BULLET_WORDS = 22
 MAX_ANSWER_BULLETS = 5
 _DETAIL_REQUEST = re.compile(r"\b(all|every|full|complete|detail|detailed|details|in depth|in-depth|everything|elaborate|list)\b", re.I)
 _BULLET = re.compile(r"^\s*(?:[-*•]|\d+[.)])\s+")
+_DROPPED_NOTE = "more — ask for the full list to see them all."
+# The follow-up that note invites ("show me the full list", "the rest", "show more")
+_FULL_LIST_FOLLOWUP = re.compile(
+    r"\b(?:(?:full|complete|entire|whole) list|list (?:them )?all|show (?:me )?(?:them )?all|all of them|see (?:them )?all|"
+    r"the (?:rest|others|remaining)(?: ones)?|what (?:are|about) the (?:rest|others))\b"
+    r"|^\s*(?:(?:show|tell|give)(?: me)? )?(?:some )?more\s*[?.!]*\s*$|^\s*(?:and )?what else\s*[?.!]*\s*$", re.I)
 
 
 def _cap_bullets(text: str, limit: int = MAX_ANSWER_BULLETS) -> str:
     """Keep answers short: at most `limit` items per bullet list (the model doesn't always respect the prompt)."""
-    out, run = [], 0
+    out: List[str] = []
+    run = 0
+
+    def note_dropped() -> None:
+        # Never drop items silently: say how many were left out and how to see them
+        if run > limit:
+            at = len(out)
+            while at and not out[at - 1].strip():
+                at -= 1
+            out.insert(at, f"- …and {run - limit} {_DROPPED_NOTE}")
+
     for line in text.split("\n"):
         if _BULLET.match(line):
             run += 1
@@ -161,8 +180,10 @@ def _cap_bullets(text: str, limit: int = MAX_ANSWER_BULLETS) -> str:
                 at = max(cut.rfind(","), cut.rfind(";"))
                 line = (cut[:at] if at > len(cut) // 2 else cut).rstrip(" ,;:—-") + "…"
         elif line.strip():
+            note_dropped()
             run = 0
         out.append(line)
+    note_dropped()
     return "\n".join(out)
 
 
@@ -304,7 +325,7 @@ class SemanticChatPipeline:
     # ------------------------------------------------------------- evidence
     def _focus(self, ev: Evidence, question: str) -> Evidence:
         """Keep the items of a large section that are most relevant to the question (original order kept)."""
-        if len(ev.items) <= MAX_EVIDENCE_ITEMS:
+        if len(ev.items) <= MAX_EVIDENCE_ITEMS or ev.operation in UNCAPPED_OPS:
             return ev
         import numpy as np
         q = self.engine.index.encode_query(question)
@@ -429,7 +450,8 @@ class SemanticChatPipeline:
     def _render_evidence(evidences: List[Evidence]) -> str:
         """Verbatim evidence, used when generation is unavailable or failed validation."""
         return "\n\n".join(f"**{e.title or 'CittaAI'} — {SECTION_LABELS.get(e.section, e.section)}**\n" +
-                           "\n".join(f"- {_short(i)}" for i in e.items[:MAX_RENDERED_ITEMS]) for e in evidences)
+                           "\n".join(f"- {_short(i)}" for i in (e.items if e.operation in UNCAPPED_OPS
+                                                                 else e.items[:MAX_RENDERED_ITEMS])) for e in evidences)
 
     # ------------------------------------------------------------ generation
     def _system_prompt(self, state: ConversationState, knowledge: str, task: str) -> str:
@@ -527,7 +549,9 @@ class SemanticChatPipeline:
             task += " " + " ".join(fixed)
         system = self._system_prompt(state, "\n\n".join(blocks), task)
         messages = [{"role": "system", "content": system}] + state.recent_turns[-6:] + [{"role": "user", "content": message}]
-        text, meta = await self._llm(messages, model, max_tokens=450 if single else min(1400, 350 * len(parts)))
+        detail = bool(_DETAIL_REQUEST.search(message))
+        # A requested full list needs room: at 450 tokens it would stop mid-item
+        text, meta = await self._llm(messages, model, max_tokens=(900 if detail else 450) if single else min(1400, 350 * len(parts)))
         if not text.strip():
             rendered = [(f"**{p.question}**\n" if not single else "") + (self._render_evidence(p.evidences) if p.kind == "evidence" else p.note)
                         for p in parts]
@@ -543,8 +567,13 @@ class SemanticChatPipeline:
             rendered = [(f"**{p.question}**\n" if not single else "") + (self._render_evidence(p.evidences) if p.kind == "evidence" else p.note)
                         for p in parts]
             return "\n\n".join(rendered), False, meta
-        if not _DETAIL_REQUEST.search(message):
-            text = _cap_bullets(text)
+        roster = any(pl.operation_name in UNCAPPED_OPS for p in parts for pl in (p.plans or []))
+        if not roster and not detail:
+            capped = _cap_bullets(text)
+            if _DROPPED_NOTE in capped:
+                # The answer now invites "ask for the full list": remember what to list when the visitor does
+                state.capped_question = message
+            text = capped
         return text, True, meta
 
     # ------------------------------------------------------------- non-knowledge turns
@@ -631,12 +660,18 @@ class SemanticChatPipeline:
         else:
             turn_kind = "knowledge"
             scratch = copy.deepcopy(state)
-            for question in split_questions(message):
+            asked, questions = message, split_questions(message)
+            if state.capped_question and len(message.split()) <= 8 and _FULL_LIST_FOLLOWUP.search(message):
+                # "show me the full list" after a shortened answer: the same question again, this time in full
+                questions = split_questions(state.capped_question)
+                asked = f"{state.capped_question} (give the complete list, every item)"
+            state.capped_question = ""
+            for question in questions:
                 decision, plans = await self._decide_async(question, scratch)
                 part = self._evidence_for(question, decision, plans)
                 parts.append(part)
                 self._apply_decision(scratch, question, decision, plans)
-            answer, verified, gen_meta = await self._answer_parts(message, parts, state, model)
+            answer, verified, gen_meta = await self._answer_parts(asked, parts, state, model)
             # Adopt the context the parts produced; remember what the answer was built from for rewrites
             for attr in ("active_entity", "active_entities", "active_aspect", "active_scope", "pending_clarification", "discussed"):
                 setattr(state, attr, getattr(scratch, attr))
